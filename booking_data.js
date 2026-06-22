@@ -5,15 +5,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu 21, Vạn Xuân",
     "address": "H. Tam Nông, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.9382526896208792,
-    "weight": 332.1251186147186,
-    "total_qty": 629.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "volume": 1.8765053792417585,
+    "weight": 664.2502372294372,
+    "total_qty": 1258.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "5891",
@@ -21,15 +17,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu 23 Vạn Xuân",
     "address": "H. Tam Nông, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.8378474786593406,
-    "weight": 288.3710428571428,
-    "total_qty": 704.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.28429,
-      "lng": 105.25763
-    }
+    "volume": 1.675694957318681,
+    "weight": 576.7420857142856,
+    "total_qty": 1408.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "6871",
@@ -37,15 +29,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO 58 Hồ Thiên Hương",
     "address": "H. Tam Nông, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 1.2467995509610361,
-    "weight": 437.10797142857143,
-    "total_qty": 737.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.25426,
-      "lng": 105.29208
-    }
+    "volume": 2.4935991019220722,
+    "weight": 874.2159428571429,
+    "total_qty": 1474.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "2AFF",
@@ -53,15 +41,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu 5, Xuân Lộc",
     "address": "H. Thanh Thủy, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.5014292844889574,
-    "weight": 133.50189111111112,
-    "total_qty": 326.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.210805,
-      "lng": 105.325933
-    }
+    "volume": 1.0028585689779148,
+    "weight": 267.0037822222222,
+    "total_qty": 652.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "2AIU",
@@ -69,15 +53,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu 14, Đào Xá",
     "address": "H. Thanh Thủy, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 1.049596448913685,
-    "weight": 338.21237142857143,
-    "total_qty": 879.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.222972,
-      "lng": 105.28925
-    }
+    "volume": 2.09919289782737,
+    "weight": 676.4247428571429,
+    "total_qty": 1758.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "2APX",
@@ -85,15 +65,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu Phố, TT Thanh Thủy",
     "address": "H. Thanh Thủy, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.6393868566626422,
-    "weight": 201.62711904761903,
-    "total_qty": 419.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "volume": 1.2787737133252843,
+    "weight": 403.254238095238,
+    "total_qty": 838.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "2ALI",
@@ -101,15 +77,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu 1, Bảo Yên",
     "address": "H. Thanh Thủy, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.5115545918543956,
-    "weight": 154.86301428571429,
-    "total_qty": 501.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "volume": 1.0231091837087911,
+    "weight": 309.72602857142857,
+    "total_qty": 1002.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "2BO6",
@@ -117,15 +89,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu 11, Tu Vũ",
     "address": "H. Thanh Thủy, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.44423181142857143,
-    "weight": 115.71854285714285,
-    "total_qty": 312.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.10791587,
-      "lng": 105.31451815
-    }
+    "volume": 0.8884636228571429,
+    "weight": 231.43708571428573,
+    "total_qty": 624.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "2BWV",
@@ -133,15 +101,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu 2, Tu Vũ",
     "address": "H. Thanh Thủy, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.5679480831124541,
-    "weight": 132.44379999999998,
-    "total_qty": 512.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.08279847,
-      "lng": 105.30111984
-    }
+    "volume": 1.1358961662249083,
+    "weight": 264.88759999999996,
+    "total_qty": 1024.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "2AKU",
@@ -149,15 +113,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu 4, Đoan Hạ",
     "address": "H. Thanh Thủy, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.6723357045604397,
-    "weight": 214.11767142857144,
-    "total_qty": 371.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "volume": 1.3446714091208793,
+    "weight": 428.2353428571429,
+    "total_qty": 742.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "6178",
@@ -165,15 +125,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu 22 Hoàng Xá",
     "address": "H. Thanh Thủy, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 1.1188919546041416,
-    "weight": 339.37160519480517,
-    "total_qty": 697.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.113472,
-      "lng": 105.280415
-    }
+    "volume": 2.237783909208283,
+    "weight": 678.7432103896103,
+    "total_qty": 1394.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "2BY6",
@@ -181,15 +137,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu 3, Thanh Thủy",
     "address": "H. Thanh Thủy, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.227877361419273,
-    "weight": 70.28728901098901,
-    "total_qty": 188.0,
-    "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.1262491,
-      "lng": 105.271048
-    }
+    "volume": 0.455754722838546,
+    "weight": 140.57457802197803,
+    "total_qty": 376.0,
+    "so_count": 4,
+    "carrier": "GHN"
   },
   {
     "id": "2BU7",
@@ -197,15 +149,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Quyết Tiến, Cự Đồng",
     "address": "H. Thanh Thủy, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.2752983365164835,
-    "weight": 74.83058571428572,
-    "total_qty": 275.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11367143,
-      "lng": 105.23102116
-    }
+    "volume": 0.550596673032967,
+    "weight": 149.66117142857144,
+    "total_qty": 550.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "2ALC",
@@ -213,15 +161,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Tân Hương, Hương Cần",
     "address": "H. Thanh Thủy, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.5430907535658804,
-    "weight": 146.73469818181817,
-    "total_qty": 371.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.02299938,
-      "lng": 105.24184934
-    }
+    "volume": 1.0861815071317609,
+    "weight": 293.4693963636364,
+    "total_qty": 742.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "2BDE",
@@ -229,15 +173,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Đề Ngữ, Yên Sơn",
     "address": "H. Thanh Sơn, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 1.1178328828571429,
-    "weight": 313.03975238095234,
-    "total_qty": 918.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 20.970857,
-      "lng": 105.285646
-    }
+    "volume": 2.2356657657142858,
+    "weight": 626.0795047619047,
+    "total_qty": 1836.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "2ASC",
@@ -245,15 +185,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Xóm Dẹ 1, Văn Miếu",
     "address": "H. Thanh Sơn, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.6491479861428573,
-    "weight": 196.3247942857143,
-    "total_qty": 452.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.1139251,
-      "lng": 105.1142747
-    }
+    "volume": 1.2982959722857146,
+    "weight": 392.6495885714286,
+    "total_qty": 904.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "2BHV",
@@ -261,15 +197,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Đống Cả, Xuân Đài",
     "address": "H. Thanh Sơn, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.23511810366910862,
-    "weight": 40.71048571428571,
-    "total_qty": 296.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11926687,
-      "lng": 105.0090192
-    }
+    "volume": 0.4702362073382173,
+    "weight": 81.42097142857143,
+    "total_qty": 592.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "2AMP",
@@ -277,15 +209,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO 28 Phố Vàng",
     "address": "H. Thanh Sơn, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.8385657221208792,
-    "weight": 333.40354285714284,
-    "total_qty": 716.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.21129929,
-      "lng": 105.17959978
-    }
+    "volume": 1.6771314442417582,
+    "weight": 666.8070857142857,
+    "total_qty": 1432.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "6240",
@@ -293,15 +221,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Hùng Nhĩ, Thanh Sơn",
     "address": "H. Thanh Sơn, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.7378602982267508,
-    "weight": 231.57158927072928,
-    "total_qty": 524.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.223631,
-      "lng": 105.188491
-    }
+    "volume": 1.4757205964535016,
+    "weight": 463.1431785414585,
+    "total_qty": 1048.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "6090",
@@ -309,15 +233,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO 191B Ba Mỏ",
     "address": "H. Thanh Sơn, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.5144100179457166,
-    "weight": 147.93282857142856,
-    "total_qty": 443.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.20316,
-      "lng": 105.1796299
-    }
+    "volume": 1.0288200358914332,
+    "weight": 295.8656571428571,
+    "total_qty": 886.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "2BGF",
@@ -325,15 +245,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu 10, Xuân Lũng",
     "address": "H. Lâm Thao, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.39847929880388844,
-    "weight": 153.0181318681319,
-    "total_qty": 190.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.38923211,
-      "lng": 105.3002563
-    }
+    "volume": 0.7969585976077769,
+    "weight": 306.0362637362638,
+    "total_qty": 380.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "2BBO",
@@ -341,15 +257,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu 2, Xuân Lũng",
     "address": "H. Lâm Thao, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.47722453527472525,
-    "weight": 142.53294285714287,
-    "total_qty": 379.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.37217265,
-      "lng": 105.29870171
-    }
+    "volume": 0.9544490705494504,
+    "weight": 285.06588571428574,
+    "total_qty": 758.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "6540",
@@ -357,15 +269,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu 12, TT Lâm Thao",
     "address": "H. Lâm Thao, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 1.2844196823677505,
-    "weight": 425.6250666666667,
-    "total_qty": 620.0,
-    "so_count": 6,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3385339,
-      "lng": 105.29316541
-    }
+    "volume": 2.5688393647355015,
+    "weight": 851.2501333333333,
+    "total_qty": 1240.0,
+    "so_count": 12,
+    "carrier": "GHN"
   },
   {
     "id": "5905",
@@ -373,15 +281,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO 26 Âu Cơ",
     "address": "H. Lâm Thao, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.4585830164835165,
-    "weight": 106.81047142857145,
-    "total_qty": 358.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.325406,
-      "lng": 105.2837353
-    }
+    "volume": 0.9171660329670331,
+    "weight": 213.62094285714286,
+    "total_qty": 716.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "2BX9",
@@ -389,15 +293,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu 15, Dục Mỹ",
     "address": "H. Lâm Thao, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.41930646405663574,
-    "weight": 157.28870329670332,
-    "total_qty": 329.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3039529,
-      "lng": 105.3205295
-    }
+    "volume": 0.8386129281132715,
+    "weight": 314.57740659340664,
+    "total_qty": 658.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "6338",
@@ -405,15 +305,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Cao Xá, Lâm Thao",
     "address": "H. Lâm Thao, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.8250226655143444,
-    "weight": 249.21274285714284,
-    "total_qty": 479.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.29753649,
-      "lng": 105.3490302
-    }
+    "volume": 1.6500453310286889,
+    "weight": 498.4254857142857,
+    "total_qty": 958.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "2BW8",
@@ -421,15 +317,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu 1, Bản Nguyên",
     "address": "H. Lâm Thao, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.4954008019429693,
-    "weight": 175.75849999999997,
-    "total_qty": 354.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.269248,
-      "lng": 105.295034
-    }
+    "volume": 0.9908016038859387,
+    "weight": 351.51699999999994,
+    "total_qty": 708.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "2AKG",
@@ -437,15 +329,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu 5, Tứ Xã",
     "address": "H. Lâm Thao, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.6142507190164299,
-    "weight": 218.09046095238094,
-    "total_qty": 404.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.288375,
-      "lng": 105.302425
-    }
+    "volume": 1.2285014380328598,
+    "weight": 436.18092190476193,
+    "total_qty": 808.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "6562",
@@ -453,15 +341,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO 235-235B TT Hùng Sơn",
     "address": "H. Lâm Thao, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 1.055651586142857,
-    "weight": 335.5341142857143,
-    "total_qty": 1013.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.355658,
-      "lng": 105.293522
-    }
+    "volume": 2.111303172285714,
+    "weight": 671.0682285714286,
+    "total_qty": 2026.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "6529",
@@ -469,15 +353,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO 545 Trần Phú",
     "address": "TP. Việt Trì, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 1.0011274167155069,
-    "weight": 201.16579610389613,
-    "total_qty": 874.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.339796,
-      "lng": 105.404829
-    }
+    "volume": 2.0022548334310137,
+    "weight": 402.33159220779226,
+    "total_qty": 1748.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "6513",
@@ -485,15 +365,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO 12 Tổ 5 Trần Phú",
     "address": "TP. Việt Trì, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.49963961481862773,
-    "weight": 136.25045142857144,
-    "total_qty": 495.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.324844,
-      "lng": 105.403205
-    }
+    "volume": 0.9992792296372555,
+    "weight": 272.5009028571429,
+    "total_qty": 990.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "3643",
@@ -501,15 +377,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu Tân An, Tân Dân",
     "address": "TP. Việt Trì, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.4122200935249232,
-    "weight": 104.02756,
-    "total_qty": 386.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32555692,
-      "lng": 105.39485343
-    }
+    "volume": 0.8244401870498465,
+    "weight": 208.05512,
+    "total_qty": 772.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "2BFK",
@@ -517,15 +389,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO 192-194 Trần Phú, Việt Trì",
     "address": "TP. Việt Trì, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.4210041935470086,
-    "weight": 101.72699999999999,
-    "total_qty": 302.0,
-    "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3307531,
-      "lng": 105.40402289
-    }
+    "volume": 0.8420083870940172,
+    "weight": 203.45399999999998,
+    "total_qty": 604.0,
+    "so_count": 4,
+    "carrier": "GHN"
   },
   {
     "id": "3993",
@@ -533,15 +401,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO 66 Hàn Thuyên",
     "address": "TP. Việt Trì, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.5203440514559875,
-    "weight": 119.77006666666665,
-    "total_qty": 484.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3244,
-      "lng": 105.399
-    }
+    "volume": 1.040688102911975,
+    "weight": 239.5401333333333,
+    "total_qty": 968.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "2AB9",
@@ -549,15 +413,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO 35 Hà Chương",
     "address": "TP. Việt Trì, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.42834250602564106,
-    "weight": 116.18270000000001,
-    "total_qty": 336.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.315633,
-      "lng": 105.394931
-    }
+    "volume": 0.8566850120512821,
+    "weight": 232.36540000000002,
+    "total_qty": 672.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "6045",
@@ -565,15 +425,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO 476 Châu Phong",
     "address": "TP. Việt Trì, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.6044111391885176,
-    "weight": 119.05168952380953,
-    "total_qty": 451.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32248786,
-      "lng": 105.3919587
-    }
+    "volume": 1.2088222783770353,
+    "weight": 238.10337904761906,
+    "total_qty": 902.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "6460",
@@ -581,15 +437,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Đồng Gia, Việt Trì",
     "address": "TP. Việt Trì, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.7458670071437483,
-    "weight": 137.83373333333333,
-    "total_qty": 712.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3143,
-      "lng": 105.39068
-    }
+    "volume": 1.4917340142874964,
+    "weight": 275.66746666666666,
+    "total_qty": 1424.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "3435",
@@ -597,15 +449,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO 130 Lê Quý Đôn",
     "address": "TP. Việt Trì, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.7536052104620418,
-    "weight": 195.04274285714285,
-    "total_qty": 675.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32061893,
-      "lng": 105.39044988
-    }
+    "volume": 1.5072104209240837,
+    "weight": 390.0854857142857,
+    "total_qty": 1350.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "1564",
@@ -613,15 +461,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM VCP PTO Việt Trì",
     "address": "TP. Việt Trì, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 9.110344363406815,
-    "weight": 1690.2847333333332,
-    "total_qty": 5530.0,
-    "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3124,
-      "lng": 105.396
-    }
+    "volume": 18.22068872681363,
+    "weight": 3380.5694666666664,
+    "total_qty": 11060.0,
+    "so_count": 2,
+    "carrier": "GHN"
   },
   {
     "id": "2AJJ",
@@ -629,15 +473,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO 439 Tiên Dung",
     "address": "TP. Việt Trì, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.48636173907692304,
-    "weight": 115.55397090909092,
-    "total_qty": 543.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.31501267,
-      "lng": 105.3979981
-    }
+    "volume": 0.9727234781538462,
+    "weight": 231.10794181818184,
+    "total_qty": 1086.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "3685",
@@ -645,15 +485,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO 1343 Hùng Vương ",
     "address": "TP. Việt Trì, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.6511377770781448,
-    "weight": 144.23809428571428,
-    "total_qty": 332.0,
-    "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.30949677,
-      "lng": 105.40170005
-    }
+    "volume": 1.3022755541562896,
+    "weight": 288.47618857142857,
+    "total_qty": 664.0,
+    "so_count": 4,
+    "carrier": "GHN"
   },
   {
     "id": "3407",
@@ -661,15 +497,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO 1250 Hùng Vương",
     "address": "TP. Việt Trì, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.4407285676567914,
-    "weight": 121.57768571428572,
-    "total_qty": 401.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.30838683,
-      "lng": 105.4037242
-    }
+    "volume": 0.8814571353135827,
+    "weight": 243.15537142857147,
+    "total_qty": 802.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "2CFX",
@@ -677,15 +509,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO 965 Hùng Vương",
     "address": "TP. Việt Trì, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.2770561410989011,
-    "weight": 95.00697142857142,
-    "total_qty": 236.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3042411,
-      "lng": 105.4139759
-    }
+    "volume": 0.5541122821978022,
+    "weight": 190.01394285714287,
+    "total_qty": 472.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "4093",
@@ -693,15 +521,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Tổ 26A Hai Bà Trưng",
     "address": "TP. Việt Trì, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.807149208571932,
-    "weight": 158.19759090909088,
-    "total_qty": 562.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3101914,
-      "lng": 105.4127013
-    }
+    "volume": 1.614298417143864,
+    "weight": 316.39518181818175,
+    "total_qty": 1124.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "3464",
@@ -709,15 +533,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Thành Công, Việt Trì",
     "address": "TP. Việt Trì, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 1.3476843145106814,
-    "weight": 158.9148476190476,
-    "total_qty": 866.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.312,
-      "lng": 105.417
-    }
+    "volume": 2.6953686290213628,
+    "weight": 317.8296952380952,
+    "total_qty": 1732.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "6434",
@@ -725,15 +545,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO 107 Bạch Hạc",
     "address": "TP. Việt Trì, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.47798103020146526,
-    "weight": 115.03057142857142,
-    "total_qty": 379.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.29671,
-      "lng": 105.43961
-    }
+    "volume": 0.9559620604029304,
+    "weight": 230.06114285714284,
+    "total_qty": 758.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "2AU9",
@@ -741,15 +557,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Băng 1, Nguyễn Tất Thành",
     "address": "TP. Việt Trì, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 0.5619075807063492,
-    "weight": 156.59488952380954,
-    "total_qty": 466.0,
-    "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.30816369,
-      "lng": 105.42655933
-    }
+    "volume": 1.1238151614126983,
+    "weight": 313.1897790476191,
+    "total_qty": 932.0,
+    "so_count": 6,
+    "carrier": "GHN"
   },
   {
     "id": "2ANC",
@@ -761,11 +573,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 297.041,
     "total_qty": 443.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "5891",
@@ -777,11 +585,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 346.7416380952381,
     "total_qty": 541.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.28429,
-      "lng": 105.25763
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6871",
@@ -793,11 +597,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 342.8209682539683,
     "total_qty": 597.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.25426,
-      "lng": 105.29208
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AFF",
@@ -809,11 +609,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 226.12493333333333,
     "total_qty": 345.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.210805,
-      "lng": 105.325933
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AIU",
@@ -825,11 +621,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 392.9932444444444,
     "total_qty": 648.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.222972,
-      "lng": 105.28925
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2APX",
@@ -841,11 +633,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 261.80083174603175,
     "total_qty": 412.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ALI",
@@ -857,11 +645,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 268.7535333333334,
     "total_qty": 508.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BO6",
@@ -873,11 +657,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 265.2653333333334,
     "total_qty": 365.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.10791587,
-      "lng": 105.31451815
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BWV",
@@ -889,11 +669,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 226.15306825396826,
     "total_qty": 368.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.08279847,
-      "lng": 105.30111984
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AKU",
@@ -905,11 +681,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 257.47066666666666,
     "total_qty": 430.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6178",
@@ -921,11 +693,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 397.558034920635,
     "total_qty": 674.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.113472,
-      "lng": 105.280415
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BY6",
@@ -937,11 +705,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 183.90190476190477,
     "total_qty": 257.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.1262491,
-      "lng": 105.271048
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BU7",
@@ -953,11 +717,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 285.9636190476191,
     "total_qty": 481.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11367143,
-      "lng": 105.23102116
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ALC",
@@ -969,11 +729,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 596.8058695526695,
     "total_qty": 1477.0,
     "so_count": 6,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.02299938,
-      "lng": 105.24184934
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BDE",
@@ -985,11 +741,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 259.4037228070176,
     "total_qty": 365.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 20.970857,
-      "lng": 105.285646
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ASC",
@@ -1001,11 +753,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 415.8548888888889,
     "total_qty": 656.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.1139251,
-      "lng": 105.1142747
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BHV",
@@ -1017,11 +765,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 320.0066984126984,
     "total_qty": 473.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11926687,
-      "lng": 105.0090192
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AMP",
@@ -1033,11 +777,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 395.2306603174603,
     "total_qty": 660.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.21129929,
-      "lng": 105.17959978
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6240",
@@ -1049,11 +789,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 311.5953428571429,
     "total_qty": 531.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.223631,
-      "lng": 105.188491
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6090",
@@ -1065,11 +801,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 346.1083904761905,
     "total_qty": 482.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.20316,
-      "lng": 105.1796299
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BGF",
@@ -1081,11 +813,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 243.49769904761905,
     "total_qty": 296.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.38923211,
-      "lng": 105.3002563
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BBO",
@@ -1097,11 +825,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 249.90247619047625,
     "total_qty": 326.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.37217265,
-      "lng": 105.29870171
-    }
+    "carrier": "GHN"
   },
   {
     "id": "5905",
@@ -1113,11 +837,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 245.76037142857146,
     "total_qty": 324.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.325406,
-      "lng": 105.2837353
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BX9",
@@ -1129,11 +849,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 225.67297142857143,
     "total_qty": 318.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3039529,
-      "lng": 105.3205295
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6338",
@@ -1145,11 +861,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 247.74614666666673,
     "total_qty": 340.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.29753649,
-      "lng": 105.3490302
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BW8",
@@ -1161,11 +873,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 243.22857142857148,
     "total_qty": 286.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.269248,
-      "lng": 105.295034
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AKG",
@@ -1177,11 +885,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 272.47673968253974,
     "total_qty": 438.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.288375,
-      "lng": 105.302425
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6562",
@@ -1193,11 +897,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 395.60774285714285,
     "total_qty": 855.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.355658,
-      "lng": 105.293522
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6529",
@@ -1209,11 +909,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 267.4450095238096,
     "total_qty": 455.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.339796,
-      "lng": 105.404829
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6513",
@@ -1225,11 +921,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 225.37195555555556,
     "total_qty": 333.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.324844,
-      "lng": 105.403205
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3643",
@@ -1241,11 +933,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 259.7158222222223,
     "total_qty": 429.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32555692,
-      "lng": 105.39485343
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BFK",
@@ -1257,11 +945,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 250.28603555555557,
     "total_qty": 319.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3307531,
-      "lng": 105.40402289
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3993",
@@ -1273,11 +957,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 229.24313333333333,
     "total_qty": 286.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3244,
-      "lng": 105.399
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AB9",
@@ -1289,11 +969,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 303.83481904761913,
     "total_qty": 361.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.315633,
-      "lng": 105.394931
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6045",
@@ -1305,11 +981,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 269.84263555555555,
     "total_qty": 362.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32248786,
-      "lng": 105.3919587
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6460",
@@ -1321,11 +993,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 297.50713333333334,
     "total_qty": 426.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3143,
-      "lng": 105.39068
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3435",
@@ -1337,11 +1005,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 349.3595663492064,
     "total_qty": 771.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32061893,
-      "lng": 105.39044988
-    }
+    "carrier": "GHN"
   },
   {
     "id": "1564",
@@ -1353,11 +1017,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 352.1478848484848,
     "total_qty": 1949.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3124,
-      "lng": 105.396
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AJJ",
@@ -1369,11 +1029,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 233.10968888888888,
     "total_qty": 337.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.31501267,
-      "lng": 105.3979981
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3685",
@@ -1385,11 +1041,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 232.07927619047618,
     "total_qty": 419.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.30949677,
-      "lng": 105.40170005
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3407",
@@ -1401,11 +1053,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 198.47302222222223,
     "total_qty": 161.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.30838683,
-      "lng": 105.4037242
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2CFX",
@@ -1417,11 +1065,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 140.97762222222224,
     "total_qty": 217.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3042411,
-      "lng": 105.4139759
-    }
+    "carrier": "GHN"
   },
   {
     "id": "4093",
@@ -1433,11 +1077,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 300.2323228070176,
     "total_qty": 398.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3101914,
-      "lng": 105.4127013
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3464",
@@ -1449,11 +1089,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 315.8895936507937,
     "total_qty": 613.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.312,
-      "lng": 105.417
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6434",
@@ -1465,11 +1101,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 184.04711111111115,
     "total_qty": 159.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.29671,
-      "lng": 105.43961
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AU9",
@@ -1481,11 +1113,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 296.74274444444444,
     "total_qty": 439.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.30816369,
-      "lng": 105.42655933
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ANC",
@@ -1497,11 +1125,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 212.97999999999996,
     "total_qty": 668.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "5891",
@@ -1513,11 +1137,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 371.7744,
     "total_qty": 1016.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.28429,
-      "lng": 105.25763
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6871",
@@ -1529,11 +1149,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 280.8624,
     "total_qty": 900.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.25426,
-      "lng": 105.29208
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AFF",
@@ -1545,11 +1161,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 153.59599999999998,
     "total_qty": 570.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.210805,
-      "lng": 105.325933
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AIU",
@@ -1561,11 +1173,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 288.0802,
     "total_qty": 822.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.222972,
-      "lng": 105.28925
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2APX",
@@ -1577,11 +1185,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 168.6384,
     "total_qty": 624.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ALI",
@@ -1593,11 +1197,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 162.74160000000003,
     "total_qty": 498.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BO6",
@@ -1609,11 +1209,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 175.47119999999998,
     "total_qty": 512.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.10791587,
-      "lng": 105.31451815
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BWV",
@@ -1625,11 +1221,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 300.372,
     "total_qty": 780.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.08279847,
-      "lng": 105.30111984
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AKU",
@@ -1641,11 +1233,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 666.0192176623377,
     "total_qty": 1724.0,
     "so_count": 7,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6178",
@@ -1657,11 +1245,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 238.2168,
     "total_qty": 768.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.113472,
-      "lng": 105.280415
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BY6",
@@ -1673,11 +1257,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 72.89359999999999,
     "total_qty": 258.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.1262491,
-      "lng": 105.271048
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BU7",
@@ -1689,11 +1269,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 155.72279999999992,
     "total_qty": 544.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11367143,
-      "lng": 105.23102116
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BDE",
@@ -1705,11 +1281,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 208.16959999999997,
     "total_qty": 648.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 20.970857,
-      "lng": 105.285646
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ASC",
@@ -1721,11 +1293,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 284.1306666666666,
     "total_qty": 808.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.1139251,
-      "lng": 105.1142747
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BHV",
@@ -1737,11 +1305,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 179.9633999999999,
     "total_qty": 626.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11926687,
-      "lng": 105.0090192
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AMP",
@@ -1753,11 +1317,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 257.7343999999999,
     "total_qty": 762.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.21129929,
-      "lng": 105.17959978
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6240",
@@ -1769,11 +1329,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 353.92,
     "total_qty": 1088.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.223631,
-      "lng": 105.188491
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6090",
@@ -1785,11 +1341,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 231.2312,
     "total_qty": 750.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.20316,
-      "lng": 105.1796299
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BGF",
@@ -1801,11 +1353,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 109.19546666666666,
     "total_qty": 338.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.38923211,
-      "lng": 105.3002563
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BBO",
@@ -1817,11 +1365,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 187.64799999999997,
     "total_qty": 732.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.37217265,
-      "lng": 105.29870171
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6540",
@@ -1833,11 +1377,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 191.58106666666663,
     "total_qty": 592.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3385339,
-      "lng": 105.29316541
-    }
+    "carrier": "GHN"
   },
   {
     "id": "5905",
@@ -1849,11 +1389,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 279.8752,
     "total_qty": 768.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.325406,
-      "lng": 105.2837353
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BX9",
@@ -1865,11 +1401,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 236.18720000000002,
     "total_qty": 606.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3039529,
-      "lng": 105.3205295
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6338",
@@ -1881,11 +1413,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 166.63359999999997,
     "total_qty": 504.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.29753649,
-      "lng": 105.3490302
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BW8",
@@ -1897,11 +1425,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 188.5498,
     "total_qty": 582.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.269248,
-      "lng": 105.295034
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AKG",
@@ -1913,11 +1437,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 229.828,
     "total_qty": 636.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.288375,
-      "lng": 105.302425
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6562",
@@ -1929,11 +1449,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 446.2448,
     "total_qty": 1334.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.355658,
-      "lng": 105.293522
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6529",
@@ -1945,11 +1461,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 479.4173333333333,
     "total_qty": 1212.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.339796,
-      "lng": 105.404829
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6513",
@@ -1961,11 +1473,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 421.33733333333333,
     "total_qty": 1068.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.324844,
-      "lng": 105.403205
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3643",
@@ -1977,11 +1485,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 403.38533333333334,
     "total_qty": 1020.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32555692,
-      "lng": 105.39485343
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BFK",
@@ -1993,11 +1497,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 394.40933333333334,
     "total_qty": 996.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3307531,
-      "lng": 105.40402289
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3993",
@@ -2009,11 +1509,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 498.5357333333333,
     "total_qty": 1188.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3244,
-      "lng": 105.399
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AB9",
@@ -2025,11 +1521,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 919.5293333333334,
     "total_qty": 1308.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.315633,
-      "lng": 105.394931
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6045",
@@ -2041,11 +1533,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 577.1765333333333,
     "total_qty": 1404.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32248786,
-      "lng": 105.3919587
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6460",
@@ -2057,11 +1545,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 497.8541333333333,
     "total_qty": 1164.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3143,
-      "lng": 105.39068
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3435",
@@ -2073,11 +1557,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 529.0973333333334,
     "total_qty": 1332.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32061893,
-      "lng": 105.39044988
-    }
+    "carrier": "GHN"
   },
   {
     "id": "1564",
@@ -2089,11 +1569,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 1856.2426246913583,
     "total_qty": 5422.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3124,
-      "lng": 105.396
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AJJ",
@@ -2105,11 +1581,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 363.1877333333333,
     "total_qty": 900.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.31501267,
-      "lng": 105.3979981
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3685",
@@ -2121,11 +1593,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 466.31333333333333,
     "total_qty": 1116.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.30949677,
-      "lng": 105.40170005
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3407",
@@ -2137,11 +1605,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 459.528,
     "total_qty": 1088.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.30838683,
-      "lng": 105.4037242
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2CFX",
@@ -2153,11 +1617,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 74.09466666666667,
     "total_qty": 116.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3042411,
-      "lng": 105.4139759
-    }
+    "carrier": "GHN"
   },
   {
     "id": "4093",
@@ -2169,11 +1629,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 416.5853333333333,
     "total_qty": 1044.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3101914,
-      "lng": 105.4127013
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3464",
@@ -2185,11 +1641,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 464.3113333333333,
     "total_qty": 1142.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.312,
-      "lng": 105.417
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6434",
@@ -2201,11 +1653,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 434.6333333333333,
     "total_qty": 1020.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.29671,
-      "lng": 105.43961
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AU9",
@@ -2217,11 +1665,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 454.7453333333334,
     "total_qty": 1164.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.30816369,
-      "lng": 105.42655933
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ANC",
@@ -2233,11 +1677,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 177.30683737373738,
     "total_qty": 304.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "5891",
@@ -2249,11 +1689,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 150.74135959595958,
     "total_qty": 351.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.28429,
-      "lng": 105.25763
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6871",
@@ -2265,11 +1701,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 128.12452868686867,
     "total_qty": 361.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.25426,
-      "lng": 105.29208
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AFF",
@@ -2281,11 +1713,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 72.86186666666666,
     "total_qty": 243.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.210805,
-      "lng": 105.325933
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AIU",
@@ -2297,11 +1725,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 179.93914444444442,
     "total_qty": 419.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.222972,
-      "lng": 105.28925
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2APX",
@@ -2313,11 +1737,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 61.95205292929293,
     "total_qty": 184.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ALI",
@@ -2329,11 +1749,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 137.14416,
     "total_qty": 286.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BO6",
@@ -2345,11 +1761,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 69.7956898989899,
     "total_qty": 259.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.10791587,
-      "lng": 105.31451815
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BWV",
@@ -2361,11 +1773,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 101.49367010101008,
     "total_qty": 376.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.08279847,
-      "lng": 105.30111984
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6178",
@@ -2377,11 +1785,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 214.56684444444448,
     "total_qty": 558.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.113472,
-      "lng": 105.280415
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BY6",
@@ -2393,11 +1797,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 47.91764444444444,
     "total_qty": 201.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.1262491,
-      "lng": 105.271048
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BU7",
@@ -2409,11 +1809,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 62.97358181818183,
     "total_qty": 208.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11367143,
-      "lng": 105.23102116
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BDE",
@@ -2425,11 +1821,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 110.58780444444446,
     "total_qty": 314.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 20.970857,
-      "lng": 105.285646
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ASC",
@@ -2441,11 +1833,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 291.9552383838383,
     "total_qty": 790.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.1139251,
-      "lng": 105.1142747
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BHV",
@@ -2457,11 +1845,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 54.791274747474745,
     "total_qty": 234.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11926687,
-      "lng": 105.0090192
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AMP",
@@ -2473,11 +1857,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 353.2610094949495,
     "total_qty": 1229.0,
     "so_count": 4,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.21129929,
-      "lng": 105.17959978
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6240",
@@ -2489,11 +1869,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 232.4362929292929,
     "total_qty": 766.0,
     "so_count": 4,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.223631,
-      "lng": 105.188491
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6090",
@@ -2505,11 +1881,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 265.07654306582305,
     "total_qty": 959.0,
     "so_count": 4,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.20316,
-      "lng": 105.1796299
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BGF",
@@ -2521,11 +1893,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 110.33605555555557,
     "total_qty": 222.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.38923211,
-      "lng": 105.3002563
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BBO",
@@ -2537,11 +1905,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 123.66775797979798,
     "total_qty": 347.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.37217265,
-      "lng": 105.29870171
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6540",
@@ -2553,11 +1917,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 90.62284343434344,
     "total_qty": 251.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3385339,
-      "lng": 105.29316541
-    }
+    "carrier": "GHN"
   },
   {
     "id": "5905",
@@ -2569,11 +1929,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 307.1798020202021,
     "total_qty": 757.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.325406,
-      "lng": 105.2837353
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BX9",
@@ -2585,11 +1941,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 99.54807111111111,
     "total_qty": 266.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3039529,
-      "lng": 105.3205295
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6338",
@@ -2601,11 +1953,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 105.41720444444444,
     "total_qty": 216.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.29753649,
-      "lng": 105.3490302
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BW8",
@@ -2617,11 +1965,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 95.80987777777779,
     "total_qty": 207.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.269248,
-      "lng": 105.295034
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AKG",
@@ -2633,11 +1977,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 130.1917313131313,
     "total_qty": 282.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.288375,
-      "lng": 105.302425
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6562",
@@ -2649,11 +1989,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 130.2120101010101,
     "total_qty": 457.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.355658,
-      "lng": 105.293522
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6529",
@@ -2665,11 +2001,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 264.38630303030305,
     "total_qty": 821.0,
     "so_count": 4,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.339796,
-      "lng": 105.404829
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6513",
@@ -2681,11 +2013,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 285.550109090909,
     "total_qty": 632.0,
     "so_count": 5,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.324844,
-      "lng": 105.403205
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3643",
@@ -2697,11 +2025,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 235.88662710622714,
     "total_qty": 809.0,
     "so_count": 6,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32555692,
-      "lng": 105.39485343
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BFK",
@@ -2713,11 +2037,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 114.87584545454547,
     "total_qty": 215.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3307531,
-      "lng": 105.40402289
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3993",
@@ -2729,11 +2049,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 259.60490000000004,
     "total_qty": 574.0,
     "so_count": 4,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3244,
-      "lng": 105.399
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AB9",
@@ -2745,11 +2061,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 216.2003666666667,
     "total_qty": 611.0,
     "so_count": 4,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.315633,
-      "lng": 105.394931
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6045",
@@ -2761,11 +2073,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 212.68962222222223,
     "total_qty": 396.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32248786,
-      "lng": 105.3919587
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6460",
@@ -2777,11 +2085,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 171.77732666666668,
     "total_qty": 476.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3143,
-      "lng": 105.39068
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3435",
@@ -2793,11 +2097,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 343.99174957264955,
     "total_qty": 1080.0,
     "so_count": 4,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32061893,
-      "lng": 105.39044988
-    }
+    "carrier": "GHN"
   },
   {
     "id": "1564",
@@ -2809,11 +2109,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 1051.636935057387,
     "total_qty": 3849.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3124,
-      "lng": 105.396
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AJJ",
@@ -2825,11 +2121,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 201.19082191142195,
     "total_qty": 631.0,
     "so_count": 6,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.31501267,
-      "lng": 105.3979981
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3685",
@@ -2841,11 +2133,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 247.87139743589745,
     "total_qty": 834.0,
     "so_count": 4,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.30949677,
-      "lng": 105.40170005
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3407",
@@ -2857,11 +2145,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 260.6598727272727,
     "total_qty": 559.0,
     "so_count": 5,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.30838683,
-      "lng": 105.4037242
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2CFX",
@@ -2873,11 +2157,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 403.6506376068377,
     "total_qty": 764.0,
     "so_count": 5,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3042411,
-      "lng": 105.4139759
-    }
+    "carrier": "GHN"
   },
   {
     "id": "4093",
@@ -2889,11 +2169,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 259.76483392607395,
     "total_qty": 617.0,
     "so_count": 6,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3101914,
-      "lng": 105.4127013
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3464",
@@ -2905,11 +2181,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 210.92967521367524,
     "total_qty": 684.0,
     "so_count": 4,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.312,
-      "lng": 105.417
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6434",
@@ -2921,11 +2193,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 100.47866666666667,
     "total_qty": 242.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.29671,
-      "lng": 105.43961
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AU9",
@@ -2937,11 +2205,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 189.74390769230774,
     "total_qty": 774.0,
     "so_count": 4,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.30816369,
-      "lng": 105.42655933
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ANC",
@@ -2953,11 +2217,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 362.4750151515152,
     "total_qty": 621.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "5891",
@@ -2969,11 +2229,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 186.47400000000005,
     "total_qty": 429.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.28429,
-      "lng": 105.25763
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6871",
@@ -2985,11 +2241,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 189.7715,
     "total_qty": 613.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.25426,
-      "lng": 105.29208
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AFF",
@@ -3001,11 +2253,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 197.74730000000002,
     "total_qty": 399.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.210805,
-      "lng": 105.325933
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AIU",
@@ -3017,11 +2265,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 291.08546666666666,
     "total_qty": 755.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.222972,
-      "lng": 105.28925
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2APX",
@@ -3033,11 +2277,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 91.29003333333334,
     "total_qty": 343.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ALI",
@@ -3049,11 +2289,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 144.4,
     "total_qty": 369.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BO6",
@@ -3065,11 +2301,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 79.09066666666666,
     "total_qty": 132.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.10791587,
-      "lng": 105.31451815
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BWV",
@@ -3081,11 +2313,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 269.9869787878788,
     "total_qty": 623.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.08279847,
-      "lng": 105.30111984
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6178",
@@ -3097,11 +2325,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 354.16859999999997,
     "total_qty": 934.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.113472,
-      "lng": 105.280415
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BY6",
@@ -3113,11 +2337,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 60.9114,
     "total_qty": 182.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.1262491,
-      "lng": 105.271048
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BU7",
@@ -3129,11 +2349,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 175.7692,
     "total_qty": 526.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11367143,
-      "lng": 105.23102116
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ALC",
@@ -3145,11 +2361,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 204.5753333333334,
     "total_qty": 295.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.02299938,
-      "lng": 105.24184934
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BDE",
@@ -3161,11 +2373,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 155.7115,
     "total_qty": 387.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 20.970857,
-      "lng": 105.285646
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ASC",
@@ -3177,11 +2385,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 105.96006666666669,
     "total_qty": 402.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.1139251,
-      "lng": 105.1142747
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BHV",
@@ -3193,11 +2397,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 234.4895151515152,
     "total_qty": 624.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11926687,
-      "lng": 105.0090192
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AMP",
@@ -3209,11 +2409,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 206.42590000000004,
     "total_qty": 493.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.21129929,
-      "lng": 105.17959978
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6240",
@@ -3225,11 +2421,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 175.19483333333335,
     "total_qty": 452.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.223631,
-      "lng": 105.188491
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6090",
@@ -3241,11 +2433,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 140.68096666666668,
     "total_qty": 354.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.20316,
-      "lng": 105.1796299
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BGF",
@@ -3257,11 +2445,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 64.42600000000002,
     "total_qty": 56.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.38923211,
-      "lng": 105.3002563
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BBO",
@@ -3273,11 +2457,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 217.48784848484848,
     "total_qty": 463.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.37217265,
-      "lng": 105.29870171
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6540",
@@ -3289,11 +2469,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 161.84400000000005,
     "total_qty": 249.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3385339,
-      "lng": 105.29316541
-    }
+    "carrier": "GHN"
   },
   {
     "id": "5905",
@@ -3305,11 +2481,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 305.9379,
     "total_qty": 393.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.325406,
-      "lng": 105.2837353
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BX9",
@@ -3321,11 +2493,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 171.6482666666667,
     "total_qty": 300.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3039529,
-      "lng": 105.3205295
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6338",
@@ -3337,11 +2505,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 109.67543333333333,
     "total_qty": 268.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.29753649,
-      "lng": 105.3490302
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BW8",
@@ -3353,11 +2517,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 228.21396666666666,
     "total_qty": 407.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.269248,
-      "lng": 105.295034
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AKG",
@@ -3369,11 +2529,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 160.16893333333334,
     "total_qty": 346.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.288375,
-      "lng": 105.302425
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6562",
@@ -3385,11 +2541,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 293.94346666666667,
     "total_qty": 654.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.355658,
-      "lng": 105.293522
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ANC",
@@ -3401,11 +2553,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 93.7750537728938,
     "total_qty": 396.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "5891",
@@ -3417,11 +2565,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 40.83181818181818,
     "total_qty": 218.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.28429,
-      "lng": 105.25763
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6871",
@@ -3433,11 +2577,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 109.36559151515152,
     "total_qty": 330.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.25426,
-      "lng": 105.29208
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AFF",
@@ -3449,11 +2589,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 72.22,
     "total_qty": 270.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.210805,
-      "lng": 105.325933
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AIU",
@@ -3465,11 +2601,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 65.223,
     "total_qty": 302.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.222972,
-      "lng": 105.28925
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2APX",
@@ -3481,11 +2613,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 28.745,
     "total_qty": 106.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ALI",
@@ -3497,11 +2625,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 62.573,
     "total_qty": 258.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BO6",
@@ -3513,11 +2637,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 37.352000000000004,
     "total_qty": 134.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.10791587,
-      "lng": 105.31451815
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BWV",
@@ -3529,11 +2649,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 60.50181818181819,
     "total_qty": 106.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.08279847,
-      "lng": 105.30111984
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6178",
@@ -3545,11 +2661,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 118.00505454545456,
     "total_qty": 296.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.113472,
-      "lng": 105.280415
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BY6",
@@ -3561,11 +2673,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 283.7899077899878,
     "total_qty": 609.0,
     "so_count": 6,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.1262491,
-      "lng": 105.271048
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BU7",
@@ -3577,11 +2685,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 37.400000000000006,
     "total_qty": 96.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11367143,
-      "lng": 105.23102116
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ALC",
@@ -3593,11 +2697,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 71.58800000000001,
     "total_qty": 142.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.02299938,
-      "lng": 105.24184934
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BDE",
@@ -3609,11 +2709,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 131.5635923809524,
     "total_qty": 399.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 20.970857,
-      "lng": 105.285646
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ASC",
@@ -3625,11 +2721,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 100.94865810189812,
     "total_qty": 365.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.1139251,
-      "lng": 105.1142747
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BHV",
@@ -3641,11 +2733,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 36.4815,
     "total_qty": 33.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11926687,
-      "lng": 105.0090192
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AMP",
@@ -3657,11 +2745,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 52.1514,
     "total_qty": 200.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.21129929,
-      "lng": 105.17959978
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6240",
@@ -3673,11 +2757,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 16.873672727272726,
     "total_qty": 180.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.223631,
-      "lng": 105.188491
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6090",
@@ -3689,11 +2769,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 18.8338,
     "total_qty": 90.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.20316,
-      "lng": 105.1796299
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BGF",
@@ -3705,11 +2781,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 341.4999496947497,
     "total_qty": 1162.0,
     "so_count": 8,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.38923211,
-      "lng": 105.3002563
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BBO",
@@ -3721,11 +2793,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 47.29700000000001,
     "total_qty": 146.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.37217265,
-      "lng": 105.29870171
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6540",
@@ -3737,11 +2805,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 358.5444142257742,
     "total_qty": 1114.0,
     "so_count": 8,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3385339,
-      "lng": 105.29316541
-    }
+    "carrier": "GHN"
   },
   {
     "id": "5905",
@@ -3753,11 +2817,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 36.001000000000005,
     "total_qty": 90.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.325406,
-      "lng": 105.2837353
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BX9",
@@ -3769,11 +2829,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 30.819000000000003,
     "total_qty": 96.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3039529,
-      "lng": 105.3205295
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6338",
@@ -3785,11 +2841,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 9.825,
     "total_qty": 120.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.29753649,
-      "lng": 105.3490302
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BW8",
@@ -3801,11 +2853,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 55.19279904761906,
     "total_qty": 198.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.269248,
-      "lng": 105.295034
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AKG",
@@ -3817,11 +2865,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 49.925,
     "total_qty": 98.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.288375,
-      "lng": 105.302425
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6562",
@@ -3833,11 +2877,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 105.86363636363639,
     "total_qty": 308.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.355658,
-      "lng": 105.293522
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AFF",
@@ -3849,11 +2889,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 127.26866666666668,
     "total_qty": 624.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.210805,
-      "lng": 105.325933
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AIU",
@@ -3865,11 +2901,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 356.15166666666664,
     "total_qty": 964.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.222972,
-      "lng": 105.28925
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2APX",
@@ -3881,11 +2913,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 177.72966666666667,
     "total_qty": 726.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ALI",
@@ -3897,11 +2925,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 180.4656666666667,
     "total_qty": 728.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BO6",
@@ -3913,11 +2937,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 154.476,
     "total_qty": 290.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.10791587,
-      "lng": 105.31451815
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BWV",
@@ -3929,11 +2949,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 256.28833333333336,
     "total_qty": 974.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.08279847,
-      "lng": 105.30111984
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AKU",
@@ -3945,11 +2961,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 253.11266666666666,
     "total_qty": 456.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6178",
@@ -3961,11 +2973,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 321.092,
     "total_qty": 894.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.113472,
-      "lng": 105.280415
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BU7",
@@ -3977,11 +2985,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 170.74166666666667,
     "total_qty": 498.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11367143,
-      "lng": 105.23102116
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ALC",
@@ -3993,11 +2997,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 172.80666666666667,
     "total_qty": 689.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.02299938,
-      "lng": 105.24184934
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BDE",
@@ -4009,11 +3009,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 304.97200000000004,
     "total_qty": 923.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 20.970857,
-      "lng": 105.285646
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ASC",
@@ -4025,11 +3021,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 223.4566666666667,
     "total_qty": 868.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.1139251,
-      "lng": 105.1142747
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BHV",
@@ -4041,11 +3033,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 155.15966666666668,
     "total_qty": 852.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11926687,
-      "lng": 105.0090192
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AMP",
@@ -4057,11 +3045,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 252.83366666666666,
     "total_qty": 940.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.21129929,
-      "lng": 105.17959978
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6240",
@@ -4073,11 +3057,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 244.929,
     "total_qty": 900.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.223631,
-      "lng": 105.188491
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6090",
@@ -4089,11 +3069,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 112.40133333333334,
     "total_qty": 606.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.20316,
-      "lng": 105.1796299
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AFF",
@@ -4105,11 +3081,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 86.89519511599515,
     "total_qty": 240.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.210805,
-      "lng": 105.325933
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AIU",
@@ -4121,11 +3093,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 130.27503113331113,
     "total_qty": 660.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.222972,
-      "lng": 105.28925
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2APX",
@@ -4137,11 +3105,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 124.85428825396824,
     "total_qty": 258.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ALI",
@@ -4153,11 +3117,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 166.55257142857144,
     "total_qty": 284.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BO6",
@@ -4169,11 +3129,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 86.40241098901092,
     "total_qty": 243.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.10791587,
-      "lng": 105.31451815
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BWV",
@@ -4185,11 +3141,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 146.78819913419915,
     "total_qty": 289.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.08279847,
-      "lng": 105.30111984
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AKU",
@@ -4201,11 +3153,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 117.286870995671,
     "total_qty": 304.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6178",
@@ -4217,11 +3165,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 1376.8578203984905,
     "total_qty": 3183.0,
     "so_count": 13,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.113472,
-      "lng": 105.280415
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BU7",
@@ -4233,11 +3177,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 196.25669722277723,
     "total_qty": 284.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11367143,
-      "lng": 105.23102116
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ALC",
@@ -4249,11 +3189,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 186.35440571428575,
     "total_qty": 280.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.02299938,
-      "lng": 105.24184934
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BDE",
@@ -4265,11 +3201,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 191.7345506715506,
     "total_qty": 318.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 20.970857,
-      "lng": 105.285646
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ASC",
@@ -4281,11 +3213,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 158.6545090909091,
     "total_qty": 509.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.1139251,
-      "lng": 105.1142747
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BHV",
@@ -4297,11 +3225,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 214.8168715151515,
     "total_qty": 365.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11926687,
-      "lng": 105.0090192
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AMP",
@@ -4313,11 +3237,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 183.23562337662335,
     "total_qty": 424.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.21129929,
-      "lng": 105.17959978
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6240",
@@ -4329,11 +3249,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 288.80808103896106,
     "total_qty": 582.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.223631,
-      "lng": 105.188491
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6090",
@@ -4345,11 +3261,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 155.8304288600289,
     "total_qty": 306.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.20316,
-      "lng": 105.1796299
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AFF",
@@ -4357,15 +3269,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu 5, Xuân Lộc",
     "address": "H. Thanh Thủy, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 1.918797174229129,
-    "weight": 483.1546266666667,
-    "total_qty": 1442.0,
-    "so_count": 7,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.210805,
-      "lng": 105.325933
-    }
+    "volume": 3.837594348458258,
+    "weight": 966.3092533333332,
+    "total_qty": 2884.0,
+    "so_count": 14,
+    "carrier": "GHN"
   },
   {
     "id": "2AIU",
@@ -4373,15 +3281,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu 14, Đào Xá",
     "address": "H. Thanh Thủy, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 2.2817723403779184,
-    "weight": 668.4466088888889,
-    "total_qty": 1798.0,
-    "so_count": 7,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.222972,
-      "lng": 105.28925
-    }
+    "volume": 4.563544680755837,
+    "weight": 1336.8932177777776,
+    "total_qty": 3596.0,
+    "so_count": 14,
+    "carrier": "GHN"
   },
   {
     "id": "2APX",
@@ -4389,15 +3293,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu Phố, TT Thanh Thủy",
     "address": "H. Thanh Thủy, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 1.9185369518550242,
-    "weight": 505.1985050793651,
-    "total_qty": 1523.0,
-    "so_count": 7,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "volume": 3.8370739037100483,
+    "weight": 1010.3970101587302,
+    "total_qty": 3046.0,
+    "so_count": 14,
+    "carrier": "GHN"
   },
   {
     "id": "2ALI",
@@ -4405,15 +3305,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu 1, Bảo Yên",
     "address": "H. Thanh Thủy, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 1.479546311395005,
-    "weight": 342.958408008658,
-    "total_qty": 1336.0,
-    "so_count": 7,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "volume": 2.9590926227900103,
+    "weight": 685.916816017316,
+    "total_qty": 2672.0,
+    "so_count": 14,
+    "carrier": "GHN"
   },
   {
     "id": "2BO6",
@@ -4421,15 +3317,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu 11, Tu Vũ",
     "address": "H. Thanh Thủy, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 1.5067522050334023,
-    "weight": 330.72648101010105,
-    "total_qty": 1065.0,
-    "so_count": 7,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.10791587,
-      "lng": 105.31451815
-    }
+    "volume": 3.013504410066805,
+    "weight": 661.4529620202021,
+    "total_qty": 2130.0,
+    "so_count": 14,
+    "carrier": "GHN"
   },
   {
     "id": "2BWV",
@@ -4437,15 +3329,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu 2, Tu Vũ",
     "address": "H. Thanh Thủy, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 2.3096876569024647,
-    "weight": 544.0754813492064,
-    "total_qty": 1971.0,
-    "so_count": 7,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.08279847,
-      "lng": 105.30111984
-    }
+    "volume": 4.619375313804929,
+    "weight": 1088.1509626984127,
+    "total_qty": 3942.0,
+    "so_count": 14,
+    "carrier": "GHN"
   },
   {
     "id": "2AKU",
@@ -4453,15 +3341,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu 4, Đoan Hạ",
     "address": "H. Thanh Thủy, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 1.995393346060986,
-    "weight": 569.7443265284423,
-    "total_qty": 1289.0,
-    "so_count": 9,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "volume": 3.990786692121972,
+    "weight": 1139.4886530568847,
+    "total_qty": 2578.0,
+    "so_count": 18,
+    "carrier": "GHN"
   },
   {
     "id": "2BY6",
@@ -4469,15 +3353,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Khu 3, Thanh Thủy",
     "address": "H. Thanh Thủy, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 1.319850956327682,
-    "weight": 325.4309438095238,
-    "total_qty": 915.0,
-    "so_count": 9,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.1262491,
-      "lng": 105.271048
-    }
+    "volume": 2.6397019126553634,
+    "weight": 650.8618876190476,
+    "total_qty": 1830.0,
+    "so_count": 18,
+    "carrier": "GHN"
   },
   {
     "id": "2BU7",
@@ -4485,15 +3365,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Quyết Tiến, Cự Đồng",
     "address": "H. Thanh Thủy, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 1.399000317680733,
-    "weight": 369.8421884848485,
-    "total_qty": 1098.0,
-    "so_count": 10,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11367143,
-      "lng": 105.23102116
-    }
+    "volume": 2.798000635361466,
+    "weight": 739.684376969697,
+    "total_qty": 2196.0,
+    "so_count": 20,
+    "carrier": "GHN"
   },
   {
     "id": "2ALC",
@@ -4501,15 +3377,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Tân Hương, Hương Cần",
     "address": "H. Thanh Thủy, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 1.5873324385320262,
-    "weight": 469.80362626262627,
-    "total_qty": 996.0,
-    "so_count": 6,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.02299938,
-      "lng": 105.24184934
-    }
+    "volume": 3.1746648770640524,
+    "weight": 939.6072525252525,
+    "total_qty": 1992.0,
+    "so_count": 12,
+    "carrier": "GHN"
   },
   {
     "id": "2BDE",
@@ -4517,15 +3389,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Đề Ngữ, Yên Sơn",
     "address": "H. Thanh Sơn, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 2.3968777197846487,
-    "weight": 640.3515507936509,
-    "total_qty": 1524.0,
-    "so_count": 10,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 20.970857,
-      "lng": 105.285646
-    }
+    "volume": 4.793755439569298,
+    "weight": 1280.703101587302,
+    "total_qty": 3048.0,
+    "so_count": 20,
+    "carrier": "GHN"
   },
   {
     "id": "2ASC",
@@ -4533,15 +3401,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Xóm Dẹ 1, Văn Miếu",
     "address": "H. Thanh Sơn, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 2.0065320715091097,
-    "weight": 569.0089028282828,
-    "total_qty": 1844.0,
-    "so_count": 7,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.1139251,
-      "lng": 105.1142747
-    }
+    "volume": 4.0130641430182195,
+    "weight": 1138.0178056565655,
+    "total_qty": 3688.0,
+    "so_count": 14,
+    "carrier": "GHN"
   },
   {
     "id": "2BHV",
@@ -4549,15 +3413,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Đống Cả, Xuân Đài",
     "address": "H. Thanh Sơn, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 1.3896588795502742,
-    "weight": 397.47650909090913,
-    "total_qty": 1368.0,
-    "so_count": 7,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11926687,
-      "lng": 105.0090192
-    }
+    "volume": 2.779317759100549,
+    "weight": 794.9530181818182,
+    "total_qty": 2736.0,
+    "so_count": 14,
+    "carrier": "GHN"
   },
   {
     "id": "2AMP",
@@ -4565,15 +3425,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO 28 Phố Vàng",
     "address": "H. Thanh Sơn, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 2.5495261580002975,
-    "weight": 685.9817131495405,
-    "total_qty": 1697.0,
-    "so_count": 10,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.21129929,
-      "lng": 105.17959978
-    }
+    "volume": 5.099052316000595,
+    "weight": 1371.963426299081,
+    "total_qty": 3394.0,
+    "so_count": 20,
+    "carrier": "GHN"
   },
   {
     "id": "6240",
@@ -4581,15 +3437,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO Hùng Nhĩ, Thanh Sơn",
     "address": "H. Thanh Sơn, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 1.0947159543692366,
-    "weight": 378.6632520634921,
-    "total_qty": 1362.0,
-    "so_count": 5,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.223631,
-      "lng": 105.188491
-    }
+    "volume": 2.1894319087384733,
+    "weight": 757.3265041269841,
+    "total_qty": 2724.0,
+    "so_count": 10,
+    "carrier": "GHN"
   },
   {
     "id": "6090",
@@ -4597,15 +3449,11 @@ const BOOKING_DELIVERY_POINTS = [
     "name": "WM+ PTO 191B Ba Mỏ",
     "address": "H. Thanh Sơn, T. Phú Thọ",
     "province": "T. Phú Thọ",
-    "volume": 2.247402904527253,
-    "weight": 600.9525175438597,
-    "total_qty": 1686.0,
-    "so_count": 10,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.20316,
-      "lng": 105.1796299
-    }
+    "volume": 4.4948058090545056,
+    "weight": 1201.9050350877196,
+    "total_qty": 3372.0,
+    "so_count": 20,
+    "carrier": "GHN"
   },
   {
     "id": "2ANC",
@@ -4617,11 +3465,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 353.6933706349206,
     "total_qty": 950.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "5891",
@@ -4633,11 +3477,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 310.1,
     "total_qty": 788.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.28429,
-      "lng": 105.25763
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6871",
@@ -4649,11 +3489,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 313.368,
     "total_qty": 854.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.25426,
-      "lng": 105.29208
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AFF",
@@ -4665,11 +3501,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 226.69199999999998,
     "total_qty": 528.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.210805,
-      "lng": 105.325933
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AIU",
@@ -4681,11 +3513,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 224.90999999999997,
     "total_qty": 576.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.222972,
-      "lng": 105.28925
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2APX",
@@ -4697,11 +3525,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 207.76,
     "total_qty": 564.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ALI",
@@ -4713,11 +3537,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 248.366,
     "total_qty": 624.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BO6",
@@ -4729,11 +3549,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 164.54500000000002,
     "total_qty": 328.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.10791587,
-      "lng": 105.31451815
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BWV",
@@ -4745,11 +3561,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 148.503,
     "total_qty": 268.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.08279847,
-      "lng": 105.30111984
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AKU",
@@ -4761,11 +3573,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 252.50800000000004,
     "total_qty": 568.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6178",
@@ -4777,11 +3585,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 204.36,
     "total_qty": 506.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.113472,
-      "lng": 105.280415
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BY6",
@@ -4793,11 +3597,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 197.805,
     "total_qty": 492.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.1262491,
-      "lng": 105.271048
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BU7",
@@ -4809,11 +3609,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 224.50800000000004,
     "total_qty": 532.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11367143,
-      "lng": 105.23102116
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ALC",
@@ -4825,11 +3621,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 207.08,
     "total_qty": 394.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.02299938,
-      "lng": 105.24184934
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BDE",
@@ -4841,11 +3633,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 182.701,
     "total_qty": 406.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 20.970857,
-      "lng": 105.285646
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ASC",
@@ -4857,11 +3645,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 347.846,
     "total_qty": 786.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.1139251,
-      "lng": 105.1142747
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BHV",
@@ -4873,11 +3657,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 257.226,
     "total_qty": 553.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11926687,
-      "lng": 105.0090192
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AMP",
@@ -4889,11 +3669,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 310.016,
     "total_qty": 769.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.21129929,
-      "lng": 105.17959978
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6240",
@@ -4905,11 +3681,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 237.568,
     "total_qty": 746.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.223631,
-      "lng": 105.188491
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6090",
@@ -4921,11 +3693,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 253.529,
     "total_qty": 562.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.20316,
-      "lng": 105.1796299
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BW1",
@@ -4937,11 +3705,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 131.41000000000003,
     "total_qty": 208.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.248375,
-      "lng": 105.1120516
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2B73",
@@ -4953,11 +3717,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 257.3890625763126,
     "total_qty": 836.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.47474439,
-      "lng": 104.94762005
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AQB",
@@ -4969,11 +3729,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 222.20600000000002,
     "total_qty": 522.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.452572,
-      "lng": 104.972053
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6364",
@@ -4985,11 +3741,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 275.412,
     "total_qty": 652.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3520324,
-      "lng": 105.0587234
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BBN",
@@ -5001,11 +3753,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 242.57000000000002,
     "total_qty": 622.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.38133637,
-      "lng": 105.10943059
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2CGH",
@@ -5017,11 +3765,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 857.2719999999999,
     "total_qty": 7782.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.4009876,
-      "lng": 105.1414893
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BTL",
@@ -5033,11 +3777,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 147.73000000000002,
     "total_qty": 388.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3655603,
-      "lng": 105.1301228
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BDO",
@@ -5049,11 +3789,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 225.763,
     "total_qty": 448.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3465653,
-      "lng": 105.1355167
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BDF",
@@ -5065,11 +3801,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 238.69,
     "total_qty": 418.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.37524532,
-      "lng": 105.14251871
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BSF",
@@ -5081,11 +3813,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 313.613,
     "total_qty": 808.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.4215625,
-      "lng": 105.1288585
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BF1",
@@ -5097,11 +3825,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 187.091,
     "total_qty": 556.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.39065622,
-      "lng": 105.14716398
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BVZ",
@@ -5113,11 +3837,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 181.94210384615383,
     "total_qty": 564.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.460025,
-      "lng": 105.090495
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6291",
@@ -5129,11 +3849,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 316.80100000000004,
     "total_qty": 762.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.42252,
-      "lng": 105.132863
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6680",
@@ -5145,11 +3861,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 366.56800000000004,
     "total_qty": 956.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.47019,
-      "lng": 105.08186
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BIB",
@@ -5161,11 +3873,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 360.409,
     "total_qty": 714.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.43356686,
-      "lng": 105.05452792
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BAW",
@@ -5177,11 +3885,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 272.8514261904762,
     "total_qty": 730.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.5014062,
-      "lng": 105.25799
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AKL",
@@ -5193,11 +3897,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 250.28128333333333,
     "total_qty": 788.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.49196898,
-      "lng": 105.22540187
-    }
+    "carrier": "GHN"
   },
   {
     "id": "5918",
@@ -5209,11 +3909,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 412.8805880952381,
     "total_qty": 1028.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.4393125,
-      "lng": 105.2553125
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BX4",
@@ -5225,11 +3921,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 237.43303484848488,
     "total_qty": 721.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.39696977,
-      "lng": 105.32566932
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6750",
@@ -5241,11 +3933,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 517.9512833333334,
     "total_qty": 1304.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.40924,
-      "lng": 105.37654
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AD3",
@@ -5257,11 +3945,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 301.8283166666667,
     "total_qty": 827.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.40373,
-      "lng": 105.31766
-    }
+    "carrier": "GHN"
   },
   {
     "id": "5689",
@@ -5273,11 +3957,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 378.8847038461539,
     "total_qty": 1231.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.4078,
-      "lng": 105.31373
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2B44",
@@ -5289,11 +3969,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 304.88520238095236,
     "total_qty": 942.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.408395,
-      "lng": 105.305459
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6270",
@@ -5305,11 +3981,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 462.2682015151515,
     "total_qty": 1408.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.4308392,
-      "lng": 105.2926415
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BGF",
@@ -5321,11 +3993,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 229.52299999999997,
     "total_qty": 610.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.38923211,
-      "lng": 105.3002563
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BBO",
@@ -5337,11 +4005,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 395.59899999999993,
     "total_qty": 604.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.37217265,
-      "lng": 105.29870171
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6540",
@@ -5353,11 +4017,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 237.881,
     "total_qty": 614.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3385339,
-      "lng": 105.29316541
-    }
+    "carrier": "GHN"
   },
   {
     "id": "5905",
@@ -5369,11 +4029,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 272.736,
     "total_qty": 612.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.325406,
-      "lng": 105.2837353
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BX9",
@@ -5385,11 +4041,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 258.11,
     "total_qty": 564.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3039529,
-      "lng": 105.3205295
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6338",
@@ -5401,11 +4053,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 300.572,
     "total_qty": 686.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.29753649,
-      "lng": 105.3490302
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BW8",
@@ -5417,11 +4065,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 215.04600000000002,
     "total_qty": 345.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.269248,
-      "lng": 105.295034
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AKG",
@@ -5433,11 +4077,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 286.82800000000003,
     "total_qty": 636.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.288375,
-      "lng": 105.302425
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6562",
@@ -5449,11 +4089,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 352.65200000000004,
     "total_qty": 871.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.355658,
-      "lng": 105.293522
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6399",
@@ -5465,11 +4101,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 205.54156666666668,
     "total_qty": 862.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.36991,
-      "lng": 105.38603
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3539",
@@ -5481,11 +4113,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 448.51867424242425,
     "total_qty": 2461.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.36793,
-      "lng": 105.34397
-    }
+    "carrier": "GHN"
   },
   {
     "id": "4141",
@@ -5497,11 +4125,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 184.16840000000002,
     "total_qty": 913.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3438,
-      "lng": 105.356
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BEV",
@@ -5513,11 +4137,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 52.247875757575756,
     "total_qty": 363.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32385022,
-      "lng": 105.34135156
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BS3",
@@ -5529,11 +4149,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 326.03407525252527,
     "total_qty": 712.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3280749,
-      "lng": 105.3255583
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3343",
@@ -5545,11 +4161,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 149.44400000000002,
     "total_qty": 522.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.34056473,
-      "lng": 105.3645401
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AY6",
@@ -5561,11 +4173,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 136.94400000000002,
     "total_qty": 266.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32183851,
-      "lng": 105.3731802
-    }
+    "carrier": "GHN"
   },
   {
     "id": "4215",
@@ -5577,11 +4185,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 191.7332,
     "total_qty": 556.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3283577,
-      "lng": 105.37602997
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6117",
@@ -5593,11 +4197,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 346.0628,
     "total_qty": 534.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.331291,
-      "lng": 105.370199
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6432",
@@ -5609,11 +4209,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 262.3328,
     "total_qty": 684.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.33672,
-      "lng": 105.37689
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3585",
@@ -5625,11 +4221,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 386.2648212121212,
     "total_qty": 2642.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3312,
-      "lng": 105.379
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3345",
@@ -5641,11 +4233,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 142.26182121212122,
     "total_qty": 650.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32930596,
-      "lng": 105.38091599
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3627",
@@ -5657,11 +4245,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 937.1500212121213,
     "total_qty": 1167.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3293,
-      "lng": 105.378
-    }
+    "carrier": "GHN"
   },
   {
     "id": "4106",
@@ -5673,11 +4257,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 209.96562121212122,
     "total_qty": 696.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3242,
-      "lng": 105.382
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3518",
@@ -5689,11 +4269,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 197.9906666666667,
     "total_qty": 898.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3263,
-      "lng": 105.385
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3313",
@@ -5705,11 +4281,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 229.30888636363636,
     "total_qty": 632.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.323517,
-      "lng": 105.387191
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3642",
@@ -5721,11 +4293,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 465.22560898989894,
     "total_qty": 1283.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3295,
-      "lng": 105.39
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6052",
@@ -5737,11 +4305,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 217.97056666666668,
     "total_qty": 654.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.33311,
-      "lng": 105.38574
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3656",
@@ -5753,11 +4317,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 188.80975303030303,
     "total_qty": 392.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3276,
-      "lng": 105.4
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6529",
@@ -5769,11 +4329,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 130.68400000000003,
     "total_qty": 224.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.339796,
-      "lng": 105.404829
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6513",
@@ -5785,11 +4341,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 197.706,
     "total_qty": 398.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.324844,
-      "lng": 105.403205
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3643",
@@ -5801,11 +4353,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 111.00399999999999,
     "total_qty": 218.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32555692,
-      "lng": 105.39485343
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3993",
@@ -5817,11 +4365,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 105.256,
     "total_qty": 176.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3244,
-      "lng": 105.399
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AB9",
@@ -5833,11 +4377,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 1023.7280000000001,
     "total_qty": 2528.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.315633,
-      "lng": 105.394931
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6045",
@@ -5849,11 +4389,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 174.72320000000002,
     "total_qty": 296.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32248786,
-      "lng": 105.3919587
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6460",
@@ -5865,11 +4401,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 121.24000000000001,
     "total_qty": 266.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3143,
-      "lng": 105.39068
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3435",
@@ -5881,11 +4413,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 170.38,
     "total_qty": 326.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32061893,
-      "lng": 105.39044988
-    }
+    "carrier": "GHN"
   },
   {
     "id": "1564",
@@ -5897,11 +4425,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 664.3180598290597,
     "total_qty": 2210.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3124,
-      "lng": 105.396
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3685",
@@ -5913,11 +4437,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 1037.6260000000002,
     "total_qty": 2600.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.30949677,
-      "lng": 105.40170005
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3407",
@@ -5929,11 +4449,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 290.9144,
     "total_qty": 668.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.30838683,
-      "lng": 105.4037242
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2CFX",
@@ -5945,11 +4461,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 315.33799999999997,
     "total_qty": 642.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3042411,
-      "lng": 105.4139759
-    }
+    "carrier": "GHN"
   },
   {
     "id": "4093",
@@ -5961,11 +4473,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 103.46000000000001,
     "total_qty": 152.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3101914,
-      "lng": 105.4127013
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3464",
@@ -5977,11 +4485,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 4376.238000000001,
     "total_qty": 11078.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.312,
-      "lng": 105.417
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6434",
@@ -5993,11 +4497,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 108.24800000000002,
     "total_qty": 164.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.29671,
-      "lng": 105.43961
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AU9",
@@ -6009,11 +4509,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 159.2016,
     "total_qty": 296.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.30816369,
-      "lng": 105.42655933
-    }
+    "carrier": "GHN"
   },
   {
     "id": "5891",
@@ -6025,11 +4521,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 58.44394999999999,
     "total_qty": 311.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.28429,
-      "lng": 105.25763
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6871",
@@ -6041,11 +4533,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 113.0772277777778,
     "total_qty": 319.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.25426,
-      "lng": 105.29208
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AFF",
@@ -6057,11 +4545,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 104.78222619047621,
     "total_qty": 206.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.210805,
-      "lng": 105.325933
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AIU",
@@ -6073,11 +4557,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 68.63931666666666,
     "total_qty": 309.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.222972,
-      "lng": 105.28925
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2APX",
@@ -6089,11 +4569,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 73.49192777777779,
     "total_qty": 292.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ALI",
@@ -6105,11 +4581,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 104.2319388888889,
     "total_qty": 336.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BO6",
@@ -6121,11 +4593,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 21.767904112554113,
     "total_qty": 250.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.10791587,
-      "lng": 105.31451815
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BWV",
@@ -6137,11 +4605,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 54.64453937728938,
     "total_qty": 271.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.08279847,
-      "lng": 105.30111984
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AKU",
@@ -6153,11 +4617,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 26.831072710622713,
     "total_qty": 207.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6178",
@@ -6169,11 +4629,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 120.1652110944611,
     "total_qty": 604.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.113472,
-      "lng": 105.280415
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BY6",
@@ -6185,11 +4641,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 13.598216666666671,
     "total_qty": 156.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.1262491,
-      "lng": 105.271048
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BU7",
@@ -6201,11 +4653,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 39.118472222222216,
     "total_qty": 329.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11367143,
-      "lng": 105.23102116
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ALC",
@@ -6217,11 +4665,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 33.80798382173382,
     "total_qty": 276.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.02299938,
-      "lng": 105.24184934
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BDE",
@@ -6233,11 +4677,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 46.2510975995116,
     "total_qty": 388.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 20.970857,
-      "lng": 105.285646
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ASC",
@@ -6249,11 +4689,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 61.063839377289376,
     "total_qty": 389.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.1139251,
-      "lng": 105.1142747
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BHV",
@@ -6265,11 +4701,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 31.28241666666667,
     "total_qty": 322.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11926687,
-      "lng": 105.0090192
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AMP",
@@ -6281,11 +4713,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 69.46877222222221,
     "total_qty": 222.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.21129929,
-      "lng": 105.17959978
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6240",
@@ -6297,11 +4725,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 52.18347689532689,
     "total_qty": 540.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.223631,
-      "lng": 105.188491
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6090",
@@ -6313,11 +4737,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 19.59575,
     "total_qty": 172.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.20316,
-      "lng": 105.1796299
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BW1",
@@ -6329,11 +4749,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 15.64075,
     "total_qty": 162.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.248375,
-      "lng": 105.1120516
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AQB",
@@ -6345,11 +4761,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 101.59311666666666,
     "total_qty": 184.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.452572,
-      "lng": 104.972053
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6364",
@@ -6361,11 +4773,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 46.57044393939394,
     "total_qty": 380.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3520324,
-      "lng": 105.0587234
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BBN",
@@ -6377,11 +4785,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 31.342995421245426,
     "total_qty": 298.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.38133637,
-      "lng": 105.10943059
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2CGH",
@@ -6393,11 +4797,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 97.03637777777777,
     "total_qty": 212.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.4009876,
-      "lng": 105.1414893
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BTL",
@@ -6409,11 +4809,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 38.84952777777779,
     "total_qty": 192.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3655603,
-      "lng": 105.1301228
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BDO",
@@ -6425,11 +4821,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 9.786706043956045,
     "total_qty": 104.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3465653,
-      "lng": 105.1355167
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BDF",
@@ -6441,11 +4833,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 22.891750000000005,
     "total_qty": 149.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.37524532,
-      "lng": 105.14251871
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BSF",
@@ -6457,11 +4845,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 51.99321715506715,
     "total_qty": 283.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.4215625,
-      "lng": 105.1288585
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BF1",
@@ -6473,11 +4857,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 40.69143888888889,
     "total_qty": 268.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.39065622,
-      "lng": 105.14716398
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6291",
@@ -6489,11 +4869,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 76.42254999999999,
     "total_qty": 397.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.42252,
-      "lng": 105.132863
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6680",
@@ -6505,11 +4881,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 48.71800555555555,
     "total_qty": 351.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.47019,
-      "lng": 105.08186
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BIB",
@@ -6521,11 +4893,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 81.93660555555556,
     "total_qty": 433.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.43356686,
-      "lng": 105.05452792
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BGF",
@@ -6537,11 +4905,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 42.265550000000005,
     "total_qty": 160.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.38923211,
-      "lng": 105.3002563
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BBO",
@@ -6553,11 +4917,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 57.83030555555557,
     "total_qty": 204.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.37217265,
-      "lng": 105.29870171
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6540",
@@ -6569,11 +4929,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 33.85575,
     "total_qty": 132.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3385339,
-      "lng": 105.29316541
-    }
+    "carrier": "GHN"
   },
   {
     "id": "5905",
@@ -6585,11 +4941,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 118.59675,
     "total_qty": 207.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.325406,
-      "lng": 105.2837353
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BX9",
@@ -6601,11 +4953,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 39.38708333333334,
     "total_qty": 209.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3039529,
-      "lng": 105.3205295
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6338",
@@ -6617,11 +4965,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 62.495365134865146,
     "total_qty": 259.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.29753649,
-      "lng": 105.3490302
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BW8",
@@ -6633,11 +4977,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 47.12875,
     "total_qty": 432.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.269248,
-      "lng": 105.295034
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AKG",
@@ -6649,11 +4989,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 72.45252474747475,
     "total_qty": 210.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.288375,
-      "lng": 105.302425
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6562",
@@ -6665,11 +5001,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 183.4961121045621,
     "total_qty": 586.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.355658,
-      "lng": 105.293522
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6529",
@@ -6681,11 +5013,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 88.51895909090908,
     "total_qty": 428.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.339796,
-      "lng": 105.404829
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6513",
@@ -6697,11 +5025,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 31.36199545454546,
     "total_qty": 130.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.324844,
-      "lng": 105.403205
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3643",
@@ -6713,11 +5037,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 81.19264393939395,
     "total_qty": 338.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32555692,
-      "lng": 105.39485343
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BFK",
@@ -6729,11 +5049,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 55.8872409090909,
     "total_qty": 366.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3307531,
-      "lng": 105.40402289
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3993",
@@ -6745,11 +5061,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 60.54051060606061,
     "total_qty": 252.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3244,
-      "lng": 105.399
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AB9",
@@ -6761,11 +5073,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 64.89752878787878,
     "total_qty": 269.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.315633,
-      "lng": 105.394931
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6045",
@@ -6777,11 +5085,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 82.59094999999999,
     "total_qty": 305.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32248786,
-      "lng": 105.3919587
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6460",
@@ -6793,11 +5097,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 77.62051666666666,
     "total_qty": 313.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3143,
-      "lng": 105.39068
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3435",
@@ -6809,11 +5109,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 108.02182575757578,
     "total_qty": 369.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32061893,
-      "lng": 105.39044988
-    }
+    "carrier": "GHN"
   },
   {
     "id": "1564",
@@ -6825,11 +5121,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 333.6058666666667,
     "total_qty": 949.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3124,
-      "lng": 105.396
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AJJ",
@@ -6841,11 +5133,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 57.30251666666668,
     "total_qty": 250.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.31501267,
-      "lng": 105.3979981
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3685",
@@ -6857,11 +5145,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 117.85156933333333,
     "total_qty": 294.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.30949677,
-      "lng": 105.40170005
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3407",
@@ -6873,11 +5157,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 41.90149545454546,
     "total_qty": 223.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.30838683,
-      "lng": 105.4037242
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2CFX",
@@ -6889,11 +5169,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 28.639250000000004,
     "total_qty": 132.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3042411,
-      "lng": 105.4139759
-    }
+    "carrier": "GHN"
   },
   {
     "id": "4093",
@@ -6905,11 +5181,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 41.36508434343435,
     "total_qty": 222.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3101914,
-      "lng": 105.4127013
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3464",
@@ -6921,11 +5193,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 80.21934292929294,
     "total_qty": 521.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.312,
-      "lng": 105.417
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6434",
@@ -6937,11 +5205,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 51.227452666666665,
     "total_qty": 318.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.29671,
-      "lng": 105.43961
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AU9",
@@ -6953,11 +5217,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 56.89467424242424,
     "total_qty": 353.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.30816369,
-      "lng": 105.42655933
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ANC",
@@ -6969,11 +5229,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 306.28442424242417,
     "total_qty": 632.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "5891",
@@ -6985,11 +5241,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 307.1419274322169,
     "total_qty": 874.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.28429,
-      "lng": 105.25763
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6871",
@@ -7001,11 +5253,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 376.2232081339713,
     "total_qty": 552.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.25426,
-      "lng": 105.29208
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AFF",
@@ -7017,11 +5265,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 167.7220606060606,
     "total_qty": 386.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.210805,
-      "lng": 105.325933
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AIU",
@@ -7033,11 +5277,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 336.5050500797448,
     "total_qty": 700.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.222972,
-      "lng": 105.28925
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2APX",
@@ -7049,11 +5289,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 192.88939393939393,
     "total_qty": 503.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ALI",
@@ -7065,11 +5301,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 208.32109090909086,
     "total_qty": 393.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BO6",
@@ -7081,11 +5313,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 181.55935757575756,
     "total_qty": 350.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.10791587,
-      "lng": 105.31451815
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BWV",
@@ -7097,11 +5325,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 118.00898947368418,
     "total_qty": 315.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.08279847,
-      "lng": 105.30111984
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AKU",
@@ -7113,11 +5337,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 162.29874003189792,
     "total_qty": 340.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6178",
@@ -7129,11 +5349,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 431.0122272727273,
     "total_qty": 673.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.113472,
-      "lng": 105.280415
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BY6",
@@ -7145,11 +5361,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 97.1509696969697,
     "total_qty": 156.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.1262491,
-      "lng": 105.271048
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BU7",
@@ -7161,11 +5373,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 158.98122424242422,
     "total_qty": 459.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11367143,
-      "lng": 105.23102116
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ALC",
@@ -7177,11 +5385,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 291.9552535885167,
     "total_qty": 453.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.02299938,
-      "lng": 105.24184934
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BDE",
@@ -7193,11 +5397,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 318.4113775651249,
     "total_qty": 672.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 20.970857,
-      "lng": 105.285646
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ASC",
@@ -7209,11 +5409,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 254.43256645401377,
     "total_qty": 608.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.1139251,
-      "lng": 105.1142747
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BHV",
@@ -7225,11 +5421,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 224.32616985645933,
     "total_qty": 532.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11926687,
-      "lng": 105.0090192
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AMP",
@@ -7241,11 +5433,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 369.3504098883572,
     "total_qty": 870.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.21129929,
-      "lng": 105.17959978
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6240",
@@ -7257,11 +5445,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 318.4040028708134,
     "total_qty": 820.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.223631,
-      "lng": 105.188491
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6090",
@@ -7273,11 +5457,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 254.13021371610847,
     "total_qty": 369.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.20316,
-      "lng": 105.1796299
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BW1",
@@ -7289,11 +5469,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 259.8412581605529,
     "total_qty": 381.0,
     "so_count": 4,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.248375,
-      "lng": 105.1120516
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2B73",
@@ -7305,11 +5481,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 343.98399534290274,
     "total_qty": 597.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.47474439,
-      "lng": 104.94762005
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AQB",
@@ -7321,11 +5493,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 316.9945518341308,
     "total_qty": 589.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.452572,
-      "lng": 104.972053
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6364",
@@ -7337,11 +5505,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 339.7421046251993,
     "total_qty": 706.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3520324,
-      "lng": 105.0587234
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BBN",
@@ -7353,11 +5517,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 284.29128867623604,
     "total_qty": 445.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.38133637,
-      "lng": 105.10943059
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2CGH",
@@ -7369,11 +5529,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 986.5269651667631,
     "total_qty": 2587.0,
     "so_count": 3,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.4009876,
-      "lng": 105.1414893
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BTL",
@@ -7385,11 +5541,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 87.37406060606061,
     "total_qty": 204.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3655603,
-      "lng": 105.1301228
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BDO",
@@ -7401,11 +5553,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 104.51109090909091,
     "total_qty": 330.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3465653,
-      "lng": 105.1355167
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BDF",
@@ -7417,11 +5565,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 169.72511897926637,
     "total_qty": 388.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.37524532,
-      "lng": 105.14251871
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BSF",
@@ -7433,11 +5577,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 278.77190494417863,
     "total_qty": 442.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.4215625,
-      "lng": 105.1288585
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BF1",
@@ -7449,11 +5589,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 175.00922424242424,
     "total_qty": 335.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.39065622,
-      "lng": 105.14716398
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BVZ",
@@ -7465,11 +5601,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 96.9541333333333,
     "total_qty": 238.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.460025,
-      "lng": 105.090495
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6291",
@@ -7481,11 +5613,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 429.5431446251994,
     "total_qty": 962.0,
     "so_count": 4,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.42252,
-      "lng": 105.132863
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6680",
@@ -7497,11 +5625,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 404.1060872727273,
     "total_qty": 832.0,
     "so_count": 4,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.47019,
-      "lng": 105.08186
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BIB",
@@ -7513,11 +5637,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 220.4977607655502,
     "total_qty": 562.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.43356686,
-      "lng": 105.05452792
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BGF",
@@ -7529,11 +5649,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 178.91621371610844,
     "total_qty": 294.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.38923211,
-      "lng": 105.3002563
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BBO",
@@ -7545,11 +5661,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 191.62109409888356,
     "total_qty": 424.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.37217265,
-      "lng": 105.29870171
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6540",
@@ -7561,11 +5673,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 162.72824880382774,
     "total_qty": 426.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3385339,
-      "lng": 105.29316541
-    }
+    "carrier": "GHN"
   },
   {
     "id": "5905",
@@ -7577,11 +5685,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 253.26024704944177,
     "total_qty": 527.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.325406,
-      "lng": 105.2837353
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BX9",
@@ -7593,11 +5697,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 157.61949090909093,
     "total_qty": 438.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3039529,
-      "lng": 105.3205295
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6338",
@@ -7609,11 +5709,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 286.3049435406698,
     "total_qty": 294.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.29753649,
-      "lng": 105.3490302
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BW8",
@@ -7625,11 +5721,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 119.52682424242425,
     "total_qty": 307.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.269248,
-      "lng": 105.295034
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AKG",
@@ -7641,11 +5733,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 234.063990430622,
     "total_qty": 425.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.288375,
-      "lng": 105.302425
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6562",
@@ -7657,11 +5745,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 452.24514673046247,
     "total_qty": 893.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.355658,
-      "lng": 105.293522
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6529",
@@ -7673,11 +5757,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 432.7688,
     "total_qty": 1133.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.339796,
-      "lng": 105.404829
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6513",
@@ -7689,11 +5769,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 329.9545333333333,
     "total_qty": 872.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.324844,
-      "lng": 105.403205
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3643",
@@ -7705,11 +5781,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 352.6573333333333,
     "total_qty": 994.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32555692,
-      "lng": 105.39485343
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BFK",
@@ -7721,11 +5793,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 370.504,
     "total_qty": 1125.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3307531,
-      "lng": 105.40402289
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3993",
@@ -7737,11 +5805,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 406.54920000000004,
     "total_qty": 1066.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3244,
-      "lng": 105.399
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AB9",
@@ -7753,11 +5817,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 219.716,
     "total_qty": 617.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.315633,
-      "lng": 105.394931
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6045",
@@ -7769,11 +5829,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 317.02299999999997,
     "total_qty": 1058.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32248786,
-      "lng": 105.3919587
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6460",
@@ -7785,11 +5841,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 603.6486666666669,
     "total_qty": 1186.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3143,
-      "lng": 105.39068
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3435",
@@ -7801,11 +5853,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 319.412,
     "total_qty": 1031.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32061893,
-      "lng": 105.39044988
-    }
+    "carrier": "GHN"
   },
   {
     "id": "1564",
@@ -7817,11 +5865,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 3141.9149733333325,
     "total_qty": 4410.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3124,
-      "lng": 105.396
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AJJ",
@@ -7833,11 +5877,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 291.30993333333333,
     "total_qty": 826.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.31501267,
-      "lng": 105.3979981
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3685",
@@ -7849,11 +5889,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 514.4478666666666,
     "total_qty": 1196.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.30949677,
-      "lng": 105.40170005
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3407",
@@ -7865,11 +5901,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 305.7954666666667,
     "total_qty": 803.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.30838683,
-      "lng": 105.4037242
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2CFX",
@@ -7881,11 +5913,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 425.2300000000001,
     "total_qty": 837.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3042411,
-      "lng": 105.4139759
-    }
+    "carrier": "GHN"
   },
   {
     "id": "4093",
@@ -7897,11 +5925,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 365.1725333333333,
     "total_qty": 874.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3101914,
-      "lng": 105.4127013
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3464",
@@ -7913,11 +5937,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 260.72253333333333,
     "total_qty": 821.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.312,
-      "lng": 105.417
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6434",
@@ -7929,11 +5949,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 361.3966,
     "total_qty": 918.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.29671,
-      "lng": 105.43961
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AU9",
@@ -7945,11 +5961,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 317.9699333333333,
     "total_qty": 993.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.30816369,
-      "lng": 105.42655933
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ANC",
@@ -7961,11 +5973,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 147.92494444444446,
     "total_qty": 275.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "5891",
@@ -7977,11 +5985,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 247.07340000000005,
     "total_qty": 443.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.28429,
-      "lng": 105.25763
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6871",
@@ -7993,11 +5997,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 342.995588888889,
     "total_qty": 385.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.25426,
-      "lng": 105.29208
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2APX",
@@ -8009,11 +6009,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 266.74006666666673,
     "total_qty": 319.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ALI",
@@ -8025,11 +6021,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 153.35997777777783,
     "total_qty": 216.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BO6",
@@ -8041,11 +6033,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 64.01142063492064,
     "total_qty": 170.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.10791587,
-      "lng": 105.31451815
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BWV",
@@ -8057,11 +6045,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 217.2840333333333,
     "total_qty": 400.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.08279847,
-      "lng": 105.30111984
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AKU",
@@ -8073,11 +6057,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 195.78671428571434,
     "total_qty": 415.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.0,
-      "lng": 105.0
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6178",
@@ -8089,11 +6069,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 330.9593222222223,
     "total_qty": 588.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.113472,
-      "lng": 105.280415
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BY6",
@@ -8105,11 +6081,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 39.53530000000001,
     "total_qty": 111.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.1262491,
-      "lng": 105.271048
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BU7",
@@ -8121,11 +6093,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 174.38294444444443,
     "total_qty": 205.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11367143,
-      "lng": 105.23102116
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ALC",
@@ -8137,11 +6105,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 178.24906031746025,
     "total_qty": 156.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.02299938,
-      "lng": 105.24184934
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BDE",
@@ -8153,11 +6117,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 123.2042777777778,
     "total_qty": 226.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 20.970857,
-      "lng": 105.285646
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2ASC",
@@ -8169,11 +6129,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 158.61446349206352,
     "total_qty": 358.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.1139251,
-      "lng": 105.1142747
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BHV",
@@ -8185,11 +6141,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 142.0873888888889,
     "total_qty": 236.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.11926687,
-      "lng": 105.0090192
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AMP",
@@ -8201,11 +6153,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 289.17588571428576,
     "total_qty": 396.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.21129929,
-      "lng": 105.17959978
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6240",
@@ -8217,11 +6165,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 249.17768730158733,
     "total_qty": 359.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.223631,
-      "lng": 105.188491
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6090",
@@ -8233,11 +6177,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 136.6521111111111,
     "total_qty": 305.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.20316,
-      "lng": 105.1796299
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AFF",
@@ -8249,11 +6189,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 219.20538888888888,
     "total_qty": 268.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.210805,
-      "lng": 105.325933
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AIU",
@@ -8265,11 +6201,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 240.71411904761905,
     "total_qty": 383.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.222972,
-      "lng": 105.28925
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6338",
@@ -8281,11 +6213,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 116.5551873015873,
     "total_qty": 233.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.29753649,
-      "lng": 105.3490302
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BW8",
@@ -8297,11 +6225,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 66.79555555555555,
     "total_qty": 177.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.269248,
-      "lng": 105.295034
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AKG",
@@ -8313,11 +6237,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 102.84511904761908,
     "total_qty": 306.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.288375,
-      "lng": 105.302425
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BX9",
@@ -8329,11 +6249,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 116.53773333333334,
     "total_qty": 152.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3039529,
-      "lng": 105.3205295
-    }
+    "carrier": "GHN"
   },
   {
     "id": "5905",
@@ -8345,11 +6261,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 147.12293333333332,
     "total_qty": 227.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.325406,
-      "lng": 105.2837353
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6540",
@@ -8361,11 +6273,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 105.87605396825398,
     "total_qty": 235.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3385339,
-      "lng": 105.29316541
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6562",
@@ -8377,11 +6285,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 232.71425396825407,
     "total_qty": 391.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.355658,
-      "lng": 105.293522
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BBO",
@@ -8393,11 +6297,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 81.96133333333334,
     "total_qty": 202.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.37217265,
-      "lng": 105.29870171
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BGF",
@@ -8409,11 +6309,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 43.28484444444446,
     "total_qty": 126.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.38923211,
-      "lng": 105.3002563
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6529",
@@ -8425,11 +6321,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 202.25508571428568,
     "total_qty": 450.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.339796,
-      "lng": 105.404829
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6513",
@@ -8441,11 +6333,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 122.43119999999999,
     "total_qty": 374.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.324844,
-      "lng": 105.403205
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3643",
@@ -8457,11 +6345,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 98.5261904761905,
     "total_qty": 352.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32555692,
-      "lng": 105.39485343
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2BFK",
@@ -8473,11 +6357,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 150.95,
     "total_qty": 332.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3307531,
-      "lng": 105.40402289
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3993",
@@ -8489,11 +6369,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 157.50873333333328,
     "total_qty": 301.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3244,
-      "lng": 105.399
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AB9",
@@ -8505,11 +6381,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 191.0001777777777,
     "total_qty": 438.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.315633,
-      "lng": 105.394931
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6045",
@@ -8521,11 +6393,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 180.06036507936506,
     "total_qty": 483.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32248786,
-      "lng": 105.3919587
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6460",
@@ -8537,11 +6405,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 214.86868888888893,
     "total_qty": 620.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3143,
-      "lng": 105.39068
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3435",
@@ -8553,11 +6417,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 296.89350476190475,
     "total_qty": 626.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.32061893,
-      "lng": 105.39044988
-    }
+    "carrier": "GHN"
   },
   {
     "id": "1564",
@@ -8569,11 +6429,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 835.125892307693,
     "total_qty": 3344.0,
     "so_count": 1,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3124,
-      "lng": 105.396
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AJJ",
@@ -8585,11 +6441,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 135.54380000000003,
     "total_qty": 303.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.31501267,
-      "lng": 105.3979981
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3685",
@@ -8601,11 +6453,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 206.69755555555557,
     "total_qty": 397.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.30949677,
-      "lng": 105.40170005
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3407",
@@ -8617,11 +6465,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 167.15971111111116,
     "total_qty": 268.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.30838683,
-      "lng": 105.4037242
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2CFX",
@@ -8633,11 +6477,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 74.07560000000004,
     "total_qty": 193.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3042411,
-      "lng": 105.4139759
-    }
+    "carrier": "GHN"
   },
   {
     "id": "4093",
@@ -8649,11 +6489,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 179.76054285714287,
     "total_qty": 330.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.3101914,
-      "lng": 105.4127013
-    }
+    "carrier": "GHN"
   },
   {
     "id": "3464",
@@ -8665,11 +6501,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 186.18193968253962,
     "total_qty": 460.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.312,
-      "lng": 105.417
-    }
+    "carrier": "GHN"
   },
   {
     "id": "6434",
@@ -8681,11 +6513,7 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 127.47650000000002,
     "total_qty": 350.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.29671,
-      "lng": 105.43961
-    }
+    "carrier": "GHN"
   },
   {
     "id": "2AU9",
@@ -8697,10 +6525,6 @@ const BOOKING_DELIVERY_POINTS = [
     "weight": 213.0134650793651,
     "total_qty": 382.0,
     "so_count": 2,
-    "carrier": "GHN",
-    "coords": {
-      "lat": 21.30816369,
-      "lng": 105.42655933
-    }
+    "carrier": "GHN"
   }
 ];

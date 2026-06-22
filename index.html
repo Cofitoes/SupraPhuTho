@@ -806,7 +806,7 @@
 <div id="login-overlay">
     <div class="login-box" id="role-selection-box">
         <div class="logo" style="justify-content: center; margin-bottom: 20px;">
-            <div class="logo-icon">LH</div><span style="font-size: 1.5rem; font-weight: 700;">Logistics Hub</span>
+            <div class="logo-icon">SP</div><span style="font-size: 1.5rem; font-weight: 700;">Supra Phú Thọ</span>
         </div>
         <h2 style="margin-bottom: 10px;">Đăng nhập hệ thống</h2>
         <p style="color: var(--text-dim); margin-bottom: 30px; font-size: 0.95rem;">Vui lòng chọn vai trò của bạn để tiếp tục</p>
@@ -817,7 +817,7 @@
 
     <div class="login-box" id="auth-form-box" style="display: none;">
         <div class="logo" style="justify-content: center; margin-bottom: 20px;">
-            <div class="logo-icon">LH</div><span style="font-size: 1.5rem; font-weight: 700;">Logistics Hub</span>
+            <div class="logo-icon">SP</div><span style="font-size: 1.5rem; font-weight: 700;">Supra Phú Thọ</span>
         </div>
         <h2 id="auth-form-title" style="margin-bottom: 10px;">Đăng nhập GHN</h2>
         <p style="color: var(--text-dim); margin-bottom: 20px; font-size: 0.95rem;">Vui lòng nhập tài khoản được cấp</p>
@@ -877,7 +877,7 @@
     <div class="app-container">
         <aside class="sidebar">
             <div class="logo">
-                <div class="logo-icon">LH</div><span>Logistics Hub</span>
+                <div class="logo-icon">SP</div><span>Supra Phú Thọ</span>
             </div>
             <div class="sidebar-date-container" style="display: none;">
                 <label
@@ -894,13 +894,13 @@
                     <li data-tab="reports"><i class="fas fa-file-invoice-dollar"></i> Báo Cáo Chi Phí</li>
                     <li data-tab="fill-rate"><i class="fas fa-truck-loading"></i> Tỷ Lệ Đầy Thùng</li>
                     <li data-tab="store-list"><i class="fas fa-store"></i> DS Cửa Hàng</li>
-                    <li data-tab="vehicle-report" style="display: none;"><i class="fas fa-truck"></i> Báo Cáo Xe</li>
+                    <!-- <li data-tab="vehicle-report" style="display: none;"><i class="fas fa-truck"></i> Báo Cáo Xe</li> -->
                     <li data-tab="incidents" style="display: none;"><i class="fas fa-exclamation-triangle"></i> Sự Cố
                     </li>
                     <li data-tab="order-lookup"><i class="fas fa-search-location"></i> Tra Cứu Đơn</li>
-                    <li data-tab="mq-delivery"><i class="fas fa-boxes"></i> Hàng Giao MQ</li>
+                    <!-- <li data-tab="mq-delivery"><i class="fas fa-boxes"></i> Hàng Giao MQ</li> -->
                     <li data-tab="create-ghn-trips"><i class="fas fa-truck-loading"></i> Tạo Chuyến GHN</li>
-                    <li data-tab="dispatched-trucks"><i class="fas fa-truck-fast"></i> Xe Xuất Hàng</li>
+                    <!-- <li data-tab="dispatched-trucks"><i class="fas fa-truck-fast"></i> Xe Xuất Hàng</li> -->
                     <!-- <li data-tab="customer-requests"><i class="fas fa-envelope"></i> Yêu Cầu Khách Hàng <span class="nav-badge" id="email-badge">3</span></li> -->
                                                 <li data-tab="access-management" style="display: none;"><i class="fas fa-users-cog"></i> Quản Lý Quyền</li>
                 </ul>
@@ -1039,9 +1039,9 @@
                             <thead>
                                 <tr>
                                     <th>STT</th>
+                                    <th>Tên Cửa Hàng</th>
                                     <th>Tỉnh/Thành Phố</th>
                                     <th>Xã/Quận/Huyện</th>
-                                    <th>Số Lượng Cửa Hàng</th>
                                     <th>Tổng CBM</th>
                                     <th>Tổng Trọng Lượng (Tấn)</th>
                                     <th>Trạng Thái</th>
@@ -1584,6 +1584,7 @@
         const cb = new Date().getTime();
         document.write('<script src="store_data.js?v=' + cb + '"></scr' + 'ipt>');
         document.write('<script src="booking_data.js?v=' + cb + '"></scr' + 'ipt>');
+        document.write('<script src="gxt_stores.js?v=' + cb + '"></scr' + 'ipt>');
         document.write('<script src="summary_data.js?v=' + cb + '"></scr' + 'ipt>');
         document.write('<script src="departure_times.js?v=' + cb + '"></scr' + 'ipt>');
         document.write('<script src="vehicle_data.js?v=' + cb + '"></scr' + 'ipt>');
@@ -1772,9 +1773,8 @@
         }
 
         const HUBS = [
-            { id: 'QM', name: 'KCN Minh Quang', coords: { lat: 20.9193754, lng: 106.115945 } },
-            { id: 'HY', name: 'KTC Hưng Yên', coords: { lat: 20.8370687, lng: 106.0433685 } },
-            { id: 'HN02', name: 'KTC Hà Nội 02', coords: { lat: 21.0310096, lng: 105.9237737 } }
+            { id: 'QM', name: 'Kho DC Win Phú Thọ', coords: { lat: 21.3885189, lng: 105.1738604 } },
+            { id: 'GXT', name: 'GXT Phú Thọ', coords: { lat: 21.3264875, lng: 105.3246094 } }
         ];
         let DELIVERY_POINTS = [];
 
@@ -1876,7 +1876,7 @@
                 const clonedP = JSON.parse(JSON.stringify(p));
                 return {
                     ...clonedP,
-                    name: store && store.name ? store.name : clonedP.name,
+                    name: clonedP.name, // Keep original name from excel
                     address: store && store.address ? store.address : clonedP.address || '',
                     coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords
                 };
@@ -2018,7 +2018,7 @@
                     const clonedP = JSON.parse(JSON.stringify(p));
                     return {
                         ...clonedP,
-                        name: store && store.name ? store.name : clonedP.name,
+                        name: clonedP.name, // Keep original name from excel
                         address: store && store.address ? store.address : clonedP.address || '',
                         coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords
                     };
@@ -2052,7 +2052,7 @@
                         const clonedP = JSON.parse(JSON.stringify(p));
                         return {
                             ...clonedP,
-                            name: store && store.name ? store.name : clonedP.name,
+                            name: clonedP.name, // Keep original name from excel
                             address: store && store.address ? store.address : clonedP.address || '',
                             coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords
                         };
@@ -2169,9 +2169,11 @@
             window.renderPendingPoints = () => {
                 const list = document.getElementById('pending-list-table');
 
-                // Group by Province and District
-                const provinceGroups = {};
-                DELIVERY_POINTS.forEach(p => {
+                let totalStores = 0;
+                let totalCBM = 0;
+                let totalWeight = 0;
+
+                let tableHtml = DELIVERY_POINTS.map((p, i) => {
                     const province = getProvinceFromNameOrAddress(p.name, p.address) || 'Chưa xác định';
                     
                     let district = 'Chưa xác định';
@@ -2193,83 +2195,40 @@
                         }
                     }
 
-                    const groupKey = province + '_' + district;
-
-                    if (!provinceGroups[groupKey]) {
-                        provinceGroups[groupKey] = {
-                            province: province,
-                            district: district,
-                            storeCount: 0,
-                            volume: 0,
-                            weight: 0,
-                            scheduledCount: 0,
-                            ktcCount: 0,
-                            coordErrorCount: 0,
-                            logicErrorCount: 0
-                        };
-                    }
-                    provinceGroups[groupKey].storeCount++;
-                    provinceGroups[groupKey].volume += (p.volume || 0);
-                    provinceGroups[groupKey].weight += (p.weight || 0);
-
-                    if (p.error === 'Lỗi Tọa Độ') {
-                        provinceGroups[groupKey].coordErrorCount++;
-                    } else if (p.error === 'Không thỏa logic ghép chuyến') {
-                        provinceGroups[groupKey].logicErrorCount++;
-                    } else if (p.error === 'Chuyển về GXT') {
-                        provinceGroups[groupKey].ktcCount++;
-                    } else if (p.isScheduled) {
-                        provinceGroups[groupKey].scheduledCount++;
-                    } else {
-                        provinceGroups[groupKey].logicErrorCount++;
-                    }
-                });
-
-                // Sort by Province name
-                const sortedProvinces = Object.values(provinceGroups).sort((a, b) => {
-                    if (a.province === b.province) {
-                        return a.district.localeCompare(b.district, 'vi', { sensitivity: 'base' });
-                    }
-                    return a.province.localeCompare(b.province, 'vi', { sensitivity: 'base' });
-                });
-
-                let totalStores = 0;
-                let totalCBM = 0;
-                let totalWeight = 0;
-
-                let tableHtml = sortedProvinces.map((g, i) => {
-                    totalStores += g.storeCount;
-                    totalCBM += g.volume;
-                    totalWeight += g.weight;
+                    totalStores++;
+                    const volume = p.volume || 0;
+                    const weight = p.weight || 0;
+                    totalCBM += volume;
+                    totalWeight += weight;
 
                     let statusText = '';
                     let statusClass = '';
 
-                    if (g.coordErrorCount > 0) {
-                        statusText = 'Lỗi Tọa Độ (' + g.coordErrorCount + ')';
+                    if (p.error === 'Lỗi Tọa Độ') {
+                        statusText = 'Lỗi Tọa Độ';
                         statusClass = 'delayed';
-                    } else if (g.logicErrorCount > 0) {
-                        statusText = 'Chờ Ghép Thêm (' + g.logicErrorCount + ')';
+                    } else if (p.error === 'Không thỏa logic ghép chuyến') {
+                        statusText = 'Chờ Ghép Thêm';
                         statusClass = 'delayed';
-                    } else if (g.ktcCount > 0 && g.scheduledCount === 0) {
-                        statusText = 'Chuyển về GXT (' + g.ktcCount + ')';
+                    } else if (p.error === 'Chuyến về GXT') {
+                        statusText = 'Chuyến về GXT';
                         statusClass = 'delayed';
-                    } else if (g.ktcCount > 0) {
-                        statusText = 'Đã Lên Lịch (' + g.scheduledCount + ') / KTC (' + g.ktcCount + ')';
-                        statusClass = 'delayed';
-                    } else {
-                        statusText = 'Đã Lên Lịch (' + g.storeCount + ')';
+                    } else if (p.isScheduled) {
+                        statusText = 'Đã Lên Lịch';
                         statusClass = 'on-time';
+                    } else {
+                        statusText = 'Chờ Lên Lịch';
+                        statusClass = 'pending';
                     }
 
                     return `
                     <tr>
                         <td style="color: var(--text-dim); font-weight: 600;">${i + 1}</td>
-                        <td><strong>${g.province}</strong></td>
-                        <td style="color: var(--text-dim);"><strong>${g.district}</strong></td>
-                        <td><strong>${g.storeCount}</strong> điểm giao</td>
-                        <td><span class="trip-status" style="background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 6px;">${g.volume.toFixed(2)}</span></td>
-                        <td><strong>${(g.weight / 1000).toFixed(2)}</strong></td>
+                        <td><strong>${p.name}</strong></td>
+                        <td><strong>${province}</strong></td>
+                        <td style="color: var(--text-dim);"><strong>${district}</strong></td>
+                        <td><span class="trip-status" style="background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 6px;">${volume.toFixed(2)}</span></td>
+                        <td><strong>${(weight / 1000).toFixed(2)}</strong></td>
                         <td><span class="trip-status ${statusClass}">${statusText}</span></td>
                     </tr>
                     `;
@@ -2277,8 +2236,7 @@
 
                 tableHtml += `
                     <tr style="background: rgba(99, 102, 241, 0.1); border-top: 2px solid var(--primary);">
-                        <td colspan="3" style="text-align: right; font-weight: 700; color: var(--text-main);">TỔNG CỘNG:</td>
-                        <td style="font-weight: 700; color: var(--primary);">${totalStores} điểm giao</td>
+                        <td colspan="4" style="text-align: right; font-weight: 700; color: var(--text-main);">TỔNG CỘNG:</td>
                         <td><span class="trip-status" style="background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 6px; font-weight: 700; color: var(--secondary);">${totalCBM.toFixed(2)}</span></td>
                         <td style="font-weight: 700; color: var(--secondary);">${(totalWeight / 1000).toFixed(2)}</td>
                         <td></td>
@@ -2300,7 +2258,7 @@
                                     const clonedP = JSON.parse(JSON.stringify(p));
                                     return {
                                         ...clonedP,
-                                        name: store && store.name ? store.name : clonedP.name,
+                                        name: clonedP.name, // Keep original name from excel
                                         address: store && store.address ? store.address : clonedP.address || '',
                                         coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords
                                     };
@@ -2563,7 +2521,7 @@
                     let stores = window.extractStoresFromTrip(t);
 
                     // Sort stores in descending order of distance to the Hub (furthest first, closest last)
-                    const mqCoords = { lat: 20.9193754, lng: 106.115945 };
+                    const mqCoords = { lat: 21.3885189, lng: 105.1738604 };
                     let hubCoords = mqCoords;
                     if (typeof HUBS !== 'undefined' && Array.isArray(HUBS)) {
                         const foundHub = HUBS.find(h => h.name === t.hub);
@@ -2586,8 +2544,8 @@
                         }
 
                         // Chuyến trung chuyển: sắp xếp theo thứ tự BỐC hàng (LIFO)
-                        // Hạ KTC Hưng Yên trước -> bốc HY sau (nằm trên) -> HY xếp cuối file
-                        // Hạ KTC Hà Nội 02 sau -> bốc HN02 trước (nằm dưới) -> HN02 xếp đầu file
+                        // Hạ GXT Phú Thọ trước -> bốc HY sau (nằm trên) -> HY xếp cuối file
+                        // Hạ GXT Phú Thọ sau -> bốc HN02 trước (nằm dưới) -> HN02 xếp đầu file
                         if (t.tripType === 'Trung chuyển') {
                             const rightProvinces = ['Tỉnh Hà Giang', 'Tỉnh Tuyên Quang', 'Tỉnh Lai Châu', 'Tỉnh Lào Cai', 'Tỉnh Yên Bái', 'Tỉnh Hòa Bình'];
                             const isHN02_A = rightProvinces.includes(provA);
@@ -2706,9 +2664,9 @@
                         if (t.tripType === 'Trung chuyển') {
                             const rightProvinces = ['Tỉnh Hà Giang', 'Tỉnh Tuyên Quang', 'Tỉnh Lai Châu', 'Tỉnh Lào Cai', 'Tỉnh Yên Bái', 'Tỉnh Hòa Bình'];
                             if (rightProvinces.includes(storeGeo.province)) {
-                                ktcVal = 'KTC Hà Nội 02';
+                                ktcVal = 'GXT Phú Thọ';
                             } else {
-                                ktcVal = 'KTC Hưng Yên';
+                                ktcVal = 'GXT Phú Thọ';
                             }
                         } else {
                             const group1 = ['Thành Phố Hà Nội', 'Tỉnh Bắc Ninh', 'Tỉnh Hưng Yên', 'Tỉnh Hải Dương'];
@@ -2777,9 +2735,9 @@
                         let routePath = '';
                         if (t.tripType === 'Trung chuyển') {
                             const hubsList = t.hubsVisited ? t.hubsVisited.join('/') : t.hub;
-                            routePath = `KCN Minh Quang -> ${hubsList}`;
+                            routePath = `Kho DC Win Phú Thọ -> ${hubsList}`;
                         } else {
-                            routePath = t.routeName || 'KCN Minh Quang';
+                            routePath = t.routeName || 'Kho DC Win Phú Thọ';
                         }
 
                         const row = [
@@ -2850,12 +2808,12 @@
                         const validPoints = t.points.filter(p => p.coords && p.coords.lat && p.coords.lng && p.type !== 'HUB_RETURN');
                         let originCoords = null;
                         if (t.tripType === 'Trung chuyển') {
-                            originCoords = { lat: 20.9193754, lng: 106.115945 }; // KCN Minh Quang
+                            originCoords = { lat: 21.3885189, lng: 105.1738604 }; // Kho DC Win Phú Thọ
                         } else {
-                            if (t.hub === 'KCN Minh Quang') originCoords = { lat: 20.9193754, lng: 106.115945 };
-                            else if (t.hub === 'KTC Hưng Yên') originCoords = { lat: 20.8370687, lng: 106.0433685 };
-                            else if (t.hub === 'KTC Hà Nội 02') originCoords = { lat: 21.0310096, lng: 105.9237737 };
-                            else originCoords = { lat: 20.9193754, lng: 106.115945 };
+                            if (t.hub === 'Kho DC Win Phú Thọ') originCoords = { lat: 21.3885189, lng: 105.1738604 };
+                            else if (t.hub === 'GXT Phú Thọ') originCoords = { lat: 21.3264875, lng: 105.3246094 };
+                            else if (t.hub === 'GXT Phú Thọ') originCoords = { lat: 21.3264875, lng: 105.3246094 };
+                            else originCoords = { lat: 21.3885189, lng: 105.1738604 };
                         }
 
                         let routeCoords = [];
@@ -2863,13 +2821,13 @@
                             routeCoords.push(originCoords);
                             if (t.hubsVisited) {
                                 t.hubsVisited.forEach(hName => {
-                                    if (hName === 'KTC Hưng Yên') routeCoords.push({ lat: 20.8370687, lng: 106.0433685 });
-                                    else if (hName === 'KTC Hà Nội 02') routeCoords.push({ lat: 21.0310096, lng: 105.9237737 });
+                                    if (hName === 'GXT Phú Thọ') routeCoords.push({ lat: 21.3264875, lng: 105.3246094 });
+                                    else if (hName === 'GXT Phú Thọ') routeCoords.push({ lat: 21.3264875, lng: 105.3246094 });
                                 });
                             } else {
                                 let transitHubCoords = null;
-                                if (t.hub === 'KTC Hưng Yên') transitHubCoords = { lat: 20.8370687, lng: 106.0433685 };
-                                else if (t.hub === 'KTC Hà Nội 02') transitHubCoords = { lat: 21.0310096, lng: 105.9237737 };
+                                if (t.hub === 'GXT Phú Thọ') transitHubCoords = { lat: 21.3264875, lng: 105.3246094 };
+                                else if (t.hub === 'GXT Phú Thọ') transitHubCoords = { lat: 21.3264875, lng: 105.3246094 };
                                 if (transitHubCoords) routeCoords.push(transitHubCoords);
                             }
                         } else {
@@ -2954,12 +2912,12 @@
                     const validPoints = t.points.filter(p => p.coords && p.coords.lat && p.coords.lng && p.type !== 'HUB_RETURN');
                     let originCoords = null;
                     if (t.tripType === 'Trung chuyển') {
-                        originCoords = { lat: 20.9193754, lng: 106.115945 }; // KCN Minh Quang
+                        originCoords = { lat: 21.3885189, lng: 105.1738604 }; // Kho DC Win Phú Thọ
                     } else {
-                        if (t.hub === 'KCN Minh Quang') originCoords = { lat: 20.9193754, lng: 106.115945 };
-                        else if (t.hub === 'KTC Hưng Yên') originCoords = { lat: 20.8370687, lng: 106.0433685 };
-                        else if (t.hub === 'KTC Hà Nội 02') originCoords = { lat: 21.0310096, lng: 105.9237737 };
-                        else originCoords = { lat: 20.9193754, lng: 106.115945 };
+                        if (t.hub === 'Kho DC Win Phú Thọ') originCoords = { lat: 21.3885189, lng: 105.1738604 };
+                        else if (t.hub === 'GXT Phú Thọ') originCoords = { lat: 21.3264875, lng: 105.3246094 };
+                        else if (t.hub === 'GXT Phú Thọ') originCoords = { lat: 21.3264875, lng: 105.3246094 };
+                        else originCoords = { lat: 21.3885189, lng: 105.1738604 };
                     }
 
                     let routeCoords = [];
@@ -2967,13 +2925,13 @@
                         routeCoords.push(originCoords);
                         if (t.hubsVisited) {
                             t.hubsVisited.forEach(hName => {
-                                if (hName === 'KTC Hưng Yên') routeCoords.push({ lat: 20.8370687, lng: 106.0433685 });
-                                else if (hName === 'KTC Hà Nội 02') routeCoords.push({ lat: 21.0310096, lng: 105.9237737 });
+                                if (hName === 'GXT Phú Thọ') routeCoords.push({ lat: 21.3264875, lng: 105.3246094 });
+                                else if (hName === 'GXT Phú Thọ') routeCoords.push({ lat: 21.3264875, lng: 105.3246094 });
                             });
                         } else {
                             let transitHubCoords = null;
-                            if (t.hub === 'KTC Hưng Yên') transitHubCoords = { lat: 20.8370687, lng: 106.0433685 };
-                            else if (t.hub === 'KTC Hà Nội 02') transitHubCoords = { lat: 21.0310096, lng: 105.9237737 };
+                            if (t.hub === 'GXT Phú Thọ') transitHubCoords = { lat: 21.3264875, lng: 105.3246094 };
+                            else if (t.hub === 'GXT Phú Thọ') transitHubCoords = { lat: 21.3264875, lng: 105.3246094 };
                             if (transitHubCoords) routeCoords.push(transitHubCoords);
                         }
                     } else {
@@ -3010,10 +2968,10 @@
                     const hyList = provincesList.filter(p => !rightProvinces.includes(p));
                     const hn02List = provincesList.filter(p => rightProvinces.includes(p));
                     if (hyList.length > 0) {
-                        provincesHtml += `<div style="margin-top: 4px;"><strong>KTC Hưng Yên</strong> (${hyList.join(', ')})</div>`;
+                        provincesHtml += `<div style="margin-top: 4px;"><strong>GXT Phú Thọ</strong> (${hyList.join(', ')})</div>`;
                     }
                     if (hn02List.length > 0) {
-                        provincesHtml += `<div style="margin-top: 4px;"><strong>KTC Hà Nội 02</strong> (${hn02List.join(', ')})</div>`;
+                        provincesHtml += `<div style="margin-top: 4px;"><strong>GXT Phú Thọ</strong> (${hn02List.join(', ')})</div>`;
                     }
                 }
 
@@ -3022,12 +2980,29 @@
                 if (t.tripType === 'Trung chuyển') {
                     const arrowIcon = '<br><i class="fas fa-arrow-right" style="font-size: 0.7rem; color: var(--text-dim); margin: 0 5px;"></i> ';
                     const hubsList = t.hubsVisited ? t.hubsVisited.join(' / ') : t.hub;
-                    routePathHtml = `<strong>KCN Minh Quang</strong>${arrowIcon}<strong>${hubsList}</strong>${provinceInfoContainer}`;
+                    routePathHtml = `<strong>Kho DC Win Phú Thọ</strong>${arrowIcon}<strong>${hubsList}</strong>${provinceInfoContainer}`;
                 } else {
                     const baseRoute = t.routeName
                         ? t.routeName.split(' -> ').map(x => `<strong>${x}</strong>`).join('<br><i class="fas fa-arrow-right" style="font-size: 0.7rem; color: var(--text-dim); margin: 0 5px;"></i> ')
-                        : `<strong>${t.hub || 'KCN Minh Quang'}</strong>`;
-                    routePathHtml = `${baseRoute}${provinceInfoContainer}`;
+                        : `<strong>${t.hub || 'Kho DC Win Phú Thọ'}</strong>`;
+                    
+                    // List store names for đi thẳng trips
+                    let storeNamesHtml = '';
+                    /* Bỏ hiển thị danh sách chi tiết cửa hàng theo yêu cầu
+                    if (typeof window.extractStoresFromTrip === 'function') {
+                        const tripStores = window.extractStoresFromTrip(t);
+                        if (tripStores.length > 0) {
+                            const storeNames = tripStores.map(s => s.name).filter(Boolean);
+                            if (storeNames.length > 0) {
+                                storeNamesHtml = `<div style="margin-top: 6px; padding-left: 12px; border-left: 2px solid rgba(16, 185, 129, 0.2); font-size: 0.82rem; line-height: 1.7; color: var(--text-dim);">` +
+                                    storeNames.map(n => `<div style="padding: 1px 0;"><i class="fas fa-store" style="font-size: 0.65rem; margin-right: 5px; color: #10b981;"></i>${n}</div>`).join('') +
+                                    `</div>`;
+                            }
+                        }
+                    }
+                    */
+                    
+                    routePathHtml = `${baseRoute}${provinceInfoContainer}${storeNamesHtml}`;
                 }
 
                 return `
@@ -3111,24 +3086,24 @@
                         const validPoints = t.points.filter(p => p.coords && p.coords.lat && p.coords.lng && p.type !== 'HUB_RETURN');
                         let originCoords = null;
                         if (t.tripType === 'Trung chuyển') {
-                            originCoords = { lat: 20.9193754, lng: 106.115945 };
+                            originCoords = { lat: 21.3885189, lng: 105.1738604 };
                         } else {
-                            if (t.hub === 'KCN Minh Quang') originCoords = { lat: 20.9193754, lng: 106.115945 };
-                            else if (t.hub === 'KTC Hưng Yên') originCoords = { lat: 20.8370687, lng: 106.0433685 };
-                            else if (t.hub === 'KTC Hà Nội 02') originCoords = { lat: 21.0310096, lng: 105.9237737 };
-                            else originCoords = { lat: 20.9193754, lng: 106.115945 };
+                            if (t.hub === 'Kho DC Win Phú Thọ') originCoords = { lat: 21.3885189, lng: 105.1738604 };
+                            else if (t.hub === 'GXT Phú Thọ') originCoords = { lat: 21.3264875, lng: 105.3246094 };
+                            else if (t.hub === 'GXT Phú Thọ') originCoords = { lat: 21.3264875, lng: 105.3246094 };
+                            else originCoords = { lat: 21.3885189, lng: 105.1738604 };
                         }
                         let routeCoords = [];
                         if (t.tripType === 'Trung chuyển') {
                             routeCoords.push(originCoords);
                             if (t.hubsVisited) {
                                 t.hubsVisited.forEach(h => {
-                                    if (h === 'KTC Hưng Yên') routeCoords.push({ lat: 20.8370687, lng: 106.0433685 });
-                                    else if (h === 'KTC Hà Nội 02') routeCoords.push({ lat: 21.0310096, lng: 105.9237737 });
+                                    if (h === 'GXT Phú Thọ') routeCoords.push({ lat: 21.3264875, lng: 105.3246094 });
+                                    else if (h === 'GXT Phú Thọ') routeCoords.push({ lat: 21.3264875, lng: 105.3246094 });
                                 });
                             } else {
-                                if (t.hub === 'KTC Hưng Yên') routeCoords.push({ lat: 20.8370687, lng: 106.0433685 });
-                                else if (t.hub === 'KTC Hà Nội 02') routeCoords.push({ lat: 21.0310096, lng: 105.9237737 });
+                                if (t.hub === 'GXT Phú Thọ') routeCoords.push({ lat: 21.3264875, lng: 105.3246094 });
+                                else if (t.hub === 'GXT Phú Thọ') routeCoords.push({ lat: 21.3264875, lng: 105.3246094 });
                             }
                         } else {
                             routeCoords = [originCoords, ...validPoints.map(p => p.coords)];
@@ -3191,11 +3166,11 @@
                     if (t.tripType === 'Trung chuyển') {
                         const arrowIcon = '<br><i class="fas fa-arrow-right" style="font-size: 0.7rem; color: var(--text-dim); margin: 0 5px;"></i> ';
                         const hubsList = t.hubsVisited ? t.hubsVisited.join(' / ') : t.hub;
-                        routePathHtml = `<strong>KCN Minh Quang</strong>${arrowIcon}<strong>${hubsList}</strong>`;
+                        routePathHtml = `<strong>Kho DC Win Phú Thọ</strong>${arrowIcon}<strong>${hubsList}</strong>`;
                     } else {
                         routePathHtml = t.routeName
                             ? t.routeName.split(' -> ').map(x => `<strong>${x}</strong>`).join('<br><i class="fas fa-arrow-right" style="font-size: 0.7rem; color: var(--text-dim); margin: 0 5px;"></i> ')
-                            : `<strong>${t.hub || 'KCN Minh Quang'}</strong>`;
+                            : `<strong>${t.hub || 'Kho DC Win Phú Thọ'}</strong>`;
                     }
 
                     return `
@@ -3220,22 +3195,22 @@
                     let hyProvincesStr = '';
                     let hn02ProvincesStr = '';
                     if (t.hubProvinces) {
-                        if (t.hubProvinces['KTC Hưng Yên'] && t.hubProvinces['KTC Hưng Yên'].length > 0) {
-                            hyProvincesStr = `<div style="margin-top: 2px;"><strong>KTC Hưng Yên</strong> (${t.hubProvinces['KTC Hưng Yên'].join(', ')})</div>`;
+                        if (t.hubProvinces['GXT Phú Thọ'] && t.hubProvinces['GXT Phú Thọ'].length > 0) {
+                            hyProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${t.hubProvinces['GXT Phú Thọ'].join(', ')})</div>`;
                         }
-                        if (t.hubProvinces['KTC Hà Nội 02'] && t.hubProvinces['KTC Hà Nội 02'].length > 0) {
-                            hn02ProvincesStr = `<div style="margin-top: 2px;"><strong>KTC Hà Nội 02</strong> (${t.hubProvinces['KTC Hà Nội 02'].join(', ')})</div>`;
+                        if (t.hubProvinces['GXT Phú Thọ'] && t.hubProvinces['GXT Phú Thọ'].length > 0) {
+                            hn02ProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${t.hubProvinces['GXT Phú Thọ'].join(', ')})</div>`;
                         }
                     } else {
                         const rightProvinces = ['Tỉnh Hà Giang', 'Tỉnh Tuyên Quang', 'Tỉnh Lai Châu', 'Tỉnh Lào Cai', 'Tỉnh Yên Bái', 'Tỉnh Hòa Bình'];
                         const provincesList = t.points.map(p => p.name).filter(Boolean);
                         const hyList = provincesList.filter(p => !rightProvinces.includes(p));
                         const hn02List = provincesList.filter(p => rightProvinces.includes(p));
-                        if (hyList.length > 0) hyProvincesStr = `<div style="margin-top: 2px;"><strong>KTC Hưng Yên</strong> (${hyList.join(', ')})</div>`;
-                        if (hn02List.length > 0) hn02ProvincesStr = `<div style="margin-top: 2px;"><strong>KTC Hà Nội 02</strong> (${hn02List.join(', ')})</div>`;
+                        if (hyList.length > 0) hyProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${hyList.join(', ')})</div>`;
+                        if (hn02List.length > 0) hn02ProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${hn02List.join(', ')})</div>`;
                     }
                     displayRoute = `
-                        <strong>KCN Minh Quang</strong> → <strong>${hubsList}</strong>
+                        <strong>Kho DC Win Phú Thọ</strong> → <strong>${hubsList}</strong>
                         <div style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; padding-left: 8px; border-left: 2px solid rgba(255,255,255,0.1); margin-top: 4px;">
                             ${hyProvincesStr}
                             ${hn02ProvincesStr}
@@ -3244,7 +3219,7 @@
                 } else {
                     displayRoute = t.routeName
                         ? t.routeName.replace(/->/g, '→').split(' → ').map(x => `<strong>${x}</strong>`).join(' → ')
-                        : `${t.hub || 'KCN Minh Quang'} → ${t.points.filter(p => p.isPoint).map(p => p.name).join(' → ')}`;
+                        : `${t.hub || 'Kho DC Win Phú Thọ'} → ${t.points.filter(p => p.isPoint).map(p => p.name).join(' → ')}`;
                 }
                 const costPerKg = t.totalWeight > 0 ? Math.round(t.cost / t.totalWeight) : 0;
                 return `
@@ -3295,29 +3270,29 @@
                     let hyProvincesStr = '';
                     let hn02ProvincesStr = '';
                     if (t.hubProvinces) {
-                        if (t.hubProvinces['KTC Hưng Yên'] && t.hubProvinces['KTC Hưng Yên'].length > 0) {
-                            hyProvincesStr = `<div style="margin-top: 2px;"><strong>KTC Hưng Yên</strong> (${t.hubProvinces['KTC Hưng Yên'].join(', ')})</div>`;
+                        if (t.hubProvinces['GXT Phú Thọ'] && t.hubProvinces['GXT Phú Thọ'].length > 0) {
+                            hyProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${t.hubProvinces['GXT Phú Thọ'].join(', ')})</div>`;
                         }
-                        if (t.hubProvinces['KTC Hà Nội 02'] && t.hubProvinces['KTC Hà Nội 02'].length > 0) {
-                            hn02ProvincesStr = `<div style="margin-top: 2px;"><strong>KTC Hà Nội 02</strong> (${t.hubProvinces['KTC Hà Nội 02'].join(', ')})</div>`;
+                        if (t.hubProvinces['GXT Phú Thọ'] && t.hubProvinces['GXT Phú Thọ'].length > 0) {
+                            hn02ProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${t.hubProvinces['GXT Phú Thọ'].join(', ')})</div>`;
                         }
                     } else {
                         const rightProvinces = ['Tỉnh Hà Giang', 'Tỉnh Tuyên Quang', 'Tỉnh Lai Châu', 'Tỉnh Lào Cai', 'Tỉnh Yên Bái', 'Tỉnh Hòa Bình'];
                         const provincesList = t.points.map(p => p.name).filter(Boolean);
                         const hyList = provincesList.filter(p => !rightProvinces.includes(p));
                         const hn02List = provincesList.filter(p => rightProvinces.includes(p));
-                        if (hyList.length > 0) hyProvincesStr = `<div style="margin-top: 2px;"><strong>KTC Hưng Yên</strong> (${hyList.join(', ')})</div>`;
-                        if (hn02List.length > 0) hn02ProvincesStr = `<div style="margin-top: 2px;"><strong>KTC Hà Nội 02</strong> (${hn02List.join(', ')})</div>`;
+                        if (hyList.length > 0) hyProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${hyList.join(', ')})</div>`;
+                        if (hn02List.length > 0) hn02ProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${hn02List.join(', ')})</div>`;
                     }
                     displayRoute = `
-                        <strong>KCN Minh Quang</strong> → <strong>${hubsList}</strong>
+                        <strong>Kho DC Win Phú Thọ</strong> → <strong>${hubsList}</strong>
                         <div style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; padding-left: 8px; border-left: 2px solid rgba(255,255,255,0.1); margin-top: 4px;">
                             ${hyProvincesStr}
                             ${hn02ProvincesStr}
                         </div>
                     `;
                 } else {
-                    const routePath = `<strong>${t.hub || 'KCN Minh Quang'}</strong>`;
+                    const routePath = `<strong>${t.hub || 'Kho DC Win Phú Thọ'}</strong>`;
                     displayRoute = `${routePath} → ${t.points.filter(p => p.isPoint).map(p => p.name).join(' → ')}`;
                 }
                 return `
@@ -3423,11 +3398,44 @@
             const list = document.getElementById('store-list-table');
             if (!list) return;
             const term = searchTerm.toLowerCase();
-            const filteredStores = typeof STORE_LIST_DATA !== 'undefined' ? STORE_LIST_DATA.filter(p =>
+            
+            // Only show stores that appeared in BOOKING_DELIVERY_POINTS
+            const bookingIds = new Set();
+            const bookingInfoMap = {};
+            if (typeof BOOKING_DELIVERY_POINTS !== 'undefined') {
+                BOOKING_DELIVERY_POINTS.forEach(bp => {
+                    bookingIds.add(bp.id);
+                    if (!bookingInfoMap[bp.id]) {
+                        bookingInfoMap[bp.id] = bp;
+                    }
+                });
+            }
+            
+            // Build store list: prefer STORE_LIST_DATA info, fallback to booking info
+            const storeMap = {};
+            if (typeof STORE_LIST_DATA !== 'undefined') {
+                STORE_LIST_DATA.forEach(s => { storeMap[s.id] = s; });
+            }
+            
+            const bookingStores = [];
+            bookingIds.forEach(id => {
+                const store = storeMap[id] || bookingInfoMap[id];
+                if (store) {
+                    bookingStores.push({
+                        id: store.id || id,
+                        name: store.name || bookingInfoMap[id]?.name || '',
+                        address: store.address || bookingInfoMap[id]?.address || '',
+                        province: store.province || '',
+                        coords: store.coords || null
+                    });
+                }
+            });
+            
+            const filteredStores = bookingStores.filter(p =>
                 (p.id && p.id.toLowerCase().includes(term)) ||
                 (p.name && p.name.toLowerCase().includes(term)) ||
                 (p.address && p.address.toLowerCase().includes(term))
-            ) : [];
+            );
 
             filteredStores.sort((a, b) => {
                 const errA = isMockOrMissingCoords(a.coords);
@@ -4121,7 +4129,7 @@
                                     const clonedP = JSON.parse(JSON.stringify(p));
                                     return {
                                         ...clonedP,
-                                        name: store && store.name ? store.name : clonedP.name,
+                                        name: clonedP.name, // Keep original name from excel
                                         address: store && store.address ? store.address : clonedP.address || '',
                                         coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords
                                     };
@@ -4282,7 +4290,7 @@
                                     const clonedP = JSON.parse(JSON.stringify(p));
                                     return {
                                         ...clonedP,
-                                        name: store && store.name ? store.name : clonedP.name,
+                                        name: clonedP.name, // Keep original name from excel
                                         address: store && store.address ? store.address : clonedP.address || '',
                                         coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords
                                     };
@@ -4599,7 +4607,7 @@
                             const clonedP = JSON.parse(JSON.stringify(p));
                             return {
                                 ...clonedP,
-                                name: store && store.name ? store.name : clonedP.name,
+                                name: clonedP.name, // Keep original name from excel
                                 address: store && store.address ? store.address : clonedP.address || '',
                                 coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords
                             };
@@ -4715,9 +4723,9 @@
                         let routePath = '';
                         if (t.tripType === 'Trung chuyển') {
                             const hubsList = t.hubsVisited ? t.hubsVisited.join('/') : t.hub;
-                            routePath = `KCN Minh Quang -> ${hubsList}`;
+                            routePath = `Kho DC Win Phú Thọ -> ${hubsList}`;
                         } else {
-                            routePath = t.routeName || 'KCN Minh Quang';
+                            routePath = t.routeName || 'Kho DC Win Phú Thọ';
                         }
 
                         resolvedVehicles.push({
@@ -4923,7 +4931,7 @@
                         const clonedP = JSON.parse(JSON.stringify(p));
                         return {
                             ...clonedP,
-                            name: store && store.name ? store.name : clonedP.name,
+                            name: clonedP.name, // Keep original name from excel
                             address: store && store.address ? store.address : clonedP.address || '',
                             coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords
                         };

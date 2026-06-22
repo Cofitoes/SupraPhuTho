@@ -1,1 +1,1 @@
-﻿window.UPDATE_STATUS = {"status":"error","timestamp":"2026-06-21 23:14:58","message":"Chi tiet loi: fatal: not a git repository (or any of the parent directories): .git","step":"Loi trong qua trinh cap nhat","progress":0};
+﻿window.UPDATE_STATUS = {"status":"error","timestamp":"2026-06-23 02:30:24","message":"Chi tiet loi: fatal: pathspec firebase-app-compat.js did not match any files","step":"Loi trong qua trinh cap nhat","progress":0};
