@@ -1,0 +1,5 @@
+Column I name: Loại kho giao (OM đánh giá)
+Unique values: <StringArray>
+['Bưu cục', 'GXT']
+Length: 2, dtype: str
+Sample GXT stores: ['WM+ HGG 178 Đường Nguyễn Trãi', 'WM+ HGG 43-45 Đường 20-8', 'WM+ HGG 469 Nguyễn Trãi', 'WM+ HGG Thôn Vạt, Việt Lâm', 'WM+ HGG Tổ 1 Đường Nguyễn Trãi, TT Vị Xuyên', 'WM+ HGG Tổ 6, Nông trường Việt Lâm', 'WM+ HGG Tổ 8 Vị Xuyên', 'WM VCP HBH Hòa Bình', 'WM+ HBH 253 Phùng Hưng', 'WM+ HBH 444 Cù Chính Lan']

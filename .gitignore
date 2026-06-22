@@ -1,0 +1,12 @@
+*.xlsx
+*.xls
+*.csv
+*.zip
+*.rar
+*.exe
+*.docx
+*.pdf
+__pycache__/
+.env
+web_release/
+.vscode/

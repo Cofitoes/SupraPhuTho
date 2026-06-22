@@ -1,0 +1,1 @@
+const INCIDENTS_DATA = [];

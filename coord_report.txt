@@ -1,0 +1,8 @@
+Total rows: 4920
+Rows with 'nan' in coordinates: 0
+Potentially swapped coords (Lat>102, Lon<24): 0
+Invalid/Out of bounds coords: 0
+
+--- Sample Swapped Coords ---
+
+--- Sample Invalid Coords ---

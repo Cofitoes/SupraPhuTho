@@ -1,0 +1,1 @@
+﻿window.UPDATE_STATUS = {"status":"error","timestamp":"2026-06-21 23:14:58","message":"Chi tiet loi: fatal: not a git repository (or any of the parent directories): .git","step":"Loi trong qua trinh cap nhat","progress":0};

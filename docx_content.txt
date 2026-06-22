@@ -1,0 +1,12 @@
+[0] TÀI LIỆU LOGIC CHIA TUYẾN SUPRA PHÚ THỌ
+[1] 1. THÔNG SỐ CHUNG & GIỚI HẠN THIẾT LẬP
+[2] Các điểm trung chuyển (Hubs)
+[3] Hub chính xuất phát: Kho DC Win Phúc Thọ. Địa Chỉ : 95PJ+RH6, Đường liên thôn, Liên Minh, Phú Thọ, Việt Nam
+[4] GXT Phú Thọ : 88GF+HRX, Hy Cương, Phú Thọ, Việt Nam
+[5] Phân loại xe vận chuyển & Tải trọng tối đa
+[6] Xe 1.9 Tấn: Tải trọng tối đa 1,900 kg | Thể tích tối đa 14 CBM.
+[7] Xe 5 Tấn: Tải trọng tối đa 4,900 kg| Thể tích tối đa 26 CBM.
+[8] Xe 8 Tấn: Tải trọng tối đa 6,800 kg| Thể tích tối đa 55 CBM.
+[9] *(Nguyên tắc quy đổi: 1 CBM tương đương 1,000 kg. Khi thuật toán xếp xe, khối lượng và thể tích được tính toán song song, không được vượt mốc nào).*
+[10] 2. HƯỚNG DẪN LOGIC PHÂN TUYẾN & GOM HÀNG
+[11] 

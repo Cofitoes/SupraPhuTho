@@ -1,0 +1,1 @@
+const VEHICLE_DATA = {};
