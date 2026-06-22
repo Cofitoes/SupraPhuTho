@@ -1,1 +1,1 @@
-﻿window.UPDATE_STATUS = {"status":"error","timestamp":"2026-06-23 02:30:24","message":"Chi tiet loi: fatal: pathspec firebase-app-compat.js did not match any files","step":"Loi trong qua trinh cap nhat","progress":0};
+﻿window.UPDATE_STATUS = {"status":"error","timestamp":"2026-06-23 02:36:19","message":"Chi tiet loi: fatal: pathspec firebase-app-compat.js did not match any files","step":"Loi trong qua trinh cap nhat","progress":0};
