@@ -5418,26 +5418,56 @@
                 }
 
                 function getTripType(storeName, storeCode) {
-                    if (!globalTrips || globalTrips.length === 0) return '-';
                     const sName = (storeName || '').toLowerCase().trim();
                     const sCode = (storeCode || '').toString().trim();
-                    for (const trip of globalTrips) {
-                        if (trip.points) {
-                            for (const pt of trip.points) {
-                                if (pt.type === 'DELIVERY') {
-                                    if ((sName && pt.name && pt.name.toLowerCase().trim() === sName) ||
-                                        (sCode && pt.id && pt.id.toString() === sCode)) {
-                                        let type = trip.tripType || '-';
-                                        if (type === 'Đi thẳng') return `<span class="trip-status on-time">Đi thẳng</span>`;
-                                        if (type === 'Trung chuyển') return `<span class="trip-status pending">Trung chuyển</span>`;
-                                        if (type === 'Giao qua GHN') return `<span class="trip-status delayed">Giao qua GHN</span>`;
-                                        return type;
+                    
+                    if (globalTrips && globalTrips.length > 0) {
+                        for (const trip of globalTrips) {
+                            if (trip.points) {
+                                for (const pt of trip.points) {
+                                    if (pt.type === 'DELIVERY') {
+                                        if ((sName && pt.name && pt.name.toLowerCase().trim() === sName) ||
+                                            (sCode && pt.id && pt.id.toString() === sCode)) {
+                                            let type = trip.tripType || '-';
+                                            if (type === 'Đi thẳng') return `<span class="trip-status on-time">Đi thẳng</span>`;
+                                            if (type === 'Trung chuyển') return `<span class="trip-status pending">Trung chuyển</span>`;
+                                            if (type === 'Giao qua GHN') return `<span class="trip-status delayed">Giao qua GHN</span>`;
+                                            return type;
+                                        }
                                     }
                                 }
                             }
                         }
                     }
-                    return '-';
+
+                    if (!sName && !sCode) return '-';
+
+                    let hasCoords = true;
+                    if (typeof STORE_LIST_DATA !== 'undefined') {
+                        const store = STORE_LIST_DATA.find(s => s.id === sCode || (s.name && s.name.toLowerCase().trim() === sName));
+                        if (store && (!store.coords || !store.coords.lat || !store.coords.lng)) {
+                            hasCoords = false;
+                        }
+                    }
+
+                    if (!hasCoords) {
+                        return `<span class="trip-status delayed">Giao qua GHN</span>`;
+                    }
+
+                    let isGxt = false;
+                    if (typeof GXT_STORE_LIST !== 'undefined') {
+                        isGxt = GXT_STORE_LIST.some(gxtName => {
+                            const normGXT = gxtName.normalize('NFC').trim().toLowerCase();
+                            const normStore = sName.normalize('NFC').trim();
+                            return normGXT === normStore || normStore.includes(normGXT) || normGXT.includes(normStore);
+                        });
+                    }
+
+                    if (isGxt) {
+                        return `<span class="trip-status pending">Trung chuyển</span>`;
+                    }
+                    
+                    return `<span class="trip-status on-time">Đi thẳng</span>`;
                 }
 
                 orderLookupBody.innerHTML = results.map(item => {
