@@ -23,29 +23,27 @@ try:
             # Skip sheets that aren't dates
             continue
         
-        df = pd.read_excel(file_path, sheet_name=sheet_name)
+        df = pd.read_excel(file_path, sheet_name=sheet_name, header=None)
         
-        # Columns could be tricky. The screenshot shows row 1 as header.
-        # Column B = 'Mã đơn GHN', Column D = 'Số SO', Column F = 'Tên siêu thị'
-        
-        # We need to find the header row because it might not be row 0.
-        header_idx = None
-        for idx, row in df.head(10).iterrows():
-            row_str = str(row.values)
-            if 'Mã đơn GHN' in row_str or 'Số SO' in row_str or 'Tên siêu thị' in row_str:
-                header_idx = idx
+        header_row_idx = -1
+        for idx, row in df.head(15).iterrows():
+            row_vals = [str(x).lower() for x in row.values]
+            if any('mã đơn ghn' in v or 'số so' in v or 'tên siêu thị' in v for v in row_vals):
+                header_row_idx = idx
                 break
                 
-        if header_idx is not None and header_idx > 0:
-            df = pd.read_excel(file_path, sheet_name=sheet_name, header=header_idx)
+        if header_row_idx == -1:
+            continue
+            
+        df = pd.read_excel(file_path, sheet_name=sheet_name, header=header_row_idx)
             
         # Standardize column names
         df.columns = [str(c).strip() for c in df.columns]
         
-        # Find exact column names
-        col_ghn = next((c for c in df.columns if 'Mã đơn GHN' in c), None)
-        col_so = next((c for c in df.columns if 'Số SO' in c), None)
-        col_store = next((c for c in df.columns if 'Tên siêu thị' in c), None)
+        # Find exact column names case-insensitively
+        col_ghn = next((c for c in df.columns if 'mã đơn ghn' in str(c).lower()), None)
+        col_so = next((c for c in df.columns if 'số so' in str(c).lower()), None)
+        col_store = next((c for c in df.columns if 'tên siêu thị' in str(c).lower()), None)
         
         if not col_ghn or not col_so or not col_store:
             # Skip safely
