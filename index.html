@@ -1509,7 +1509,7 @@
                                     <th style="width: 120px;">Biển Số Xe</th>
                                     <th style="width: 120px;">Trọng Tải Xe</th>
                                     <th>Lộ Trình</th>
-                                    <th style="width: 250px;">Mã BUFF</th>
+                                    <th style="width: 250px;">Số SO</th>
                                     <th style="width: 250px;">Mã GHN</th>
                                 </tr>
                             </thead>
@@ -1588,6 +1588,7 @@
         document.write('<script src="booking_data.js?v=' + cb + '"></scr' + 'ipt>');
         document.write('<script src="gxt_stores.js?v=' + cb + '"></scr' + 'ipt>');
         document.write('<script src="summary_data.js?v=' + cb + '"></scr' + 'ipt>');
+        document.write('<script src="data_ghn_so.js?v=' + cb + '"></scr' + 'ipt>');
         document.write('<script src="departure_times.js?v=' + cb + '"></scr' + 'ipt>');
         document.write('<script src="vehicle_data.js?v=' + cb + '"></scr' + 'ipt>');
         document.write('<script src="checkin_data.js?v=' + cb + '"></scr' + 'ipt>');
@@ -3107,43 +3108,40 @@
 
                     const storesList = typeof window.extractStoresFromTrip === 'function' ? window.extractStoresFromTrip(t) : [];
 
-                    let buffs = [];
-                    storesList.forEach(s => {
-                        let b = s.buff || s.Buff || s.BUFF;
-                        if (!b && typeof BOOKING_DELIVERY_POINTS !== 'undefined') {
-                            let matched = BOOKING_DELIVERY_POINTS.find(dp => dp.id && s.id && dp.id == s.id);
-                            if (!matched) matched = BOOKING_DELIVERY_POINTS.find(dp => dp.name === s.name);
-                            if (matched) b = matched.buff || matched.Buff || matched.BUFF;
-                        } 
-                        if (!b && typeof DELIVERY_POINTS !== 'undefined') {
-                            let matched = DELIVERY_POINTS.find(dp => dp.id && s.id && dp.id == s.id);
-                            if (!matched) matched = DELIVERY_POINTS.find(dp => dp.name === s.name);
-                            if (matched) b = matched.buff || matched.Buff || matched.BUFF;
-                        }
-                        if (b) buffs.push(b);
-                    });
-                    buffs = buffs.filter(Boolean);
-                    uniqueBuffs = buffs.length > 0 ? [...new Set(buffs)].join('<br>') : '-';
-
+                    let soList = [];
                     let ghnList = [];
                     storesList.forEach(s => {
-                        let b = s.buff || s.Buff || s.BUFF;
-                        if (!b && typeof BOOKING_DELIVERY_POINTS !== 'undefined') {
-                            let matched = BOOKING_DELIVERY_POINTS.find(dp => dp.id && s.id && dp.id == s.id);
-                            if (!matched) matched = BOOKING_DELIVERY_POINTS.find(dp => dp.name === s.name);
-                            if (matched) b = matched.buff || matched.Buff || matched.BUFF;
+                        let so = '';
+                        let ghn = '';
+                        if (typeof STORE_GHN_SO_DATA !== 'undefined' && STORE_GHN_SO_DATA[selectedDate] && STORE_GHN_SO_DATA[selectedDate][s.name]) {
+                            so = STORE_GHN_SO_DATA[selectedDate][s.name].so.join('<br>');
+                            ghn = STORE_GHN_SO_DATA[selectedDate][s.name].ghn.join('<br>');
                         }
+                        if (so) soList.push(so);
+                        if (ghn) ghnList.push(ghn);
 
-                        if (s.ghn || s['Mã đơn GHN'] || s.maGHN) {
-                            ghnList.push(s.ghn || s['Mã đơn GHN'] || s.maGHN);
-                        } else if (b && typeof concungData !== 'undefined') {
-                            const matched = concungData.find(item => item['MÃ CỬA HÀNG'] === b || item['Mã BUFF'] === b);
-                            if (matched && (matched['Vận đơn'] || matched['Mã đơn GHN'])) {
-                                ghnList.push(matched['Vận đơn'] || matched['Mã đơn GHN']);
+                        // Fallback logic if GHN is missing
+                        if (!ghn) {
+                            let b = s.buff || s.Buff || s.BUFF;
+                            if (!b && typeof BOOKING_DELIVERY_POINTS !== 'undefined') {
+                                let matched = BOOKING_DELIVERY_POINTS.find(dp => dp.id && s.id && dp.id == s.id);
+                                if (!matched) matched = BOOKING_DELIVERY_POINTS.find(dp => dp.name === s.name);
+                                if (matched) b = matched.buff || matched.Buff || matched.BUFF;
+                            }
+                            if (s.ghn || s['Mã đơn GHN'] || s.maGHN) {
+                                ghnList.push(s.ghn || s['Mã đơn GHN'] || s.maGHN);
+                            } else if (b && typeof concungData !== 'undefined') {
+                                const matched = concungData.find(item => item['MÃ CỬA HÀNG'] === b || item['Mã BUFF'] === b);
+                                if (matched && (matched['Vận đơn'] || matched['Mã đơn GHN'])) {
+                                    ghnList.push(matched['Vận đơn'] || matched['Mã đơn GHN']);
+                                }
                             }
                         }
                     });
-                    uniqueGhns = ghnList.length > 0 ? [...new Set(ghnList)].join('<br>') : '<span style="color: #ef4444; font-weight: 500;">Thiếu mã GHN</span>';
+                    
+                    soList = soList.filter(Boolean);
+                    uniqueSOs = soList.length > 0 ? [...new Set(soList)].join('<br><br>') : '-';
+                    uniqueGhns = ghnList.length > 0 ? [...new Set(ghnList)].join('<br><br>') : '<span style="color: #ef4444; font-weight: 500;">Thiếu mã GHN</span>';
 
                     if (t.tripType === 'Trung chuyển') {
                         const arrowIcon = '<br><i class="fas fa-arrow-right" style="font-size: 0.7rem; color: var(--text-dim); margin: 0 5px;"></i> ';
@@ -3164,7 +3162,7 @@
                             <div style="margin-bottom: 8px;">${routePathHtml}</div>
                             <a href="${mapsUrl}" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; font-size: 0.8rem; color: #3b82f6; text-decoration: none; padding: 4px 8px; background: rgba(59, 130, 246, 0.1); border-radius: 4px; transition: all 0.2s;"><i class="fas fa-map-marked-alt"></i> Xem lộ trình Google Maps</a>
                         </td>
-                        <td><span style="font-size: 0.85rem; color: var(--text-dim);">${uniqueBuffs || '-'}</span></td>
+                        <td><span style="font-size: 0.85rem; color: var(--text-dim);">${uniqueSOs || '-'}</span></td>
                         <td><span style="font-size: 0.85rem; color: var(--text-dim);">${uniqueGhns || '-'}</span></td>
                     </tr>`;
                 }).join('');
