@@ -1436,9 +1436,7 @@
                                     <th>Tên Cửa Hàng</th>
                                     <th>Tỉnh Lấy</th>
                                     <th>Ngày Lấy Thành Công</th>
-                                    <th>Tỉnh Giao</th>
-                                    <th>Trạng Thái</th>
-                                    <th>Deadline</th>
+                                    <th>Tên Siêu Thị</th>
                                 </tr>
                             </thead>
                             <tbody id="order-lookup-body">
@@ -5317,7 +5315,7 @@
                 if (!results || results.length === 0) {
                     orderLookupBody.innerHTML = `
                         <tr>
-                            <td colspan="9" style="text-align: center; color: var(--text-dim); padding: 40px;">
+                            <td colspan="7" style="text-align: center; color: var(--text-dim); padding: 40px;">
                                 <i class="fas fa-search-location" style="font-size: 2rem; margin-bottom: 10px; opacity:0.3;"></i><br>
                                 Không tìm thấy kết quả nào.
                             </td>
@@ -5327,7 +5325,6 @@
                 }
 
                 orderLookupBody.innerHTML = results.map(item => {
-                    const statusClass = (item['Trạng thái hệ thống'] || '').includes('thành công') ? 'on-time' : 'delayed';
                     return `
                         <tr style="border-bottom: 1px solid var(--border-color);">
                             <td><strong style="color: var(--primary);">${item['Vận đơn'] || ''}</strong></td>
@@ -5337,8 +5334,6 @@
                             <td>${item['Tỉnh lấy'] || ''}</td>
                             <td>${item['Ngày lấy thành công'] || ''}</td>
                             <td>${item['Tỉnh giao'] || ''}</td>
-                            <td><span class="trip-status ${statusClass}" style="background: rgba(16, 185, 129, 0.1); color: ${statusClass === 'on-time' ? 'var(--on-time)' : 'var(--delayed)'};">${item['Trạng thái hệ thống'] || ''}</span></td>
-                            <td>${item['Ngày giao dự kiến'] || ''}</td>
                         </tr>
                     `;
                 }).join('');
@@ -5373,8 +5368,8 @@
                             'MÃ CỬA HÀNG': storeCode,
                             'TÊN CỬA HÀNG': storeName,
                             'Ngày tạo đơn': date,
-                            'Ngày lấy thành công': '-',
-                            'Tỉnh giao': '',
+                            'Ngày lấy thành công': date,
+                            'Tỉnh giao': storeName,
                             'Trạng thái hệ thống': '-',
                             'Tỉnh lấy': 'Phú Thọ',
                             'Ngày giao dự kiến': '-'
