@@ -1,5 +1,15 @@
 const STORE_LIST_DATA = [
   {
+    "id": "2CGH",
+    "name": "WM+ PTO Khu Suông 2, Phú Khê",
+    "address": "Khu Suông 2, Xã Phú Khê, Huyện Cẩm Khê, Tỉnh Phú Thọ",
+    "province": "Phú Thọ",
+    "coords": {
+      "lat": 21.387993,
+      "lng": 105.087082
+    }
+  },
+  {
     "id": "1564",
     "name": "WM VCP PTO Việt Trì",
     "address": "Tầng 2 - TTTM Vincom Việt Trì Plaza, Phường Tiên Cát, Thành phố Việt Trì, Tỉnh Phú Thọ",
