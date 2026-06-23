@@ -5418,10 +5418,10 @@
                 }
 
                 function getTripType(storeName, storeCode) {
-                    if (!window.globalTrips || window.globalTrips.length === 0) return '-';
+                    if (!globalTrips || globalTrips.length === 0) return '-';
                     const sName = (storeName || '').toLowerCase().trim();
                     const sCode = (storeCode || '').toString().trim();
-                    for (const trip of window.globalTrips) {
+                    for (const trip of globalTrips) {
                         if (trip.points) {
                             for (const pt of trip.points) {
                                 if (pt.type === 'DELIVERY') {
