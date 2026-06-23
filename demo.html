@@ -1143,6 +1143,7 @@
                                     <th>Biển Số Xe</th>
                                     <th>Lộ Trình</th>
                                     <th>Loại Xe</th>
+                                    <th>Loại Chuyến</th>
                                     <th>Ngày Xuất</th>
                                     <th>Tổng KM</th>
                                     <th>Khối Lượng (Kg)</th>
@@ -1735,7 +1736,7 @@
                 } else if (distanceKm <= 150) {
                     return rates[2];
                 } else {
-                    return rates[2] + extraRate * (distanceKm - 150);
+                    return rates[2] + extraRate * Math.round(distanceKm - 150);
                 }
             }
             return 0;
@@ -2253,18 +2254,25 @@
                     if (typeof BOOKING_DELIVERY_POINTS !== 'undefined' && typeof generateTrips === 'function') {
                         const backupPoints = DELIVERY_POINTS;
                         BOOKING_SUMMARY.forEach(item => {
-                            // Always recalculate to ensure sync with pricingConfig
-                            DELIVERY_POINTS = BOOKING_DELIVERY_POINTS.filter(p => p.date === item.date).map(p => {
-                                const store = (typeof STORE_LIST_DATA !== 'undefined') ? STORE_LIST_DATA.find(s => s.id === p.id) : null;
-                                const clonedP = JSON.parse(JSON.stringify(p));
-                                return {
-                                    ...clonedP,
-                                    name: clonedP.name, // Keep original name from excel
-                                    address: store && store.address ? store.address : clonedP.address || '',
-                                    coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords
-                                };
-                            });
-                            const trips = generateTrips();
+                            let trips;
+                            const cachedStr = localStorage.getItem('trips_cache_' + item.date);
+                            if (cachedStr) {
+                                try { trips = JSON.parse(cachedStr); } catch(e) {}
+                            }
+                            if (!trips) {
+                                DELIVERY_POINTS = BOOKING_DELIVERY_POINTS.filter(p => p.date === item.date).map(p => {
+                                    const store = (typeof STORE_LIST_DATA !== 'undefined') ? STORE_LIST_DATA.find(s => s.id === p.id) : null;
+                                    const clonedP = JSON.parse(JSON.stringify(p));
+                                    return {
+                                        ...clonedP,
+                                        name: clonedP.name, // Keep original name from excel
+                                        address: store && store.address ? store.address : clonedP.address || '',
+                                        coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords
+                                    };
+                                });
+                                trips = generateTrips();
+                            }
+
                             let c19 = 0, c5 = 0, c8 = 0;
                             let totalCost = 0;
                             trips.forEach(t => {
@@ -2272,29 +2280,33 @@
                                 else if (t.truckType === '5T') c5++;
                                 else if (t.truckType === '8T') c8++;
                                 
-                                let baseCost = 0, excessCost = 0;
-                                const cfg = pricingConfig[t.truckType];
-                                if (cfg) {
-                                    if (t.truckType === '1.9T') {
-                                        baseCost = cfg.baseCost;
-                                        const exKm = Math.max(0, t.dist - cfg.minKm);
-                                        excessCost = exKm * cfg.extraRate;
-                                    } else if (t.truckType === '5T' || t.truckType === '8T') {
-                                        if (t.dist <= 50) baseCost = cfg.rates[0];
-                                        else if (t.dist <= 100) baseCost = cfg.rates[1];
-                                        else if (t.dist <= 150) baseCost = cfg.rates[2];
-                                        else {
-                                            baseCost = cfg.rates[2];
-                                            excessCost = Math.round(t.dist - 150) * cfg.extraRate;
+                                if (t.cost !== undefined) {
+                                    totalCost += t.cost;
+                                } else {
+                                    let baseCost = 0, excessCost = 0;
+                                    const cfg = pricingConfig[t.truckType];
+                                    if (cfg) {
+                                        if (t.truckType === '1.9T') {
+                                            baseCost = cfg.baseCost;
+                                            const exKm = Math.max(0, t.dist - cfg.minKm);
+                                            excessCost = exKm * cfg.extraRate;
+                                        } else if (t.truckType === '5T' || t.truckType === '8T') {
+                                            if (t.dist <= 50) baseCost = cfg.rates[0];
+                                            else if (t.dist <= 100) baseCost = cfg.rates[1];
+                                            else if (t.dist <= 150) baseCost = cfg.rates[2];
+                                            else {
+                                                baseCost = cfg.rates[2];
+                                                excessCost = Math.round(t.dist - 150) * cfg.extraRate;
+                                            }
                                         }
                                     }
+                                    totalCost += (baseCost + excessCost);
                                 }
-                                totalCost += (baseCost + excessCost);
                             });
                             item.truck19 = c19;
                             item.truck5 = c5;
                             item.truck8 = c8;
-                            item.totalCost = totalCost;
+                            item.totalCost = Math.round(totalCost);
                             item.trucksCalculated = true;
                         });
                         DELIVERY_POINTS = backupPoints;
@@ -2465,7 +2477,7 @@
                     "Ship code", "Address", "Receive Goods date", "CBM Booking", "Region",
                     "Province", "District", "Key", "Loading sequences", "Total CBM",
                     "Trip", "Truck Number", "Driver Name", "SĐT", "Location Receive goods",
-                    "Subcontractor", "Truck type", "Goods Available time", "Register Time", "Time Out ",
+                    "Subcontractor", "Truck type", "Loại Chuyến", "Goods Available time", "Register Time", "Time Out ",
                     "Total Weight (Ton)", "Weight", "PCS", "Buff Number", "Third party loading/ unloading ",
                     "Key WH", "Stock Out", "Reason delay goods out of WH ", "Sattus", "Split code ",
                     "Reconciliation", "Blacklist", "Booking number", "KTC"
@@ -2639,8 +2651,9 @@
                             row[12] = t.driverName || ''; // Driver Name
                             row[13] = t.driverPhone || ''; // SĐT
                             row[16] = t.truckType || '8T'; // Truck type
-                            row[17] = ''; // Goods Available time (Empty per request)
-                            row[20] = (t.totalWeight || 0) / 1000; // Total Weight (Ton)
+                            row[17] = t.tripType || 'Đi thẳng'; // Loại Chuyến
+                            row[18] = ''; // Goods Available time (Empty per request)
+                            row[21] = (t.totalWeight || 0) / 1000; // Total Weight (Ton)
                         } else {
                             row[9] = '';
                             row[11] = '';
@@ -2648,7 +2661,8 @@
                             row[13] = '';
                             row[16] = '';
                             row[17] = '';
-                            row[20] = '';
+                            row[18] = '';
+                            row[21] = '';
                         }
 
                         // Column 11: Trip (Sequential number written on all rows of the trip)
@@ -2659,24 +2673,24 @@
                         row[15] = '';
 
                         // Columns 19, 20: Register Time, Time Out (Blank)
-                        row[18] = '';
                         row[19] = '';
+                        row[20] = '';
 
                         // Store level details
-                        row[21] = store.weight || 0; // Weight
-                        row[22] = store.pcs || 0; // PCS
-                        row[23] = store.buff || ''; // Buff Number
+                        row[22] = store.weight || 0; // Weight
+                        row[23] = store.pcs || 0; // PCS
+                        row[24] = store.buff || ''; // Buff Number
 
                         // Columns 25 to 33: Blank
-                        row[24] = ''; // Third party loading/ unloading
-                        row[25] = ''; // Key WH
-                        row[26] = ''; // \
-                        row[27] = ''; // Reason delay goods out of WH
-                        row[28] = ''; // Sattus
-                        row[29] = ''; // Split code
-                        row[30] = ''; // Reconciliation
-                        row[31] = ''; // Blacklist
-                        row[32] = ''; // Booking number
+                        row[25] = ''; // Third party loading/ unloading
+                        row[26] = ''; // Key WH
+                        row[27] = ''; // \
+                        row[28] = ''; // Reason delay goods out of WH
+                        row[29] = ''; // Sattus
+                        row[30] = ''; // Split code
+                        row[31] = ''; // Reconciliation
+                        row[32] = ''; // Blacklist
+                        row[33] = ''; // Booking number
 
                         // Column 34: KTC
                         let ktcVal = '';
@@ -2695,7 +2709,7 @@
                                 ktcVal = 'Đi thẳng Tỉnh';
                             }
                         }
-                        row[33] = ktcVal; // KTC
+                        row[34] = ktcVal; // KTC
 
                         aoa.push(row);
                     });
@@ -2825,14 +2839,9 @@
                     const t = trips[i];
                     if ((t.dist > 0 || t.tripType === 'Trung chuyển') && t.points && t.points.length >= 1) {
                         const validPoints = t.points.filter(p => p.coords && p.coords.lat && p.coords.lng && p.type !== 'HUB_RETURN');
-                        let originCoords = null;
-                        if (t.tripType === 'Trung chuyển') {
-                            originCoords = { lat: 21.3885189, lng: 105.1738604 }; // Kho DC Win Phú Thọ
-                        } else {
-                            if (t.hub === 'Kho DC Win Phú Thọ') originCoords = { lat: 21.3885189, lng: 105.1738604 };
-                            else if (t.hub === 'GXT Phú Thọ') originCoords = { lat: 21.3264875, lng: 105.3246094 };
-                            else if (t.hub === 'GXT Phú Thọ') originCoords = { lat: 21.3264875, lng: 105.3246094 };
-                            else originCoords = { lat: 21.3885189, lng: 105.1738604 };
+                        let originCoords = { lat: 21.3885189, lng: 105.1738604 }; // Default Kho DC Win Phú Thọ
+                        if (t.tripType !== 'Trung chuyển' && t.hub === 'GXT Phú Thọ') {
+                            originCoords = { lat: 21.3264875, lng: 105.3246094 };
                         }
 
                         let routeCoords = [];
@@ -2841,13 +2850,9 @@
                             if (t.hubsVisited) {
                                 t.hubsVisited.forEach(hName => {
                                     if (hName === 'GXT Phú Thọ') routeCoords.push({ lat: 21.3264875, lng: 105.3246094 });
-                                    else if (hName === 'GXT Phú Thọ') routeCoords.push({ lat: 21.3264875, lng: 105.3246094 });
                                 });
                             } else {
-                                let transitHubCoords = null;
-                                if (t.hub === 'GXT Phú Thọ') transitHubCoords = { lat: 21.3264875, lng: 105.3246094 };
-                                else if (t.hub === 'GXT Phú Thọ') transitHubCoords = { lat: 21.3264875, lng: 105.3246094 };
-                                if (transitHubCoords) routeCoords.push(transitHubCoords);
+                                if (t.hub === 'GXT Phú Thọ') routeCoords.push({ lat: 21.3264875, lng: 105.3246094 });
                             }
                         } else {
                             routeCoords.push(originCoords);
@@ -2857,21 +2862,33 @@
                         if (routeCoords.length >= 2) {
                             const coordsStr = routeCoords.map(c => `${c.lng},${c.lat}`).join(';');
 
-                            try {
-                                const res = await fetch(`https://router.project-osrm.org/route/v1/driving/${coordsStr}?overview=false`);
-                                if (res.ok) {
-                                    const data = await res.json();
-                                    if (data && data.routes && data.routes.length > 0) {
-                                        const realDistKm = data.routes[0].distance / 1000;
-                                        t.dist = parseFloat(realDistKm.toFixed(2));
-                                        if (t.tripType !== 'Trung chuyển') {
-                                            t.cost = getTripCost(t.truckType, t.dist);
+                            let retries = 3;
+                            let success = false;
+                            while (retries > 0 && !success) {
+                                try {
+                                    const res = await fetch(`https://router.project-osrm.org/route/v1/driving/${coordsStr}?overview=false`);
+                                    if (res.ok) {
+                                        const data = await res.json();
+                                        if (data && data.routes && data.routes.length > 0) {
+                                            const realDistKm = data.routes[0].distance / 1000;
+                                            t.dist = parseFloat(realDistKm.toFixed(2));
+                                            if (t.tripType !== 'Trung chuyển') {
+                                                t.cost = getTripCost(t.truckType, t.dist);
+                                            }
+                                            t.unitCost = t.cost / (t.totalWeight || 1);
                                         }
-                                        t.unitCost = t.cost / (t.totalWeight || 1);
+                                        success = true;
+                                    } else {
+                                        console.warn(`OSRM fetch failed with status ${res.status}. Retrying...`);
                                     }
+                                } catch (err) {
+                                    console.error('OSRM fetch error:', err);
                                 }
-                            } catch (err) {
-                                console.error('OSRM fetch error:', err);
+                                
+                                if (!success) {
+                                    retries--;
+                                    await new Promise(r => setTimeout(r, 1000)); // Wait 1s on failure before retry
+                                }
                             }
                         }
                     }
@@ -2880,6 +2897,34 @@
                     }
                     renderResults();
                     calculateOTP();
+                    try {
+                        localStorage.setItem('trips_cache_' + dateVal, JSON.stringify(globalTrips));
+                    } catch (e) {
+                        if (e.name === 'QuotaExceededError' || e.name === 'NS_ERROR_DOM_QUOTA_REACHED') {
+                            console.warn('LocalStorage quota exceeded. Clearing old trips_cache...');
+                            const keysToRemove = [];
+                            for (let k = 0; k < localStorage.length; k++) {
+                                const key = localStorage.key(k);
+                                if (key && key.startsWith('trips_cache_') && key !== 'trips_cache_' + dateVal) {
+                                    keysToRemove.push(key);
+                                }
+                            }
+                            keysToRemove.sort();
+                            const numToRemove = Math.max(1, Math.floor(keysToRemove.length / 2));
+                            for (let i = 0; i < numToRemove; i++) {
+                                localStorage.removeItem(keysToRemove[i]);
+                            }
+                            try {
+                                localStorage.setItem('trips_cache_' + dateVal, JSON.stringify(globalTrips));
+                            } catch (e2) {
+                                console.error('Failed to save cache even after cleanup', e2);
+                            }
+                        }
+                    }
+                    // Check if Dashboard needs re-render
+                    if (document.getElementById('summary-table-body')) {
+                        window.renderSummaryTable();
+                    }
                     await new Promise(r => setTimeout(r, 200)); // Rate limit protection
                 }
             } finally {
@@ -3307,6 +3352,7 @@
                         <td><strong style="color: #c084fc;">${t.licensePlate || '-'}</strong></td>
                         <td>${displayRoute}</td>
                         <td><span class="trip-status on-time">${t.truckType}</span></td>
+                        <td><span class="trip-status" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">${t.tripType}</span></td>
                         <td><strong>${stockOutDateStr}</strong></td>
                         <td>${t.dist}</td>
                         <td><strong>${Math.round(t.totalWeight || 0).toLocaleString()}</strong></td>
@@ -3344,7 +3390,7 @@
 
             document.getElementById('report-body').innerHTML += `
                 <tr style="background: rgba(99, 102, 241, 0.15); border-top: 2px solid var(--secondary); font-weight: 700;">
-                    <td colspan="5" style="text-align: center; font-size: 1.05rem; color: var(--secondary);">TỔNG CỘNG (${globalTrips.length} chuyến)</td>
+                    <td colspan="6" style="text-align: center; font-size: 1.05rem; color: var(--secondary);">TỔNG CỘNG (${globalTrips.length} chuyến)</td>
                     <td style="color: var(--text-main);">${sumDist.toFixed(1)}</td>
                     <td style="color: var(--text-main);">${Math.round(sumWeight).toLocaleString()}</td>
                     <td style="color: var(--text-main);">${sumBaseCost.toLocaleString()}</td>

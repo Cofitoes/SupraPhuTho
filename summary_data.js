@@ -56,25 +56,31 @@ const BOOKING_SUMMARY = [
   {
     "date": "2026-06-19",
     "storeCount": 47,
-    "totalVolume": 34.899298681739296,
-    "totalWeight": 8670.356062148965
+    "totalVolume": 69.79859736347859,
+    "totalWeight": 17340.71212429793
   },
   {
     "date": "2026-06-20",
     "storeCount": 62,
-    "totalVolume": 84.18292927076548,
-    "totalWeight": 20945.460919914236
+    "totalVolume": 168.36585854153097,
+    "totalWeight": 41890.92183982847
   },
   {
     "date": "2026-06-22",
     "storeCount": 59,
-    "totalVolume": 39.416580856966135,
-    "totalWeight": 3893.0664392409813
+    "totalVolume": 78.83316171393227,
+    "totalWeight": 7786.1328784819625
   },
   {
     "date": "2026-06-23",
     "storeCount": 88,
     "totalVolume": 85.90881564187642,
     "totalWeight": 29254.20199558109
+  },
+  {
+    "date": "2026-06-24",
+    "storeCount": 89,
+    "totalVolume": 45.73097927794454,
+    "totalWeight": 19031.556027777784
   }
 ];
