@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <!-- SortableJS -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <style>
         :root {
             --primary: #6366f1;
@@ -2967,21 +2969,19 @@
                         ? t.routeName.split(' -> ').map(x => `<strong>${x}</strong>`).join('<br><i class="fas fa-arrow-right" style="font-size: 0.7rem; color: var(--text-dim); margin: 0 5px;"></i> ')
                         : `<strong>${t.hub || 'Kho DC Win Phú Thọ'}</strong>`;
                     
-                    // List store names for đi thẳng trips
+                    // List store names for đi thẳng trips (Draggable)
                     let storeNamesHtml = '';
-                    /* Bỏ hiển thị danh sách chi tiết cửa hàng theo yêu cầu
                     if (typeof window.extractStoresFromTrip === 'function') {
                         const tripStores = window.extractStoresFromTrip(t);
                         if (tripStores.length > 0) {
                             const storeNames = tripStores.map(s => s.name).filter(Boolean);
                             if (storeNames.length > 0) {
-                                storeNamesHtml = `<div style="margin-top: 6px; padding-left: 12px; border-left: 2px solid rgba(16, 185, 129, 0.2); font-size: 0.82rem; line-height: 1.7; color: var(--text-dim);">` +
-                                    storeNames.map(n => `<div style="padding: 1px 0;"><i class="fas fa-store" style="font-size: 0.65rem; margin-right: 5px; color: #10b981;"></i>${n}</div>`).join('') +
+                                storeNamesHtml = `<div id="trip-stores-${t.id}" data-trip-id="${t.id}" class="sortable-store-list" style="margin-top: 10px; padding: 5px; border: 1px dashed rgba(255,255,255,0.1); border-radius: 6px; min-height: 40px; background: rgba(0,0,0,0.1);">` +
+                                    storeNames.map(n => `<div data-store-name="${n}" class="draggable-store" style="padding: 6px 10px; margin: 4px 0; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 4px; font-size: 0.85rem; cursor: grab; display: flex; align-items: center; transition: all 0.2s;"><i class="fas fa-grip-vertical" style="margin-right: 8px; opacity: 0.6; cursor: grab;"></i>${n}</div>`).join('') +
                                     `</div>`;
                             }
                         }
                     }
-                    */
                     
                     routePathHtml = `${baseRoute}${provinceInfoContainer}${storeNamesHtml}`;
                 }
@@ -3022,6 +3022,57 @@
 
             document.getElementById('route-results-table').innerHTML += summaryRowHtml;
 
+            // Initialize SortableJS for drag-and-drop
+            if (typeof Sortable !== 'undefined') {
+                const sortableLists = document.querySelectorAll('.sortable-store-list');
+                sortableLists.forEach(listEl => {
+                    new Sortable(listEl, {
+                        group: 'shared-trips', // set both lists to same group
+                        animation: 150,
+                        ghostClass: 'sortable-ghost',
+                        onEnd: function (evt) {
+                            const itemEl = evt.item; // dragged HTMLElement
+                            const fromList = evt.from; // previous list
+                            const toList = evt.to;    // target list
+                            
+                            if (fromList === toList) return; // Didn't move to another trip
+                            
+                            const fromTripId = fromList.getAttribute('data-trip-id');
+                            const toTripId = toList.getAttribute('data-trip-id');
+                            const storeName = itemEl.getAttribute('data-store-name');
+                            
+                            if (fromTripId && toTripId && storeName) {
+                                // Find trips in globalTrips
+                                const fromTrip = globalTrips.find(t => t.id === fromTripId);
+                                const toTrip = globalTrips.find(t => t.id === toTripId);
+                                
+                                if (fromTrip && toTrip && typeof window.recalculateTrip === 'function') {
+                                    // Extract the point from fromTrip
+                                    const ptIdx = fromTrip.points.findIndex(p => p.type === 'DELIVERY' && p.name === storeName);
+                                    if (ptIdx !== -1) {
+                                        const ptToMove = fromTrip.points[ptIdx];
+                                        fromTrip.points.splice(ptIdx, 1);
+                                        // Push to toTrip's points (before HUB_RETURN if exists)
+                                        const returnIdx = toTrip.points.findIndex(p => p.type === 'HUB_RETURN');
+                                        if (returnIdx !== -1) {
+                                            toTrip.points.splice(returnIdx, 0, ptToMove);
+                                        } else {
+                                            toTrip.points.push(ptToMove);
+                                        }
+                                        
+                                        // Recalculate both trips
+                                        window.recalculateTrip(fromTrip);
+                                        window.recalculateTrip(toTrip);
+                                        
+                                        // Re-render
+                                        renderPlanner();
+                                    }
+                                }
+                            }
+                        }
+                    });
+                });
+            }
             // Đồng bộ Biển Số Xe từ Telegram vào globalTrips
             if (typeof telegramData !== 'undefined' && telegramData && telegramData.length > 0) {
                 let plateMessages = telegramData.filter(d => d.Extracted_Plate);

@@ -163,112 +163,165 @@ function generateTrips() {
         return parseFloat(dist.toFixed(2));
     };
 
-    // STEP 1: DIRECT DELIVERY (Giao thẳng) - Only 1.9T
+    // STEP 1: DIRECT DELIVERY (Giao thẳng) - K-Means Clustering
     // ========================================
-    // Priority: Minimize trucks. Max 1900kg / 14 CBM / 15 points
     let directTrips = [];
-    let remainingDirect = [...directPoints];
+    if (directPoints.length > 0) {
+        let totalW = 0; let totalV = 0;
+        directPoints.forEach(p => { totalW += (p.weight || 0); totalV += (p.volume || 0); });
+        
+        let K = Math.max(1, Math.ceil(totalW / 1900), Math.ceil(totalV / 14), Math.ceil(directPoints.length / 15));
+        if (K > directPoints.length) K = directPoints.length;
 
-    remainingDirect.sort((a, b) => {
-        return calculateDistance(hubDC.coords, b.coords) - calculateDistance(hubDC.coords, a.coords);
-    });
+        // Initialize K centroids (spread them out)
+        let centroids = [];
+        let remainingForCentroid = [...directPoints];
+        remainingForCentroid.sort((a, b) => calculateDistance(hubDC.coords, b.coords) - calculateDistance(hubDC.coords, a.coords));
+        for (let i = 0; i < K; i++) {
+            if (i === 0) {
+                centroids.push({ ...remainingForCentroid[0].coords });
+            } else {
+                let maxMinDist = -1;
+                let bestPt = remainingForCentroid[0];
+                for (let pt of remainingForCentroid) {
+                    let minDist = Infinity;
+                    for (let c of centroids) {
+                        let d = calculateDistance(pt.coords, c);
+                        if (d < minDist) minDist = d;
+                    }
+                    if (minDist > maxMinDist) {
+                        maxMinDist = minDist;
+                        bestPt = pt;
+                    }
+                }
+                centroids.push({ ...bestPt.coords });
+            }
+        }
 
-    while (remainingDirect.length > 0) {
-        const seed = remainingDirect.shift();
-        const chunk = [seed];
-        let chunkW = seed.weight || 0;
-        let chunkV = seed.volume || 0;
+        // K-Means iteration
+        let clusters = Array.from({length: K}, () => []);
+        let changed = true;
+        let iter = 0;
+        while (changed && iter < 50) {
+            changed = false;
+            let newClusters = Array.from({length: K}, () => []);
+            directPoints.forEach(p => {
+                let bestK = 0; let minDist = Infinity;
+                for (let i = 0; i < K; i++) {
+                    let d = calculateDistance(p.coords, centroids[i]);
+                    if (d < minDist) { minDist = d; bestK = i; }
+                }
+                newClusters[bestK].push(p);
+            });
+            for (let i = 0; i < K; i++) {
+                if (clusters[i].length !== newClusters[i].length) changed = true;
+            }
+            clusters = newClusters;
+            for (let i = 0; i < K; i++) {
+                if (clusters[i].length > 0) {
+                    let sumLat = 0; let sumLng = 0;
+                    clusters[i].forEach(p => { sumLat += p.coords.lat; sumLng += p.coords.lng; });
+                    centroids[i] = { lat: sumLat / clusters[i].length, lng: sumLng / clusters[i].length };
+                }
+            }
+            iter++;
+        }
 
-        let added = true;
-        while (added && chunk.length < 15) {
-            added = false;
-            let nearestIdx = -1;
-            let minDist = Infinity;
-            for (let i = 0; i < remainingDirect.length; i++) {
-                const p = remainingDirect[i];
-                if (chunkW + (p.weight || 0) <= 1900 && chunkV + (p.volume || 0) <= 14) {
-                    const d = calculateDistance(chunk[chunk.length-1].coords, p.coords);
-                    if (d < minDist) {
-                        minDist = d;
-                        nearestIdx = i;
+        // Capacity constraint balancing (force valid chunks)
+        let isValid = false;
+        let balanceIter = 0;
+        while (!isValid && balanceIter < 50) {
+            isValid = true;
+            for (let i = 0; i < K; i++) {
+                let w = clusters[i].reduce((sum, p) => sum + (p.weight||0), 0);
+                let v = clusters[i].reduce((sum, p) => sum + (p.volume||0), 0);
+                if (w > 1900 || v > 14 || clusters[i].length > 15) {
+                    isValid = false;
+                    clusters[i].sort((a,b) => calculateDistance(b.coords, centroids[i]) - calculateDistance(a.coords, centroids[i]));
+                    let moved = false;
+                    for (let p of clusters[i]) {
+                        let bestAltK = -1; let minAltDist = Infinity;
+                        for (let j = 0; j < K; j++) {
+                            if (i === j) continue;
+                            let altW = clusters[j].reduce((sum, pt) => sum + (pt.weight||0), 0);
+                            let altV = clusters[j].reduce((sum, pt) => sum + (pt.volume||0), 0);
+                            if (altW + (p.weight||0) <= 1900 && altV + (p.volume||0) <= 14 && clusters[j].length < 15) {
+                                let d = calculateDistance(p.coords, centroids[j]);
+                                if (d < minAltDist) {
+                                    minAltDist = d;
+                                    bestAltK = j;
+                                }
+                            }
+                        }
+                        if (bestAltK !== -1) {
+                            clusters[bestAltK].push(p);
+                            clusters[i] = clusters[i].filter(pt => pt !== p);
+                            moved = true;
+                            break;
+                        }
+                    }
+                    if (!moved) {
+                        K++;
+                        clusters.push([]);
+                        centroids.push({ ...clusters[i][0].coords });
+                        isValid = false;
+                        break;
                     }
                 }
             }
-            if (nearestIdx !== -1) { 
-                const p = remainingDirect[nearestIdx];
-                chunkW += (p.weight || 0);
-                chunkV += (p.volume || 0);
-                chunk.push(p);
-                remainingDirect.splice(nearestIdx, 1);
-                added = true;
-            }
+            balanceIter++;
         }
-        directTrips.push(createDirectTrip(chunk, hubDC, '1.9T'));
-    }
 
-    // ========================================
-    // STEP 1.5: OPTIMIZE DIRECT TRIPS
-    // ========================================
-    if (directTrips.length > 1) {
-        const evaluateSolution = (solution) => {
-            let score = 0;
-            solution.forEach(chunk => {
-                if (chunk.length === 0) return;
-                const dist = getChunkDistance(hubDC, chunk);
-                score += dist * dist;
-            });
-            return score;
-        };
+        // ========================================
+        // STEP 1.5: OPTIMIZE DIRECT TRIPS (Local Search)
+        // ========================================
+        if (clusters.length > 1) {
+            const evaluateSolution = (solution) => {
+                let score = 0;
+                let weights = [];
+                solution.forEach(chunk => {
+                    if (chunk.length === 0) return;
+                    const dist = getChunkDistance(hubDC, chunk);
+                    score += dist * dist;
+                    weights.push(chunk.reduce((sum, p) => sum + (p.weight||0), 0));
+                });
+                // Penalty for unbalance (optional, heavily penalize unbalance)
+                if (weights.length > 0) {
+                    let avgW = weights.reduce((a,b)=>a+b, 0) / weights.length;
+                    let variance = weights.reduce((sum, w) => sum + Math.pow(w - avgW, 2), 0) / weights.length;
+                    score += variance * 0.1; // Add weight variance penalty to encourage balancing
+                }
+                return score;
+            };
 
-        const isValidChunk = (chunk) => {
-            if (chunk.length === 0) return true;
-            if (chunk.length > 15) return false;
-            let w = 0, v = 0;
-            for (let i = 0; i < chunk.length; i++) {
-                w += chunk[i].weight || 0;
-                v += chunk[i].volume || 0;
-            }
-            if (w > 1900 || v > 14) return false;
-            return true;
-        };
+            const isValidChunk = (chunk) => {
+                if (chunk.length === 0) return true;
+                if (chunk.length > 15) return false;
+                let w = 0, v = 0;
+                for (let i = 0; i < chunk.length; i++) {
+                    w += chunk[i].weight || 0;
+                    v += chunk[i].volume || 0;
+                }
+                if (w > 1900 || v > 14) return false;
+                return true;
+            };
 
-        let solution = directTrips.map(t => t.points.filter(pt => pt.type === 'DELIVERY'));
-        let bestScore = evaluateSolution(solution);
-        let improved = true;
-        let maxIterations = 300;
-        
-        while (improved && maxIterations > 0) {
-            improved = false;
-            maxIterations--;
-            for (let i = 0; i < solution.length && !improved; i++) {
-                for (let j = 0; j < solution.length && !improved; j++) {
-                    if (i === j) continue;
-                    // Try MOVE
-                    for (let sIdx = 0; sIdx < solution[i].length; sIdx++) {
-                        const store = solution[i][sIdx];
-                        const newSrc = solution[i].filter((_, idx) => idx !== sIdx);
-                        const newDst = [...solution[j], store];
-                        if (isValidChunk(newSrc) && isValidChunk(newDst)) {
-                            const proposed = solution.map((chunk, idx) => {
-                                if (idx === i) return newSrc;
-                                if (idx === j) return newDst;
-                                return chunk;
-                            }).filter(chunk => chunk.length > 0);
-                            const score = evaluateSolution(proposed);
-                            if (score < bestScore - 0.01) {
-                                solution = proposed;
-                                bestScore = score;
-                                improved = true;
-                                break;
-                            }
-                        }
-                    }
-                    if (improved) break;
-                    // Try SWAP
-                    for (let sI = 0; sI < solution[i].length && !improved; sI++) {
-                        for (let sJ = 0; sJ < solution[j].length; sJ++) {
-                            const newSrc = solution[i].map((s, idx) => idx === sI ? solution[j][sJ] : s);
-                            const newDst = solution[j].map((s, idx) => idx === sJ ? solution[i][sI] : s);
+            let solution = clusters;
+            let bestScore = evaluateSolution(solution);
+            let improved = true;
+            let maxIterations = 300;
+            
+            while (improved && maxIterations > 0) {
+                improved = false;
+                maxIterations--;
+                for (let i = 0; i < solution.length && !improved; i++) {
+                    for (let j = 0; j < solution.length && !improved; j++) {
+                        if (i === j) continue;
+                        // Try MOVE
+                        for (let sIdx = 0; sIdx < solution[i].length; sIdx++) {
+                            const store = solution[i][sIdx];
+                            const newSrc = solution[i].filter((_, idx) => idx !== sIdx);
+                            const newDst = [...solution[j], store];
                             if (isValidChunk(newSrc) && isValidChunk(newDst)) {
                                 const proposed = solution.map((chunk, idx) => {
                                     if (idx === i) return newSrc;
@@ -284,13 +337,35 @@ function generateTrips() {
                                 }
                             }
                         }
+                        if (improved) break;
+                        // Try SWAP
+                        for (let sI = 0; sI < solution[i].length && !improved; sI++) {
+                            for (let sJ = 0; sJ < solution[j].length; sJ++) {
+                                const newSrc = solution[i].map((s, idx) => idx === sI ? solution[j][sJ] : s);
+                                const newDst = solution[j].map((s, idx) => idx === sJ ? solution[i][sI] : s);
+                                if (isValidChunk(newSrc) && isValidChunk(newDst)) {
+                                    const proposed = solution.map((chunk, idx) => {
+                                        if (idx === i) return newSrc;
+                                        if (idx === j) return newDst;
+                                        return chunk;
+                                    });
+                                    const score = evaluateSolution(proposed);
+                                    if (score < bestScore - 0.01) {
+                                        solution = proposed;
+                                        bestScore = score;
+                                        improved = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
+            clusters = solution;
         }
-        
-        directTrips = [];
-        solution.forEach(chunk => {
+
+        clusters.forEach(chunk => {
             if (chunk.length > 0) {
                 directTrips.push(createDirectTrip(chunk, hubDC, '1.9T'));
             }
@@ -445,6 +520,24 @@ function generateTrips() {
     sortedTrips.forEach((trip, idx) => {
         trip.id = `LH-${bookingDateStr}-${String(idx + 1).padStart(3, '0')}`;
     });
+
+    // API for Drag and Drop reallocation
+    window.recalculateTrip = (trip) => {
+        if (trip.tripType !== 'Đi thẳng') return trip;
+        const originalPts = trip.points.filter(p => p.type === 'DELIVERY').map(p => {
+            // Need to pass the original delivery point format back to createDirectTrip
+            return {
+                name: p.name,
+                coords: p.coords,
+                weight: p.weight || 0,
+                volume: p.volume || 0,
+                originalPoints: p.originalPoints || [p.name]
+            };
+        });
+        const newTrip = createDirectTrip(originalPts, hubDC, '1.9T', trip.id);
+        Object.assign(trip, newTrip);
+        return trip;
+    };
 
     return sortedTrips;
 }
