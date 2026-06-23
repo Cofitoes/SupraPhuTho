@@ -5353,6 +5353,36 @@
             // Load June 2026 orders initially after a longer timeout to allow sheet data to load
             setTimeout(loadInitialOrders, 1500);
 
+            let transformedGhnSoData = [];
+            if (typeof STORE_GHN_SO_DATA !== 'undefined') {
+                Object.keys(STORE_GHN_SO_DATA).forEach(date => {
+                    Object.keys(STORE_GHN_SO_DATA[date]).forEach(storeName => {
+                        const info = STORE_GHN_SO_DATA[date][storeName];
+                        const combinedGhn = info.ghn.join(', ');
+                        const combinedSo = info.so.join(', ');
+                        
+                        let storeCode = '';
+                        if (typeof STORE_LIST_DATA !== 'undefined') {
+                            const st = STORE_LIST_DATA.find(s => s.name === storeName);
+                            if (st) storeCode = st.id || st.code || '';
+                        }
+                        
+                        transformedGhnSoData.push({
+                            'Vận đơn': (combinedGhn ? combinedGhn : '') + (combinedSo ? (combinedGhn ? '<br>' : '') + 'SO: ' + combinedSo : ''),
+                            'RawSearchText': combinedGhn + ' ' + combinedSo + ' ' + storeName,
+                            'MÃ CỬA HÀNG': storeCode,
+                            'TÊN CỬA HÀNG': storeName,
+                            'Ngày tạo đơn': date,
+                            'Ngày lấy thành công': '-',
+                            'Tỉnh giao': '',
+                            'Trạng thái hệ thống': '-',
+                            'Tỉnh lấy': 'Phú Thọ',
+                            'Ngày giao dự kiến': '-'
+                        });
+                    });
+                });
+            }
+
             if (orderSearchInput) {
                 orderSearchInput.addEventListener('input', function () {
                     const val = this.value.trim().toLowerCase();
@@ -5366,11 +5396,13 @@
                         allData = allData.concat(concungData);
                     }
                     allData = allData.concat(sheetData);
+                    allData = allData.concat(transformedGhnSoData);
 
                     const results = allData.filter(item => {
                         const vd = (item['Vận đơn'] || '').toLowerCase();
                         const ma = (item['MÃ CỬA HÀNG'] || '').toLowerCase();
-                        return vd.includes(val) || ma.includes(val);
+                        const raw = (item['RawSearchText'] || '').toLowerCase();
+                        return vd.includes(val) || ma.includes(val) || raw.includes(val);
                     });
                     renderOrderLookup(results.slice(0, 50));
                 });
