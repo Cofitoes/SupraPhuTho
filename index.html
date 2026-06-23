@@ -1071,6 +1071,8 @@
                             </div>
                         </div>
                         <div style="display: flex; gap: 10px; align-items: center;">
+                            <button class="btn-icon" id="btn-undo-trips" style="display: none; background-color: transparent; border: 1px solid #ef4444; color: #ef4444;" title="Hoàn tác thay đổi"><i class="fas fa-undo"></i></button>
+                            <button class="btn-primary" id="btn-save-trips" style="display: none; background-color: #10b981;"><i class="fas fa-save"></i> Lưu Tuyến</button>
                             <button class="btn-primary" id="btn-run-optimization" style="display: none;">Chạy Tối Ưu
                                 Tuyến</button>
                             <button class="btn-primary" id="btn-export-planner"
@@ -1745,6 +1747,37 @@
         let DELIVERY_POINTS = [];
 
         let globalTrips = [];
+        let backupGlobalTrips = [];
+
+        function resetBackupAndUI() {
+            backupGlobalTrips = JSON.parse(JSON.stringify(globalTrips));
+            const btnUndo = document.getElementById('btn-undo-trips');
+            const btnSave = document.getElementById('btn-save-trips');
+            if (btnUndo) btnUndo.style.display = 'none';
+            if (btnSave) btnSave.style.display = 'none';
+        }
+
+        // Handle Undo and Save
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnUndo = document.getElementById('btn-undo-trips');
+            const btnSave = document.getElementById('btn-save-trips');
+            
+            if (btnUndo) {
+                btnUndo.addEventListener('click', () => {
+                    globalTrips = JSON.parse(JSON.stringify(backupGlobalTrips));
+                    renderResults();
+                    btnUndo.style.display = 'none';
+                    if (btnSave) btnSave.style.display = 'none';
+                    alert('Đã hoàn tác lại lộ trình gốc!');
+                });
+            }
+            if (btnSave) {
+                btnSave.addEventListener('click', () => {
+                    resetBackupAndUI();
+                    alert('Đã lưu các thay đổi thủ công của bạn!');
+                });
+            }
+        });
 
         function calculateDistance(p1, p2) {
             const R = 6371;
@@ -1857,6 +1890,7 @@
 
             if (typeof generateTrips === 'function') {
                 globalTrips = generateTrips();
+                resetBackupAndUI();
                 window.renderTripsTable(); // Re-render main table if needed
             }
         };
@@ -2368,6 +2402,7 @@
 
                 try {
                     globalTrips = generateTrips();
+                    resetBackupAndUI();
 
                     DELIVERY_POINTS.forEach(p => {
                         let isInTrip = false;
@@ -3066,6 +3101,12 @@
                                         
                                         // Re-render
                                         renderResults();
+                                        
+                                        // Show Save/Undo buttons
+                                        const btnUndo = document.getElementById('btn-undo-trips');
+                                        const btnSave = document.getElementById('btn-save-trips');
+                                        if (btnUndo) btnUndo.style.display = '';
+                                        if (btnSave) btnSave.style.display = '';
                                     }
                                 }
                             }
