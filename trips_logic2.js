@@ -163,134 +163,63 @@ function generateTrips() {
         return parseFloat(dist.toFixed(2));
     };
 
-    // STEP 1: DIRECT DELIVERY (Giao thẳng) - K-Means Clustering
+    // STEP 1: DIRECT DELIVERY (Giao thẳng) - Heuristic & Local Search
     // ========================================
+    // Priority 1: Minimize number of trucks (Greedy Packing)
+    // Priority 2: Optimize geographic routes (Local Search minimizing dist^2 to balance trip lengths)
     let directTrips = [];
     if (directPoints.length > 0) {
-        let totalW = 0; let totalV = 0;
-        directPoints.forEach(p => { totalW += (p.weight || 0); totalV += (p.volume || 0); });
-        
-        let K = Math.max(1, Math.ceil(totalW / 1900), Math.ceil(totalV / 14), Math.ceil(directPoints.length / 15));
-        if (K > directPoints.length) K = directPoints.length;
+        let solutionGreedy = [];
+        let remaining = [...directPoints];
+        // Sort by furthest point first
+        remaining.sort((a, b) => calculateDistance(hubDC.coords, b.coords) - calculateDistance(hubDC.coords, a.coords));
 
-        // Initialize K centroids (spread them out)
-        let centroids = [];
-        let remainingForCentroid = [...directPoints];
-        remainingForCentroid.sort((a, b) => calculateDistance(hubDC.coords, b.coords) - calculateDistance(hubDC.coords, a.coords));
-        for (let i = 0; i < K; i++) {
-            if (i === 0) {
-                centroids.push({ ...remainingForCentroid[0].coords });
-            } else {
-                let maxMinDist = -1;
-                let bestPt = remainingForCentroid[0];
-                for (let pt of remainingForCentroid) {
-                    let minDist = Infinity;
-                    for (let c of centroids) {
-                        let d = calculateDistance(pt.coords, c);
-                        if (d < minDist) minDist = d;
-                    }
-                    if (minDist > maxMinDist) {
-                        maxMinDist = minDist;
-                        bestPt = pt;
-                    }
-                }
-                centroids.push({ ...bestPt.coords });
-            }
-        }
+        while (remaining.length > 0) {
+            const seed = remaining.shift();
+            const chunk = [seed];
+            let cw = seed.weight || 0;
+            let cv = seed.volume || 0;
 
-        // K-Means iteration
-        let clusters = Array.from({length: K}, () => []);
-        let changed = true;
-        let iter = 0;
-        while (changed && iter < 50) {
-            changed = false;
-            let newClusters = Array.from({length: K}, () => []);
-            directPoints.forEach(p => {
-                let bestK = 0; let minDist = Infinity;
-                for (let i = 0; i < K; i++) {
-                    let d = calculateDistance(p.coords, centroids[i]);
-                    if (d < minDist) { minDist = d; bestK = i; }
-                }
-                newClusters[bestK].push(p);
-            });
-            for (let i = 0; i < K; i++) {
-                if (clusters[i].length !== newClusters[i].length) changed = true;
-            }
-            clusters = newClusters;
-            for (let i = 0; i < K; i++) {
-                if (clusters[i].length > 0) {
-                    let sumLat = 0; let sumLng = 0;
-                    clusters[i].forEach(p => { sumLat += p.coords.lat; sumLng += p.coords.lng; });
-                    centroids[i] = { lat: sumLat / clusters[i].length, lng: sumLng / clusters[i].length };
-                }
-            }
-            iter++;
-        }
-
-        // Capacity constraint balancing (force valid chunks)
-        let isValid = false;
-        let balanceIter = 0;
-        while (!isValid && balanceIter < 50) {
-            isValid = true;
-            for (let i = 0; i < K; i++) {
-                let w = clusters[i].reduce((sum, p) => sum + (p.weight||0), 0);
-                let v = clusters[i].reduce((sum, p) => sum + (p.volume||0), 0);
-                if (w > 1900 || v > 14 || clusters[i].length > 15) {
-                    isValid = false;
-                    clusters[i].sort((a,b) => calculateDistance(b.coords, centroids[i]) - calculateDistance(a.coords, centroids[i]));
-                    let moved = false;
-                    for (let p of clusters[i]) {
-                        let bestAltK = -1; let minAltDist = Infinity;
-                        for (let j = 0; j < K; j++) {
-                            if (i === j) continue;
-                            let altW = clusters[j].reduce((sum, pt) => sum + (pt.weight||0), 0);
-                            let altV = clusters[j].reduce((sum, pt) => sum + (pt.volume||0), 0);
-                            if (altW + (p.weight||0) <= 1900 && altV + (p.volume||0) <= 14 && clusters[j].length < 15) {
-                                let d = calculateDistance(p.coords, centroids[j]);
-                                if (d < minAltDist) {
-                                    minAltDist = d;
-                                    bestAltK = j;
-                                }
-                            }
-                        }
-                        if (bestAltK !== -1) {
-                            clusters[bestAltK].push(p);
-                            clusters[i] = clusters[i].filter(pt => pt !== p);
-                            moved = true;
-                            break;
-                        }
-                    }
-                    if (!moved) {
-                        K++;
-                        clusters.push([]);
-                        centroids.push({ ...clusters[i][0].coords });
-                        isValid = false;
-                        break;
+            let added = true;
+            while (added && chunk.length < 15) {
+                added = false;
+                let nearestIdx = -1, minDist = Infinity;
+                for (let i = 0; i < remaining.length; i++) {
+                    const p = remaining[i];
+                    if (cw + (p.weight || 0) <= 1900 && cv + (p.volume || 0) <= 14) {
+                        const d = calculateDistance(chunk[chunk.length - 1].coords, p.coords);
+                        if (d < minDist) { minDist = d; nearestIdx = i; }
                     }
                 }
+                if (nearestIdx !== -1) {
+                    const p = remaining[nearestIdx];
+                    cw += p.weight || 0; cv += p.volume || 0;
+                    chunk.push(p);
+                    remaining.splice(nearestIdx, 1);
+                    added = true;
+                }
             }
-            balanceIter++;
+            solutionGreedy.push(chunk);
         }
 
         // ========================================
         // STEP 1.5: OPTIMIZE DIRECT TRIPS (Local Search)
         // ========================================
+        let clusters = solutionGreedy;
         if (clusters.length > 1) {
             const evaluateSolution = (solution) => {
                 let score = 0;
-                let weights = [];
+                let exactCost = 0;
                 solution.forEach(chunk => {
                     if (chunk.length === 0) return;
                     const dist = getChunkDistance(hubDC, chunk);
-                    score += dist * dist;
-                    weights.push(chunk.reduce((sum, p) => sum + (p.weight||0), 0));
+                    score += dist * dist; // Penalize unbalanced long trips
+                    if (typeof getTripCost === 'function') {
+                        exactCost += getTripCost('1.9T', dist);
+                    }
                 });
-                // Penalty for unbalance (optional, heavily penalize unbalance)
-                if (weights.length > 0) {
-                    let avgW = weights.reduce((a,b)=>a+b, 0) / weights.length;
-                    let variance = weights.reduce((sum, w) => sum + Math.pow(w - avgW, 2), 0) / weights.length;
-                    score += variance * 0.1; // Add weight variance penalty to encourage balancing
-                }
+                // If we can evaluate exact cost, prioritize it heavily
+                if (exactCost > 0) return exactCost + (score * 0.0001); 
                 return score;
             };
 
@@ -306,31 +235,31 @@ function generateTrips() {
                 return true;
             };
 
-            let solution = clusters;
-            let bestScore = evaluateSolution(solution);
+            let bestScore = evaluateSolution(clusters);
             let improved = true;
-            let maxIterations = 300;
-            
+            let maxIterations = 400; // Increased iterations for better optimization
+
             while (improved && maxIterations > 0) {
                 improved = false;
                 maxIterations--;
-                for (let i = 0; i < solution.length && !improved; i++) {
-                    for (let j = 0; j < solution.length && !improved; j++) {
+                for (let i = 0; i < clusters.length && !improved; i++) {
+                    for (let j = 0; j < clusters.length && !improved; j++) {
                         if (i === j) continue;
+                        
                         // Try MOVE
-                        for (let sIdx = 0; sIdx < solution[i].length; sIdx++) {
-                            const store = solution[i][sIdx];
-                            const newSrc = solution[i].filter((_, idx) => idx !== sIdx);
-                            const newDst = [...solution[j], store];
+                        for (let sIdx = 0; sIdx < clusters[i].length; sIdx++) {
+                            const store = clusters[i][sIdx];
+                            const newSrc = clusters[i].filter((_, idx) => idx !== sIdx);
+                            const newDst = [...clusters[j], store];
                             if (isValidChunk(newSrc) && isValidChunk(newDst)) {
-                                const proposed = solution.map((chunk, idx) => {
+                                const proposed = clusters.map((chunk, idx) => {
                                     if (idx === i) return newSrc;
                                     if (idx === j) return newDst;
                                     return chunk;
                                 });
                                 const score = evaluateSolution(proposed);
                                 if (score < bestScore - 0.01) {
-                                    solution = proposed;
+                                    clusters = proposed;
                                     bestScore = score;
                                     improved = true;
                                     break;
@@ -338,20 +267,21 @@ function generateTrips() {
                             }
                         }
                         if (improved) break;
+                        
                         // Try SWAP
-                        for (let sI = 0; sI < solution[i].length && !improved; sI++) {
-                            for (let sJ = 0; sJ < solution[j].length; sJ++) {
-                                const newSrc = solution[i].map((s, idx) => idx === sI ? solution[j][sJ] : s);
-                                const newDst = solution[j].map((s, idx) => idx === sJ ? solution[i][sI] : s);
+                        for (let sI = 0; sI < clusters[i].length && !improved; sI++) {
+                            for (let sJ = 0; sJ < clusters[j].length; sJ++) {
+                                const newSrc = clusters[i].map((s, idx) => idx === sI ? clusters[j][sJ] : s);
+                                const newDst = clusters[j].map((s, idx) => idx === sJ ? clusters[i][sI] : s);
                                 if (isValidChunk(newSrc) && isValidChunk(newDst)) {
-                                    const proposed = solution.map((chunk, idx) => {
+                                    const proposed = clusters.map((chunk, idx) => {
                                         if (idx === i) return newSrc;
                                         if (idx === j) return newDst;
                                         return chunk;
                                     });
                                     const score = evaluateSolution(proposed);
                                     if (score < bestScore - 0.01) {
-                                        solution = proposed;
+                                        clusters = proposed;
                                         bestScore = score;
                                         improved = true;
                                         break;
@@ -362,7 +292,6 @@ function generateTrips() {
                     }
                 }
             }
-            clusters = solution;
         }
 
         clusters.forEach(chunk => {
