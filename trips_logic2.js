@@ -419,8 +419,8 @@ function generateTrips() {
                 dist: distFloat,
                 totalVolume: chunkV,
                 totalWeight: chunkW,
-                cost: 0,
-                unitCost: 0,
+                cost: getTripCost(chunkTruckType, distFloat),
+                unitCost: getTripCost(chunkTruckType, distFloat) / (chunkW || 1),
                 tripType: 'Trung chuyển',
                 routeName: routeName,
                 hubProvinces: {

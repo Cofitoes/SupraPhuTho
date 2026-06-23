@@ -1142,8 +1142,10 @@
                                     <th>Ngày Xuất</th>
                                     <th>Tổng KM</th>
                                     <th>Khối Lượng (Kg)</th>
-                                    <th>Thành Tiền</th>
-                                    <th>Cost/Kg</th>
+                                    <th>Giá Chuyến</th>
+                                    <th>KM Vượt</th>
+                                    <th>Phí Vượt KM</th>
+                                    <th>Tổng Tiền</th>
                                 </tr>
                             </thead>
                             <tbody id="report-body"></tbody>
@@ -1699,52 +1701,15 @@
             return '';
         }
 
+        // ===== BẢNG GIÁ - Nguồn duy nhất: Phụ Lục HĐ Phạm Gia 88 =====
+        // FINAL_GHN_PHAMGIA88_Phụ_Lục_01_HDDV_Thuê_Tải_Liên_Vùng_B2B.docx
+        // Đơn giá chưa VAT, đã bao gồm xăng dầu, cầu đường
         let pricingConfig = {
-            '1.9T': { minKm: 120, baseCost: 1600000, extraRate: 11000 },
-            '5T': { rates: [1100000, 2400000, 3000000], extraRate: 19000 },
-            '8T': { rates: [1500000, 3000000, 4200000], extraRate: 22000 }
+            '1.9T': { minKm: 120, baseCost: 1700000, extraRate: 11000 },  // 1,700,000đ/chuyến, giới hạn 120km, vượt 11,000đ/km
+            '5T':   { rates: [1100000, 2400000, 3000000], extraRate: 20000 },  // 0-50km: 1.1tr | 51-100km: 2.4tr | 101-150km: 3tr | vượt 20,000đ/km
+            '8T':   { rates: [1500000, 3000000, 4200000], extraRate: 22000 }   // 0-50km: 1.5tr | 51-100km: 3tr | 101-150km: 4.2tr | vượt 22,000đ/km
         };
-
-        async function loadPricingFromExcel() {
-            const googleSheetUrl = 'https://docs.google.com/spreadsheets/d/1Bdvc8wXaG7umyW-pwQk4bEZtgGRSKEoIwel9Z3p7jxc/export?format=xlsx&gid=30061802';
-            try {
-                const response = await fetch(googleSheetUrl);
-                if (!response.ok) throw new Error('Google Sheet fetch returned status ' + response.status);
-                const arrayBuffer = await response.arrayBuffer();
-                const data = new Uint8Array(arrayBuffer);
-                const workbook = XLSX.read(data, { type: 'array' });
-                const sheetName = workbook.SheetNames[0];
-                const sheet = workbook.Sheets[sheetName];
-                const rows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-
-                for (const row of rows) {
-                    if (!row || row.length === 0) continue;
-                    const truckLabel = String(row[0]).trim();
-                    if (truckLabel === '1T9') {
-                        const minKm = parseFloat(row[1]);
-                        const baseCost = parseFloat(row[2]);
-                        const extraText = String(row[3]);
-                        const match = extraText.match(/(\d+)\s*\*\s*km/);
-                        const extraRate = match ? parseInt(match[1]) : 11000;
-                        pricingConfig['1.9T'] = { minKm, baseCost, extraRate };
-                    } else if (truckLabel === '5T' || truckLabel === '8T') {
-                        const rate0_50 = parseFloat(row[1]);
-                        const rate51_100 = parseFloat(row[2]);
-                        const rate101_150 = parseFloat(row[3]);
-                        const extraText = String(row[4]);
-                        const match = extraText.match(/(\d+)\s*\*\s*km/);
-                        const extraRate = match ? parseInt(match[1]) : (truckLabel === '5T' ? 19000 : 22000);
-                        pricingConfig[truckLabel] = {
-                            rates: [rate0_50, rate51_100, rate101_150],
-                            extraRate: extraRate
-                        };
-                    }
-                }
-                console.log('Successfully loaded pricing config:', pricingConfig);
-            } catch (e) {
-                console.warn('Could not load pricing config, using default fallback values:', e);
-            }
-        }
+        // Phí bốc xếp: 200,000đ/tấn (chưa áp dụng trong tính toán tự động)
 
         function getTripCost(truckType, distanceKm) {
             const config = pricingConfig[truckType];
@@ -1896,7 +1861,7 @@
         };
         let currentRunId = 0;
         document.addEventListener('DOMContentLoaded', async () => {
-            await loadPricingFromExcel();
+            // Bảng giá đã hardcode từ HĐ Phạm Gia 88, không cần tải từ nguồn ngoài
             /* Tạm ẩn toast thông báo email
             const toastHtml = `
             <div class="toast" id="email-toast">
@@ -2252,32 +2217,49 @@
                     if (typeof BOOKING_DELIVERY_POINTS !== 'undefined' && typeof generateTrips === 'function') {
                         const backupPoints = DELIVERY_POINTS;
                         BOOKING_SUMMARY.forEach(item => {
-                            if (!item.trucksCalculated) {
-                                DELIVERY_POINTS = BOOKING_DELIVERY_POINTS.filter(p => p.date === item.date).map(p => {
-                                    const store = (typeof STORE_LIST_DATA !== 'undefined') ? STORE_LIST_DATA.find(s => s.id === p.id) : null;
-                                    const clonedP = JSON.parse(JSON.stringify(p));
-                                    return {
-                                        ...clonedP,
-                                        name: clonedP.name, // Keep original name from excel
-                                        address: store && store.address ? store.address : clonedP.address || '',
-                                        coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords
-                                    };
-                                });
-                                const trips = generateTrips();
-                                let c19 = 0, c5 = 0, c8 = 0;
-                                let totalCost = 0;
-                                trips.forEach(t => {
-                                    if (t.truckType === '1.9T') c19++;
-                                    else if (t.truckType === '5T') c5++;
-                                    else if (t.truckType === '8T') c8++;
-                                    totalCost += (typeof t.cost === 'number' ? t.cost : (t.cost && t.cost.total ? t.cost.total : 0));
-                                });
-                                item.truck19 = c19;
-                                item.truck5 = c5;
-                                item.truck8 = c8;
-                                item.totalCost = totalCost;
-                                item.trucksCalculated = true;
-                            }
+                            // Always recalculate to ensure sync with pricingConfig
+                            DELIVERY_POINTS = BOOKING_DELIVERY_POINTS.filter(p => p.date === item.date).map(p => {
+                                const store = (typeof STORE_LIST_DATA !== 'undefined') ? STORE_LIST_DATA.find(s => s.id === p.id) : null;
+                                const clonedP = JSON.parse(JSON.stringify(p));
+                                return {
+                                    ...clonedP,
+                                    name: clonedP.name, // Keep original name from excel
+                                    address: store && store.address ? store.address : clonedP.address || '',
+                                    coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords
+                                };
+                            });
+                            const trips = generateTrips();
+                            let c19 = 0, c5 = 0, c8 = 0;
+                            let totalCost = 0;
+                            trips.forEach(t => {
+                                if (t.truckType === '1.9T') c19++;
+                                else if (t.truckType === '5T') c5++;
+                                else if (t.truckType === '8T') c8++;
+                                
+                                let baseCost = 0, excessCost = 0;
+                                const cfg = pricingConfig[t.truckType];
+                                if (cfg) {
+                                    if (t.truckType === '1.9T') {
+                                        baseCost = cfg.baseCost;
+                                        const exKm = Math.max(0, t.dist - cfg.minKm);
+                                        excessCost = exKm * cfg.extraRate;
+                                    } else if (t.truckType === '5T' || t.truckType === '8T') {
+                                        if (t.dist <= 50) baseCost = cfg.rates[0];
+                                        else if (t.dist <= 100) baseCost = cfg.rates[1];
+                                        else if (t.dist <= 150) baseCost = cfg.rates[2];
+                                        else {
+                                            baseCost = cfg.rates[2];
+                                            excessCost = Math.round(t.dist - 150) * cfg.extraRate;
+                                        }
+                                    }
+                                }
+                                totalCost += (baseCost + excessCost);
+                            });
+                            item.truck19 = c19;
+                            item.truck5 = c5;
+                            item.truck8 = c8;
+                            item.totalCost = totalCost;
+                            item.trucksCalculated = true;
                         });
                         DELIVERY_POINTS = backupPoints;
                     }
@@ -3192,36 +3174,44 @@
                 let displayRoute = '';
                 if (t.tripType === 'Trung chuyển') {
                     const hubsList = t.hubsVisited ? t.hubsVisited.join(' → ') : t.hub;
-                    let hyProvincesStr = '';
-                    let hn02ProvincesStr = '';
-                    if (t.hubProvinces) {
-                        if (t.hubProvinces['GXT Phú Thọ'] && t.hubProvinces['GXT Phú Thọ'].length > 0) {
-                            hyProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${t.hubProvinces['GXT Phú Thọ'].join(', ')})</div>`;
-                        }
-                        if (t.hubProvinces['GXT Phú Thọ'] && t.hubProvinces['GXT Phú Thọ'].length > 0) {
-                            hn02ProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${t.hubProvinces['GXT Phú Thọ'].join(', ')})</div>`;
-                        }
-                    } else {
-                        const rightProvinces = ['Tỉnh Hà Giang', 'Tỉnh Tuyên Quang', 'Tỉnh Lai Châu', 'Tỉnh Lào Cai', 'Tỉnh Yên Bái', 'Tỉnh Hòa Bình'];
-                        const provincesList = t.points.map(p => p.name).filter(Boolean);
-                        const hyList = provincesList.filter(p => !rightProvinces.includes(p));
-                        const hn02List = provincesList.filter(p => rightProvinces.includes(p));
-                        if (hyList.length > 0) hyProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${hyList.join(', ')})</div>`;
-                        if (hn02List.length > 0) hn02ProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${hn02List.join(', ')})</div>`;
-                    }
-                    displayRoute = `
-                        <strong>Kho DC Win Phú Thọ</strong> → <strong>${hubsList}</strong>
-                        <div style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; padding-left: 8px; border-left: 2px solid rgba(255,255,255,0.1); margin-top: 4px;">
-                            ${hyProvincesStr}
-                            ${hn02ProvincesStr}
-                        </div>
-                    `;
+                    displayRoute = `<strong>Kho DC Win Phú Thọ</strong> → <strong>${hubsList}</strong>`;
                 } else {
-                    displayRoute = t.routeName
-                        ? t.routeName.replace(/->/g, '→').split(' → ').map(x => `<strong>${x}</strong>`).join(' → ')
-                        : `${t.hub || 'Kho DC Win Phú Thọ'} → ${t.points.filter(p => p.isPoint).map(p => p.name).join(' → ')}`;
+                    const routeBase = t.routeName
+                        ? t.routeName.replace(/->/g, '→').split(' → ')[0]
+                        : (t.hub || 'Kho DC Win Phú Thọ');
+                    const storeCount = typeof window.extractStoresFromTrip === 'function' ? window.extractStoresFromTrip(t).length : 0;
+                    displayRoute = `<strong>${routeBase}</strong> <span style="color: var(--text-dim); font-size: 0.85rem;">(${storeCount} điểm giao)</span>`;
                 }
-                const costPerKg = t.totalWeight > 0 ? Math.round(t.cost / t.totalWeight) : 0;
+
+                // Tính chi tiết chi phí theo bảng giá Phạm Gia 88
+                let baseCost = 0;
+                let excessKm = 0;
+                let excessCost = 0;
+                const config = pricingConfig[t.truckType];
+                if (config) {
+                    if (t.truckType === '1.9T') {
+                        baseCost = config.baseCost;
+                        excessKm = Math.max(0, t.dist - config.minKm);
+                        excessCost = excessKm * config.extraRate;
+                    } else if (t.truckType === '5T' || t.truckType === '8T') {
+                        if (t.dist <= 50) {
+                            baseCost = config.rates[0];
+                            excessKm = 0;
+                        } else if (t.dist <= 100) {
+                            baseCost = config.rates[1];
+                            excessKm = 0;
+                        } else if (t.dist <= 150) {
+                            baseCost = config.rates[2];
+                            excessKm = 0;
+                        } else {
+                            baseCost = config.rates[2];
+                            excessKm = Math.round(t.dist - 150);
+                            excessCost = excessKm * config.extraRate;
+                        }
+                    }
+                }
+                const totalCost = baseCost + excessCost;
+
                 return `
                     <tr>
                         <td>${t.id}</td>
@@ -3231,11 +3221,49 @@
                         <td><strong>${stockOutDateStr}</strong></td>
                         <td>${t.dist}</td>
                         <td><strong>${Math.round(t.totalWeight || 0).toLocaleString()}</strong></td>
-                        <td style="color: var(--secondary); font-weight: 600;">${Math.round(t.cost).toLocaleString()}</td>
-                        <td>${costPerKg.toLocaleString()}</td>
+                        <td style="color: var(--text-main);">${baseCost.toLocaleString()}</td>
+                        <td style="color: ${excessKm > 0 ? '#fbbf24' : 'var(--text-dim)'};">${excessKm > 0 ? excessKm.toFixed(1) + ' km' : '-'}</td>
+                        <td style="color: ${excessCost > 0 ? '#fbbf24' : 'var(--text-dim)'};">${excessCost > 0 ? Math.round(excessCost).toLocaleString() : '-'}</td>
+                        <td style="color: var(--secondary); font-weight: 700; font-size: 1.05rem;">${Math.round(totalCost).toLocaleString()}</td>
                     </tr>
                 `;
             }).join('');
+
+            // Tính tổng cộng
+            let sumDist = 0, sumWeight = 0, sumBaseCost = 0, sumExcessCost = 0, sumTotal = 0;
+            globalTrips.forEach(t => {
+                sumDist += t.dist || 0;
+                sumWeight += t.totalWeight || 0;
+                const cfg = pricingConfig[t.truckType];
+                if (cfg) {
+                    if (t.truckType === '1.9T') {
+                        sumBaseCost += cfg.baseCost;
+                        const exKm = Math.max(0, t.dist - cfg.minKm);
+                        sumExcessCost += exKm * cfg.extraRate;
+                    } else if (t.truckType === '5T' || t.truckType === '8T') {
+                        if (t.dist <= 50) sumBaseCost += cfg.rates[0];
+                        else if (t.dist <= 100) sumBaseCost += cfg.rates[1];
+                        else if (t.dist <= 150) sumBaseCost += cfg.rates[2];
+                        else {
+                            sumBaseCost += cfg.rates[2];
+                            sumExcessCost += Math.round(t.dist - 150) * cfg.extraRate;
+                        }
+                    }
+                }
+            });
+            sumTotal = sumBaseCost + sumExcessCost;
+
+            document.getElementById('report-body').innerHTML += `
+                <tr style="background: rgba(99, 102, 241, 0.15); border-top: 2px solid var(--secondary); font-weight: 700;">
+                    <td colspan="5" style="text-align: center; font-size: 1.05rem; color: var(--secondary);">TỔNG CỘNG (${globalTrips.length} chuyến)</td>
+                    <td style="color: var(--text-main);">${sumDist.toFixed(1)}</td>
+                    <td style="color: var(--text-main);">${Math.round(sumWeight).toLocaleString()}</td>
+                    <td style="color: var(--text-main);">${sumBaseCost.toLocaleString()}</td>
+                    <td style="color: ${sumExcessCost > 0 ? '#fbbf24' : 'var(--text-dim)'};">-</td>
+                    <td style="color: ${sumExcessCost > 0 ? '#fbbf24' : 'var(--text-dim)'};">${sumExcessCost > 0 ? Math.round(sumExcessCost).toLocaleString() : '-'}</td>
+                    <td style="color: var(--secondary); font-size: 1.1rem;">${Math.round(sumTotal).toLocaleString()}</td>
+                </tr>
+            `;
 
             const otpBody = document.getElementById('otp-body');
             if (otpBody) {
@@ -3267,33 +3295,13 @@
                 let displayRoute = '';
                 if (t.tripType === 'Trung chuyển') {
                     const hubsList = t.hubsVisited ? t.hubsVisited.join(' → ') : t.hub;
-                    let hyProvincesStr = '';
-                    let hn02ProvincesStr = '';
-                    if (t.hubProvinces) {
-                        if (t.hubProvinces['GXT Phú Thọ'] && t.hubProvinces['GXT Phú Thọ'].length > 0) {
-                            hyProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${t.hubProvinces['GXT Phú Thọ'].join(', ')})</div>`;
-                        }
-                        if (t.hubProvinces['GXT Phú Thọ'] && t.hubProvinces['GXT Phú Thọ'].length > 0) {
-                            hn02ProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${t.hubProvinces['GXT Phú Thọ'].join(', ')})</div>`;
-                        }
-                    } else {
-                        const rightProvinces = ['Tỉnh Hà Giang', 'Tỉnh Tuyên Quang', 'Tỉnh Lai Châu', 'Tỉnh Lào Cai', 'Tỉnh Yên Bái', 'Tỉnh Hòa Bình'];
-                        const provincesList = t.points.map(p => p.name).filter(Boolean);
-                        const hyList = provincesList.filter(p => !rightProvinces.includes(p));
-                        const hn02List = provincesList.filter(p => rightProvinces.includes(p));
-                        if (hyList.length > 0) hyProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${hyList.join(', ')})</div>`;
-                        if (hn02List.length > 0) hn02ProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${hn02List.join(', ')})</div>`;
-                    }
-                    displayRoute = `
-                        <strong>Kho DC Win Phú Thọ</strong> → <strong>${hubsList}</strong>
-                        <div style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; padding-left: 8px; border-left: 2px solid rgba(255,255,255,0.1); margin-top: 4px;">
-                            ${hyProvincesStr}
-                            ${hn02ProvincesStr}
-                        </div>
-                    `;
+                    displayRoute = `<strong>Kho DC Win Phú Thọ</strong> → <strong>${hubsList}</strong>`;
                 } else {
-                    const routePath = `<strong>${t.hub || 'Kho DC Win Phú Thọ'}</strong>`;
-                    displayRoute = `${routePath} → ${t.points.filter(p => p.isPoint).map(p => p.name).join(' → ')}`;
+                    const routeBase = t.routeName
+                        ? t.routeName.replace(/->/g, '→').split(' → ')[0]
+                        : (t.hub || 'Kho DC Win Phú Thọ');
+                    const storeCount = typeof window.extractStoresFromTrip === 'function' ? window.extractStoresFromTrip(t).length : 0;
+                    displayRoute = `<strong>${routeBase}</strong> <span style="color: var(--text-dim); font-size: 0.85rem;">(${storeCount} điểm giao)</span>`;
                 }
                 return `
                 <tr data-trip="${t.id}">

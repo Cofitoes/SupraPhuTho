@@ -64,7 +64,7 @@ function Sync-Git-Data {
         & $gitPath add -u
         
         # Explicitly stage dynamic data files to guarantee they are tracked and synced even if recreated
-        & $gitPath add "vehicle_data.js" "departure_times.js" "incidents_data.js" "checkin_data.js" "firebase-app-compat.js" "firebase-firestore-compat.js" 2>$null
+        & $gitPath add "vehicle_data.js" "departure_times.js" "incidents_data.js" "checkin_data.js" 2>$null
         
         if ($LASTEXITCODE -ne 0) {
             # Ignore minor errors if files do not exist
