@@ -1441,11 +1441,12 @@
                                     <th>Tỉnh Lấy</th>
                                     <th>Ngày Lấy Thành Công</th>
                                     <th>Tên Siêu Thị</th>
+                                    <th>Loại Chuyến</th>
                                 </tr>
                             </thead>
                             <tbody id="order-lookup-body">
                                 <tr>
-                                    <td colspan="9" style="text-align: center; color: var(--text-dim); padding: 40px;">
+                                    <td colspan="8" style="text-align: center; color: var(--text-dim); padding: 40px;">
                                         <i class="fas fa-search-location"
                                             style="font-size: 2rem; margin-bottom: 10px; opacity:0.3;"></i><br>
                                         Nhập từ khóa để tra cứu đơn hàng
@@ -5407,7 +5408,7 @@
                 if (!results || results.length === 0) {
                     orderLookupBody.innerHTML = `
                         <tr>
-                            <td colspan="7" style="text-align: center; color: var(--text-dim); padding: 40px;">
+                            <td colspan="8" style="text-align: center; color: var(--text-dim); padding: 40px;">
                                 <i class="fas fa-search-location" style="font-size: 2rem; margin-bottom: 10px; opacity:0.3;"></i><br>
                                 Không tìm thấy kết quả nào.
                             </td>
@@ -5416,7 +5417,31 @@
                     return;
                 }
 
+                function getTripType(storeName, storeCode) {
+                    if (!window.globalTrips || window.globalTrips.length === 0) return '-';
+                    const sName = (storeName || '').toLowerCase().trim();
+                    const sCode = (storeCode || '').toString().trim();
+                    for (const trip of window.globalTrips) {
+                        if (trip.points) {
+                            for (const pt of trip.points) {
+                                if (pt.type === 'DELIVERY') {
+                                    if ((sName && pt.name && pt.name.toLowerCase().trim() === sName) ||
+                                        (sCode && pt.id && pt.id.toString() === sCode)) {
+                                        let type = trip.tripType || '-';
+                                        if (type === 'Đi thẳng') return `<span class="trip-status on-time">Đi thẳng</span>`;
+                                        if (type === 'Trung chuyển') return `<span class="trip-status pending">Trung chuyển</span>`;
+                                        if (type === 'Giao qua GHN') return `<span class="trip-status delayed">Giao qua GHN</span>`;
+                                        return type;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    return '-';
+                }
+
                 orderLookupBody.innerHTML = results.map(item => {
+                    const tripTypeHtml = getTripType(item['TÊN CỬA HÀNG'], item['MÃ CỬA HÀNG']);
                     return `
                         <tr style="border-bottom: 1px solid var(--border-color);">
                             <td><strong style="color: var(--primary);">${item['Vận đơn'] || ''}</strong></td>
@@ -5426,6 +5451,7 @@
                             <td>${item['Tỉnh lấy'] || ''}</td>
                             <td>${item['Ngày lấy thành công'] || ''}</td>
                             <td>${item['Tỉnh giao'] || ''}</td>
+                            <td>${tripTypeHtml}</td>
                         </tr>
                     `;
                 }).join('');
