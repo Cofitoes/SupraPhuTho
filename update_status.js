@@ -1,1 +1,1 @@
-﻿window.UPDATE_STATUS = {"status":"running","timestamp":"2026-06-24 15:34:07","message":"","step":"Dang dong bo du lieu len link online...","progress":95};
+﻿window.UPDATE_STATUS = {"status":"error","timestamp":"2026-06-24 15:34:09","message":"Chi tiet loi: Khong the tai du lieu moi tu GitHub (git pull --rebase failed). Co the do xung dot file.","step":"Loi trong qua trinh cap nhat","progress":0};
