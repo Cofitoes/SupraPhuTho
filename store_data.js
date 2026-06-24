@@ -49255,5 +49255,15 @@ const STORE_LIST_DATA = [
       "lat": 21.3989531,
       "lng": 105.2072326
     }
+  },
+  {
+    "id": "WM VC+ PTO Phú Thọ",
+    "name": "WM VC+ PTO Phú Thọ",
+    "address": "WM VC+ PTO Phú Thọ",
+    "province": "Phú Thọ",
+    "coords": {
+      "lat": 21.4184405,
+      "lng": 105.2118986
+    }
   }
 ];
