@@ -1,1 +1,1 @@
-﻿window.UPDATE_STATUS = {"status":"running","timestamp":"2026-06-24 15:27:12","message":"","step":"Dang dong bo du lieu len link online...","progress":95};
+﻿window.UPDATE_STATUS = {"status":"error","timestamp":"2026-06-24 15:27:13","message":"Mot tien trinh cap nhat khac (PID 508) dang chay. Vui long doi.","step":"Loi trung lap tien trinh","progress":0};
