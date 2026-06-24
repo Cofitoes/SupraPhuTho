@@ -1,1 +1,1 @@
-﻿window.UPDATE_STATUS = {"status":"error","timestamp":"2026-06-24 15:19:31","message":"Mot tien trinh cap nhat khac (PID 26356) dang chay. Vui long doi.","step":"Loi trung lap tien trinh","progress":0};
+﻿window.UPDATE_STATUS = {"status":"error","timestamp":"2026-06-24 15:19:45","message":"Mot tien trinh cap nhat khac (PID 26356) dang chay. Vui long doi.","step":"Loi trung lap tien trinh","progress":0};
