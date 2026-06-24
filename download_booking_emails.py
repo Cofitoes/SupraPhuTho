@@ -239,17 +239,15 @@ def download_attachments():
                                                     print(f" -> Bỏ qua file Planning cho {booking_date} ({new_plates} biển số): {filename}. Chi tiết: {reason}")
                                         
                                         elif is_booking:
-                                            target_filename = filename
-                                            # Ensure the booking file has the correct date from the email subject
-                                            # Nếu tên file ko chứa date_pattern, thì ghép date vào tên file
+                                            if booking_date:
+                                                y, m, d = booking_date.split('-')
+                                                ext = os.path.splitext(filename)[1]
+                                                target_filename = f"Booking Supra {d}-{m}-{y}{ext}"
+                                            else:
+                                                target_filename = filename
+                                                
                                             if target_filename not in processed_booking_files:
-                                                if booking_date and target_filename == filename:
-                                                    y, m, d = booking_date.split('-')
-                                                    formatted_date = f"{y}{m}{d}"
-                                                    # Bỏ qua thêm date nếu filename đã chứa date
-                                                    if formatted_date not in target_filename:
-                                                        name_part, ext = os.path.splitext(target_filename)
-                                                        target_filename = f"{name_part} {formatted_date}{ext}"
+                                                pass # just a placeholder for logic indentation
                                             
                                             dest_path = os.path.join(OUTPUT_DIR, target_filename)
                                             file_data = part.get_payload(decode=True)

@@ -1150,6 +1150,7 @@
                                     <th>Giá Chuyến</th>
                                     <th>KM Vượt</th>
                                     <th>Phí Vượt KM</th>
+                                    <th>Phí Bốc Xếp</th>
                                     <th>Tổng Tiền</th>
                                 </tr>
                             </thead>
@@ -1779,6 +1780,7 @@
             
             if (btnUndo) {
                 btnUndo.addEventListener('click', () => {
+                    document.write('<script src="trips_logic_v5.js?v=' + cb + '"><\/script>');
                     globalTrips = JSON.parse(JSON.stringify(backupGlobalTrips));
                     renderResults();
                     btnUndo.style.opacity = '0.3'; btnUndo.style.pointerEvents = 'none';
@@ -1809,7 +1811,7 @@
             return `${Math.floor(totalMins / 60).toString().padStart(2, '0')}:${(totalMins % 60).toString().padStart(2, '0')}`;
         }
     </script>
-    <script>document.write('<script src="trips_logic2.js?v=' + cb + '"><\/script>');</script>
+    <script>document.write('<script src="trips_logic_v5.js?v=' + cb + '"><\/script>');</script>
     <script>
         window.extractStoresFromTrip = function (trip) {
             let stores = [];
@@ -2313,7 +2315,8 @@
                                             }
                                         }
                                     }
-                                    totalCost += (baseCost + excessCost);
+                                    const loadingFee = t.loadingFee || 0;
+                                    totalCost += (baseCost + excessCost + loadingFee);
                                 }
                             });
                             item.truck19 = c19;
@@ -3339,8 +3342,15 @@
                     });
                     
                     soList = soList.filter(Boolean);
-                    uniqueSOs = soList.length > 0 ? [...new Set(soList)].join('<br><br>') : '-';
-                    uniqueGhns = ghnList.length > 0 ? [...new Set(ghnList)].join('<br><br>') : '<span style="color: #ef4444; font-weight: 500;">Thiếu mã GHN</span>';
+                    const uniqueSoSet = soList.length > 0 ? [...new Set(soList)] : [];
+                    const uniqueGhnSet = ghnList.length > 0 ? [...new Set(ghnList)] : [];
+                    
+                    uniqueSOs = uniqueSoSet.length > 0 
+                        ? `<div style="max-height: 150px; overflow-y: auto; padding-right: 5px; word-break: break-all;">${uniqueSoSet.join('<br>')}</div>` 
+                        : '-';
+                    uniqueGhns = uniqueGhnSet.length > 0 
+                        ? `<div style="max-height: 150px; overflow-y: auto; padding-right: 5px; word-break: break-all;">${uniqueGhnSet.join('<br>')}</div>` 
+                        : '<span style="color: #ef4444; font-weight: 500;">Thiếu mã GHN</span>';
 
                     if (t.tripType === 'Trung chuyển') {
                         const arrowIcon = '<br><i class="fas fa-arrow-right" style="font-size: 0.7rem; color: var(--text-dim); margin: 0 5px;"></i> ';
@@ -3407,7 +3417,8 @@
                         }
                     }
                 }
-                const totalCost = baseCost + excessCost;
+                const loadingFee = t.loadingFee || 0;
+                const totalCost = baseCost + excessCost + loadingFee;
 
                 return `
                     <tr>
@@ -3422,16 +3433,18 @@
                         <td style="color: var(--text-main);">${baseCost.toLocaleString()}</td>
                         <td style="color: ${excessKm > 0 ? '#fbbf24' : 'var(--text-dim)'};">${excessKm > 0 ? excessKm.toFixed(1) + ' km' : '-'}</td>
                         <td style="color: ${excessCost > 0 ? '#fbbf24' : 'var(--text-dim)'};">${excessCost > 0 ? Math.round(excessCost).toLocaleString() : '-'}</td>
+                        <td style="color: ${loadingFee > 0 ? '#10b981' : 'var(--text-dim)'};">${loadingFee > 0 ? Math.round(loadingFee).toLocaleString() : '-'}</td>
                         <td style="color: var(--secondary); font-weight: 700; font-size: 1.05rem;">${Math.round(totalCost).toLocaleString()}</td>
                     </tr>
                 `;
             }).join('');
 
             // Tính tổng cộng
-            let sumDist = 0, sumWeight = 0, sumBaseCost = 0, sumExcessCost = 0, sumTotal = 0;
+            let sumDist = 0, sumWeight = 0, sumBaseCost = 0, sumExcessCost = 0, sumLoadingFee = 0, sumTotal = 0;
             globalTrips.forEach(t => {
                 sumDist += t.dist || 0;
                 sumWeight += t.totalWeight || 0;
+                sumLoadingFee += t.loadingFee || 0;
                 const cfg = pricingConfig[t.truckType];
                 if (cfg) {
                     if (t.truckType === '1.9T') {
@@ -3449,7 +3462,7 @@
                     }
                 }
             });
-            sumTotal = sumBaseCost + sumExcessCost;
+            sumTotal = sumBaseCost + sumExcessCost + sumLoadingFee;
 
             document.getElementById('report-body').innerHTML += `
                 <tr style="background: rgba(99, 102, 241, 0.15); border-top: 2px solid var(--secondary); font-weight: 700;">
@@ -3459,6 +3472,7 @@
                     <td style="color: var(--text-main);">${sumBaseCost.toLocaleString()}</td>
                     <td style="color: ${sumExcessCost > 0 ? '#fbbf24' : 'var(--text-dim)'};">-</td>
                     <td style="color: ${sumExcessCost > 0 ? '#fbbf24' : 'var(--text-dim)'};">${sumExcessCost > 0 ? Math.round(sumExcessCost).toLocaleString() : '-'}</td>
+                    <td style="color: ${sumLoadingFee > 0 ? '#10b981' : 'var(--text-dim)'};">${sumLoadingFee > 0 ? Math.round(sumLoadingFee).toLocaleString() : '-'}</td>
                     <td style="color: var(--secondary); font-size: 1.1rem;">${Math.round(sumTotal).toLocaleString()}</td>
                 </tr>
             `;

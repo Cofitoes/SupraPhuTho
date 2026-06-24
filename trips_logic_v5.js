@@ -138,26 +138,26 @@ function generateTrips() {
     const isGXTStore = (storeName, addressOrDistrict = '') => {
         if (!storeName) return false;
         
-        // Ngoại lệ: 3 Huyện này luôn đi thẳng
-        const directDistricts = ['Lâm Thao', 'Phù Ninh', 'Tam Nông'];
+        const upperStore = storeName.toUpperCase();
         const fullText = (storeName + ' ' + (addressOrDistrict || '')).normalize('NFC').toLowerCase();
+
+        // Ngoại lệ: 3 Huyện này luôn đi thẳng do rất gần kho DC
+        const directDistricts = ['lâm thao', 'phù ninh', 'tam nông'];
         for (let d of directDistricts) {
-            if (fullText.includes(d.normalize('NFC').toLowerCase())) return false;
+            if (fullText.includes(d)) return false;
         }
 
         // 1. Dựa vào mã bưu cục (Hub Code): Các tỉnh này LUÔN LUÔN phải qua kho trung chuyển GXT
         const transitCodes = ['TQG', 'YBI', 'LCI', 'HGG', 'SLA', 'HBH'];
-        const upperStore = storeName.toUpperCase();
         for (let code of transitCodes) {
             if (upperStore.includes(code)) return true;
         }
 
-        // 1.5. Chỉ định cứng các điểm đặc biệt LUÔN đi GXT
+        // 2. Chỉ định cứng các điểm đặc biệt LUÔN đi GXT
         const forcedGXTStores = ["WM+ PTO 965 Hùng Vương"];
         if (forcedGXTStores.some(name => upperStore === name.toUpperCase())) return true;
 
-        // 2. Dựa vào danh sách ngoại lệ GXT (từ cột I file Danh_sach_Winmart.xlsx)
-        // Chủ yếu áp dụng cho một số điểm PTO đặc thù phải đi GXT
+        // 4. Dựa vào danh sách ngoại lệ GXT
         return gxtStoreNames.some(gxtName => {
             const normGXT = gxtName.normalize('NFC').trim().toLowerCase();
             const normStore = storeName.normalize('NFC').trim().toLowerCase();
@@ -330,7 +330,12 @@ function generateTrips() {
 
         clusters.forEach(chunk => {
             if (chunk.length > 0) {
-                directTrips.push(createDirectTrip(chunk, hubDC, '1.9T'));
+                let cw = chunk.reduce((s, p) => s + (p.weight || 0), 0);
+                let cv = chunk.reduce((s, p) => s + (p.volume || 0), 0);
+                let tType = '1.9T';
+                if (cw > 4900 || cv > 26) tType = '8T';
+                else if (cw > 1900 || cv > 14) tType = '5T';
+                directTrips.push(createDirectTrip(chunk, hubDC, tType));
             }
         });
     }
@@ -366,8 +371,15 @@ function generateTrips() {
         const t1_pts = pts.slice(0, mid);
         const t2_pts = pts.slice(mid);
         
-        const newT1 = createDirectTrip(t1_pts, hubDC, '1.9T');
-        const newT2 = createDirectTrip(t2_pts, hubDC, '1.9T');
+        const splitTripType = (pts) => {
+            let cw = pts.reduce((s, p) => s + (p.weight || 0), 0);
+            let cv = pts.reduce((s, p) => s + (p.volume || 0), 0);
+            if (cw > 4900 || cv > 26) return '8T';
+            if (cw > 1900 || cv > 14) return '5T';
+            return '1.9T';
+        };
+        const newT1 = createDirectTrip(t1_pts, hubDC, splitTripType(t1_pts));
+        const newT2 = createDirectTrip(t2_pts, hubDC, splitTripType(t2_pts));
         
         directTrips.splice(splitTripIdx, 1, newT1, newT2);
         
@@ -442,6 +454,8 @@ function generateTrips() {
             const tripId = getNextTripId();
             const routeName = `Kho DC Win Phú Thọ -> GXT Phú Thọ (${weightInTons} Tấn)`;
 
+            const loadingFee = (chunkW / 1000) * 200000;
+
             trips.push({
                 id: tripId,
                 hub: 'GXT Phú Thọ',
@@ -460,7 +474,8 @@ function generateTrips() {
                 dist: distFloat,
                 totalVolume: chunkV,
                 totalWeight: chunkW,
-                cost: getTripCost(chunkTruckType, distFloat),
+                cost: getTripCost(chunkTruckType, distFloat) + loadingFee,
+                loadingFee: loadingFee,
                 unitCost: getTripCost(chunkTruckType, distFloat) / (chunkW || 1),
                 tripType: 'Trung chuyển',
                 routeName: routeName,

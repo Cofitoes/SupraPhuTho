@@ -16,12 +16,12 @@ def extract_date_from_filename(filename):
     match = re.search(r'(\d{4})(\d{2})(\d{2})', filename)
     if match:
         return f"{match.group(1)}-{match.group(2)}-{match.group(3)}"
-    # Pattern 2: DD.MM.YYYY (e.g., 22.06.2026)
-    match = re.search(r'(\d{1,2})\.(\d{2})\.(\d{4})', filename)
+    # Pattern 2: DD.MM.YYYY or DD-MM-YYYY (e.g., 22.06.2026 or 22-06-2026)
+    match = re.search(r'(\d{1,2})[\.\-](\d{2})[\.\-](\d{4})', filename)
     if match:
         return f"{match.group(3)}-{match.group(2)}-{match.group(1).zfill(2)}"
-    # Pattern 3: DD.MM (e.g., 19.06) - assume current year 2026
-    match = re.search(r'(\d{1,2})\.(\d{2})', filename)
+    # Pattern 3: DD.MM or DD-MM (e.g., 19.06) - assume current year 2026
+    match = re.search(r'(\d{1,2})[\.\-](\d{2})', filename)
     if match:
         return f"2026-{match.group(2)}-{match.group(1).zfill(2)}"
     return None

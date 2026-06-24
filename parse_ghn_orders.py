@@ -13,9 +13,9 @@ store_ghn_so_data = {}
 def extract_date_from_filename(filename):
     match = re.search(r'202606(\d{2})', filename)
     if match: return f"2026-06-{match.group(1).zfill(2)}"
-    match = re.search(r'(\d{1,2})\.(\d{1,2})\.(\d{4})', filename)
+    match = re.search(r'(\d{1,2})[\.\-](\d{2})[\.\-](\d{4})', filename)
     if match: return f"{match.group(3)}-{match.group(2).zfill(2)}-{match.group(1).zfill(2)}"
-    match = re.search(r'(\d{1,2})\.(\d{1,2})', filename)
+    match = re.search(r'(\d{1,2})[\.\-](\d{2})', filename)
     if match: return f"2026-{match.group(2).zfill(2)}-{match.group(1).zfill(2)}"
     return None
 
@@ -57,6 +57,11 @@ def process_dataframe(df, default_date_str):
             val = row[col_date]
             if isinstance(val, datetime):
                 date_str = val.strftime("%Y-%m-%d")
+            elif isinstance(val, (int, float)):
+                try:
+                    date_str = pd.to_datetime(val, origin='1899-12-30', unit='D').strftime("%Y-%m-%d")
+                except:
+                    pass
             else:
                 try:
                     date_str = pd.to_datetime(val).strftime("%Y-%m-%d")
