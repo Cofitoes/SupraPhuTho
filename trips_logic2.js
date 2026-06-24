@@ -135,9 +135,16 @@ function generateTrips() {
     // --- CLASSIFY STORES: GXT vs DIRECT ---
     const gxtStoreNames = (typeof GXT_STORE_LIST !== 'undefined') ? GXT_STORE_LIST : [];
     
-    const isGXTStore = (storeName) => {
+    const isGXTStore = (storeName, addressOrDistrict = '') => {
         if (!storeName) return false;
         
+        // Ngoại lệ: 3 Huyện này luôn đi thẳng
+        const directDistricts = ['Lâm Thao', 'Phù Ninh', 'Tam Nông'];
+        const fullText = (storeName + ' ' + addressOrDistrict).toLowerCase();
+        for (let d of directDistricts) {
+            if (fullText.includes(d.toLowerCase())) return false;
+        }
+
         // 1. Dựa vào mã bưu cục (Hub Code): Các tỉnh này LUÔN LUÔN phải qua kho trung chuyển GXT
         const transitCodes = ['TQG', 'YBI', 'LCI', 'HGG', 'SLA', 'HBH'];
         const upperStore = storeName.toUpperCase();
@@ -161,8 +168,8 @@ function generateTrips() {
     // Expose for demo.html UI usage
     if (typeof window !== 'undefined') window.isGXTStore = isGXTStore;
 
-    const gxtPoints = DELIVERY_POINTS.filter(p => p.coords && p.coords.lat && p.coords.lng && isGXTStore(p.name));
-    const directPoints = DELIVERY_POINTS.filter(p => p.coords && p.coords.lat && p.coords.lng && !isGXTStore(p.name));
+    const gxtPoints = DELIVERY_POINTS.filter(p => p.coords && p.coords.lat && p.coords.lng && isGXTStore(p.name, p.address));
+    const directPoints = DELIVERY_POINTS.filter(p => p.coords && p.coords.lat && p.coords.lng && !isGXTStore(p.name, p.address));
 
     // ========================================
         const getChunkDistance = (hub, points) => {
