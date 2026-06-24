@@ -1,0 +1,29 @@
+--- Table 0 ---
+[0] Giấy chứng nhận đăng ký doanh nghiệp | : | 0311907295 do Sở Kế Hoạch và Đầu Tư Thành Phố Hồ Chí Minh cấp lần đầu ngày 02 tháng 08 năm 2012
+[1] Địa chỉ đăng ký | : | 405/15 Xô Viết Nghệ Tĩnh, Phường Bình Thạnh, Thành phố Hồ Chí Minh, Việt Nam
+[2] Đại diện bởi | : | Ông Lương Duy Hoài
+[3] Chức vụ | : | Tổng Giám Đốc
+
+--- Table 1 ---
+[0] Giấy chứng nhận đăng ký doanh nghiệp | : | 
+[1] Địa chỉ đăng ký | : | 
+[2] Đại diện bởi | : | 
+[3] Chức vụ | : | Giám Đốc
+
+--- Table 2 ---
+[0] Stt | Lộ trình | Loại xe | Đơn giá (VNĐ/Chuyến) | Giới hạn Km | Phí vượt Km (VNĐ/km) | Ghi chú
+[1] 1 | Chuyến giao hàng | 1T9 | 1.700.000 | 120 | 11.000 | 
+[2] 2 | Chuyến luân chuyển | 1T9 | 1.700.000 | 120 | 11.000 | 
+
+--- Table 3 ---
+[0] Loại xe | 0km - 50km (VNĐ) | 51km - 100km (VNĐ) | 101km - 150km (VNĐ) | >150km (Phí vượt KM)
+[1] Xe 5T | 1.100.000/chuyến | 2.400.000/chuyến | 3.000.000/chuyến | 20.000 đồng/km vượt
+[2] Xe 8T | 1.500.000/chuyến | 3.000.000/chuyến | 4.200.000/chuyến | 22.000 đồng/km vượt
+
+--- Table 4 ---
+[0] Phí bốc xếp | Đơn Giá/Tấn
+[1] Bốc xếp tại kho | 200.000/tấn
+
+--- Table 5 ---
+[0] ĐẠI DIỆN BÊN A      LƯƠNG DUY HOÀI TỔNG GIÁM ĐỐC | ĐẠI DIỆN BÊN B      LÊ VĂN HOÀN GIÁM ĐỐC
+

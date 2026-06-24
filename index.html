@@ -1780,7 +1780,6 @@
             
             if (btnUndo) {
                 btnUndo.addEventListener('click', () => {
-                    document.write('<script src="trips_logic_v5.js?v=' + cb + '"><\/script>');
                     globalTrips = JSON.parse(JSON.stringify(backupGlobalTrips));
                     renderResults();
                     btnUndo.style.opacity = '0.3'; btnUndo.style.pointerEvents = 'none';
