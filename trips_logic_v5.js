@@ -39,7 +39,7 @@ function generateTrips() {
     // --- TRUCK LIMITS ---
     const TRUCK_LIMITS = {
         '1.9T': { maxW: 1900, maxV: 14 },
-        '5T': { maxW: 4900, maxV: 26 },
+        '5T': { maxW: 5550, maxV: 40 },
         '8T': { maxW: 6800, maxV: 55 }
     };
 
@@ -133,43 +133,53 @@ function generateTrips() {
     };
 
     // --- CLASSIFY STORES: GXT vs DIRECT ---
-    const gxtStoreNames = (typeof GXT_STORE_LIST !== 'undefined') ? GXT_STORE_LIST : [];
-    
-    const isGXTStore = (storeName, addressOrDistrict = '') => {
-        if (!storeName) return false;
-        
-        const upperStore = storeName.toUpperCase();
-        const fullText = (storeName + ' ' + (addressOrDistrict || '')).normalize('NFC').toLowerCase();
+    // Use the `isGXT` flag built into the pre-processed STORE_LIST_DATA
+    // The web UI or booking logic should have already attached it to DELIVERY_POINTS
+    const gxtPoints = DELIVERY_POINTS.filter(p => p.coords && p.coords.lat && p.coords.lng && p.isGXT === true);
+    let directPoints = DELIVERY_POINTS.filter(p => p.coords && p.coords.lat && p.coords.lng && p.isGXT !== true);
 
-        // Ngoại lệ: Các Huyện/Thị xã này luôn đi thẳng do rất gần kho DC
-        const directDistricts = ['lâm thao', 'phù ninh', 'tam nông', 'thanh ba', 'thị xã phú thọ', 'tx phú thọ', 'tx. phú thọ'];
-        for (let d of directDistricts) {
-            if (fullText.includes(d)) return false;
-        }
+    // --- SPLIT LARGE DIRECT POINTS ---
+    // Tách các siêu thị giao thẳng nếu vượt quá giới hạn 1 xe 5T
+    const splitLargeDirectPoints = (points) => {
+        const result = [];
+        points.forEach(p => {
+            const maxW = 5550;
+            const maxV = 40;
+            if ((p.weight && p.weight > maxW) || (p.volume && p.volume > maxV)) {
+                let remW = p.weight || 0;
+                let remV = p.volume || 0;
+                let partIndex = 1;
+                while (remW > 0 || remV > 0) {
+                    let fractionW = remW > 0 ? Math.min(1, maxW / remW) : 1;
+                    let fractionV = remV > 0 ? Math.min(1, maxV / remV) : 1;
+                    let fraction = Math.min(fractionW, fractionV);
+                    
+                    let takeW = parseFloat((remW * fraction).toFixed(2));
+                    let takeV = parseFloat((remV * fraction).toFixed(2));
+                    
+                    if (takeW <= 0.01 && takeV <= 0.01) break;
+                    if (takeW > remW) takeW = remW;
+                    if (takeV > remV) takeV = remV;
 
-        // 1. Dựa vào mã bưu cục (Hub Code): Các tỉnh này LUÔN LUÔN phải qua kho trung chuyển GXT
-        const transitCodes = ['TQG', 'YBI', 'LCI', 'HGG', 'SLA', 'HBH'];
-        for (let code of transitCodes) {
-            if (upperStore.includes(code)) return true;
-        }
-
-        // 2. Chỉ định cứng các điểm đặc biệt LUÔN đi GXT
-        const forcedGXTStores = ["WM+ PTO 965 Hùng Vương"];
-        if (forcedGXTStores.some(name => upperStore === name.toUpperCase())) return true;
-
-        // 4. Dựa vào danh sách ngoại lệ GXT
-        return gxtStoreNames.some(gxtName => {
-            const normGXT = gxtName.normalize('NFC').trim().toLowerCase();
-            const normStore = storeName.normalize('NFC').trim().toLowerCase();
-            return normGXT === normStore || normStore.includes(normGXT) || normGXT.includes(normStore);
+                    result.push({
+                        ...p,
+                        name: `${p.name} (Phần ${partIndex})`,
+                        weight: takeW,
+                        volume: takeV,
+                        originalPoints: p.originalPoints || [p.name]
+                    });
+                    
+                    remW = parseFloat((remW - takeW).toFixed(2));
+                    remV = parseFloat((remV - takeV).toFixed(2));
+                    partIndex++;
+                }
+            } else {
+                result.push(p);
+            }
         });
+        return result;
     };
-    
-    // Expose for demo.html UI usage
-    if (typeof window !== 'undefined') window.isGXTStore = isGXTStore;
-
-    const gxtPoints = DELIVERY_POINTS.filter(p => p.coords && p.coords.lat && p.coords.lng && isGXTStore(p.name, p.address));
-    const directPoints = DELIVERY_POINTS.filter(p => p.coords && p.coords.lat && p.coords.lng && !isGXTStore(p.name, p.address));
+    directPoints = splitLargeDirectPoints(directPoints);
 
     // ========================================
         const getChunkDistance = (hub, points) => {
@@ -205,6 +215,15 @@ function generateTrips() {
             let cw = seed.weight || 0;
             let cv = seed.volume || 0;
 
+            // Priority 3: Trường hợp có Siêu thị nào có lượng hàng = 2 xe 1t9, có thể sắp xe 5 tấn
+            let chunkMaxW = 1900;
+            let chunkMaxV = 14;
+            // Nếu cửa hàng vượt quá 1 xe 1.9T thì nâng lên xe 5T
+            if (cw > 1900 || cv > 14) {
+                chunkMaxW = 5550;
+                chunkMaxV = 40;
+            }
+
             // Dynamic capacity to balance trips
             let remW = cw, remV = cv;
             remaining.forEach(p => { remW += (p.weight || 0); remV += (p.volume || 0); });
@@ -218,7 +237,7 @@ function generateTrips() {
                 let nearestIdx = -1, minDist = Infinity;
                 for (let i = 0; i < remaining.length; i++) {
                     const p = remaining[i];
-                    if (cw + (p.weight || 0) <= 1900 && cv + (p.volume || 0) <= 14) {
+                    if (cw + (p.weight || 0) <= chunkMaxW && cv + (p.volume || 0) <= chunkMaxV) {
                         const d = calculateDistance(chunk[chunk.length - 1].coords, p.coords);
                         if (d < minDist) { minDist = d; nearestIdx = i; }
                     }
@@ -246,8 +265,13 @@ function generateTrips() {
                     if (chunk.length === 0) return;
                     const dist = getChunkDistance(hubDC, chunk);
                     score += dist * dist; // Penalize unbalanced distance and long routes
+                    
+                    let cw = chunk.reduce((s, p) => s + (p.weight || 0), 0);
+                    let cv = chunk.reduce((s, p) => s + (p.volume || 0), 0);
+                    let tType = (cw > 1900 || cv > 14) ? '5T' : '1.9T';
+
                     if (typeof getTripCost === 'function') {
-                        exactCost += getTripCost('1.9T', dist);
+                        exactCost += getTripCost(tType, dist);
                     }
                 });
                 // Prioritize exact cost, but use distance squared to naturally balance trips geographically
@@ -261,11 +285,20 @@ function generateTrips() {
                 if (chunk.length === 0) return true;
                 if (chunk.length > 15) return false;
                 let w = 0, v = 0;
+                let hasBigStore = false;
                 for (let i = 0; i < chunk.length; i++) {
                     w += chunk[i].weight || 0;
                     v += chunk[i].volume || 0;
+                    if ((chunk[i].weight || 0) > 1900 || (chunk[i].volume || 0) > 14) hasBigStore = true;
                 }
-                if (w > 1900 || v > 14) return false;
+                
+                let maxW = 1900, maxV = 14;
+                if (hasBigStore) {
+                    maxW = 5550;
+                    maxV = 40;
+                }
+                
+                if (w > maxW || v > maxV) return false;
                 return true;
             };
 
@@ -333,8 +366,8 @@ function generateTrips() {
                 let cw = chunk.reduce((s, p) => s + (p.weight || 0), 0);
                 let cv = chunk.reduce((s, p) => s + (p.volume || 0), 0);
                 let tType = '1.9T';
-                if (cw > 4900 || cv > 26) tType = '8T';
-                else if (cw > 1900 || cv > 14) tType = '5T';
+                // Theo luật mới: Chỉ sử dụng 1.9T, exception = 5T. Tuyệt đối không dùng 8T cho giao thẳng
+                if (cw > 1900 || cv > 14) tType = '5T';
                 directTrips.push(createDirectTrip(chunk, hubDC, tType));
             }
         });
@@ -374,7 +407,6 @@ function generateTrips() {
         const splitTripType = (pts) => {
             let cw = pts.reduce((s, p) => s + (p.weight || 0), 0);
             let cv = pts.reduce((s, p) => s + (p.volume || 0), 0);
-            if (cw > 4900 || cv > 26) return '8T';
             if (cw > 1900 || cv > 14) return '5T';
             return '1.9T';
         };
@@ -406,7 +438,7 @@ function generateTrips() {
 
         // Determine best truck type
         let truckType = '8T';
-        if (totalGxtW <= 4900 && totalGxtV <= 26) truckType = '5T';
+        if (totalGxtW <= 5550 && totalGxtV <= 40) truckType = '5T';
         if (totalGxtW <= 1900 && totalGxtV <= 14) truckType = '1.9T';
 
         // If total exceeds 8T, split into multiple transit trips
@@ -444,7 +476,7 @@ function generateTrips() {
             const chunkV = chunk.reduce((s, p) => s + (p.volume || 0), 0);
 
             let chunkTruckType = '8T';
-            if (chunkW <= 4900 && chunkV <= 26) chunkTruckType = '5T';
+            if (chunkW <= 5550 && chunkV <= 40) chunkTruckType = '5T';
             if (chunkW <= 1900 && chunkV <= 14) chunkTruckType = '1.9T';
 
             // Build store names list for display

@@ -644,7 +644,6 @@
             }
         }, true);
     </script>
-    <script src="mq_data.js"></script>
 
 <style id="rbac-styles">
 #login-overlay {
@@ -1604,7 +1603,6 @@
         const cb = new Date().getTime();
         document.write('<script src="store_data.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
         document.write('<script src="booking_data.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
-        document.write('<script src="gxt_stores.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
         document.write('<script src="summary_data.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
         document.write('<script src="data_ghn_so.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
         document.write('<script src="departure_times.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
@@ -2622,19 +2620,34 @@
                         let searchName = store.name ? store.name.trim() : '';
                         if (typeof STORE_GHN_SO_DATA !== 'undefined' && STORE_GHN_SO_DATA[dateStr]) {
                             if (STORE_GHN_SO_DATA[dateStr][searchName]) {
-                                soList = STORE_GHN_SO_DATA[dateStr][searchName].so || [];
-                                doList = STORE_GHN_SO_DATA[dateStr][searchName].ghn || [];
+                                soList = [...(STORE_GHN_SO_DATA[dateStr][searchName].so || [])];
+                                doList = [...(STORE_GHN_SO_DATA[dateStr][searchName].ghn || [])];
                             } else {
                                 // Fallback: try case-insensitive and space-trimmed match
                                 const foundKey = Object.keys(STORE_GHN_SO_DATA[dateStr]).find(k => k.trim().toLowerCase() === searchName.toLowerCase());
                                 if (foundKey) {
-                                    soList = STORE_GHN_SO_DATA[dateStr][foundKey].so || [];
-                                    doList = STORE_GHN_SO_DATA[dateStr][foundKey].ghn || [];
+                                    soList = [...(STORE_GHN_SO_DATA[dateStr][foundKey].so || [])];
+                                    doList = [...(STORE_GHN_SO_DATA[dateStr][foundKey].ghn || [])];
                                 }
                             }
                         }
 
-                        const numRows = Math.max(1, soList.length);
+                        if (store.so || store['Mã SO'] || store.maSO) {
+                            soList.push(store.so || store['Mã SO'] || store.maSO);
+                        }
+                        if (store.ghn || store['Mã đơn GHN'] || store.maGHN) {
+                            doList.push(store.ghn || store['Mã đơn GHN'] || store.maGHN);
+                        } else if (searchName && typeof concungData !== 'undefined') {
+                            const matched = concungData.find(item => item['MÃ CỬA HÀNG'] === searchName || item['Mã BUFF'] === searchName);
+                            if (matched && (matched['Vận đơn'] || matched['Mã đơn GHN'])) {
+                                doList.push(matched['Vận đơn'] || matched['Mã đơn GHN']);
+                            }
+                        }
+
+                        soList = [...new Set(soList)];
+                        doList = [...new Set(doList)];
+
+                        const numRows = Math.max(1, soList.length, doList.length);
 
                         for (let r = 0; r < numRows; r++) {
                             globalRowCounter++;
@@ -3344,14 +3357,14 @@
                     const uniqueSoSet = soList.length > 0 ? [...new Set(soList)] : [];
                     const uniqueGhnSet = ghnList.length > 0 ? [...new Set(ghnList)] : [];
                     
-                    const soHtml = uniqueSoSet.map(code => `<div style="break-inside: avoid; white-space: nowrap; margin-bottom: 1px; font-size: 0.75rem;">${code}</div>`).join('');
+                    const soHtml = uniqueSoSet.map(code => `<div>${code}</div>`).join('');
                     uniqueSOs = uniqueSoSet.length > 0 
-                        ? `<div style="column-count: 3; column-gap: 12px;">${soHtml}</div>` 
+                        ? `<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px 8px; font-size: 0.75rem; white-space: nowrap;">${soHtml}</div>` 
                         : '-';
                     
-                    const ghnHtml = uniqueGhnSet.map(code => `<div style="break-inside: avoid; white-space: nowrap; margin-bottom: 1px; font-size: 0.75rem;">${code}</div>`).join('');
+                    const ghnHtml = uniqueGhnSet.map(code => `<div>${code}</div>`).join('');
                     uniqueGhns = uniqueGhnSet.length > 0 
-                        ? `<div style="column-count: 3; column-gap: 12px;">${ghnHtml}</div>` 
+                        ? `<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px 8px; font-size: 0.75rem; white-space: nowrap;">${ghnHtml}</div>` 
                         : '<span style="color: #ef4444; font-weight: 500;">Thiếu mã GHN</span>';
 
                     if (t.tripType === 'Trung chuyển') {
@@ -3648,31 +3661,9 @@
                 }
                 store = store || bInfo;
                 if (store) {
-                    let district = '';
-                    if (bInfo && bInfo.address && bInfo.address.includes(',')) {
-                        let parts = bInfo.address.split(',').map(part => part.trim());
-                        district = parts[0];
-                    }
-                    if (!district && store.address && store.address.includes(',')) {
-                        let parts = store.address.split(',').map(part => part.trim());
-                        if (parts.length >= 2) {
-                            district = parts[parts.length - 2];
-                            if (district.toLowerCase() === 'việt nam' || district.toLowerCase() === 'vietnam') {
-                                district = parts.length >= 3 ? parts[parts.length - 3] : district;
-                            }
-                        }
-                        if (parts.length === 2 && (parts[0].startsWith('H.') || parts[0].startsWith('TX.') || parts[0].startsWith('TP.') || parts[0].startsWith('Q.'))) {
-                            district = parts[0];
-                        }
-                    }
-                    if (!district && typeof extractProvinceAndDistrict === 'function') {
-                        district = extractProvinceAndDistrict(store.name, store.address).district;
-                    }
-
-                    let isGXT = false;
-                    if (typeof window.isGXTStore === 'function') {
-                        isGXT = window.isGXTStore(store.name || bInfo?.name || '', district || store.address || bInfo?.address || '');
-                    }
+                                          let district = store.district || '';
+                      let province = store.province || '';
+                      let isGXT = store.isGXT || false;
 
                     bookingStores.push({
                         id: store.id || id,
@@ -3778,8 +3769,12 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             window.renderStoreList();
+            let searchTimeout;
             document.getElementById('store-search')?.addEventListener('input', (e) => {
-                window.renderStoreList(e.target.value);
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    window.renderStoreList(e.target.value);
+                }, 300);
             });
             document.getElementById('store-filter-type')?.addEventListener('change', () => {
                 window.renderStoreList(document.getElementById('store-search')?.value || '');
@@ -5653,12 +5648,9 @@
                     }
 
                     let isGxt = false;
-                    if (typeof GXT_STORE_LIST !== 'undefined') {
-                        isGxt = GXT_STORE_LIST.some(gxtName => {
-                            const normGXT = gxtName.normalize('NFC').trim().toLowerCase();
-                            const normStore = sName.normalize('NFC').trim();
-                            return normGXT === normStore || normStore.includes(normGXT) || normGXT.includes(normStore);
-                        });
+                    if (typeof STORE_LIST_DATA !== 'undefined') {
+                        const store = STORE_LIST_DATA.find(s => s.id === sCode || (s.name && s.name.toLowerCase().trim() === sName));
+                        if (store) isGxt = store.isGXT || false;
                     }
 
                     if (isGxt) {
