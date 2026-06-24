@@ -49245,5 +49245,15 @@ const STORE_LIST_DATA = [
       "lat": 21.3753828,
       "lng": 105.1860164
     }
+  },
+  {
+    "id": "WM+ PTO KĐT Âu Cơ, Âu Cơ",
+    "name": "WM+ PTO KĐT Âu Cơ, Âu Cơ",
+    "address": "WM+ PTO KĐT Âu Cơ, Âu Cơ",
+    "province": "Phú Thọ",
+    "coords": {
+      "lat": 21.3989531,
+      "lng": 105.2072326
+    }
   }
 ];
