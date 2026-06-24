@@ -49235,5 +49235,15 @@ const STORE_LIST_DATA = [
       "lat": 21.1356817,
       "lng": 105.9913869
     }
+  },
+  {
+    "id": "WM+ PTO Khu 3, Liên Minh",
+    "name": "WM+ PTO Khu 3, Liên Minh",
+    "address": "WM+ PTO Khu 3, Liên Minh",
+    "province": "Phú Thọ",
+    "coords": {
+      "lat": 21.3753828,
+      "lng": 105.1860164
+    }
   }
 ];
