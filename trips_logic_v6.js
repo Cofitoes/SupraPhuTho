@@ -132,6 +132,14 @@ function generateTrips() {
     };
 
     // --- CLASSIFY STORES ---
+
+    // Ensure coords are objects
+    DELIVERY_POINTS.forEach(p => {
+        if (typeof p.coords === 'string') {
+            try { p.coords = JSON.parse(p.coords); } catch(e) {}
+        }
+    });
+
     const gxtPoints = DELIVERY_POINTS.filter(p => p.coords && p.coords.lat && p.coords.lng && p.isGXT === true);
     let directPoints = DELIVERY_POINTS.filter(p => p.coords && p.coords.lat && p.coords.lng && p.isGXT !== true);
 
