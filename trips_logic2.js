@@ -136,12 +136,30 @@ function generateTrips() {
     const gxtStoreNames = (typeof GXT_STORE_LIST !== 'undefined') ? GXT_STORE_LIST : [];
     
     const isGXTStore = (storeName) => {
+        if (!storeName) return false;
+        
+        // 1. Dựa vào mã bưu cục (Hub Code): Các tỉnh này LUÔN LUÔN phải qua kho trung chuyển GXT
+        const transitCodes = ['TQG', 'YBI', 'LCI', 'HGG', 'SLA', 'HBH'];
+        const upperStore = storeName.toUpperCase();
+        for (let code of transitCodes) {
+            if (upperStore.includes(code)) return true;
+        }
+
+        // 1.5. Chỉ định cứng các điểm đặc biệt LUÔN đi GXT
+        const forcedGXTStores = ["WM+ PTO 965 Hùng Vương"];
+        if (forcedGXTStores.some(name => upperStore === name.toUpperCase())) return true;
+
+        // 2. Dựa vào danh sách ngoại lệ GXT (từ cột I file Danh_sach_Winmart.xlsx)
+        // Chủ yếu áp dụng cho một số điểm PTO đặc thù phải đi GXT
         return gxtStoreNames.some(gxtName => {
             const normGXT = gxtName.normalize('NFC').trim().toLowerCase();
             const normStore = storeName.normalize('NFC').trim().toLowerCase();
             return normGXT === normStore || normStore.includes(normGXT) || normGXT.includes(normStore);
         });
     };
+    
+    // Expose for demo.html UI usage
+    if (typeof window !== 'undefined') window.isGXTStore = isGXTStore;
 
     const gxtPoints = DELIVERY_POINTS.filter(p => p.coords && p.coords.lat && p.coords.lng && isGXTStore(p.name));
     const directPoints = DELIVERY_POINTS.filter(p => p.coords && p.coords.lat && p.coords.lng && !isGXTStore(p.name));
@@ -180,8 +198,15 @@ function generateTrips() {
             let cw = seed.weight || 0;
             let cv = seed.volume || 0;
 
+            // Dynamic capacity to balance trips
+            let remW = cw, remV = cv;
+            remaining.forEach(p => { remW += (p.weight || 0); remV += (p.volume || 0); });
+            let neededTrucks = Math.max(1, Math.ceil(remW / 1900), Math.ceil(remV / 14));
+            let dynamicLimit = Math.ceil((remaining.length + 1) / neededTrucks) + 1; // +1 for slack
+            let limit = Math.min(15, Math.max(3, dynamicLimit)); // Bound between 3 and 15
+
             let added = true;
-            while (added && chunk.length < 15) {
+            while (added && chunk.length < limit) {
                 added = false;
                 let nearestIdx = -1, minDist = Infinity;
                 for (let i = 0; i < remaining.length; i++) {
@@ -213,13 +238,15 @@ function generateTrips() {
                 solution.forEach(chunk => {
                     if (chunk.length === 0) return;
                     const dist = getChunkDistance(hubDC, chunk);
-                    score += dist * dist; // Penalize unbalanced long trips
+                    score += dist * dist; // Penalize unbalanced distance and long routes
                     if (typeof getTripCost === 'function') {
                         exactCost += getTripCost('1.9T', dist);
                     }
                 });
-                // If we can evaluate exact cost, prioritize it heavily
-                if (exactCost > 0) return exactCost + (score * 0.0001); 
+                // Prioritize exact cost, but use distance squared to naturally balance trips geographically
+                if (exactCost > 0) {
+                    return exactCost + (score * 0.5); 
+                }
                 return score;
             };
 
@@ -368,21 +395,24 @@ function generateTrips() {
         if (totalGxtW <= TRUCK_LIMITS['8T'].maxW && totalGxtV <= TRUCK_LIMITS['8T'].maxV) {
             transitChunks.push(gxtPoints);
         } else {
-            // Pack into chunks fitting 8T
+            // Pack into chunks fitting 8T sequentially to preserve original booking file order
             let remaining = [...gxtPoints];
-            remaining.sort((a, b) => (b.weight || 0) - (a.weight || 0));
             while (remaining.length > 0) {
                 const chunk = [];
                 let w = 0, v = 0;
-                for (let i = remaining.length - 1; i >= 0; i--) {
-                    const p = remaining[i];
+                while (remaining.length > 0) {
+                    const p = remaining[0];
                     if (w + (p.weight || 0) <= TRUCK_LIMITS['8T'].maxW && v + (p.volume || 0) <= TRUCK_LIMITS['8T'].maxV) {
                         chunk.push(p);
                         w += (p.weight || 0);
                         v += (p.volume || 0);
-                        remaining.splice(i, 1);
+                        remaining.shift();
+                    } else {
+                        break;
                     }
                 }
+                
+                // Edge case: if a single point exceeds 8T capacity, it causes infinite loop
                 if (chunk.length === 0 && remaining.length > 0) {
                     chunk.push(remaining.shift());
                 }

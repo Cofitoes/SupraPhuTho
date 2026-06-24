@@ -90,6 +90,18 @@ for idx, row in df.iterrows():
     if lat and lng and lat != 0.0 and lng != 0.0:
         coords = {"lat": lat, "lng": lng}
         
+    # Apply manual overrides for known problematic stores
+    MANUAL_OVERRIDES = {
+        "WM+ PTO Khu Suông 2, Phú Khê": {
+            "coords": {"lat": 21.387993, "lng": 105.087082},
+            "id": "2CGH"
+        },
+        # Add future overrides here
+    }
+    
+    if name in MANUAL_OVERRIDES:
+        coords = MANUAL_OVERRIDES[name]["coords"]
+        
     store_list.append({
         "id": store_id,
         "name": name,
@@ -97,6 +109,19 @@ for idx, row in df.iterrows():
         "province": prov,
         "coords": coords
     })
+
+# Add missing manual overrides that weren't in the Excel
+found_names = {s['name'] for s in store_list}
+for o_name, o_data in MANUAL_OVERRIDES.items():
+    if o_name not in found_names:
+        store_list.append({
+            "id": o_data.get("id", o_name),
+            "name": o_name,
+            "address": o_name,
+            "province": "Phú Thọ",
+            "coords": o_data["coords"]
+        })
+        print(f"Injected missing store from overrides: {o_name}")
 
 print(f"Total stores extracted: {len(store_list)}")
 print(f"Newly geocoded: {updated}")

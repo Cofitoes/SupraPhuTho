@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.min.js"></script>
     <!-- Flatpickr (Lịch chọn ngày đẹp & tùy chỉnh kích thước) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
@@ -1204,23 +1204,36 @@
                     <div class="planner-header"
                         style="margin-bottom:20px; display:flex; justify-content:space-between; align-items:center;">
                         <h2>Danh Sách Cửa Hàng</h2>
-                        <div class="header-search" style="width: 300px; position: relative;">
-                            <i class="fas fa-search"
-                                style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-dim);"></i>
-                            <input type="text" id="store-search" placeholder="Tìm kiếm cửa hàng..."
-                                style="width: 100%; padding: 10px 12px 10px 48px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); border-radius: 10px; color: white; outline: none;">
+                        <div style="display: flex; gap: 15px; align-items: center;">
+                            <select id="store-filter-type" style="padding: 10px 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); border-radius: 10px; color: white; outline: none; cursor: pointer;">
+                                <option value="ALL" style="color: black;">Tất cả loại chuyến</option>
+                                <option value="GXT" style="color: black;">Trung Chuyển GXT</option>
+                                <option value="DIRECT" style="color: black;">Đi thẳng</option>
+                            </select>
+                            <select id="store-filter-status" style="padding: 10px 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); border-radius: 10px; color: white; outline: none; cursor: pointer;">
+                                <option value="ALL" style="color: black;">Tất cả trạng thái</option>
+                                <option value="OK" style="color: black;">Đã định vị</option>
+                                <option value="ERROR" style="color: black;">Lỗi định vị</option>
+                            </select>
+                            <div class="header-search" style="width: 250px; position: relative;">
+                                <i class="fas fa-search" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-dim);"></i>
+                                <input type="text" id="store-search" placeholder="Tìm kiếm cửa hàng..." style="width: 100%; padding: 10px 12px 10px 48px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); border-radius: 10px; color: white; outline: none;">
+                            </div>
                         </div>
                     </div>
                     <div class="card" style="overflow-y: auto; padding: 0; max-height: calc(100vh - 200px);">
                         <table style="width: 100%;">
                             <thead>
                                 <tr>
-                                    <th>Mã CH</th>
-                                    <th>Tên Cửa Hàng</th>
-                                    <th>Địa Chỉ</th>
-                                    <th>Tỉnh/Thành Phố</th>
-                                    <th>Link Google Maps</th>
-                                    <th>Cảnh Báo Định Vị</th>
+                                    <th style="width: 50px; text-align: center;">STT</th>
+                                    <th style="width: 80px; text-align: center;">Mã CH</th>
+                                    <th style="width: 220px; text-align: left;">Tên Cửa Hàng</th>
+                                    <th style="width: 280px; text-align: left;">Địa Chỉ</th>
+                                    <th style="width: 130px; text-align: left;">Huyện/Xã</th>
+                                    <th style="width: 130px; text-align: left;">Tỉnh/Thành Phố</th>
+                                    <th style="width: 140px; text-align: center;">Loại Chuyến</th>
+                                    <th style="width: 150px; text-align: center;">Link Google Maps</th>
+                                    <th style="width: 160px; text-align: center;">Cảnh Báo Định Vị</th>
                                 </tr>
                             </thead>
                             <tbody id="store-list-table">
@@ -2016,7 +2029,7 @@
                 updateReportTitle(val);
 
                 DELIVERY_POINTS = BOOKING_DELIVERY_POINTS.filter(p => p.date === val).map(p => {
-                    const store = (typeof STORE_LIST_DATA !== 'undefined') ? STORE_LIST_DATA.find(s => s.id === p.id) : null;
+                    const store = (typeof STORE_LIST_DATA !== 'undefined') ? STORE_LIST_DATA.find(s => s.id === p.id || s.name === p.name) : null;
                     const clonedP = JSON.parse(JSON.stringify(p));
                     return {
                         ...clonedP,
@@ -2050,7 +2063,7 @@
                     globalDateFilter.value = latestDate;
                     updateReportTitle(latestDate);
                     DELIVERY_POINTS = BOOKING_DELIVERY_POINTS.filter(p => p.date === latestDate).map(p => {
-                        const store = (typeof STORE_LIST_DATA !== 'undefined') ? STORE_LIST_DATA.find(s => s.id === p.id) : null;
+                        const store = (typeof STORE_LIST_DATA !== 'undefined') ? STORE_LIST_DATA.find(s => s.id === p.id || s.name === p.name) : null;
                         const clonedP = JSON.parse(JSON.stringify(p));
                         return {
                             ...clonedP,
@@ -2472,24 +2485,15 @@
                     return;
                 }
 
-                // Row 1 headers (originally row2)
+                // Row 1 headers
                 const row1 = [
-                    "Ship code", "Address", "Receive Goods date", "CBM Booking", "Region",
-                    "Province", "District", "Key", "Loading sequences", "Total CBM",
-                    "Trip", "Truck Number", "Driver Name", "SĐT", "Location Receive goods",
-                    "Subcontractor", "Truck type", "Loại Chuyến", "Goods Available time", "Register Time", "Time Out ",
-                    "Total Weight (Ton)", "Weight", "PCS", "Buff Number", "Third party loading/ unloading ",
-                    "Key WH", "Stock Out", "Reason delay goods out of WH ", "Sattus", "Split code ",
-                    "Reconciliation", "Blacklist", "Booking number", "KTC"
+                    'STT', 'Ngày xuất', 'Số SO', 'Số DO', 'Mã siêu thị ', 'Tên siêu thị', 'Số kiện', 'Qty', 
+                    'Tổng PCS/Mã chuyến', 'Weight (kg)', 'Volume up (m3)', 'Tỉnh', 'Quận', 'Mã giờ', 'Giờ nhận hàng', 
+                    'Số điểm giao', 'Tổng số kiện xe', 'Trọng tải', 'Ghi chú', 'Chẵn', 'Gợi ý lot sau', 'Ghi chú 2', 
+                    'Đơn vị vận tải', 'Count', 'Weight', 'Volume', 'PCS/DROP/Tỉnh', 'KG/Lot', 'CBM/Lot', 'BKS', 'Tên Tài Xế', 'SĐT'
                 ];
 
                 const aoa = [row1];
-
-                // Helper to normalize text (remove accents)
-                function removeAccents(str) {
-                    if (!str) return '';
-                    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D");
-                }
 
                 // Helper to extract province and district
                 function extractProvinceAndDistrict(name, address) {
@@ -2517,11 +2521,11 @@
                     };
                 }
 
-                // Get date serial for Column 3
+                // Get date serial for Column 1 (Ngày xuất)
                 const dateFilterVal = document.getElementById('global-date-filter').value;
                 let dateStr = dateFilterVal || new Date().toISOString().slice(0, 10);
 
-                // If there's an actual stock out date from the email, use it for "Receive Goods date" in Excel
+                // If there's an actual stock out date from the email, use it for "Ngày xuất" in Excel
                 if (typeof STOCK_OUT_DATES !== 'undefined' && STOCK_OUT_DATES[dateFilterVal]) {
                     const sOut = STOCK_OUT_DATES[dateFilterVal];
                     let displayOut = '';
@@ -2543,11 +2547,17 @@
                 const excelEpoch = new Date(1899, 11, 30);
                 const serialDate = Math.round((d.getTime() - excelEpoch.getTime()) / (24 * 60 * 60 * 1000));
 
-                let globalTripCounter = 0;
+                let globalRowCounter = 0;
 
-                globalTrips.forEach((t) => {
-                    globalTripCounter++;
+                // Sort trips by truckType (trọng tải lớn trước, nhỏ sau)
+                let sortedTrips = [...globalTrips];
+                sortedTrips.sort((a, b) => {
+                    const weightA = parseFloat((a.truckType || '0').replace('T', '')) || 0;
+                    const weightB = parseFloat((b.truckType || '0').replace('T', '')) || 0;
+                    return weightB - weightA;
+                });
 
+                sortedTrips.forEach((t, i) => {
                     // Get all stores for this trip using the shared helper
                     let stores = window.extractStoresFromTrip(t);
 
@@ -2561,161 +2571,214 @@
                         }
                     }
 
-                    stores.sort((a, b) => {
-                        const storeGeoA = extractProvinceAndDistrict(a.name, a.address);
-                        const storeGeoB = extractProvinceAndDistrict(b.name, b.address);
-                        let provA = storeGeoA.province;
-                        let provB = storeGeoB.province;
+                    if (t.tripType !== 'Trung chuyển') {
+                        stores.sort((a, b) => {
+                            const storeGeoA = extractProvinceAndDistrict(a.name, a.address);
+                            const storeGeoB = extractProvinceAndDistrict(b.name, b.address);
+                            let provA = storeGeoA.province;
+                            let provB = storeGeoB.province;
 
-                        if (provA === 'Tỉnh Hà Nam' || provA === 'Tỉnh Nam Định') {
-                            provA = 'Tỉnh Hà Nam - Nam Định';
-                        }
-                        if (provB === 'Tỉnh Hà Nam' || provB === 'Tỉnh Nam Định') {
-                            provB = 'Tỉnh Hà Nam - Nam Định';
-                        }
-
-                        // Chuyến trung chuyển: sắp xếp theo thứ tự BỐC hàng (LIFO)
-                        // Hạ GXT Phú Thọ trước -> bốc HY sau (nằm trên) -> HY xếp cuối file
-                        // Hạ GXT Phú Thọ sau -> bốc HN02 trước (nằm dưới) -> HN02 xếp đầu file
-                        if (t.tripType === 'Trung chuyển') {
-                            const rightProvinces = ['Tỉnh Hà Giang', 'Tỉnh Tuyên Quang', 'Tỉnh Lai Châu', 'Tỉnh Lào Cai', 'Tỉnh Yên Bái', 'Tỉnh Hòa Bình'];
-                            const isHN02_A = rightProvinces.includes(provA);
-                            const isHN02_B = rightProvinces.includes(provB);
-                            if (isHN02_A !== isHN02_B) {
-                                // HN02 (bốc trước) xếp trước trong file, HY (bốc sau) xếp sau
-                                return isHN02_A ? -1 : 1;
+                            if (provA === 'Tỉnh Hà Nam' || provA === 'Tỉnh Nam Định') {
+                                provA = 'Tỉnh Hà Nam - Nam Định';
                             }
-                        }
+                            if (provB === 'Tỉnh Hà Nam' || provB === 'Tỉnh Nam Định') {
+                                provB = 'Tỉnh Hà Nam - Nam Định';
+                            }
 
-                        let idxA = t.points.findIndex(p => p.name === provA);
-                        let idxB = t.points.findIndex(p => p.name === provB);
+                            let idxA = t.points.findIndex(p => p.name === provA);
+                            let idxB = t.points.findIndex(p => p.name === provB);
 
-                        if (idxA === -1) {
-                            idxA = t.points.findIndex(p => p.name && (p.name.includes(provA) || provA.includes(p.name)));
-                        }
-                        if (idxB === -1) {
-                            idxB = t.points.findIndex(p => p.name && (p.name.includes(provB) || provB.includes(p.name)));
-                        }
+                            if (idxA === -1) {
+                                idxA = t.points.findIndex(p => p.name && (p.name.includes(provA) || provA.includes(p.name)));
+                            }
+                            if (idxB === -1) {
+                                idxB = t.points.findIndex(p => p.name && (p.name.includes(provB) || provB.includes(p.name)));
+                            }
 
-                        if (idxA !== idxB && idxA !== -1 && idxB !== -1) {
-                            // Thứ tự bốc hàng (LIFO): tỉnh xa nhất bốc trước (dưới xe), tỉnh gần nhất bốc sau (trên xe, hạ trước)
-                            return idxB - idxA;
-                        }
-                        const distA = (a.coords && a.coords.lat) ? calculateDistance(hubCoords, a.coords) : 0;
-                        const distB = (b.coords && b.coords.lat) ? calculateDistance(hubCoords, b.coords) : 0;
-                        // Sắp xếp theo thứ tự bốc hàng: xa hub trước (bốc trước), gần hub sau (bốc sau)
-                        return distB - distA;
-                    });
-
-                    // Static mapping for trips 1 to 5
-                    const driverMapping = {
-                        1: { plate: '29E60370', name: 'HÀ KHẮC TUYÊN', phone: '393886638' },
-                        2: { plate: '29K04243', name: 'NGUYỄN VĂN CHIẾN', phone: '363321602' },
-                        3: { plate: '29E19670', name: 'HỮU XUÂN DIỆU', phone: '938211193' },
-                        4: { plate: '29E71304', name: 'NGUYỄN VĂN HẬU', phone: '983399571' },
-                        5: { plate: '50H86529', name: 'LÊ GIÁP DẦN', phone: '705755861' }
-                    };
-
-                    let driverDetails = driverMapping[globalTripCounter];
-                    if (!driverDetails) {
-                        // Fallback for > 5 trips
-                        const fallbacks = [
-                            { plate: '29C55555', name: 'NGUYỄN VĂN A', phone: '901234567' },
-                            { plate: '29C66666', name: 'TRẦN VĂN B', phone: '907654321' },
-                            { plate: '29C77777', name: 'LÊ VĂN C', phone: '912345678' },
-                            { plate: '29C88888', name: 'PHẠM VĂN D', phone: '987654321' }
-                        ];
-                        driverDetails = fallbacks[(globalTripCounter - 6) % fallbacks.length];
+                            if (idxA !== idxB && idxA !== -1 && idxB !== -1) {
+                                // Thứ tự bốc hàng (LIFO): tỉnh xa nhất bốc trước (dưới xe), tỉnh gần nhất bốc sau (trên xe, hạ trước)
+                                return idxB - idxA;
+                            }
+                            const distA = (a.coords && a.coords.lat) ? calculateDistance(hubCoords, a.coords) : 0;
+                            const distB = (b.coords && b.coords.lat) ? calculateDistance(hubCoords, b.coords) : 0;
+                            // Sắp xếp theo thứ tự bốc hàng: xa hub trước (bốc trước), gần hub sau (bốc sau)
+                            return distB - distA;
+                        });
                     }
 
+                    // Calculate total pcs for the trip
+                    let tripTotalPcs = 0;
+                    stores.forEach(s => {
+                        tripTotalPcs += (s.pcs || 0);
+                    });
+
                     stores.forEach((store, storeIdx) => {
-                        const isFirstStore = (storeIdx === 0);
                         const storeGeo = extractProvinceAndDistrict(store.name, store.address);
 
-                        const row = Array(34).fill('');
-
-                        row[0] = store.id || ''; // Ship code
-                        row[1] = store.name || ''; // Address
-                        row[2] = serialDate; // Receive Goods date
-                        row[3] = store.volume || 0; // CBM Booking
-                        row[4] = store.region || 'North'; // Region
-                        row[5] = removeAccents(storeGeo.province); // Province
-                        row[6] = removeAccents(storeGeo.district); // District
-                        row[7] = removeAccents(storeGeo.province) + removeAccents(storeGeo.district); // Key
-                        row[8] = storeIdx + 1; // Loading sequences
-
-                        // Columns that only appear on the first row of each trip
-                        if (isFirstStore) {
-                            row[9] = t.totalVolume || 0; // Total CBM
-                            row[11] = t.licensePlate || ''; // Truck Number
-                            row[12] = t.driverName || ''; // Driver Name
-                            row[13] = t.driverPhone || ''; // SĐT
-                            row[16] = t.truckType || '8T'; // Truck type
-                            row[17] = t.tripType || 'Đi thẳng'; // Loại Chuyến
-                            row[18] = ''; // Goods Available time (Empty per request)
-                            row[21] = (t.totalWeight || 0) / 1000; // Total Weight (Ton)
-                        } else {
-                            row[9] = '';
-                            row[11] = '';
-                            row[12] = '';
-                            row[13] = '';
-                            row[16] = '';
-                            row[17] = '';
-                            row[18] = '';
-                            row[21] = '';
-                        }
-
-                        // Column 11: Trip (Sequential number written on all rows of the trip)
-                        row[10] = globalTripCounter; // Trip
-
-                        // Columns 15, 16: Location Receive goods, Subcontractor (Blank)
-                        row[14] = '';
-                        row[15] = '';
-
-                        // Columns 19, 20: Register Time, Time Out (Blank)
-                        row[19] = '';
-                        row[20] = '';
-
-                        // Store level details
-                        row[22] = store.weight || 0; // Weight
-                        row[23] = store.pcs || 0; // PCS
-                        row[24] = store.buff || ''; // Buff Number
-
-                        // Columns 25 to 33: Blank
-                        row[25] = ''; // Third party loading/ unloading
-                        row[26] = ''; // Key WH
-                        row[27] = ''; // \
-                        row[28] = ''; // Reason delay goods out of WH
-                        row[29] = ''; // Sattus
-                        row[30] = ''; // Split code
-                        row[31] = ''; // Reconciliation
-                        row[32] = ''; // Blacklist
-                        row[33] = ''; // Booking number
-
-                        // Column 34: KTC
-                        let ktcVal = '';
-                        if (t.tripType === 'Trung chuyển') {
-                            const rightProvinces = ['Tỉnh Hà Giang', 'Tỉnh Tuyên Quang', 'Tỉnh Lai Châu', 'Tỉnh Lào Cai', 'Tỉnh Yên Bái', 'Tỉnh Hòa Bình'];
-                            if (rightProvinces.includes(storeGeo.province)) {
-                                ktcVal = 'GXT Phú Thọ';
+                        let soList = [];
+                        let doList = [];
+                        let searchName = store.name ? store.name.trim() : '';
+                        if (typeof STORE_GHN_SO_DATA !== 'undefined' && STORE_GHN_SO_DATA[dateStr]) {
+                            if (STORE_GHN_SO_DATA[dateStr][searchName]) {
+                                soList = STORE_GHN_SO_DATA[dateStr][searchName].so || [];
+                                doList = STORE_GHN_SO_DATA[dateStr][searchName].ghn || [];
                             } else {
-                                ktcVal = 'GXT Phú Thọ';
-                            }
-                        } else {
-                            const group1 = ['Thành Phố Hà Nội', 'Tỉnh Bắc Ninh', 'Tỉnh Hưng Yên', 'Tỉnh Hải Dương'];
-                            if (t.truckType === '1.9T' && group1.includes(storeGeo.province)) {
-                                ktcVal = 'Giao thẳng Store';
-                            } else {
-                                ktcVal = 'Đi thẳng Tỉnh';
+                                // Fallback: try case-insensitive and space-trimmed match
+                                const foundKey = Object.keys(STORE_GHN_SO_DATA[dateStr]).find(k => k.trim().toLowerCase() === searchName.toLowerCase());
+                                if (foundKey) {
+                                    soList = STORE_GHN_SO_DATA[dateStr][foundKey].so || [];
+                                    doList = STORE_GHN_SO_DATA[dateStr][foundKey].ghn || [];
+                                }
                             }
                         }
-                        row[34] = ktcVal; // KTC
 
-                        aoa.push(row);
+                        const numRows = Math.max(1, soList.length);
+
+                        for (let r = 0; r < numRows; r++) {
+                            globalRowCounter++;
+                            const isFirstStore = (storeIdx === 0 && r === 0);
+                            const isFirstStoreRow = (r === 0);
+                            
+                            const row = Array(32).fill('');
+
+                            row[0] = globalRowCounter; // STT
+                            
+                            const dParts = dateStr.split('-');
+                            row[1] = dParts.length === 3 ? `${dParts[2]}/${dParts[1]}/${dParts[0]}` : dateStr; // Ngày xuất (DD/MM/YYYY)
+                            
+                            row[2] = soList[r] || ''; // Số SO
+                            row[3] = doList[r] || ''; // Số DO
+                            row[4] = store.id || ''; // Mã siêu thị
+                            row[5] = store.name || ''; // Tên siêu thị
+                            
+                            const format2Dec = (val) => val ? Math.round(parseFloat(val) * 100) / 100 : 0;
+
+                            if (isFirstStoreRow) {
+                                row[6] = store.pcs || 0; // Số kiện
+                                row[7] = store.total_qty || ''; // Qty
+                                row[9] = format2Dec(store.weight); // Weight (kg) - Store Level
+                                row[10] = format2Dec(store.volume); // Volume up (m3) - Store Level
+                                row[23] = 0; // Count
+                                row[24] = format2Dec(store.weight); // Weight (DO level approx)
+                                row[25] = format2Dec(store.volume); // Volume (DO level approx)
+                            } else {
+                                row[6] = '';
+                                row[7] = '';
+                                row[9] = '';
+                                row[10] = '';
+                                row[23] = 0;
+                                row[24] = '';
+                                row[25] = '';
+                            }
+                            
+                            let prov = '';
+                            let dist = '';
+                            let exactBookingStore = null;
+                            if (typeof BOOKING_DELIVERY_POINTS !== 'undefined') {
+                                exactBookingStore = BOOKING_DELIVERY_POINTS.find(dp => dp.name && dp.name.trim().toLowerCase() === (store.name || '').trim().toLowerCase() && dp.date === dateStr);
+                                if (!exactBookingStore) {
+                                    exactBookingStore = BOOKING_DELIVERY_POINTS.find(dp => dp.name && dp.name.trim().toLowerCase() === (store.name || '').trim().toLowerCase());
+                                }
+                            }
+
+                            if (exactBookingStore) {
+                                prov = exactBookingStore.province || '';
+                                if (exactBookingStore.address && exactBookingStore.address.includes(',')) {
+                                    dist = exactBookingStore.address.split(',')[0].trim();
+                                }
+                            } else if (store.province) {
+                                prov = store.province;
+                                if (store.address && store.address.includes(',')) {
+                                    dist = store.address.split(',')[0].trim();
+                                }
+                            }
+
+                            if (!prov || !dist) {
+                                if (!prov) prov = storeGeo.province;
+                                if (!dist) dist = storeGeo.district;
+                            }
+
+                            row[11] = prov; // Tỉnh
+                            row[12] = dist; // Quận
+                            row[13] = ''; // Mã giờ
+                            row[14] = ''; // Giờ nhận hàng
+                            
+                            // Trip-level fields (only on the first row of each trip)
+                            if (isFirstStore) {
+                                row[8] = tripTotalPcs; // Tổng PCS/Mã chuyến
+                                row[15] = stores.length; // Số điểm giao
+                                let tNum = parseFloat((t.truckType || '0').replace('T', ''));
+                                row[17] = tNum ? tNum + ' Tấn' : ''; // Trọng tải (số)
+                                
+                                row[27] = format2Dec(t.totalWeight); // KG/Lot
+                                row[28] = format2Dec(t.totalVolume); // CBM/Lot
+                            }
+                            
+                            row[21] = 'Xe ' + (i + 1); // Ghi chú 2
+                            row[22] = 'GHN'; // Đơn vị vận tải (On every row)
+                            
+                            // Vehicle and driver info (On every row)
+                            row[29] = t.licensePlate || ''; // BKS
+                            row[30] = t.driverName || ''; // Tên Tài Xế
+                            row[31] = t.driverPhone || ''; // SĐT
+
+                            aoa.push(row);
+                        }
                     });
                 });
 
                 const ws = XLSX.utils.aoa_to_sheet(aoa);
+                
+                // --- Bắt đầu định dạng (Styling) cho file Excel ---
+                if (ws['!ref']) {
+                    const range = XLSX.utils.decode_range(ws['!ref']);
+                    
+                    // Danh sách các cột có nền xanh nhạt
+                    const lightBlueCols = ['Qty', 'Số kiện', 'Số kiện', 'Tổng PCS/Mã chuyến', 'Tổng PCS/Mã chuyến', 'Mã giờ', 'Giờ nhận hàng', 'Số điểm giao', 'Tổng số kiện xe', 'Đơn vị vận tải', 'Count', 'Weight', 'Volume', 'PCS/DROP/Tỉnh', 'KG/Lot', 'CBM/Lot'];
+                    
+                    for (let C = range.s.c; C <= range.e.c; C++) {
+                        const headerCellAddress = XLSX.utils.encode_cell({r: 0, c: C});
+                        const headerCell = ws[headerCellAddress];
+                        if (!headerCell) continue;
+                        
+                        const headerText = headerCell.v ? headerCell.v.toString().trim() : '';
+                        let isYellowHeader = headerText === 'Gợi ý lot sau' || headerText === 'Gợi ý lot sau';
+                        
+                        // Định dạng Header
+                        headerCell.s = {
+                            fill: { fgColor: { rgb: isYellowHeader ? "FFFF00" : "5B9BD5" } },
+                            font: { color: { rgb: isYellowHeader ? "000000" : "FFFFFF" }, bold: true, name: "Arial", sz: 10 },
+                            alignment: { horizontal: "center", vertical: "center" },
+                            border: {
+                                top: { style: "thin", color: { rgb: "000000" } },
+                                bottom: { style: "thin", color: { rgb: "000000" } },
+                                left: { style: "thin", color: { rgb: "000000" } },
+                                right: { style: "thin", color: { rgb: "000000" } }
+                            }
+                        };
+                        
+                        let isLightBlueCol = lightBlueCols.includes(headerText);
+                        
+                        // Định dạng Data cells
+                        for (let R = 1; R <= range.e.r; R++) {
+                            const cellAddress = XLSX.utils.encode_cell({r: R, c: C});
+                            if (!ws[cellAddress]) ws[cellAddress] = { t: 's', v: '' }; // Đảm bảo ô tồn tại để gán style
+                            
+                            ws[cellAddress].s = {
+                                fill: { fgColor: { rgb: isLightBlueCol ? "DDEBF7" : "FFFFFF" } },
+                                font: { name: "Arial", sz: 10 },
+                                border: {
+                                    top: { style: "thin", color: { rgb: "BFBFBF" } },
+                                    bottom: { style: "thin", color: { rgb: "BFBFBF" } },
+                                    left: { style: "thin", color: { rgb: "BFBFBF" } },
+                                    right: { style: "thin", color: { rgb: "BFBFBF" } }
+                                }
+                            };
+                        }
+                    }
+                }
+                // --- Kết thúc định dạng ---
+
                 const wb = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(wb, ws, "Form");
 
@@ -3562,23 +3625,74 @@
             
             const bookingStores = [];
             bookingIds.forEach(id => {
-                const store = storeMap[id] || bookingInfoMap[id];
+                const bInfo = bookingInfoMap[id];
+                let store = storeMap[id];
+                if (!store && bInfo && typeof STORE_LIST_DATA !== 'undefined') {
+                    store = STORE_LIST_DATA.find(s => s.name === bInfo.name);
+                }
+                store = store || bInfo;
                 if (store) {
+                    let district = '';
+                    if (bInfo && bInfo.address && bInfo.address.includes(',')) {
+                        let parts = bInfo.address.split(',').map(part => part.trim());
+                        district = parts[0];
+                    }
+                    if (!district && store.address && store.address.includes(',')) {
+                        let parts = store.address.split(',').map(part => part.trim());
+                        if (parts.length >= 2) {
+                            district = parts[parts.length - 2];
+                            if (district.toLowerCase() === 'việt nam' || district.toLowerCase() === 'vietnam') {
+                                district = parts.length >= 3 ? parts[parts.length - 3] : district;
+                            }
+                        }
+                        if (parts.length === 2 && (parts[0].startsWith('H.') || parts[0].startsWith('TX.') || parts[0].startsWith('TP.') || parts[0].startsWith('Q.'))) {
+                            district = parts[0];
+                        }
+                    }
+                    if (!district && typeof extractProvinceAndDistrict === 'function') {
+                        district = extractProvinceAndDistrict(store.name, store.address).district;
+                    }
+
+                    let isGXT = false;
+                    if (typeof window.isGXTStore === 'function') {
+                        isGXT = window.isGXTStore(store.name || bInfo?.name || '');
+                    }
+
                     bookingStores.push({
                         id: store.id || id,
-                        name: store.name || bookingInfoMap[id]?.name || '',
-                        address: store.address || bookingInfoMap[id]?.address || '',
-                        province: store.province || '',
+                        name: store.name || bInfo?.name || '',
+                        address: store.address || bInfo?.address || '',
+                        bookingAddress: bInfo?.address || '',
+                        province: bInfo?.province || store.province || '',
+                        district: district || '',
+                        isGXT: isGXT,
                         coords: store.coords || null
                     });
                 }
             });
             
-            const filteredStores = bookingStores.filter(p =>
-                (p.id && p.id.toLowerCase().includes(term)) ||
-                (p.name && p.name.toLowerCase().includes(term)) ||
-                (p.address && p.address.toLowerCase().includes(term))
-            );
+            const typeFilter = document.getElementById('store-filter-type')?.value || 'ALL';
+            const statusFilter = document.getElementById('store-filter-status')?.value || 'ALL';
+
+            const filteredStores = bookingStores.filter(p => {
+                const matchSearch = (p.id && p.id.toLowerCase().includes(term)) ||
+                                    (p.name && p.name.toLowerCase().includes(term)) ||
+                                    (p.address && p.address.toLowerCase().includes(term));
+                if (!matchSearch) return false;
+
+                if (typeFilter !== 'ALL') {
+                    if (typeFilter === 'GXT' && !p.isGXT) return false;
+                    if (typeFilter === 'DIRECT' && p.isGXT) return false;
+                }
+
+                if (statusFilter !== 'ALL') {
+                    const isErr = isMockOrMissingCoords(p.coords);
+                    if (statusFilter === 'OK' && isErr) return false;
+                    if (statusFilter === 'ERROR' && !isErr) return false;
+                }
+
+                return true;
+            });
 
             filteredStores.sort((a, b) => {
                 const errA = isMockOrMissingCoords(a.coords);
@@ -3586,14 +3700,22 @@
                 if (errA && !errB) return -1;
                 if (!errA && errB) return 1;
 
-                const provA = getProvinceFromNameOrAddress(a.name, a.address) || '';
-                const provB = getProvinceFromNameOrAddress(b.name, b.address) || '';
-                const comp = provA.localeCompare(provB, 'vi', { sensitivity: 'base' });
-                if (comp !== 0) return comp;
+                // Sort by trip type first: GXT first, then others
+                if (a.isGXT && !b.isGXT) return -1;
+                if (!a.isGXT && b.isGXT) return 1;
+
+                const provA = a.province || getProvinceFromNameOrAddress(a.name, a.address) || '';
+                const provB = b.province || getProvinceFromNameOrAddress(b.name, b.address) || '';
+                const provComp = provA.localeCompare(provB, 'vi', { sensitivity: 'base' });
+                if (provComp !== 0) return provComp;
+
+                const distComp = (a.district || '').localeCompare(b.district || '', 'vi', { sensitivity: 'base' });
+                if (distComp !== 0) return distComp;
+
                 return (a.id || '').localeCompare(b.id || '');
             });
 
-            list.innerHTML = filteredStores.map(p => {
+            list.innerHTML = filteredStores.map((p, index) => {
                 let mapLink = '';
                 const isErr = isMockOrMissingCoords(p.coords);
 
@@ -3615,16 +3737,24 @@
                     warning = `<span class="trip-status on-time" style="font-size: 0.8rem; background: rgba(16, 185, 129, 0.1); color: #10b981;"><i class="fas fa-check-circle"></i> Đã định vị</span>`;
                 }
 
-                let province = getProvinceFromNameOrAddress(p.name, p.address);
+                let province = p.province || getProvinceFromNameOrAddress(p.name, p.address);
+                let district = p.district || '';
+
+                let tripTypeHtml = p.isGXT 
+                    ? `<span class="trip-status" style="background: rgba(168, 85, 247, 0.15); color: #c084fc;">Trung Chuyển GXT</span>`
+                    : `<span class="trip-status" style="background: rgba(99, 102, 241, 0.15); color: #818cf8;">Đi thẳng</span>`;
 
                 return `
                 <tr>
-                    <td><strong>${p.id}</strong></td>
+                    <td style="text-align: center;"><strong>${index + 1}</strong></td>
+                    <td style="text-align: center;"><strong>${p.id}</strong></td>
                     <td>${p.name}</td>
-                    <td style="color: var(--text-dim); max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${p.address || ''}">${p.address || ''}</td>
+                    <td style="color: var(--text-dim); max-width: 280px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${p.address || ''}">${p.address || ''}</td>
+                    <td>${district}</td>
                     <td><strong>${province}</strong></td>
-                    <td>${mapLink}</td>
-                    <td>${warning}</td>
+                    <td style="text-align: center;">${tripTypeHtml}</td>
+                    <td style="text-align: center;">${mapLink}</td>
+                    <td style="text-align: center;">${warning}</td>
                 </tr>
                 `;
             }).join('');
@@ -3634,6 +3764,12 @@
             window.renderStoreList();
             document.getElementById('store-search')?.addEventListener('input', (e) => {
                 window.renderStoreList(e.target.value);
+            });
+            document.getElementById('store-filter-type')?.addEventListener('change', () => {
+                window.renderStoreList(document.getElementById('store-search')?.value || '');
+            });
+            document.getElementById('store-filter-status')?.addEventListener('change', () => {
+                window.renderStoreList(document.getElementById('store-search')?.value || '');
             });
         });
     </script>

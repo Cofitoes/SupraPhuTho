@@ -49215,5 +49215,15 @@ const STORE_LIST_DATA = [
       "lat": 21.3042411,
       "lng": 105.4139759
     }
+  },
+  {
+    "id": "2CGH",
+    "name": "WM+ PTO Khu Suông 2, Phú Khê",
+    "address": "WM+ PTO Khu Suông 2, Phú Khê",
+    "province": "Phú Thọ",
+    "coords": {
+      "lat": 21.387993,
+      "lng": 105.087082
+    }
   }
 ];
