@@ -261,53 +261,47 @@ function generateTrips() {
         // ========================================
         let clusters = solutionGreedy;
         if (clusters.length > 1) {
-            const evaluateSolution = (solution) => {
-                let score = 0;
-                let exactCost = 0;
-                solution.forEach(chunk => {
-                    if (chunk.length === 0) return;
-                    const dist = getChunkDistance(hubDC, chunk);
-                    score += dist * dist; // Penalize unbalanced distance and long routes
-                    
-                    let cw = chunk.reduce((s, p) => s + (p.weight || 0), 0);
-                    let cv = chunk.reduce((s, p) => s + (p.volume || 0), 0);
-                    let tType = (cw > 1900 || cv > 14) ? '5T' : '1.9T';
+            const evaluateChunk = (chunk) => {
+                if (chunk.length === 0) return { score: 0, exactCost: 0 };
+                const dist = getChunkDistance(hubDC, chunk);
+                let score = dist * dist;
+                let cw = chunk.reduce((s, p) => s + (p.weight || 0), 0);
+                let cv = chunk.reduce((s, p) => s + (p.volume || 0), 0);
+                let tType = (cw > 1900 || cv > 14) ? '5T' : '1.9T';
+                let exactCost = (typeof getTripCost === 'function') ? getTripCost(tType, dist) : 0;
+                return { score, exactCost };
+            };
+            const getChunkVal = (res) => (typeof getTripCost === 'function') ? (res.exactCost + res.score * 0.5) : res.score;
 
-                    if (typeof getTripCost === 'function') {
-                        exactCost += getTripCost(tType, dist);
-                    }
+            const evaluateSolution = (solution) => {
+                let score = 0, exactCost = 0;
+                solution.forEach(chunk => {
+                    const res = evaluateChunk(chunk);
+                    score += res.score;
+                    exactCost += res.exactCost;
                 });
-                // Prioritize exact cost, but use distance squared to naturally balance trips geographically
-                if (exactCost > 0) {
-                    return exactCost + (score * 0.5); 
-                }
-                return score;
+                return exactCost > 0 ? exactCost + (score * 0.5) : score;
             };
 
             const isValidChunk = (chunk) => {
                 if (chunk.length === 0) return true;
                 if (chunk.length > 15) return false;
-                let w = 0, v = 0;
-                let hasBigStore = false;
+                let w = 0, v = 0, hasBigStore = false;
                 for (let i = 0; i < chunk.length; i++) {
                     w += chunk[i].weight || 0;
                     v += chunk[i].volume || 0;
                     if ((chunk[i].weight || 0) > 1900 || (chunk[i].volume || 0) > 14) hasBigStore = true;
                 }
-                
-                let maxW = 1900, maxV = 14;
-                if (hasBigStore) {
-                    maxW = 5550;
-                    maxV = 40;
-                }
-                
-                if (w > maxW || v > maxV) return false;
-                return true;
+                let maxW = hasBigStore ? 5550 : 1900;
+                let maxV = hasBigStore ? 40 : 14;
+                return w <= maxW && v <= maxV;
             };
 
             let bestScore = evaluateSolution(clusters);
+            let chunkVals = clusters.map(c => getChunkVal(evaluateChunk(c)));
+            
             let improved = true;
-            let maxIterations = 400; // Increased iterations for better optimization
+            let maxIterations = 50;
 
             while (improved && maxIterations > 0) {
                 improved = false;
@@ -316,21 +310,21 @@ function generateTrips() {
                     for (let j = 0; j < clusters.length && !improved; j++) {
                         if (i === j) continue;
                         
-                        // Try MOVE
                         for (let sIdx = 0; sIdx < clusters[i].length; sIdx++) {
                             const store = clusters[i][sIdx];
                             const newSrc = clusters[i].filter((_, idx) => idx !== sIdx);
                             const newDst = [...clusters[j], store];
                             if (isValidChunk(newSrc) && isValidChunk(newDst)) {
-                                const proposed = clusters.map((chunk, idx) => {
-                                    if (idx === i) return newSrc;
-                                    if (idx === j) return newDst;
-                                    return chunk;
-                                });
-                                const score = evaluateSolution(proposed);
-                                if (score < bestScore - 0.01) {
-                                    clusters = proposed;
-                                    bestScore = score;
+                                const srcVal = getChunkVal(evaluateChunk(newSrc));
+                                const dstVal = getChunkVal(evaluateChunk(newDst));
+                                const delta = srcVal + dstVal - chunkVals[i] - chunkVals[j];
+                                
+                                if (delta < -0.01) {
+                                    clusters[i] = newSrc;
+                                    clusters[j] = newDst;
+                                    chunkVals[i] = srcVal;
+                                    chunkVals[j] = dstVal;
+                                    bestScore += delta;
                                     improved = true;
                                     break;
                                 }
@@ -338,21 +332,21 @@ function generateTrips() {
                         }
                         if (improved) break;
                         
-                        // Try SWAP
                         for (let sI = 0; sI < clusters[i].length && !improved; sI++) {
                             for (let sJ = 0; sJ < clusters[j].length; sJ++) {
                                 const newSrc = clusters[i].map((s, idx) => idx === sI ? clusters[j][sJ] : s);
                                 const newDst = clusters[j].map((s, idx) => idx === sJ ? clusters[i][sI] : s);
                                 if (isValidChunk(newSrc) && isValidChunk(newDst)) {
-                                    const proposed = clusters.map((chunk, idx) => {
-                                        if (idx === i) return newSrc;
-                                        if (idx === j) return newDst;
-                                        return chunk;
-                                    });
-                                    const score = evaluateSolution(proposed);
-                                    if (score < bestScore - 0.01) {
-                                        clusters = proposed;
-                                        bestScore = score;
+                                    const srcVal = getChunkVal(evaluateChunk(newSrc));
+                                    const dstVal = getChunkVal(evaluateChunk(newDst));
+                                    const delta = srcVal + dstVal - chunkVals[i] - chunkVals[j];
+                                    
+                                    if (delta < -0.01) {
+                                        clusters[i] = newSrc;
+                                        clusters[j] = newDst;
+                                        chunkVals[i] = srcVal;
+                                        chunkVals[j] = dstVal;
+                                        bestScore += delta;
                                         improved = true;
                                         break;
                                     }
