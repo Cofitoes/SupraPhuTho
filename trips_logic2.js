@@ -140,9 +140,9 @@ function generateTrips() {
         
         // Ngoại lệ: 3 Huyện này luôn đi thẳng
         const directDistricts = ['Lâm Thao', 'Phù Ninh', 'Tam Nông'];
-        const fullText = (storeName + ' ' + addressOrDistrict).toLowerCase();
+        const fullText = (storeName + ' ' + (addressOrDistrict || '')).normalize('NFC').toLowerCase();
         for (let d of directDistricts) {
-            if (fullText.includes(d.toLowerCase())) return false;
+            if (fullText.includes(d.normalize('NFC').toLowerCase())) return false;
         }
 
         // 1. Dựa vào mã bưu cục (Hub Code): Các tỉnh này LUÔN LUÔN phải qua kho trung chuyển GXT
