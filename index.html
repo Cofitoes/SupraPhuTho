@@ -5962,6 +5962,10 @@
         if (window.location.protocol === 'file:') {
             isOfflineMode = true;
             APP_USERS = Object.assign(JSON.parse(JSON.stringify(DEFAULT_USERS)), localUsers);
+            const savedLogin = localStorage.getItem('userLogin');
+            if (savedLogin && !APP_USERS[savedLogin]) {
+                APP_USERS[savedLogin] = { password: 'xxx', name: localStorage.getItem('userName') || 'Người dùng', roleTitle: localStorage.getItem('userTitle') || 'Logistics Staff', role: localStorage.getItem('userRole') || 'GHN', isAdmin: false, allowedTabs: DEFAULT_GHN_TABS };
+            }
             usersLoaded = true;
             applyRolePermissions();
             if (document.getElementById('user-management-tbody')) renderUserTable();
@@ -6010,6 +6014,10 @@
             
             // Fallback để vẫn đăng nhập được khi chạy local file:/// hoặc mạng lỗi
             APP_USERS = Object.assign(JSON.parse(JSON.stringify(DEFAULT_USERS)), localUsers);
+            const savedLoginFallback = localStorage.getItem('userLogin');
+            if (savedLoginFallback && !APP_USERS[savedLoginFallback]) {
+                APP_USERS[savedLoginFallback] = { password: 'xxx', name: localStorage.getItem('userName') || 'Người dùng', roleTitle: localStorage.getItem('userTitle') || 'Logistics Staff', role: localStorage.getItem('userRole') || 'GHN', isAdmin: false, allowedTabs: DEFAULT_GHN_TABS };
+            }
             usersLoaded = true;
             applyRolePermissions();
             

@@ -299,7 +299,7 @@ try {
             if ($s.coords) { $storeMap[$s.id] = $s.coords }
         }
         
-        $bookingJsonStr = (Get-Content ".\booking_data.js" -Raw).Trim() -replace '^const BOOKING_DELIVERY_POINTS = ', ''
+        $bookingJsonStr = (Get-Content -Path ".\booking_data.js" -Encoding UTF8 -Raw).Trim() -replace '^const BOOKING_DELIVERY_POINTS = ', ''
         if ($bookingJsonStr.EndsWith(';')) { $bookingJsonStr = $bookingJsonStr.Substring(0, $bookingJsonStr.Length - 1) }
         $bookingData = $bookingJsonStr | ConvertFrom-Json
         
@@ -320,7 +320,10 @@ try {
         
         if ($updated -gt 0) {
             $newJson = $bookingData | ConvertTo-Json -Depth 5 -Compress
-            Set-Content -Path ".\booking_data.js" -Value "const BOOKING_DELIVERY_POINTS = $newJson;" -Encoding UTF8
+            # Write without BOM for compatibility
+    $jsContent = "const BOOKING_DELIVERY_POINTS = $newJson;"
+    $utf8NoBom = New-Object System.Text.UTF8Encoding $false
+    [System.IO.File]::WriteAllText("$PWD\booking_data.js", $jsContent, $utf8NoBom)
             Write-Host "Updated $updated booking coordinates!"
         } else {
             Write-Host "No updates needed for booking_data.js"

@@ -1,1 +1,1 @@
-﻿const CHECKIN_DATA = [];
+const CHECKIN_DATA = [];
