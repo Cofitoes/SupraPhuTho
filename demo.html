@@ -3344,11 +3344,14 @@
                     const uniqueSoSet = soList.length > 0 ? [...new Set(soList)] : [];
                     const uniqueGhnSet = ghnList.length > 0 ? [...new Set(ghnList)] : [];
                     
+                    const soHtml = uniqueSoSet.map(code => `<div style="break-inside: avoid; margin-bottom: 2px;">${code}</div>`).join('');
                     uniqueSOs = uniqueSoSet.length > 0 
-                        ? `<div style="padding-right: 5px; word-break: break-all;">${uniqueSoSet.join('<br>')}</div>` 
+                        ? `<div style="padding-right: 5px; word-break: break-all; column-count: 3; column-gap: 15px;">${soHtml}</div>` 
                         : '-';
+                    
+                    const ghnHtml = uniqueGhnSet.map(code => `<div style="break-inside: avoid; margin-bottom: 2px;">${code}</div>`).join('');
                     uniqueGhns = uniqueGhnSet.length > 0 
-                        ? `<div style="padding-right: 5px; word-break: break-all;">${uniqueGhnSet.join('<br>')}</div>` 
+                        ? `<div style="padding-right: 5px; word-break: break-all; column-count: 3; column-gap: 15px;">${ghnHtml}</div>` 
                         : '<span style="color: #ef4444; font-weight: 500;">Thiếu mã GHN</span>';
 
                     if (t.tripType === 'Trung chuyển') {
