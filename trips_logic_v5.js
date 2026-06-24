@@ -303,12 +303,20 @@ function generateTrips() {
             let improved = true;
             let maxIterations = 50;
 
+            let ops = 0;
+            const MAX_OPS = 20000;
+
             while (improved && maxIterations > 0) {
                 improved = false;
                 maxIterations--;
                 for (let i = 0; i < clusters.length && !improved; i++) {
                     for (let j = 0; j < clusters.length && !improved; j++) {
                         if (i === j) continue;
+                        ops++;
+                        if (ops > MAX_OPS) {
+                            maxIterations = 0;
+                            break;
+                        }
                         
                         for (let sIdx = 0; sIdx < clusters[i].length; sIdx++) {
                             const store = clusters[i][sIdx];
@@ -334,6 +342,11 @@ function generateTrips() {
                         
                         for (let sI = 0; sI < clusters[i].length && !improved; sI++) {
                             for (let sJ = 0; sJ < clusters[j].length; sJ++) {
+                                ops++;
+                                if (ops > MAX_OPS) {
+                                    maxIterations = 0;
+                                    break;
+                                }
                                 const newSrc = clusters[i].map((s, idx) => idx === sI ? clusters[j][sJ] : s);
                                 const newDst = clusters[j].map((s, idx) => idx === sJ ? clusters[i][sI] : s);
                                 if (isValidChunk(newSrc) && isValidChunk(newDst)) {
@@ -352,8 +365,10 @@ function generateTrips() {
                                     }
                                 }
                             }
+                            if (maxIterations === 0) break;
                         }
                     }
+                    if (maxIterations === 0) break;
                 }
             }
         }
