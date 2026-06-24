@@ -1527,8 +1527,8 @@
                                     <th style="width: 120px;">Biển Số Xe</th>
                                     <th style="width: 120px;">Trọng Tải Xe</th>
                                     <th>Lộ Trình</th>
-                                    <th style="width: 250px;">Số SO</th>
-                                    <th style="width: 250px;">Mã GHN</th>
+                                    <th style="width: 300px;">Số SO</th>
+                                    <th style="width: 300px;">Mã GHN</th>
                                 </tr>
                             </thead>
                             <tbody id="ghn-trips-table-body">
@@ -3345,10 +3345,10 @@
                     const uniqueGhnSet = ghnList.length > 0 ? [...new Set(ghnList)] : [];
                     
                     uniqueSOs = uniqueSoSet.length > 0 
-                        ? `<div style="max-height: 150px; overflow-y: auto; padding-right: 5px; word-break: break-all;">${uniqueSoSet.join('<br>')}</div>` 
+                        ? `<div style="padding-right: 5px; word-break: break-all;">${uniqueSoSet.join('<br>')}</div>` 
                         : '-';
                     uniqueGhns = uniqueGhnSet.length > 0 
-                        ? `<div style="max-height: 150px; overflow-y: auto; padding-right: 5px; word-break: break-all;">${uniqueGhnSet.join('<br>')}</div>` 
+                        ? `<div style="padding-right: 5px; word-break: break-all;">${uniqueGhnSet.join('<br>')}</div>` 
                         : '<span style="color: #ef4444; font-weight: 500;">Thiếu mã GHN</span>';
 
                     if (t.tripType === 'Trung chuyển') {
