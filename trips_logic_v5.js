@@ -228,12 +228,10 @@ function generateTrips() {
                     let nextLen = chunk.length + 1;
                     
                     let valid = false;
-                    // Logic: Nếu tổng < 1.9T thì chỉ được tối đa 3 điểm
-                    if (nextW <= 1900 && nextV <= 14) {
-                        if (nextLen <= 3) valid = true;
-                    } else {
-                        // Nâng lên 5T: cho phép tối đa 15 điểm
-                        if (nextW <= 4900 && nextV <= 26 && nextLen <= 15) valid = true;
+                    // Theo rule mới nhất từ user: Chỉ sử dụng xe 1.9T để giao thẳng, tối đa 15 điểm giao.
+                    // Nếu quá 2 xe 1t9 thì sắp 5T. Tất cả đều max 15 điểm.
+                    if (nextW <= 4900 && nextV <= 26 && nextLen <= 15) {
+                        valid = true;
                     }
 
                     if (valid) {
@@ -281,17 +279,13 @@ function generateTrips() {
 
             const isValidChunk = (chunk) => {
     if (chunk.length === 0) return true;
+    if (chunk.length > 15) return false;
     let w = 0, v = 0;
     for (let i = 0; i < chunk.length; i++) {
         w += chunk[i].weight || 0;
         v += chunk[i].volume || 0;
     }
-    if (w <= 1900 && v <= 14) {
-        if (chunk.length > 3) return false;
-    } else {
-        if (w > 4900 || v > 26) return false;
-        if (chunk.length > 15) return false;
-    }
+    if (w > 4900 || v > 26) return false;
     return true;
 };
 
