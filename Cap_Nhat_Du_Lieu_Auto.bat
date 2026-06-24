@@ -1,19 +1,37 @@
 @echo off
 title AutoUpdateSupra
-:LOOP
-echo ========================================================
-echo   DONG BO BOOKING, GIO XUAT VA BIEN SO XE TREN DASHBOARD
-echo ========================================================
-echo.
-echo Dang tu dong dong bo tu Email va cac file Booking (CHAY NGAM)...
-powershell -ExecutionPolicy Bypass -File "%~dp0run_pipeline.ps1"
-echo.
-echo ========================================================
-echo KET THUC DONG BO LOKAL.
-echo ========================================================
-echo.
-call "%~dp0Dong_Bo_Github.bat"
+chcp 65001 >nul 2>&1
 
-echo Dang doi 60 giay de cap nhat tiep theo...
+set "LOGFILE=%~dp0sync_log.txt"
+
+:LOOP
+echo.
+echo ========================================================
+echo   [%date% %time%] BAT DAU CHU KY CAP NHAT
+echo ========================================================
+
+REM Ghi log
+echo [%date% %time%] Bat dau chu ky cap nhat >> "%LOGFILE%"
+
+REM Chay pipeline chinh (da bao gom dong bo GitHub ben trong)
+echo Dang chay pipeline dong bo du lieu...
+powershell -ExecutionPolicy Bypass -File "%~dp0run_pipeline.ps1"
+
+if errorlevel 1 (
+    echo [%date% %time%] Pipeline gap loi, se thu lai o chu ky tiep theo >> "%LOGFILE%"
+    echo Pipeline gap loi. Se thu lai sau 60 giay...
+) else (
+    echo [%date% %time%] Pipeline hoan thanh thanh cong >> "%LOGFILE%"
+    echo Pipeline hoan thanh thanh cong!
+)
+
+echo.
+echo ========================================================
+echo   [%date% %time%] KET THUC - Doi 60 giay cho chu ky tiep...
+echo ========================================================
+
+REM Giu log file nho (chi giu 200 dong cuoi)
+powershell -Command "if (Test-Path '%LOGFILE%') { $l = Get-Content '%LOGFILE%' -Tail 200; Set-Content '%LOGFILE%' $l }" >nul 2>&1
+
 timeout /t 60 /nobreak >nul
 goto LOOP

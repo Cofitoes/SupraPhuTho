@@ -6,7 +6,12 @@
 *.exe
 *.docx
 *.pdf
+*.xlsb
 __pycache__/
 .env
 web_release/
 .vscode/
+*.lock
+sync_log.txt
+*.tmp
+*.bak
