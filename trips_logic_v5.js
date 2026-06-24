@@ -141,8 +141,8 @@ function generateTrips() {
         const upperStore = storeName.toUpperCase();
         const fullText = (storeName + ' ' + (addressOrDistrict || '')).normalize('NFC').toLowerCase();
 
-        // Ngoại lệ: 3 Huyện này luôn đi thẳng do rất gần kho DC
-        const directDistricts = ['lâm thao', 'phù ninh', 'tam nông'];
+        // Ngoại lệ: Các Huyện này luôn đi thẳng do rất gần kho DC
+        const directDistricts = ['lâm thao', 'phù ninh', 'tam nông', 'thanh ba'];
         for (let d of directDistricts) {
             if (fullText.includes(d)) return false;
         }
