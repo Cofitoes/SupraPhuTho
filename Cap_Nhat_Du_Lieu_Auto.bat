@@ -1,4 +1,5 @@
 @echo off
+title AutoUpdateSupra
 :LOOP
 echo ========================================================
 echo   DONG BO BOOKING, GIO XUAT VA BIEN SO XE TREN DASHBOARD
