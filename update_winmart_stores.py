@@ -97,16 +97,20 @@ for idx, row in df.iterrows():
             "id": "2CGH"
         },
         "WM+ PTO Khu 8, Tiêu Sơn, Chân Mộng": {
-            "coords": {"lat": 21.1356817, "lng": 105.9913869}
+            "coords": {"lat": 21.1356817, "lng": 105.9913869},
+            "id": "2CFI"
         },
         "WM+ PTO Khu 3, Liên Minh": {
-            "coords": {"lat": 21.3753828, "lng": 105.1860164}
+            "coords": {"lat": 21.3753828, "lng": 105.1860164},
+            "id": "2CCB"
         },
         "WM+ PTO KĐT Âu Cơ, Âu Cơ": {
-            "coords": {"lat": 21.3989531, "lng": 105.2072326}
+            "coords": {"lat": 21.3989531, "lng": 105.2072326},
+            "id": "2CFK"
         },
         "WM VC+ PTO Phú Thọ": {
-            "coords": {"lat": 21.4184405, "lng": 105.2118986}
+            "coords": {"lat": 21.4184405, "lng": 105.2118986},
+            "id": "1649"
         },
         # Add future overrides here
     }

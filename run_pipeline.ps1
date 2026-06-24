@@ -306,8 +306,13 @@ try {
         $updated = 0
         foreach ($b in $bookingData) {
             if ($storeMap.ContainsKey($b.id)) {
-                if (-not $b.coords -or $b.coords.lat -ne $storeMap[$b.id].lat -or $b.coords.lng -ne $storeMap[$b.id].lng) {
-                    $b.coords = $storeMap[$b.id]
+                $hasCoords = $b.PSObject.Properties.Match('coords').Count -gt 0
+                if (-not $hasCoords -or -not $b.coords -or $b.coords.lat -ne $storeMap[$b.id].lat -or $b.coords.lng -ne $storeMap[$b.id].lng) {
+                    if (-not $hasCoords) {
+                        $b | Add-Member -MemberType NoteProperty -Name "coords" -Value $storeMap[$b.id]
+                    } else {
+                        $b.coords = $storeMap[$b.id]
+                    }
                     $updated++
                 }
             }

@@ -49227,7 +49227,7 @@ const STORE_LIST_DATA = [
     }
   },
   {
-    "id": "WM+ PTO Khu 8, Tiêu Sơn, Chân Mộng",
+    "id": "2CFI",
     "name": "WM+ PTO Khu 8, Tiêu Sơn, Chân Mộng",
     "address": "WM+ PTO Khu 8, Tiêu Sơn, Chân Mộng",
     "province": "Phú Thọ",
@@ -49237,7 +49237,7 @@ const STORE_LIST_DATA = [
     }
   },
   {
-    "id": "WM+ PTO Khu 3, Liên Minh",
+    "id": "2CCB",
     "name": "WM+ PTO Khu 3, Liên Minh",
     "address": "WM+ PTO Khu 3, Liên Minh",
     "province": "Phú Thọ",
@@ -49247,7 +49247,7 @@ const STORE_LIST_DATA = [
     }
   },
   {
-    "id": "WM+ PTO KĐT Âu Cơ, Âu Cơ",
+    "id": "2CFK",
     "name": "WM+ PTO KĐT Âu Cơ, Âu Cơ",
     "address": "WM+ PTO KĐT Âu Cơ, Âu Cơ",
     "province": "Phú Thọ",
@@ -49257,7 +49257,7 @@ const STORE_LIST_DATA = [
     }
   },
   {
-    "id": "WM VC+ PTO Phú Thọ",
+    "id": "1649",
     "name": "WM VC+ PTO Phú Thọ",
     "address": "WM VC+ PTO Phú Thọ",
     "province": "Phú Thọ",
