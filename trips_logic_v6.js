@@ -293,4 +293,5 @@ function generateTrips() {
     if (typeof updateTripTables === 'function') {
         updateTripTables(trips);
     }
+    return trips;
 }
