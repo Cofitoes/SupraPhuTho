@@ -9,13 +9,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <!-- Flatpickr (Lịch chọn ngày đẹp & tùy chỉnh kích thước) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <!-- SortableJS -->
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <style>
         :root {
             --primary: #6366f1;
@@ -644,6 +642,7 @@
             }
         }, true);
     </script>
+    <script src="mq_data.js"></script>
 
 <style id="rbac-styles">
 #login-overlay {
@@ -749,7 +748,57 @@
 }
 </style>
 
+<script src="firebase-app-compat.js"></script>
+<script src="firebase-firestore-compat.js"></script>
 <script>
+  let db = null;
+  try {
+    if (typeof firebase !== 'undefined') {
+      const firebaseConfig = {
+        apiKey: "AIzaSyA9DrBxkEy_s4cOc5ObcFPhfwNQqQLFLRw",
+        authDomain: "logistics-hub-6657b.firebaseapp.com",
+        projectId: "logistics-hub-6657b",
+        storageBucket: "logistics-hub-6657b.firebasestorage.app",
+        messagingSenderId: "1085764364186",
+        appId: "1:1085764364186:web:e235282a9019e5113ebc23",
+        measurementId: "G-WLW0C70CQ0"
+      };
+      firebase.initializeApp(firebaseConfig);
+      db = firebase.firestore();
+      
+      // Kích hoạt Firestore Offline Persistence (Lưu trữ ngoại tuyến)
+      db.enablePersistence().catch((err) => {
+        if (err.code == 'failed-precondition') {
+          console.warn("Firebase persistence failed-precondition (multiple tabs)");
+        } else if (err.code == 'unimplemented') {
+          console.warn("Firebase persistence unimplemented in this browser");
+        }
+      });
+    } else {
+      console.warn("Firebase SDK not loaded. Working in offline mock fallback.");
+    }
+  } catch (e) {
+    console.error("Firebase initialization failed:", e);
+  }
+
+  // Khởi tạo Mock DB nếu Firebase không thể chạy để tránh crash trang web
+  if (!db) {
+    db = {
+      collection: function() {
+        return {
+          get: function() { return Promise.reject(new Error("Firebase is not initialized")); },
+          doc: function(docId) {
+            return {
+              set: function() { return Promise.reject(new Error("Firebase is not initialized")); },
+              update: function() { return Promise.reject(new Error("Firebase is not initialized")); },
+              delete: function() { return Promise.reject(new Error("Firebase is not initialized")); }
+            };
+          }
+        };
+      }
+    };
+  }
+</script>
 
 </head>
 
@@ -1020,8 +1069,6 @@
                             </div>
                         </div>
                         <div style="display: flex; gap: 10px; align-items: center;">
-                            <button class="btn-icon" id="btn-undo-trips" style="background-color: transparent; border: 1px solid #ef4444; color: #ef4444; opacity: 0.3; pointer-events: none;" title="Hoàn tác thay đổi"><i class="fas fa-undo"></i></button>
-                            <button class="btn-primary" id="btn-save-trips" style="background-color: #10b981; opacity: 0.3; pointer-events: none;"><i class="fas fa-save"></i> Lưu Tuyến</button>
                             <button class="btn-primary" id="btn-run-optimization" style="display: none;">Chạy Tối Ưu
                                 Tuyến</button>
                             <button class="btn-primary" id="btn-export-planner"
@@ -1092,15 +1139,11 @@
                                     <th>Biển Số Xe</th>
                                     <th>Lộ Trình</th>
                                     <th>Loại Xe</th>
-                                    <th>Loại Chuyến</th>
                                     <th>Ngày Xuất</th>
                                     <th>Tổng KM</th>
                                     <th>Khối Lượng (Kg)</th>
-                                    <th>Giá Chuyến</th>
-                                    <th>KM Vượt</th>
-                                    <th>Phí Vượt KM</th>
-                                    <th>Phí Bốc Xếp</th>
-                                    <th>Tổng Tiền</th>
+                                    <th>Thành Tiền</th>
+                                    <th>Cost/Kg</th>
                                 </tr>
                             </thead>
                             <tbody id="report-body"></tbody>
@@ -1154,36 +1197,23 @@
                     <div class="planner-header"
                         style="margin-bottom:20px; display:flex; justify-content:space-between; align-items:center;">
                         <h2>Danh Sách Cửa Hàng</h2>
-                        <div style="display: flex; gap: 15px; align-items: center;">
-                            <select id="store-filter-type" style="padding: 10px 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); border-radius: 10px; color: white; outline: none; cursor: pointer;">
-                                <option value="ALL" style="color: black;">Tất cả loại chuyến</option>
-                                <option value="GXT" style="color: black;">Trung Chuyển GXT</option>
-                                <option value="DIRECT" style="color: black;">Đi thẳng</option>
-                            </select>
-                            <select id="store-filter-status" style="padding: 10px 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); border-radius: 10px; color: white; outline: none; cursor: pointer;">
-                                <option value="ALL" style="color: black;">Tất cả trạng thái</option>
-                                <option value="OK" style="color: black;">Đã định vị</option>
-                                <option value="ERROR" style="color: black;">Lỗi định vị</option>
-                            </select>
-                            <div class="header-search" style="width: 250px; position: relative;">
-                                <i class="fas fa-search" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-dim);"></i>
-                                <input type="text" id="store-search" placeholder="Tìm kiếm cửa hàng..." style="width: 100%; padding: 10px 12px 10px 48px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); border-radius: 10px; color: white; outline: none;">
-                            </div>
+                        <div class="header-search" style="width: 300px; position: relative;">
+                            <i class="fas fa-search"
+                                style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-dim);"></i>
+                            <input type="text" id="store-search" placeholder="Tìm kiếm cửa hàng..."
+                                style="width: 100%; padding: 10px 12px 10px 48px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); border-radius: 10px; color: white; outline: none;">
                         </div>
                     </div>
                     <div class="card" style="overflow-y: auto; padding: 0; max-height: calc(100vh - 200px);">
                         <table style="width: 100%;">
                             <thead>
                                 <tr>
-                                    <th style="width: 50px; text-align: center;">STT</th>
-                                    <th style="width: 80px; text-align: center;">Mã CH</th>
-                                    <th style="width: 220px; text-align: left;">Tên Cửa Hàng</th>
-                                    <th style="width: 280px; text-align: left;">Địa Chỉ</th>
-                                    <th style="width: 130px; text-align: left;">Huyện/Xã</th>
-                                    <th style="width: 130px; text-align: left;">Tỉnh/Thành Phố</th>
-                                    <th style="width: 140px; text-align: center;">Loại Chuyến</th>
-                                    <th style="width: 150px; text-align: center;">Link Google Maps</th>
-                                    <th style="width: 160px; text-align: center;">Cảnh Báo Định Vị</th>
+                                    <th>Mã CH</th>
+                                    <th>Tên Cửa Hàng</th>
+                                    <th>Địa Chỉ</th>
+                                    <th>Tỉnh/Thành Phố</th>
+                                    <th>Link Google Maps</th>
+                                    <th>Cảnh Báo Định Vị</th>
                                 </tr>
                             </thead>
                             <tbody id="store-list-table">
@@ -1259,7 +1289,7 @@
                             </h4>
                             <form id="incident-form" onsubmit="event.preventDefault();"
                                 style="display: flex; flex-direction: column; gap: 16px;">
-                                <!-- 1. Chọn Ngày -->
+                                <!-- 1. Chọn Ngày & Mã đơn ConCung -->
                                 <div style="display: flex; gap: 16px; width: 100%;">
                                     <div style="display: flex; flex-direction: column; gap: 8px; flex: 1;">
                                         <label style="color: var(--text-dim); font-size: 0.9rem; font-weight: 600;">1.
@@ -1270,6 +1300,8 @@
                                     </div>
                                     <div style="display: flex; flex-direction: column; gap: 8px; flex: 1;">
                                         <label style="color: var(--text-dim); font-size: 0.9rem; font-weight: 600;">Mã
+                                            Đơn ConCung</label>
+                                        <input type="text" id="incident-concung-code" class="actual-time-input"
                                             style="width: 100% !important; text-align: left !important;"
                                             placeholder="Nhập mã đơn...">
                                     </div>
@@ -1402,13 +1434,14 @@
                                     <th>Tên Cửa Hàng</th>
                                     <th>Tỉnh Lấy</th>
                                     <th>Ngày Lấy Thành Công</th>
-                                    <th>Tên Siêu Thị</th>
-                                    <th>Loại Chuyến</th>
+                                    <th>Tỉnh Giao</th>
+                                    <th>Trạng Thái</th>
+                                    <th>Deadline</th>
                                 </tr>
                             </thead>
                             <tbody id="order-lookup-body">
                                 <tr>
-                                    <td colspan="8" style="text-align: center; color: var(--text-dim); padding: 40px;">
+                                    <td colspan="9" style="text-align: center; color: var(--text-dim); padding: 40px;">
                                         <i class="fas fa-search-location"
                                             style="font-size: 2rem; margin-bottom: 10px; opacity:0.3;"></i><br>
                                         Nhập từ khóa để tra cứu đơn hàng
@@ -1470,12 +1503,12 @@
                         <table style="width: 100%;">
                             <thead>
                                 <tr>
-                                    <th style="width: 3%;">Trip</th>
-                                    <th style="width: 7%;">Biển Số Xe</th>
-                                    <th style="width: 7%;">Trọng Tải Xe</th>
-                                    <th style="width: 23%;">Lộ Trình</th>
-                                    <th style="width: 30%;">Số SO</th>
-                                    <th style="width: 30%;">Mã GHN</th>
+                                    <th style="width: 60px;">Trip</th>
+                                    <th style="width: 120px;">Biển Số Xe</th>
+                                    <th style="width: 120px;">Trọng Tải Xe</th>
+                                    <th>Lộ Trình</th>
+                                    <th style="width: 250px;">Mã BUFF</th>
+                                    <th style="width: 250px;">Mã GHN</th>
                                 </tr>
                             </thead>
                             <tbody id="ghn-trips-table-body">
@@ -1549,33 +1582,16 @@
     <!-- <script src="email_data.js"></script> -->
     <script>
         const cb = new Date().getTime();
-        document.write('<script src="store_data.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
-        document.write('<script src="booking_data.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
-        document.write('<script src="summary_data.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
-        document.write('<script src="data_ghn_so.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
-        document.write('<script> \
-            window.GlobalStoreMapById = {}; \
-            window.GlobalStoreMapByName = {}; \
-            if (typeof STORE_LIST_DATA !== "undefined") { \
-                STORE_LIST_DATA.forEach(s => { \
-                    if (s.id) window.GlobalStoreMapById[s.id] = s; \
-                    if (s.name) window.GlobalStoreMapByName[s.name] = s; \
-                }); \
-            } \
-            window.GlobalBookingMapById = {}; \
-            window.GlobalBookingMapByName = {}; \
-            if (typeof BOOKING_DELIVERY_POINTS !== "undefined") { \
-                BOOKING_DELIVERY_POINTS.forEach(dp => { \
-                    if (dp.id) window.GlobalBookingMapById[dp.id] = dp; \
-                    if (dp.name) window.GlobalBookingMapByName[dp.name] = dp; \
-                });             } \
-        </scr' + 'ipt>');
-
-        document.write('<script src="departure_times.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
-        document.write('<script src="vehicle_data.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
-        document.write('<script src="checkin_data.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
-        document.write('<script src="incidents_data.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
-        document.write('<script src="Data_Booking/telegram_data.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
+        document.write('<script src="store_data.js?v=' + cb + '"></scr' + 'ipt>');
+        document.write('<script src="booking_data.js?v=' + cb + '"></scr' + 'ipt>');
+        document.write('<script src="gxt_stores.js?v=' + cb + '"></scr' + 'ipt>');
+        document.write('<script src="summary_data.js?v=' + cb + '"></scr' + 'ipt>');
+        document.write('<script src="departure_times.js?v=' + cb + '"></scr' + 'ipt>');
+        document.write('<script src="vehicle_data.js?v=' + cb + '"></scr' + 'ipt>');
+        document.write('<script src="checkin_data.js?v=' + cb + '"></scr' + 'ipt>');
+        document.write('<script src="incidents_data.js?v=' + cb + '"></scr' + 'ipt>');
+        document.write('<script src="concung_data.js?v=' + cb + '"></scr' + 'ipt>');
+        document.write('<script src="Data_Booking/telegram_data.js?v=' + cb + '"></scr' + 'ipt>');
     </script>
     <script>
         const CONFIG = { START_TIME: "08:00", AVG_SPEED_KMH: 50, UNLOADING_TIME_MIN: 30 };
@@ -1683,15 +1699,52 @@
             return '';
         }
 
-        // ===== BẢNG GIÁ - Nguồn duy nhất: Phụ Lục HĐ Phạm Gia 88 =====
-        // FINAL_GHN_PHAMGIA88_Phụ_Lục_01_HDDV_Thuê_Tải_Liên_Vùng_B2B.docx
-        // Đơn giá chưa VAT, đã bao gồm xăng dầu, cầu đường
         let pricingConfig = {
-            '1.9T': { minKm: 120, baseCost: 1700000, extraRate: 11000 },  // 1,700,000đ/chuyến, giới hạn 120km, vượt 11,000đ/km
-            '5T':   { rates: [1100000, 2400000, 3000000], extraRate: 20000 },  // 0-50km: 1.1tr | 51-100km: 2.4tr | 101-150km: 3tr | vượt 20,000đ/km
-            '8T':   { rates: [1500000, 3000000, 4200000], extraRate: 22000 }   // 0-50km: 1.5tr | 51-100km: 3tr | 101-150km: 4.2tr | vượt 22,000đ/km
+            '1.9T': { minKm: 120, baseCost: 1600000, extraRate: 11000 },
+            '5T': { rates: [1100000, 2400000, 3000000], extraRate: 19000 },
+            '8T': { rates: [1500000, 3000000, 4200000], extraRate: 22000 }
         };
-        // Phí bốc xếp: 200,000đ/tấn (chưa áp dụng trong tính toán tự động)
+
+        async function loadPricingFromExcel() {
+            const googleSheetUrl = 'https://docs.google.com/spreadsheets/d/1Bdvc8wXaG7umyW-pwQk4bEZtgGRSKEoIwel9Z3p7jxc/export?format=xlsx&gid=30061802';
+            try {
+                const response = await fetch(googleSheetUrl);
+                if (!response.ok) throw new Error('Google Sheet fetch returned status ' + response.status);
+                const arrayBuffer = await response.arrayBuffer();
+                const data = new Uint8Array(arrayBuffer);
+                const workbook = XLSX.read(data, { type: 'array' });
+                const sheetName = workbook.SheetNames[0];
+                const sheet = workbook.Sheets[sheetName];
+                const rows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+
+                for (const row of rows) {
+                    if (!row || row.length === 0) continue;
+                    const truckLabel = String(row[0]).trim();
+                    if (truckLabel === '1T9') {
+                        const minKm = parseFloat(row[1]);
+                        const baseCost = parseFloat(row[2]);
+                        const extraText = String(row[3]);
+                        const match = extraText.match(/(\d+)\s*\*\s*km/);
+                        const extraRate = match ? parseInt(match[1]) : 11000;
+                        pricingConfig['1.9T'] = { minKm, baseCost, extraRate };
+                    } else if (truckLabel === '5T' || truckLabel === '8T') {
+                        const rate0_50 = parseFloat(row[1]);
+                        const rate51_100 = parseFloat(row[2]);
+                        const rate101_150 = parseFloat(row[3]);
+                        const extraText = String(row[4]);
+                        const match = extraText.match(/(\d+)\s*\*\s*km/);
+                        const extraRate = match ? parseInt(match[1]) : (truckLabel === '5T' ? 19000 : 22000);
+                        pricingConfig[truckLabel] = {
+                            rates: [rate0_50, rate51_100, rate101_150],
+                            extraRate: extraRate
+                        };
+                    }
+                }
+                console.log('Successfully loaded pricing config:', pricingConfig);
+            } catch (e) {
+                console.warn('Could not load pricing config, using default fallback values:', e);
+            }
+        }
 
         function getTripCost(truckType, distanceKm) {
             const config = pricingConfig[truckType];
@@ -1713,7 +1766,7 @@
                 } else if (distanceKm <= 150) {
                     return rates[2];
                 } else {
-                    return rates[2] + extraRate * Math.round(distanceKm - 150);
+                    return rates[2] + extraRate * (distanceKm - 150);
                 }
             }
             return 0;
@@ -1726,37 +1779,6 @@
         let DELIVERY_POINTS = [];
 
         let globalTrips = [];
-        let backupGlobalTrips = [];
-
-        function resetBackupAndUI() {
-            backupGlobalTrips = JSON.parse(JSON.stringify(globalTrips));
-            const btnUndo = document.getElementById('btn-undo-trips');
-            const btnSave = document.getElementById('btn-save-trips');
-            if (btnUndo) { btnUndo.style.opacity = '0.3'; btnUndo.style.pointerEvents = 'none'; }
-            if (btnSave) { btnSave.style.opacity = '0.3'; btnSave.style.pointerEvents = 'none'; }
-        }
-
-        // Handle Undo and Save
-        document.addEventListener('DOMContentLoaded', () => {
-            const btnUndo = document.getElementById('btn-undo-trips');
-            const btnSave = document.getElementById('btn-save-trips');
-            
-            if (btnUndo) {
-                btnUndo.addEventListener('click', () => {
-                    globalTrips = JSON.parse(JSON.stringify(backupGlobalTrips));
-                    renderResults();
-                    btnUndo.style.opacity = '0.3'; btnUndo.style.pointerEvents = 'none';
-                    if (btnSave) { btnSave.style.opacity = '0.3'; btnSave.style.pointerEvents = 'none'; }
-                    alert('Đã hoàn tác lại lộ trình gốc!');
-                });
-            }
-            if (btnSave) {
-                btnSave.addEventListener('click', () => {
-                    resetBackupAndUI();
-                    alert('Đã lưu các thay đổi thủ công của bạn!');
-                });
-            }
-        });
 
         function calculateDistance(p1, p2) {
             const R = 6371;
@@ -1773,7 +1795,7 @@
             return `${Math.floor(totalMins / 60).toString().padStart(2, '0')}:${(totalMins % 60).toString().padStart(2, '0')}`;
         }
     </script>
-    <script>document.write('<script src="trips_logic_v5.js?v=' + cb + '"><\/script>');</script>
+    <script>document.write('<script src="trips_logic2.js?v=' + cb + '"><\/script>');</script>
     <script>
         window.extractStoresFromTrip = function (trip) {
             let stores = [];
@@ -1786,13 +1808,10 @@
                     stores.push(...p.originalPointObjects);
                 } else if (p.originalPoints && Array.isArray(p.originalPoints) && p.originalPoints.length > 0) {
                     p.originalPoints.forEach(storeName => {
-                        let found = null;
-                          if (window.GlobalBookingMapByName) {
-                              found = window.GlobalBookingMapByName[storeName];
-                          }
-                          if (!found && typeof DELIVERY_POINTS !== 'undefined') {
-                              found = DELIVERY_POINTS.find(dp => dp.name === storeName);
-                          }
+                        let found = typeof DELIVERY_POINTS !== 'undefined' ? DELIVERY_POINTS.find(dp => dp.name === storeName) : null;
+                        if (!found && typeof BOOKING_DELIVERY_POINTS !== 'undefined') {
+                            found = BOOKING_DELIVERY_POINTS.find(dp => dp.name === storeName);
+                        }
                         if (found) {
                             stores.push(found);
                         } else {
@@ -1842,6 +1861,15 @@
                 const isDateMatch = d1 === d2 || p.date === formattedDate || p.date === ghnDatePicker.value;
                 if (!isDateMatch) return false;
 
+                if (typeof concungData !== 'undefined') {
+                    const b = p.buff || p.Buff || p.BUFF;
+                    if (b) {
+                        const matched = concungData.find(item => item['MÃ CỬA HÀNG'] === b);
+                        if (matched && matched['Trạng thái hệ thống'] === 'Giao hàng thành công') {
+                            return false;
+                        }
+                    }
+                }
                 return true;
             }).map(p => {
                 const store = (typeof STORE_LIST_DATA !== 'undefined') ? STORE_LIST_DATA.find(s => s.id === p.id) : null;
@@ -1863,13 +1891,12 @@
 
             if (typeof generateTrips === 'function') {
                 globalTrips = generateTrips();
-                resetBackupAndUI();
                 window.renderTripsTable(); // Re-render main table if needed
             }
         };
         let currentRunId = 0;
         document.addEventListener('DOMContentLoaded', async () => {
-            // Bảng giá đã hardcode từ HĐ Phạm Gia 88, không cần tải từ nguồn ngoài
+            await loadPricingFromExcel();
             /* Tạm ẩn toast thông báo email
             const toastHtml = `
             <div class="toast" id="email-toast">
@@ -1987,7 +2014,7 @@
                 updateReportTitle(val);
 
                 DELIVERY_POINTS = BOOKING_DELIVERY_POINTS.filter(p => p.date === val).map(p => {
-                    const store = (typeof STORE_LIST_DATA !== 'undefined') ? STORE_LIST_DATA.find(s => s.id === p.id || s.name === p.name) : null;
+                    const store = (typeof STORE_LIST_DATA !== 'undefined') ? STORE_LIST_DATA.find(s => s.id === p.id) : null;
                     const clonedP = JSON.parse(JSON.stringify(p));
                     return {
                         ...clonedP,
@@ -2021,7 +2048,7 @@
                     globalDateFilter.value = latestDate;
                     updateReportTitle(latestDate);
                     DELIVERY_POINTS = BOOKING_DELIVERY_POINTS.filter(p => p.date === latestDate).map(p => {
-                        const store = (typeof STORE_LIST_DATA !== 'undefined') ? STORE_LIST_DATA.find(s => s.id === p.id || s.name === p.name) : null;
+                        const store = (typeof STORE_LIST_DATA !== 'undefined') ? STORE_LIST_DATA.find(s => s.id === p.id) : null;
                         const clonedP = JSON.parse(JSON.stringify(p));
                         return {
                             ...clonedP,
@@ -2225,12 +2252,7 @@
                     if (typeof BOOKING_DELIVERY_POINTS !== 'undefined' && typeof generateTrips === 'function') {
                         const backupPoints = DELIVERY_POINTS;
                         BOOKING_SUMMARY.forEach(item => {
-                            let trips;
-                            const cachedStr = localStorage.getItem('trips_cache_' + item.date);
-                            if (cachedStr) {
-                                try { trips = JSON.parse(cachedStr); } catch(e) {}
-                            }
-                            if (!trips) {
+                            if (!item.trucksCalculated) {
                                 DELIVERY_POINTS = BOOKING_DELIVERY_POINTS.filter(p => p.date === item.date).map(p => {
                                     const store = (typeof STORE_LIST_DATA !== 'undefined') ? STORE_LIST_DATA.find(s => s.id === p.id) : null;
                                     const clonedP = JSON.parse(JSON.stringify(p));
@@ -2241,45 +2263,21 @@
                                         coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords
                                     };
                                 });
-                                trips = generateTrips();
+                                const trips = generateTrips();
+                                let c19 = 0, c5 = 0, c8 = 0;
+                                let totalCost = 0;
+                                trips.forEach(t => {
+                                    if (t.truckType === '1.9T') c19++;
+                                    else if (t.truckType === '5T') c5++;
+                                    else if (t.truckType === '8T') c8++;
+                                    totalCost += (typeof t.cost === 'number' ? t.cost : (t.cost && t.cost.total ? t.cost.total : 0));
+                                });
+                                item.truck19 = c19;
+                                item.truck5 = c5;
+                                item.truck8 = c8;
+                                item.totalCost = totalCost;
+                                item.trucksCalculated = true;
                             }
-
-                            let c19 = 0, c5 = 0, c8 = 0;
-                            let totalCost = 0;
-                            trips.forEach(t => {
-                                if (t.truckType === '1.9T') c19++;
-                                else if (t.truckType === '5T') c5++;
-                                else if (t.truckType === '8T') c8++;
-                                
-                                if (t.cost !== undefined) {
-                                    totalCost += t.cost;
-                                } else {
-                                    let baseCost = 0, excessCost = 0;
-                                    const cfg = pricingConfig[t.truckType];
-                                    if (cfg) {
-                                        if (t.truckType === '1.9T') {
-                                            baseCost = cfg.baseCost;
-                                            const exKm = Math.max(0, t.dist - cfg.minKm);
-                                            excessCost = exKm * cfg.extraRate;
-                                        } else if (t.truckType === '5T' || t.truckType === '8T') {
-                                            if (t.dist <= 50) baseCost = cfg.rates[0];
-                                            else if (t.dist <= 100) baseCost = cfg.rates[1];
-                                            else if (t.dist <= 150) baseCost = cfg.rates[2];
-                                            else {
-                                                baseCost = cfg.rates[2];
-                                                excessCost = Math.round(t.dist - 150) * cfg.extraRate;
-                                            }
-                                        }
-                                    }
-                                    const loadingFee = t.loadingFee || 0;
-                                    totalCost += (baseCost + excessCost + loadingFee);
-                                }
-                            });
-                            item.truck19 = c19;
-                            item.truck5 = c5;
-                            item.truck8 = c8;
-                            item.totalCost = Math.round(totalCost);
-                            item.trucksCalculated = true;
                         });
                         DELIVERY_POINTS = backupPoints;
                     }
@@ -2387,7 +2385,6 @@
 
                 try {
                     globalTrips = generateTrips();
-                    resetBackupAndUI();
 
                     DELIVERY_POINTS.forEach(p => {
                         let isInTrip = false;
@@ -2444,15 +2441,24 @@
                     return;
                 }
 
-                // Row 1 headers
+                // Row 1 headers (originally row2)
                 const row1 = [
-                    'STT', 'Ngày xuất', 'Số SO', 'Số DO', 'Mã siêu thị ', 'Tên siêu thị', 'Số kiện', 'Qty', 
-                    'Tổng PCS/Mã chuyến', 'Weight (kg)', 'Volume up (m3)', 'Tỉnh', 'Quận', 'Mã giờ', 'Giờ nhận hàng', 
-                    'Số điểm giao', 'Tổng số kiện xe', 'Trọng tải', 'Ghi chú', 'Chẵn', 'Gợi ý lot sau', 'Ghi chú 2', 
-                    'Đơn vị vận tải', 'Count', 'Weight', 'Volume', 'PCS/DROP/Tỉnh', 'KG/Lot', 'CBM/Lot', 'BKS', 'Tên Tài Xế', 'SĐT'
+                    "Ship code", "Address", "Receive Goods date", "CBM Booking", "Region",
+                    "Province", "District", "Key", "Loading sequences", "Total CBM",
+                    "Trip", "Truck Number", "Driver Name", "SĐT", "Location Receive goods",
+                    "Subcontractor", "Truck type", "Goods Available time", "Register Time", "Time Out ",
+                    "Total Weight (Ton)", "Weight", "PCS", "Buff Number", "Third party loading/ unloading ",
+                    "Key WH", "Stock Out", "Reason delay goods out of WH ", "Sattus", "Split code ",
+                    "Reconciliation", "Blacklist", "Booking number", "KTC"
                 ];
 
                 const aoa = [row1];
+
+                // Helper to normalize text (remove accents)
+                function removeAccents(str) {
+                    if (!str) return '';
+                    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D");
+                }
 
                 // Helper to extract province and district
                 function extractProvinceAndDistrict(name, address) {
@@ -2480,11 +2486,11 @@
                     };
                 }
 
-                // Get date serial for Column 1 (Ngày xuất)
+                // Get date serial for Column 3
                 const dateFilterVal = document.getElementById('global-date-filter').value;
                 let dateStr = dateFilterVal || new Date().toISOString().slice(0, 10);
 
-                // If there's an actual stock out date from the email, use it for "Ngày xuất" in Excel
+                // If there's an actual stock out date from the email, use it for "Receive Goods date" in Excel
                 if (typeof STOCK_OUT_DATES !== 'undefined' && STOCK_OUT_DATES[dateFilterVal]) {
                     const sOut = STOCK_OUT_DATES[dateFilterVal];
                     let displayOut = '';
@@ -2506,17 +2512,11 @@
                 const excelEpoch = new Date(1899, 11, 30);
                 const serialDate = Math.round((d.getTime() - excelEpoch.getTime()) / (24 * 60 * 60 * 1000));
 
-                let globalRowCounter = 0;
+                let globalTripCounter = 0;
 
-                // Sort trips by truckType (trọng tải lớn trước, nhỏ sau)
-                let sortedTrips = [...globalTrips];
-                sortedTrips.sort((a, b) => {
-                    const weightA = parseFloat((a.truckType || '0').replace('T', '')) || 0;
-                    const weightB = parseFloat((b.truckType || '0').replace('T', '')) || 0;
-                    return weightB - weightA;
-                });
+                globalTrips.forEach((t) => {
+                    globalTripCounter++;
 
-                sortedTrips.forEach((t, i) => {
                     // Get all stores for this trip using the shared helper
                     let stores = window.extractStoresFromTrip(t);
 
@@ -2530,224 +2530,159 @@
                         }
                     }
 
-                    if (t.tripType !== 'Trung chuyển') {
-                        stores.sort((a, b) => {
-                            const storeGeoA = extractProvinceAndDistrict(a.name, a.address);
-                            const storeGeoB = extractProvinceAndDistrict(b.name, b.address);
-                            let provA = storeGeoA.province;
-                            let provB = storeGeoB.province;
+                    stores.sort((a, b) => {
+                        const storeGeoA = extractProvinceAndDistrict(a.name, a.address);
+                        const storeGeoB = extractProvinceAndDistrict(b.name, b.address);
+                        let provA = storeGeoA.province;
+                        let provB = storeGeoB.province;
 
-                            if (provA === 'Tỉnh Hà Nam' || provA === 'Tỉnh Nam Định') {
-                                provA = 'Tỉnh Hà Nam - Nam Định';
-                            }
-                            if (provB === 'Tỉnh Hà Nam' || provB === 'Tỉnh Nam Định') {
-                                provB = 'Tỉnh Hà Nam - Nam Định';
-                            }
+                        if (provA === 'Tỉnh Hà Nam' || provA === 'Tỉnh Nam Định') {
+                            provA = 'Tỉnh Hà Nam - Nam Định';
+                        }
+                        if (provB === 'Tỉnh Hà Nam' || provB === 'Tỉnh Nam Định') {
+                            provB = 'Tỉnh Hà Nam - Nam Định';
+                        }
 
-                            let idxA = t.points.findIndex(p => p.name === provA);
-                            let idxB = t.points.findIndex(p => p.name === provB);
-
-                            if (idxA === -1) {
-                                idxA = t.points.findIndex(p => p.name && (p.name.includes(provA) || provA.includes(p.name)));
+                        // Chuyến trung chuyển: sắp xếp theo thứ tự BỐC hàng (LIFO)
+                        // Hạ GXT Phú Thọ trước -> bốc HY sau (nằm trên) -> HY xếp cuối file
+                        // Hạ GXT Phú Thọ sau -> bốc HN02 trước (nằm dưới) -> HN02 xếp đầu file
+                        if (t.tripType === 'Trung chuyển') {
+                            const rightProvinces = ['Tỉnh Hà Giang', 'Tỉnh Tuyên Quang', 'Tỉnh Lai Châu', 'Tỉnh Lào Cai', 'Tỉnh Yên Bái', 'Tỉnh Hòa Bình'];
+                            const isHN02_A = rightProvinces.includes(provA);
+                            const isHN02_B = rightProvinces.includes(provB);
+                            if (isHN02_A !== isHN02_B) {
+                                // HN02 (bốc trước) xếp trước trong file, HY (bốc sau) xếp sau
+                                return isHN02_A ? -1 : 1;
                             }
-                            if (idxB === -1) {
-                                idxB = t.points.findIndex(p => p.name && (p.name.includes(provB) || provB.includes(p.name)));
-                            }
+                        }
 
-                            if (idxA !== idxB && idxA !== -1 && idxB !== -1) {
-                                // Thứ tự bốc hàng (LIFO): tỉnh xa nhất bốc trước (dưới xe), tỉnh gần nhất bốc sau (trên xe, hạ trước)
-                                return idxB - idxA;
-                            }
-                            const distA = (a.coords && a.coords.lat) ? calculateDistance(hubCoords, a.coords) : 0;
-                            const distB = (b.coords && b.coords.lat) ? calculateDistance(hubCoords, b.coords) : 0;
-                            // Sắp xếp theo thứ tự bốc hàng: xa hub trước (bốc trước), gần hub sau (bốc sau)
-                            return distB - distA;
-                        });
-                    }
+                        let idxA = t.points.findIndex(p => p.name === provA);
+                        let idxB = t.points.findIndex(p => p.name === provB);
 
-                    // Calculate total pcs for the trip
-                    let tripTotalPcs = 0;
-                    stores.forEach(s => {
-                        tripTotalPcs += (s.pcs || 0);
+                        if (idxA === -1) {
+                            idxA = t.points.findIndex(p => p.name && (p.name.includes(provA) || provA.includes(p.name)));
+                        }
+                        if (idxB === -1) {
+                            idxB = t.points.findIndex(p => p.name && (p.name.includes(provB) || provB.includes(p.name)));
+                        }
+
+                        if (idxA !== idxB && idxA !== -1 && idxB !== -1) {
+                            // Thứ tự bốc hàng (LIFO): tỉnh xa nhất bốc trước (dưới xe), tỉnh gần nhất bốc sau (trên xe, hạ trước)
+                            return idxB - idxA;
+                        }
+                        const distA = (a.coords && a.coords.lat) ? calculateDistance(hubCoords, a.coords) : 0;
+                        const distB = (b.coords && b.coords.lat) ? calculateDistance(hubCoords, b.coords) : 0;
+                        // Sắp xếp theo thứ tự bốc hàng: xa hub trước (bốc trước), gần hub sau (bốc sau)
+                        return distB - distA;
                     });
 
+                    // Static mapping for trips 1 to 5
+                    const driverMapping = {
+                        1: { plate: '29E60370', name: 'HÀ KHẮC TUYÊN', phone: '393886638' },
+                        2: { plate: '29K04243', name: 'NGUYỄN VĂN CHIẾN', phone: '363321602' },
+                        3: { plate: '29E19670', name: 'HỮU XUÂN DIỆU', phone: '938211193' },
+                        4: { plate: '29E71304', name: 'NGUYỄN VĂN HẬU', phone: '983399571' },
+                        5: { plate: '50H86529', name: 'LÊ GIÁP DẦN', phone: '705755861' }
+                    };
+
+                    let driverDetails = driverMapping[globalTripCounter];
+                    if (!driverDetails) {
+                        // Fallback for > 5 trips
+                        const fallbacks = [
+                            { plate: '29C55555', name: 'NGUYỄN VĂN A', phone: '901234567' },
+                            { plate: '29C66666', name: 'TRẦN VĂN B', phone: '907654321' },
+                            { plate: '29C77777', name: 'LÊ VĂN C', phone: '912345678' },
+                            { plate: '29C88888', name: 'PHẠM VĂN D', phone: '987654321' }
+                        ];
+                        driverDetails = fallbacks[(globalTripCounter - 6) % fallbacks.length];
+                    }
+
                     stores.forEach((store, storeIdx) => {
+                        const isFirstStore = (storeIdx === 0);
                         const storeGeo = extractProvinceAndDistrict(store.name, store.address);
 
-                        let soList = [];
-                        let doList = [];
-                        let searchName = store.name ? store.name.trim() : '';
-                        if (typeof STORE_GHN_SO_DATA !== 'undefined' && STORE_GHN_SO_DATA[dateStr]) {
-                            if (STORE_GHN_SO_DATA[dateStr][searchName]) {
-                                soList = [...(STORE_GHN_SO_DATA[dateStr][searchName].so || [])];
-                                doList = [...(STORE_GHN_SO_DATA[dateStr][searchName].ghn || [])];
+                        const row = Array(34).fill('');
+
+                        row[0] = store.id || ''; // Ship code
+                        row[1] = store.name || ''; // Address
+                        row[2] = serialDate; // Receive Goods date
+                        row[3] = store.volume || 0; // CBM Booking
+                        row[4] = store.region || 'North'; // Region
+                        row[5] = removeAccents(storeGeo.province); // Province
+                        row[6] = removeAccents(storeGeo.district); // District
+                        row[7] = removeAccents(storeGeo.province) + removeAccents(storeGeo.district); // Key
+                        row[8] = storeIdx + 1; // Loading sequences
+
+                        // Columns that only appear on the first row of each trip
+                        if (isFirstStore) {
+                            row[9] = t.totalVolume || 0; // Total CBM
+                            row[11] = t.licensePlate || ''; // Truck Number
+                            row[12] = t.driverName || ''; // Driver Name
+                            row[13] = t.driverPhone || ''; // SĐT
+                            row[16] = t.truckType || '8T'; // Truck type
+                            row[17] = ''; // Goods Available time (Empty per request)
+                            row[20] = (t.totalWeight || 0) / 1000; // Total Weight (Ton)
+                        } else {
+                            row[9] = '';
+                            row[11] = '';
+                            row[12] = '';
+                            row[13] = '';
+                            row[16] = '';
+                            row[17] = '';
+                            row[20] = '';
+                        }
+
+                        // Column 11: Trip (Sequential number written on all rows of the trip)
+                        row[10] = globalTripCounter; // Trip
+
+                        // Columns 15, 16: Location Receive goods, Subcontractor (Blank)
+                        row[14] = '';
+                        row[15] = '';
+
+                        // Columns 19, 20: Register Time, Time Out (Blank)
+                        row[18] = '';
+                        row[19] = '';
+
+                        // Store level details
+                        row[21] = store.weight || 0; // Weight
+                        row[22] = store.pcs || 0; // PCS
+                        row[23] = store.buff || ''; // Buff Number
+
+                        // Columns 25 to 33: Blank
+                        row[24] = ''; // Third party loading/ unloading
+                        row[25] = ''; // Key WH
+                        row[26] = ''; // \
+                        row[27] = ''; // Reason delay goods out of WH
+                        row[28] = ''; // Sattus
+                        row[29] = ''; // Split code
+                        row[30] = ''; // Reconciliation
+                        row[31] = ''; // Blacklist
+                        row[32] = ''; // Booking number
+
+                        // Column 34: KTC
+                        let ktcVal = '';
+                        if (t.tripType === 'Trung chuyển') {
+                            const rightProvinces = ['Tỉnh Hà Giang', 'Tỉnh Tuyên Quang', 'Tỉnh Lai Châu', 'Tỉnh Lào Cai', 'Tỉnh Yên Bái', 'Tỉnh Hòa Bình'];
+                            if (rightProvinces.includes(storeGeo.province)) {
+                                ktcVal = 'GXT Phú Thọ';
                             } else {
-                                // Fallback: try case-insensitive and space-trimmed match
-                                const foundKey = Object.keys(STORE_GHN_SO_DATA[dateStr]).find(k => k.trim().toLowerCase() === searchName.toLowerCase());
-                                if (foundKey) {
-                                    soList = [...(STORE_GHN_SO_DATA[dateStr][foundKey].so || [])];
-                                    doList = [...(STORE_GHN_SO_DATA[dateStr][foundKey].ghn || [])];
-                                }
+                                ktcVal = 'GXT Phú Thọ';
                             }
-                        }
-
-                        if (store.so || store['Mã SO'] || store.maSO) {
-                            soList.push(store.so || store['Mã SO'] || store.maSO);
-                        }
-                        if (store.ghn || store['Mã đơn GHN'] || store.maGHN) {
-                            doList.push(store.ghn || store['Mã đơn GHN'] || store.maGHN);
-                        }
-
-                        soList = [...new Set(soList)];
-                        doList = [...new Set(doList)];
-
-                        const numRows = Math.max(1, soList.length, doList.length);
-
-                        for (let r = 0; r < numRows; r++) {
-                            globalRowCounter++;
-                            const isFirstStore = (storeIdx === 0 && r === 0);
-                            const isFirstStoreRow = (r === 0);
-                            
-                            const row = Array(32).fill('');
-
-                            row[0] = globalRowCounter; // STT
-                            
-                            const dParts = dateStr.split('-');
-                            row[1] = dParts.length === 3 ? `${dParts[2]}/${dParts[1]}/${dParts[0]}` : dateStr; // Ngày xuất (DD/MM/YYYY)
-                            
-                            row[2] = soList[r] || ''; // Số SO
-                            row[3] = doList[r] || ''; // Số DO
-                            row[4] = store.id || ''; // Mã siêu thị
-                            row[5] = store.name || ''; // Tên siêu thị
-                            
-                            const format2Dec = (val) => val ? Math.round(parseFloat(val) * 100) / 100 : 0;
-
-                            if (isFirstStoreRow) {
-                                row[6] = store.pcs || 0; // Số kiện
-                                row[7] = store.total_qty || ''; // Qty
-                                row[9] = format2Dec(store.weight); // Weight (kg) - Store Level
-                                row[10] = format2Dec(store.volume); // Volume up (m3) - Store Level
-                                row[23] = 0; // Count
-                                row[24] = format2Dec(store.weight); // Weight (DO level approx)
-                                row[25] = format2Dec(store.volume); // Volume (DO level approx)
+                        } else {
+                            const group1 = ['Thành Phố Hà Nội', 'Tỉnh Bắc Ninh', 'Tỉnh Hưng Yên', 'Tỉnh Hải Dương'];
+                            if (t.truckType === '1.9T' && group1.includes(storeGeo.province)) {
+                                ktcVal = 'Giao thẳng Store';
                             } else {
-                                row[6] = '';
-                                row[7] = '';
-                                row[9] = '';
-                                row[10] = '';
-                                row[23] = 0;
-                                row[24] = '';
-                                row[25] = '';
+                                ktcVal = 'Đi thẳng Tỉnh';
                             }
-                            
-                            let prov = '';
-                            let dist = '';
-                            let exactBookingStore = null;
-                            if (typeof BOOKING_DELIVERY_POINTS !== 'undefined') {
-                                exactBookingStore = window.GlobalBookingMapByName[store.name] || BOOKING_DELIVERY_POINTS.find(dp => dp.name && dp.name.trim().toLowerCase() === (store.name || '').trim().toLowerCase() && dp.date === dateStr);
-                                if (!exactBookingStore) {
-                                    exactBookingStore = window.GlobalBookingMapByName[store.name] || BOOKING_DELIVERY_POINTS.find(dp => dp.name && dp.name.trim().toLowerCase() === (store.name || '').trim().toLowerCase());
-                                }
-                            }
-
-                            if (exactBookingStore) {
-                                prov = exactBookingStore.province || '';
-                                if (exactBookingStore.address && exactBookingStore.address.includes(',')) {
-                                    dist = exactBookingStore.address.split(',')[0].trim();
-                                }
-                            } else if (store.province) {
-                                prov = store.province;
-                                if (store.address && store.address.includes(',')) {
-                                    dist = store.address.split(',')[0].trim();
-                                }
-                            }
-
-                            if (!prov || !dist) {
-                                if (!prov) prov = storeGeo.province;
-                                if (!dist) dist = storeGeo.district;
-                            }
-
-                            row[11] = prov; // Tỉnh
-                            row[12] = dist; // Quận
-                            row[13] = ''; // Mã giờ
-                            row[14] = ''; // Giờ nhận hàng
-                            
-                            // Trip-level fields (only on the first row of each trip)
-                            if (isFirstStore) {
-                                row[8] = tripTotalPcs; // Tổng PCS/Mã chuyến
-                                row[15] = stores.length; // Số điểm giao
-                                let tNum = parseFloat((t.truckType || '0').replace('T', ''));
-                                row[17] = tNum ? tNum + ' Tấn' : ''; // Trọng tải (số)
-                                
-                                row[27] = format2Dec(t.totalWeight); // KG/Lot
-                                row[28] = format2Dec(t.totalVolume); // CBM/Lot
-                            }
-                            
-                            row[21] = 'Xe ' + (i + 1); // Ghi chú 2
-                            row[22] = 'GHN'; // Đơn vị vận tải (On every row)
-                            
-                            // Vehicle and driver info (On every row)
-                            row[29] = t.licensePlate || ''; // BKS
-                            row[30] = t.driverName || ''; // Tên Tài Xế
-                            row[31] = t.driverPhone || ''; // SĐT
-
-                            aoa.push(row);
                         }
+                        row[33] = ktcVal; // KTC
+
+                        aoa.push(row);
                     });
                 });
 
                 const ws = XLSX.utils.aoa_to_sheet(aoa);
-                
-                // --- Bắt đầu định dạng (Styling) cho file Excel ---
-                if (ws['!ref']) {
-                    const range = XLSX.utils.decode_range(ws['!ref']);
-                    
-                    // Danh sách các cột có nền xanh nhạt
-                    const lightBlueCols = ['Qty', 'Số kiện', 'Số kiện', 'Tổng PCS/Mã chuyến', 'Tổng PCS/Mã chuyến', 'Mã giờ', 'Giờ nhận hàng', 'Số điểm giao', 'Tổng số kiện xe', 'Đơn vị vận tải', 'Count', 'Weight', 'Volume', 'PCS/DROP/Tỉnh', 'KG/Lot', 'CBM/Lot'];
-                    
-                    for (let C = range.s.c; C <= range.e.c; C++) {
-                        const headerCellAddress = XLSX.utils.encode_cell({r: 0, c: C});
-                        const headerCell = ws[headerCellAddress];
-                        if (!headerCell) continue;
-                        
-                        const headerText = headerCell.v ? headerCell.v.toString().trim() : '';
-                        let isYellowHeader = headerText === 'Gợi ý lot sau' || headerText === 'Gợi ý lot sau';
-                        
-                        // Định dạng Header
-                        headerCell.s = {
-                            fill: { fgColor: { rgb: isYellowHeader ? "FFFF00" : "5B9BD5" } },
-                            font: { color: { rgb: isYellowHeader ? "000000" : "FFFFFF" }, bold: true, name: "Arial", sz: 10 },
-                            alignment: { horizontal: "center", vertical: "center" },
-                            border: {
-                                top: { style: "thin", color: { rgb: "000000" } },
-                                bottom: { style: "thin", color: { rgb: "000000" } },
-                                left: { style: "thin", color: { rgb: "000000" } },
-                                right: { style: "thin", color: { rgb: "000000" } }
-                            }
-                        };
-                        
-                        let isLightBlueCol = lightBlueCols.includes(headerText);
-                        
-                        // Định dạng Data cells
-                        for (let R = 1; R <= range.e.r; R++) {
-                            const cellAddress = XLSX.utils.encode_cell({r: R, c: C});
-                            if (!ws[cellAddress]) ws[cellAddress] = { t: 's', v: '' }; // Đảm bảo ô tồn tại để gán style
-                            
-                            ws[cellAddress].s = {
-                                fill: { fgColor: { rgb: isLightBlueCol ? "DDEBF7" : "FFFFFF" } },
-                                font: { name: "Arial", sz: 10 },
-                                border: {
-                                    top: { style: "thin", color: { rgb: "BFBFBF" } },
-                                    bottom: { style: "thin", color: { rgb: "BFBFBF" } },
-                                    left: { style: "thin", color: { rgb: "BFBFBF" } },
-                                    right: { style: "thin", color: { rgb: "BFBFBF" } }
-                                }
-                            };
-                        }
-                    }
-                }
-                // --- Kết thúc định dạng ---
-
                 const wb = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(wb, ws, "Form");
 
@@ -2871,9 +2806,14 @@
                     const t = trips[i];
                     if ((t.dist > 0 || t.tripType === 'Trung chuyển') && t.points && t.points.length >= 1) {
                         const validPoints = t.points.filter(p => p.coords && p.coords.lat && p.coords.lng && p.type !== 'HUB_RETURN');
-                        let originCoords = { lat: 21.3885189, lng: 105.1738604 }; // Default Kho DC Win Phú Thọ
-                        if (t.tripType !== 'Trung chuyển' && t.hub === 'GXT Phú Thọ') {
-                            originCoords = { lat: 21.3264875, lng: 105.3246094 };
+                        let originCoords = null;
+                        if (t.tripType === 'Trung chuyển') {
+                            originCoords = { lat: 21.3885189, lng: 105.1738604 }; // Kho DC Win Phú Thọ
+                        } else {
+                            if (t.hub === 'Kho DC Win Phú Thọ') originCoords = { lat: 21.3885189, lng: 105.1738604 };
+                            else if (t.hub === 'GXT Phú Thọ') originCoords = { lat: 21.3264875, lng: 105.3246094 };
+                            else if (t.hub === 'GXT Phú Thọ') originCoords = { lat: 21.3264875, lng: 105.3246094 };
+                            else originCoords = { lat: 21.3885189, lng: 105.1738604 };
                         }
 
                         let routeCoords = [];
@@ -2882,9 +2822,13 @@
                             if (t.hubsVisited) {
                                 t.hubsVisited.forEach(hName => {
                                     if (hName === 'GXT Phú Thọ') routeCoords.push({ lat: 21.3264875, lng: 105.3246094 });
+                                    else if (hName === 'GXT Phú Thọ') routeCoords.push({ lat: 21.3264875, lng: 105.3246094 });
                                 });
                             } else {
-                                if (t.hub === 'GXT Phú Thọ') routeCoords.push({ lat: 21.3264875, lng: 105.3246094 });
+                                let transitHubCoords = null;
+                                if (t.hub === 'GXT Phú Thọ') transitHubCoords = { lat: 21.3264875, lng: 105.3246094 };
+                                else if (t.hub === 'GXT Phú Thọ') transitHubCoords = { lat: 21.3264875, lng: 105.3246094 };
+                                if (transitHubCoords) routeCoords.push(transitHubCoords);
                             }
                         } else {
                             routeCoords.push(originCoords);
@@ -2894,33 +2838,21 @@
                         if (routeCoords.length >= 2) {
                             const coordsStr = routeCoords.map(c => `${c.lng},${c.lat}`).join(';');
 
-                            let retries = 3;
-                            let success = false;
-                            while (retries > 0 && !success) {
-                                try {
-                                    const res = await fetch(`https://router.project-osrm.org/route/v1/driving/${coordsStr}?overview=false`);
-                                    if (res.ok) {
-                                        const data = await res.json();
-                                        if (data && data.routes && data.routes.length > 0) {
-                                            const realDistKm = data.routes[0].distance / 1000;
-                                            t.dist = parseFloat(realDistKm.toFixed(2));
-                                            if (t.tripType !== 'Trung chuyển') {
-                                                t.cost = getTripCost(t.truckType, t.dist);
-                                            }
-                                            t.unitCost = t.cost / (t.totalWeight || 1);
+                            try {
+                                const res = await fetch(`https://router.project-osrm.org/route/v1/driving/${coordsStr}?overview=false`);
+                                if (res.ok) {
+                                    const data = await res.json();
+                                    if (data && data.routes && data.routes.length > 0) {
+                                        const realDistKm = data.routes[0].distance / 1000;
+                                        t.dist = parseFloat(realDistKm.toFixed(2));
+                                        if (t.tripType !== 'Trung chuyển') {
+                                            t.cost = getTripCost(t.truckType, t.dist);
                                         }
-                                        success = true;
-                                    } else {
-                                        console.warn(`OSRM fetch failed with status ${res.status}. Retrying...`);
+                                        t.unitCost = t.cost / (t.totalWeight || 1);
                                     }
-                                } catch (err) {
-                                    console.error('OSRM fetch error:', err);
                                 }
-                                
-                                if (!success) {
-                                    retries--;
-                                    await new Promise(r => setTimeout(r, 1000)); // Wait 1s on failure before retry
-                                }
+                            } catch (err) {
+                                console.error('OSRM fetch error:', err);
                             }
                         }
                     }
@@ -2929,34 +2861,6 @@
                     }
                     renderResults();
                     calculateOTP();
-                    try {
-                        localStorage.setItem('trips_cache_' + dateVal, JSON.stringify(globalTrips));
-                    } catch (e) {
-                        if (e.name === 'QuotaExceededError' || e.name === 'NS_ERROR_DOM_QUOTA_REACHED') {
-                            console.warn('LocalStorage quota exceeded. Clearing old trips_cache...');
-                            const keysToRemove = [];
-                            for (let k = 0; k < localStorage.length; k++) {
-                                const key = localStorage.key(k);
-                                if (key && key.startsWith('trips_cache_') && key !== 'trips_cache_' + dateVal) {
-                                    keysToRemove.push(key);
-                                }
-                            }
-                            keysToRemove.sort();
-                            const numToRemove = Math.max(1, Math.floor(keysToRemove.length / 2));
-                            for (let i = 0; i < numToRemove; i++) {
-                                localStorage.removeItem(keysToRemove[i]);
-                            }
-                            try {
-                                localStorage.setItem('trips_cache_' + dateVal, JSON.stringify(globalTrips));
-                            } catch (e2) {
-                                console.error('Failed to save cache even after cleanup', e2);
-                            }
-                        }
-                    }
-                    // Check if Dashboard needs re-render
-                    if (document.getElementById('summary-table-body')) {
-                        window.renderSummaryTable();
-                    }
                     await new Promise(r => setTimeout(r, 200)); // Rate limit protection
                 }
             } finally {
@@ -3082,19 +2986,21 @@
                         ? t.routeName.split(' -> ').map(x => `<strong>${x}</strong>`).join('<br><i class="fas fa-arrow-right" style="font-size: 0.7rem; color: var(--text-dim); margin: 0 5px;"></i> ')
                         : `<strong>${t.hub || 'Kho DC Win Phú Thọ'}</strong>`;
                     
-                    // List store names for đi thẳng trips (Draggable)
+                    // List store names for đi thẳng trips
                     let storeNamesHtml = '';
+                    /* Bỏ hiển thị danh sách chi tiết cửa hàng theo yêu cầu
                     if (typeof window.extractStoresFromTrip === 'function') {
                         const tripStores = window.extractStoresFromTrip(t);
                         if (tripStores.length > 0) {
                             const storeNames = tripStores.map(s => s.name).filter(Boolean);
                             if (storeNames.length > 0) {
-                                storeNamesHtml = `<div id="trip-stores-${t.id}" data-trip-id="${t.id}" class="sortable-store-list" style="margin-top: 10px; padding: 5px; border: 1px dashed rgba(255,255,255,0.1); border-radius: 6px; min-height: 40px; background: rgba(0,0,0,0.1);">` +
-                                    storeNames.map(n => `<div data-store-name="${n}" class="draggable-store" style="padding: 6px 10px; margin: 4px 0; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 4px; font-size: 0.85rem; cursor: grab; display: flex; align-items: center; transition: all 0.2s;"><i class="fas fa-grip-vertical" style="margin-right: 8px; opacity: 0.6; cursor: grab;"></i>${n}</div>`).join('') +
+                                storeNamesHtml = `<div style="margin-top: 6px; padding-left: 12px; border-left: 2px solid rgba(16, 185, 129, 0.2); font-size: 0.82rem; line-height: 1.7; color: var(--text-dim);">` +
+                                    storeNames.map(n => `<div style="padding: 1px 0;"><i class="fas fa-store" style="font-size: 0.65rem; margin-right: 5px; color: #10b981;"></i>${n}</div>`).join('') +
                                     `</div>`;
                             }
                         }
                     }
+                    */
                     
                     routePathHtml = `${baseRoute}${provinceInfoContainer}${storeNamesHtml}`;
                 }
@@ -3135,63 +3041,6 @@
 
             document.getElementById('route-results-table').innerHTML += summaryRowHtml;
 
-            // Initialize SortableJS for drag-and-drop
-            if (typeof Sortable !== 'undefined') {
-                const sortableLists = document.querySelectorAll('.sortable-store-list');
-                sortableLists.forEach(listEl => {
-                    new Sortable(listEl, {
-                        group: 'shared-trips', // set both lists to same group
-                        animation: 150,
-                        ghostClass: 'sortable-ghost',
-                        onEnd: function (evt) {
-                            const itemEl = evt.item; // dragged HTMLElement
-                            const fromList = evt.from; // previous list
-                            const toList = evt.to;    // target list
-                            
-                            if (fromList === toList) return; // Didn't move to another trip
-                            
-                            const fromTripId = fromList.getAttribute('data-trip-id');
-                            const toTripId = toList.getAttribute('data-trip-id');
-                            const storeName = itemEl.getAttribute('data-store-name');
-                            
-                            if (fromTripId && toTripId && storeName) {
-                                // Find trips in globalTrips
-                                const fromTrip = globalTrips.find(t => t.id === fromTripId);
-                                const toTrip = globalTrips.find(t => t.id === toTripId);
-                                
-                                if (fromTrip && toTrip && typeof window.recalculateTrip === 'function') {
-                                    // Extract the point from fromTrip
-                                    const ptIdx = fromTrip.points.findIndex(p => p.type === 'DELIVERY' && p.name === storeName);
-                                    if (ptIdx !== -1) {
-                                        const ptToMove = fromTrip.points[ptIdx];
-                                        fromTrip.points.splice(ptIdx, 1);
-                                        // Push to toTrip's points (before HUB_RETURN if exists)
-                                        const returnIdx = toTrip.points.findIndex(p => p.type === 'HUB_RETURN');
-                                        if (returnIdx !== -1) {
-                                            toTrip.points.splice(returnIdx, 0, ptToMove);
-                                        } else {
-                                            toTrip.points.push(ptToMove);
-                                        }
-                                        
-                                        // Recalculate both trips
-                                        window.recalculateTrip(fromTrip);
-                                        window.recalculateTrip(toTrip);
-                                        
-                                        // Re-render
-                                        renderResults();
-                                        
-                                        // Show Save/Undo buttons
-                                        const btnUndo = document.getElementById('btn-undo-trips');
-                                        const btnSave = document.getElementById('btn-save-trips');
-                                        if (btnUndo) { btnUndo.style.opacity = '1'; btnUndo.style.pointerEvents = 'auto'; }
-                                        if (btnSave) { btnSave.style.opacity = '1'; btnSave.style.pointerEvents = 'auto'; }
-                                    }
-                                }
-                            }
-                        }
-                    });
-                });
-            }
             // Đồng bộ Biển Số Xe từ Telegram vào globalTrips
             if (typeof telegramData !== 'undefined' && telegramData && telegramData.length > 0) {
                 let plateMessages = telegramData.filter(d => d.Extracted_Plate);
@@ -3276,44 +3125,43 @@
 
                     const storesList = typeof window.extractStoresFromTrip === 'function' ? window.extractStoresFromTrip(t) : [];
 
-                    let soList = [];
+                    let buffs = [];
+                    storesList.forEach(s => {
+                        let b = s.buff || s.Buff || s.BUFF;
+                        if (!b && typeof BOOKING_DELIVERY_POINTS !== 'undefined') {
+                            let matched = BOOKING_DELIVERY_POINTS.find(dp => dp.id && s.id && dp.id == s.id);
+                            if (!matched) matched = BOOKING_DELIVERY_POINTS.find(dp => dp.name === s.name);
+                            if (matched) b = matched.buff || matched.Buff || matched.BUFF;
+                        } 
+                        if (!b && typeof DELIVERY_POINTS !== 'undefined') {
+                            let matched = DELIVERY_POINTS.find(dp => dp.id && s.id && dp.id == s.id);
+                            if (!matched) matched = DELIVERY_POINTS.find(dp => dp.name === s.name);
+                            if (matched) b = matched.buff || matched.Buff || matched.BUFF;
+                        }
+                        if (b) buffs.push(b);
+                    });
+                    buffs = buffs.filter(Boolean);
+                    uniqueBuffs = buffs.length > 0 ? [...new Set(buffs)].join('<br>') : '-';
+
                     let ghnList = [];
                     storesList.forEach(s => {
-                        let so = '';
-                        let ghn = '';
-                        if (typeof STORE_GHN_SO_DATA !== 'undefined' && STORE_GHN_SO_DATA[selectedDate] && STORE_GHN_SO_DATA[selectedDate][s.name]) {
-                            so = STORE_GHN_SO_DATA[selectedDate][s.name].so.join('<br>');
-                            ghn = STORE_GHN_SO_DATA[selectedDate][s.name].ghn.join('<br>');
+                        let b = s.buff || s.Buff || s.BUFF;
+                        if (!b && typeof BOOKING_DELIVERY_POINTS !== 'undefined') {
+                            let matched = BOOKING_DELIVERY_POINTS.find(dp => dp.id && s.id && dp.id == s.id);
+                            if (!matched) matched = BOOKING_DELIVERY_POINTS.find(dp => dp.name === s.name);
+                            if (matched) b = matched.buff || matched.Buff || matched.BUFF;
                         }
-                        if (so) soList.push(so);
-                        if (ghn) ghnList.push(ghn);
 
-                        // Fallback logic if GHN is missing
-                        if (!ghn) {
-                            let b = s.buff || s.Buff || s.BUFF;
-                            if (!b && typeof BOOKING_DELIVERY_POINTS !== 'undefined') {
-                                let matched = window.GlobalBookingMapById[s.id] || window.GlobalBookingMapByName[s.name];
-                                if (matched) b = matched.buff || matched.Buff || matched.BUFF;
-                            }
-                            if (s.ghn || s['Mã đơn GHN'] || s.maGHN) {
-                                ghnList.push(s.ghn || s['Mã đơn GHN'] || s.maGHN);
+                        if (s.ghn || s['Mã đơn GHN'] || s.maGHN) {
+                            ghnList.push(s.ghn || s['Mã đơn GHN'] || s.maGHN);
+                        } else if (b && typeof concungData !== 'undefined') {
+                            const matched = concungData.find(item => item['MÃ CỬA HÀNG'] === b || item['Mã BUFF'] === b);
+                            if (matched && (matched['Vận đơn'] || matched['Mã đơn GHN'])) {
+                                ghnList.push(matched['Vận đơn'] || matched['Mã đơn GHN']);
                             }
                         }
                     });
-                    
-                    soList = soList.filter(Boolean);
-                    const uniqueSoSet = soList.length > 0 ? [...new Set(soList)] : [];
-                    const uniqueGhnSet = ghnList.length > 0 ? [...new Set(ghnList)] : [];
-                    
-                    const soHtml = uniqueSoSet.map(code => `<div>${code}</div>`).join('');
-                    uniqueSOs = uniqueSoSet.length > 0 
-                        ? `<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px 8px; font-size: 0.75rem; white-space: nowrap;">${soHtml}</div>` 
-                        : '-';
-                    
-                    const ghnHtml = uniqueGhnSet.map(code => `<div>${code}</div>`).join('');
-                    uniqueGhns = uniqueGhnSet.length > 0 
-                        ? `<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px 8px; font-size: 0.75rem; white-space: nowrap;">${ghnHtml}</div>` 
-                        : '<span style="color: #ef4444; font-weight: 500;">Thiếu mã GHN</span>';
+                    uniqueGhns = ghnList.length > 0 ? [...new Set(ghnList)].join('<br>') : '<span style="color: #ef4444; font-weight: 500;">Thiếu mã GHN</span>';
 
                     if (t.tripType === 'Trung chuyển') {
                         const arrowIcon = '<br><i class="fas fa-arrow-right" style="font-size: 0.7rem; color: var(--text-dim); margin: 0 5px;"></i> ';
@@ -3334,7 +3182,7 @@
                             <div style="margin-bottom: 8px;">${routePathHtml}</div>
                             <a href="${mapsUrl}" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; font-size: 0.8rem; color: #3b82f6; text-decoration: none; padding: 4px 8px; background: rgba(59, 130, 246, 0.1); border-radius: 4px; transition: all 0.2s;"><i class="fas fa-map-marked-alt"></i> Xem lộ trình Google Maps</a>
                         </td>
-                        <td><span style="font-size: 0.85rem; color: var(--text-dim);">${uniqueSOs || '-'}</span></td>
+                        <td><span style="font-size: 0.85rem; color: var(--text-dim);">${uniqueBuffs || '-'}</span></td>
                         <td><span style="font-size: 0.85rem; color: var(--text-dim);">${uniqueGhns || '-'}</span></td>
                     </tr>`;
                 }).join('');
@@ -3344,101 +3192,50 @@
                 let displayRoute = '';
                 if (t.tripType === 'Trung chuyển') {
                     const hubsList = t.hubsVisited ? t.hubsVisited.join(' → ') : t.hub;
-                    displayRoute = `<strong>Kho DC Win Phú Thọ</strong> → <strong>${hubsList}</strong>`;
-                } else {
-                    const routeBase = t.routeName
-                        ? t.routeName.replace(/->/g, '→').split(' → ')[0]
-                        : (t.hub || 'Kho DC Win Phú Thọ');
-                    const storeCount = typeof window.extractStoresFromTrip === 'function' ? window.extractStoresFromTrip(t).length : 0;
-                    displayRoute = `<strong>${routeBase}</strong> <span style="color: var(--text-dim); font-size: 0.85rem;">(${storeCount} điểm giao)</span>`;
-                }
-
-                // Tính chi tiết chi phí theo bảng giá Phạm Gia 88
-                let baseCost = 0;
-                let excessKm = 0;
-                let excessCost = 0;
-                const config = pricingConfig[t.truckType];
-                if (config) {
-                    if (t.truckType === '1.9T') {
-                        baseCost = config.baseCost;
-                        excessKm = Math.max(0, t.dist - config.minKm);
-                        excessCost = excessKm * config.extraRate;
-                    } else if (t.truckType === '5T' || t.truckType === '8T') {
-                        if (t.dist <= 50) {
-                            baseCost = config.rates[0];
-                            excessKm = 0;
-                        } else if (t.dist <= 100) {
-                            baseCost = config.rates[1];
-                            excessKm = 0;
-                        } else if (t.dist <= 150) {
-                            baseCost = config.rates[2];
-                            excessKm = 0;
-                        } else {
-                            baseCost = config.rates[2];
-                            excessKm = Math.round(t.dist - 150);
-                            excessCost = excessKm * config.extraRate;
+                    let hyProvincesStr = '';
+                    let hn02ProvincesStr = '';
+                    if (t.hubProvinces) {
+                        if (t.hubProvinces['GXT Phú Thọ'] && t.hubProvinces['GXT Phú Thọ'].length > 0) {
+                            hyProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${t.hubProvinces['GXT Phú Thọ'].join(', ')})</div>`;
                         }
+                        if (t.hubProvinces['GXT Phú Thọ'] && t.hubProvinces['GXT Phú Thọ'].length > 0) {
+                            hn02ProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${t.hubProvinces['GXT Phú Thọ'].join(', ')})</div>`;
+                        }
+                    } else {
+                        const rightProvinces = ['Tỉnh Hà Giang', 'Tỉnh Tuyên Quang', 'Tỉnh Lai Châu', 'Tỉnh Lào Cai', 'Tỉnh Yên Bái', 'Tỉnh Hòa Bình'];
+                        const provincesList = t.points.map(p => p.name).filter(Boolean);
+                        const hyList = provincesList.filter(p => !rightProvinces.includes(p));
+                        const hn02List = provincesList.filter(p => rightProvinces.includes(p));
+                        if (hyList.length > 0) hyProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${hyList.join(', ')})</div>`;
+                        if (hn02List.length > 0) hn02ProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${hn02List.join(', ')})</div>`;
                     }
+                    displayRoute = `
+                        <strong>Kho DC Win Phú Thọ</strong> → <strong>${hubsList}</strong>
+                        <div style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; padding-left: 8px; border-left: 2px solid rgba(255,255,255,0.1); margin-top: 4px;">
+                            ${hyProvincesStr}
+                            ${hn02ProvincesStr}
+                        </div>
+                    `;
+                } else {
+                    displayRoute = t.routeName
+                        ? t.routeName.replace(/->/g, '→').split(' → ').map(x => `<strong>${x}</strong>`).join(' → ')
+                        : `${t.hub || 'Kho DC Win Phú Thọ'} → ${t.points.filter(p => p.isPoint).map(p => p.name).join(' → ')}`;
                 }
-                const loadingFee = t.loadingFee || 0;
-                const totalCost = baseCost + excessCost + loadingFee;
-
+                const costPerKg = t.totalWeight > 0 ? Math.round(t.cost / t.totalWeight) : 0;
                 return `
                     <tr>
                         <td>${t.id}</td>
                         <td><strong style="color: #c084fc;">${t.licensePlate || '-'}</strong></td>
                         <td>${displayRoute}</td>
                         <td><span class="trip-status on-time">${t.truckType}</span></td>
-                        <td><span class="trip-status" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">${t.tripType}</span></td>
                         <td><strong>${stockOutDateStr}</strong></td>
                         <td>${t.dist}</td>
                         <td><strong>${Math.round(t.totalWeight || 0).toLocaleString()}</strong></td>
-                        <td style="color: var(--text-main);">${baseCost.toLocaleString()}</td>
-                        <td style="color: ${excessKm > 0 ? '#fbbf24' : 'var(--text-dim)'};">${excessKm > 0 ? excessKm.toFixed(1) + ' km' : '-'}</td>
-                        <td style="color: ${excessCost > 0 ? '#fbbf24' : 'var(--text-dim)'};">${excessCost > 0 ? Math.round(excessCost).toLocaleString() : '-'}</td>
-                        <td style="color: ${loadingFee > 0 ? '#10b981' : 'var(--text-dim)'};">${loadingFee > 0 ? Math.round(loadingFee).toLocaleString() : '-'}</td>
-                        <td style="color: var(--secondary); font-weight: 700; font-size: 1.05rem;">${Math.round(totalCost).toLocaleString()}</td>
+                        <td style="color: var(--secondary); font-weight: 600;">${Math.round(t.cost).toLocaleString()}</td>
+                        <td>${costPerKg.toLocaleString()}</td>
                     </tr>
                 `;
             }).join('');
-
-            // Tính tổng cộng
-            let sumDist = 0, sumWeight = 0, sumBaseCost = 0, sumExcessCost = 0, sumLoadingFee = 0, sumTotal = 0;
-            globalTrips.forEach(t => {
-                sumDist += t.dist || 0;
-                sumWeight += t.totalWeight || 0;
-                sumLoadingFee += t.loadingFee || 0;
-                const cfg = pricingConfig[t.truckType];
-                if (cfg) {
-                    if (t.truckType === '1.9T') {
-                        sumBaseCost += cfg.baseCost;
-                        const exKm = Math.max(0, t.dist - cfg.minKm);
-                        sumExcessCost += exKm * cfg.extraRate;
-                    } else if (t.truckType === '5T' || t.truckType === '8T') {
-                        if (t.dist <= 50) sumBaseCost += cfg.rates[0];
-                        else if (t.dist <= 100) sumBaseCost += cfg.rates[1];
-                        else if (t.dist <= 150) sumBaseCost += cfg.rates[2];
-                        else {
-                            sumBaseCost += cfg.rates[2];
-                            sumExcessCost += Math.round(t.dist - 150) * cfg.extraRate;
-                        }
-                    }
-                }
-            });
-            sumTotal = sumBaseCost + sumExcessCost + sumLoadingFee;
-
-            document.getElementById('report-body').innerHTML += `
-                <tr style="background: rgba(99, 102, 241, 0.15); border-top: 2px solid var(--secondary); font-weight: 700;">
-                    <td colspan="6" style="text-align: center; font-size: 1.05rem; color: var(--secondary);">TỔNG CỘNG (${globalTrips.length} chuyến)</td>
-                    <td style="color: var(--text-main);">${sumDist.toFixed(1)}</td>
-                    <td style="color: var(--text-main);">${Math.round(sumWeight).toLocaleString()}</td>
-                    <td style="color: var(--text-main);">${sumBaseCost.toLocaleString()}</td>
-                    <td style="color: ${sumExcessCost > 0 ? '#fbbf24' : 'var(--text-dim)'};">-</td>
-                    <td style="color: ${sumExcessCost > 0 ? '#fbbf24' : 'var(--text-dim)'};">${sumExcessCost > 0 ? Math.round(sumExcessCost).toLocaleString() : '-'}</td>
-                    <td style="color: ${sumLoadingFee > 0 ? '#10b981' : 'var(--text-dim)'};">${sumLoadingFee > 0 ? Math.round(sumLoadingFee).toLocaleString() : '-'}</td>
-                    <td style="color: var(--secondary); font-size: 1.1rem;">${Math.round(sumTotal).toLocaleString()}</td>
-                </tr>
-            `;
 
             const otpBody = document.getElementById('otp-body');
             if (otpBody) {
@@ -3470,13 +3267,33 @@
                 let displayRoute = '';
                 if (t.tripType === 'Trung chuyển') {
                     const hubsList = t.hubsVisited ? t.hubsVisited.join(' → ') : t.hub;
-                    displayRoute = `<strong>Kho DC Win Phú Thọ</strong> → <strong>${hubsList}</strong>`;
+                    let hyProvincesStr = '';
+                    let hn02ProvincesStr = '';
+                    if (t.hubProvinces) {
+                        if (t.hubProvinces['GXT Phú Thọ'] && t.hubProvinces['GXT Phú Thọ'].length > 0) {
+                            hyProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${t.hubProvinces['GXT Phú Thọ'].join(', ')})</div>`;
+                        }
+                        if (t.hubProvinces['GXT Phú Thọ'] && t.hubProvinces['GXT Phú Thọ'].length > 0) {
+                            hn02ProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${t.hubProvinces['GXT Phú Thọ'].join(', ')})</div>`;
+                        }
+                    } else {
+                        const rightProvinces = ['Tỉnh Hà Giang', 'Tỉnh Tuyên Quang', 'Tỉnh Lai Châu', 'Tỉnh Lào Cai', 'Tỉnh Yên Bái', 'Tỉnh Hòa Bình'];
+                        const provincesList = t.points.map(p => p.name).filter(Boolean);
+                        const hyList = provincesList.filter(p => !rightProvinces.includes(p));
+                        const hn02List = provincesList.filter(p => rightProvinces.includes(p));
+                        if (hyList.length > 0) hyProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${hyList.join(', ')})</div>`;
+                        if (hn02List.length > 0) hn02ProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${hn02List.join(', ')})</div>`;
+                    }
+                    displayRoute = `
+                        <strong>Kho DC Win Phú Thọ</strong> → <strong>${hubsList}</strong>
+                        <div style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; padding-left: 8px; border-left: 2px solid rgba(255,255,255,0.1); margin-top: 4px;">
+                            ${hyProvincesStr}
+                            ${hn02ProvincesStr}
+                        </div>
+                    `;
                 } else {
-                    const routeBase = t.routeName
-                        ? t.routeName.replace(/->/g, '→').split(' → ')[0]
-                        : (t.hub || 'Kho DC Win Phú Thọ');
-                    const storeCount = typeof window.extractStoresFromTrip === 'function' ? window.extractStoresFromTrip(t).length : 0;
-                    displayRoute = `<strong>${routeBase}</strong> <span style="color: var(--text-dim); font-size: 0.85rem;">(${storeCount} điểm giao)</span>`;
+                    const routePath = `<strong>${t.hub || 'Kho DC Win Phú Thọ'}</strong>`;
+                    displayRoute = `${routePath} → ${t.points.filter(p => p.isPoint).map(p => p.name).join(' → ')}`;
                 }
                 return `
                 <tr data-trip="${t.id}">
@@ -3602,52 +3419,23 @@
             
             const bookingStores = [];
             bookingIds.forEach(id => {
-                const bInfo = bookingInfoMap[id];
-                let store = storeMap[id];
-                  if (!store && bInfo) {
-                      store = window.GlobalStoreMapByName[bInfo.name];
-                  }
-                store = store || bInfo;
+                const store = storeMap[id] || bookingInfoMap[id];
                 if (store) {
-                                          let district = store.district || '';
-                      let province = store.province || '';
-                      let isGXT = store.isGXT || false;
-
                     bookingStores.push({
                         id: store.id || id,
-                        name: store.name || bInfo?.name || '',
-                        address: store.address || bInfo?.address || '',
-                        bookingAddress: bInfo?.address || '',
-                        province: bInfo?.province || store.province || '',
-                        district: district || '',
-                        isGXT: isGXT,
+                        name: store.name || bookingInfoMap[id]?.name || '',
+                        address: store.address || bookingInfoMap[id]?.address || '',
+                        province: store.province || '',
                         coords: store.coords || null
                     });
                 }
             });
             
-            const typeFilter = document.getElementById('store-filter-type')?.value || 'ALL';
-            const statusFilter = document.getElementById('store-filter-status')?.value || 'ALL';
-
-            const filteredStores = bookingStores.filter(p => {
-                const matchSearch = (p.id && p.id.toLowerCase().includes(term)) ||
-                                    (p.name && p.name.toLowerCase().includes(term)) ||
-                                    (p.address && p.address.toLowerCase().includes(term));
-                if (!matchSearch) return false;
-
-                if (typeFilter !== 'ALL') {
-                    if (typeFilter === 'GXT' && !p.isGXT) return false;
-                    if (typeFilter === 'DIRECT' && p.isGXT) return false;
-                }
-
-                if (statusFilter !== 'ALL') {
-                    const isErr = isMockOrMissingCoords(p.coords);
-                    if (statusFilter === 'OK' && isErr) return false;
-                    if (statusFilter === 'ERROR' && !isErr) return false;
-                }
-
-                return true;
-            });
+            const filteredStores = bookingStores.filter(p =>
+                (p.id && p.id.toLowerCase().includes(term)) ||
+                (p.name && p.name.toLowerCase().includes(term)) ||
+                (p.address && p.address.toLowerCase().includes(term))
+            );
 
             filteredStores.sort((a, b) => {
                 const errA = isMockOrMissingCoords(a.coords);
@@ -3655,22 +3443,14 @@
                 if (errA && !errB) return -1;
                 if (!errA && errB) return 1;
 
-                // Sort by trip type first: GXT first, then others
-                if (a.isGXT && !b.isGXT) return -1;
-                if (!a.isGXT && b.isGXT) return 1;
-
-                const provA = a.province || getProvinceFromNameOrAddress(a.name, a.address) || '';
-                const provB = b.province || getProvinceFromNameOrAddress(b.name, b.address) || '';
-                const provComp = provA.localeCompare(provB, 'vi', { sensitivity: 'base' });
-                if (provComp !== 0) return provComp;
-
-                const distComp = (a.district || '').localeCompare(b.district || '', 'vi', { sensitivity: 'base' });
-                if (distComp !== 0) return distComp;
-
+                const provA = getProvinceFromNameOrAddress(a.name, a.address) || '';
+                const provB = getProvinceFromNameOrAddress(b.name, b.address) || '';
+                const comp = provA.localeCompare(provB, 'vi', { sensitivity: 'base' });
+                if (comp !== 0) return comp;
                 return (a.id || '').localeCompare(b.id || '');
             });
 
-            list.innerHTML = filteredStores.map((p, index) => {
+            list.innerHTML = filteredStores.map(p => {
                 let mapLink = '';
                 const isErr = isMockOrMissingCoords(p.coords);
 
@@ -3692,24 +3472,16 @@
                     warning = `<span class="trip-status on-time" style="font-size: 0.8rem; background: rgba(16, 185, 129, 0.1); color: #10b981;"><i class="fas fa-check-circle"></i> Đã định vị</span>`;
                 }
 
-                let province = p.province || getProvinceFromNameOrAddress(p.name, p.address);
-                let district = p.district || '';
-
-                let tripTypeHtml = p.isGXT 
-                    ? `<span class="trip-status" style="background: rgba(168, 85, 247, 0.15); color: #c084fc;">Trung Chuyển GXT</span>`
-                    : `<span class="trip-status" style="background: rgba(99, 102, 241, 0.15); color: #818cf8;">Đi thẳng</span>`;
+                let province = getProvinceFromNameOrAddress(p.name, p.address);
 
                 return `
                 <tr>
-                    <td style="text-align: center;"><strong>${index + 1}</strong></td>
-                    <td style="text-align: center;"><strong>${p.id}</strong></td>
+                    <td><strong>${p.id}</strong></td>
                     <td>${p.name}</td>
-                    <td style="color: var(--text-dim); max-width: 280px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${p.address || ''}">${p.address || ''}</td>
-                    <td>${district}</td>
+                    <td style="color: var(--text-dim); max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${p.address || ''}">${p.address || ''}</td>
                     <td><strong>${province}</strong></td>
-                    <td style="text-align: center;">${tripTypeHtml}</td>
-                    <td style="text-align: center;">${mapLink}</td>
-                    <td style="text-align: center;">${warning}</td>
+                    <td>${mapLink}</td>
+                    <td>${warning}</td>
                 </tr>
                 `;
             }).join('');
@@ -3717,18 +3489,8 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             window.renderStoreList();
-            let searchTimeout;
             document.getElementById('store-search')?.addEventListener('input', (e) => {
-                clearTimeout(searchTimeout);
-                searchTimeout = setTimeout(() => {
-                    window.renderStoreList(e.target.value);
-                }, 300);
-            });
-            document.getElementById('store-filter-type')?.addEventListener('change', () => {
-                window.renderStoreList(document.getElementById('store-search')?.value || '');
-            });
-            document.getElementById('store-filter-status')?.addEventListener('change', () => {
-                window.renderStoreList(document.getElementById('store-search')?.value || '');
+                window.renderStoreList(e.target.value);
             });
         });
     </script>
@@ -4159,7 +3921,7 @@
                         }
 
                         // Kích hoạt giao thức gọi chạy ngầm
-                        window.location.href = 'supraupdate://run';
+                        window.location.href = 'logisticsupdate://run';
 
                         // Xóa trạng thái cũ
                         if (typeof window.UPDATE_STATUS !== 'undefined') {
@@ -5050,7 +4812,7 @@
             // Load local incidents from localStorage
             let localIncidents = [];
             try {
-                const stored = localStorage.getItem('supra_incidents');
+                const stored = localStorage.getItem('logistics_incidents');
                 if (stored) {
                     localIncidents = JSON.parse(stored);
                 }
@@ -5071,7 +4833,7 @@
                     // Filter out compiled incidents to save space in localStorage
                     const compiledIds = new Set(compiledIncidents.map(x => x.id));
                     const pendingSave = incidents.filter(x => !compiledIds.has(x.id));
-                    localStorage.setItem('supra_incidents', JSON.stringify(pendingSave));
+                    localStorage.setItem('logistics_incidents', JSON.stringify(pendingSave));
                 } catch (e) {
                     console.error("Failed to save incidents to localStorage", e);
                     alert("Không thể lưu sự cố. Có thể dung lượng ảnh quá lớn!");
@@ -5290,6 +5052,7 @@
             if (btnSave) {
                 btnSave.addEventListener('click', () => {
                     const dateVal = datePicker.value;
+                    const concungCodeVal = document.getElementById('incident-concung-code').value.trim();
                     const plateVal = plateSelect.value;
                     const typeVal = document.getElementById('incident-type-select').value;
                     const descVal = document.getElementById('incident-desc').value.trim();
@@ -5310,6 +5073,7 @@
                     const newIncident = {
                         id: 'INC-' + Date.now(),
                         date: dateVal,
+                        concungCode: concungCodeVal,
                         plate: plateVal,
                         type: typeVal,
                         desc: descVal,
@@ -5322,6 +5086,7 @@
 
                     const resetIncidentForm = () => {
                         document.getElementById('incident-desc').value = "";
+                        document.getElementById('incident-concung-code').value = "";
                         document.getElementById('incident-type-select').value = "Thiếu hàng";
                         btnRemoveImg.click();
                     };
@@ -5399,6 +5164,7 @@
                         <tr style="border-bottom: 1px solid var(--border-color);">
                             <td><strong>${idx + 1}</strong></td>
                             <td><strong>${formattedDate}</strong></td>
+                            <td><strong style="color: var(--secondary);">${item.concungCode || '-'}</strong></td>
                             <td><span class="trip-status on-time" style="background: rgba(99, 102, 241, 0.15); color: #818cf8;">${item.plate}</span></td>
                             <td>${typeLabel}</td>
                             <td style="max-width: 250px; white-space: normal; word-break: break-word; line-height: 1.4;">${item.desc}</td>
@@ -5545,7 +5311,7 @@
                 if (!results || results.length === 0) {
                     orderLookupBody.innerHTML = `
                         <tr>
-                            <td colspan="8" style="text-align: center; color: var(--text-dim); padding: 40px;">
+                            <td colspan="9" style="text-align: center; color: var(--text-dim); padding: 40px;">
                                 <i class="fas fa-search-location" style="font-size: 2rem; margin-bottom: 10px; opacity:0.3;"></i><br>
                                 Không tìm thấy kết quả nào.
                             </td>
@@ -5554,58 +5320,8 @@
                     return;
                 }
 
-                function getTripType(storeName, storeCode) {
-                    const sName = (storeName || '').toLowerCase().trim();
-                    const sCode = (storeCode || '').toString().trim();
-                    
-                    if (globalTrips && globalTrips.length > 0) {
-                        for (const trip of globalTrips) {
-                            if (trip.points) {
-                                for (const pt of trip.points) {
-                                    if (pt.type === 'DELIVERY') {
-                                        if ((sName && pt.name && pt.name.toLowerCase().trim() === sName) ||
-                                            (sCode && pt.id && pt.id.toString() === sCode)) {
-                                            let type = trip.tripType || '-';
-                                            if (type === 'Đi thẳng') return `<span class="trip-status on-time">Đi thẳng</span>`;
-                                            if (type === 'Trung chuyển') return `<span class="trip-status pending">Trung chuyển</span>`;
-                                            if (type === 'Giao qua GHN') return `<span class="trip-status delayed">Giao qua GHN</span>`;
-                                            return type;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    if (!sName && !sCode) return '-';
-
-                    let hasCoords = true;
-                    if (typeof STORE_LIST_DATA !== 'undefined') {
-                        const store = STORE_LIST_DATA.find(s => s.id === sCode || (s.name && s.name.toLowerCase().trim() === sName));
-                        if (store && (!store.coords || !store.coords.lat || !store.coords.lng)) {
-                            hasCoords = false;
-                        }
-                    }
-
-                    if (!hasCoords) {
-                        return `<span class="trip-status delayed">Giao qua GHN</span>`;
-                    }
-
-                    let isGxt = false;
-                    if (typeof STORE_LIST_DATA !== 'undefined') {
-                        const store = STORE_LIST_DATA.find(s => s.id === sCode || (s.name && s.name.toLowerCase().trim() === sName));
-                        if (store) isGxt = store.isGXT || false;
-                    }
-
-                    if (isGxt) {
-                        return `<span class="trip-status pending">Trung chuyển</span>`;
-                    }
-                    
-                    return `<span class="trip-status on-time">Đi thẳng</span>`;
-                }
-
                 orderLookupBody.innerHTML = results.map(item => {
-                    const tripTypeHtml = getTripType(item['TÊN CỬA HÀNG'], item['MÃ CỬA HÀNG']);
+                    const statusClass = (item['Trạng thái hệ thống'] || '').includes('thành công') ? 'on-time' : 'delayed';
                     return `
                         <tr style="border-bottom: 1px solid var(--border-color);">
                             <td><strong style="color: var(--primary);">${item['Vận đơn'] || ''}</strong></td>
@@ -5615,7 +5331,8 @@
                             <td>${item['Tỉnh lấy'] || ''}</td>
                             <td>${item['Ngày lấy thành công'] || ''}</td>
                             <td>${item['Tỉnh giao'] || ''}</td>
-                            <td>${tripTypeHtml}</td>
+                            <td><span class="trip-status ${statusClass}" style="background: rgba(16, 185, 129, 0.1); color: ${statusClass === 'on-time' ? 'var(--on-time)' : 'var(--delayed)'};">${item['Trạng thái hệ thống'] || ''}</span></td>
+                            <td>${item['Ngày giao dự kiến'] || ''}</td>
                         </tr>
                     `;
                 }).join('');
@@ -5630,36 +5347,6 @@
             // Load June 2026 orders initially after a longer timeout to allow sheet data to load
             setTimeout(loadInitialOrders, 1500);
 
-            let transformedGhnSoData = [];
-            if (typeof STORE_GHN_SO_DATA !== 'undefined') {
-                Object.keys(STORE_GHN_SO_DATA).forEach(date => {
-                    Object.keys(STORE_GHN_SO_DATA[date]).forEach(storeName => {
-                        const info = STORE_GHN_SO_DATA[date][storeName];
-                        const combinedGhn = info.ghn.join(', ');
-                        const combinedSo = info.so.join(', ');
-                        
-                        let storeCode = '';
-                        if (typeof STORE_LIST_DATA !== 'undefined') {
-                            const st = window.GlobalStoreMapByName[storeName];
-                            if (st) storeCode = st.id || st.code || '';
-                        }
-                        
-                        transformedGhnSoData.push({
-                            'Vận đơn': (combinedGhn ? combinedGhn : '') + (combinedSo ? (combinedGhn ? '<br>' : '') + 'SO: ' + combinedSo : ''),
-                            'RawSearchText': combinedGhn + ' ' + combinedSo + ' ' + storeName,
-                            'MÃ CỬA HÀNG': storeCode,
-                            'TÊN CỬA HÀNG': storeName,
-                            'Ngày tạo đơn': date,
-                            'Ngày lấy thành công': date,
-                            'Tỉnh giao': storeName,
-                            'Trạng thái hệ thống': '-',
-                            'Tỉnh lấy': 'Phú Thọ',
-                            'Ngày giao dự kiến': '-'
-                        });
-                    });
-                });
-            }
-
             if (orderSearchInput) {
                 orderSearchInput.addEventListener('input', function () {
                     const val = this.value.trim().toLowerCase();
@@ -5669,14 +5356,15 @@
                     }
 
                     let allData = [];
+                    if (typeof concungData !== 'undefined') {
+                        allData = allData.concat(concungData);
+                    }
                     allData = allData.concat(sheetData);
-                    allData = allData.concat(transformedGhnSoData);
 
                     const results = allData.filter(item => {
                         const vd = (item['Vận đơn'] || '').toLowerCase();
                         const ma = (item['MÃ CỬA HÀNG'] || '').toLowerCase();
-                        const raw = (item['RawSearchText'] || '').toLowerCase();
-                        return vd.includes(val) || ma.includes(val) || raw.includes(val);
+                        return vd.includes(val) || ma.includes(val);
                     });
                     renderOrderLookup(results.slice(0, 50));
                 });
@@ -5888,27 +5576,87 @@
     let usersLoaded = false;
     let isOfflineMode = false;
 
-    function loadUsersFromFirebase() {
+    async function loadUsersFromFirebase() {
         let localUsers = {};
         try {
-            const stored = localStorage.getItem('supra_local_users');
+            const stored = localStorage.getItem('logistics_local_users');
             if (stored) localUsers = JSON.parse(stored);
         } catch(e) { console.error(e); }
-        isOfflineMode = true;
-        APP_USERS = Object.assign(JSON.parse(JSON.stringify(DEFAULT_USERS)), localUsers);
-        const savedLoginFallback = localStorage.getItem('userLogin');
-        if (savedLoginFallback && !APP_USERS[savedLoginFallback]) {
-            APP_USERS[savedLoginFallback] = { password: 'xxx', name: localStorage.getItem('userName') || 'Người dùng', roleTitle: localStorage.getItem('userTitle') || 'Logistics Staff', role: localStorage.getItem('userRole') || 'GHN', isAdmin: false, allowedTabs: DEFAULT_GHN_TABS };
+
+        if (window.location.protocol === 'file:') {
+            isOfflineMode = true;
+            APP_USERS = Object.assign(JSON.parse(JSON.stringify(DEFAULT_USERS)), localUsers);
+            usersLoaded = true;
+            applyRolePermissions();
+            if (document.getElementById('user-management-tbody')) renderUserTable();
+            const loadingMsg = document.getElementById('firebase-loading');
+            if (loadingMsg) {
+                loadingMsg.style.color = '#f59e0b';
+                loadingMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Đang chạy offline';
+            }
+            return;
         }
-        usersLoaded = true;
-        applyRolePermissions();
-        if (document.getElementById('user-management-tbody')) renderUserTable();
+        try {
+            // Thêm timeout 10 giây để không bị treo vĩnh viễn trên file:///
+            const snapshot = await Promise.race([
+                db.collection('users').get(),
+                new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 10000))
+            ]);
+            
+            if (snapshot.empty) {
+                console.log("No users in Firebase, initializing defaults...");
+                for (let key in DEFAULT_USERS) {
+                    await db.collection('users').doc(key).set(DEFAULT_USERS[key]);
+                }
+                APP_USERS = JSON.parse(JSON.stringify(DEFAULT_USERS));
+            } else {
+                APP_USERS = {};
+                snapshot.forEach(doc => {
+                    APP_USERS[doc.id] = doc.data();
+                });
+            }
+            // Merge with local users too, so local custom users still exist
+            Object.assign(APP_USERS, localUsers);
+            usersLoaded = true;
+            
+            applyRolePermissions();
+            
+            if (document.getElementById('user-management-tbody')) {
+                renderUserTable();
+            }
+            
+            const loadingMsg = document.getElementById('firebase-loading');
+            if (loadingMsg) loadingMsg.style.display = 'none';
+        } catch (error) {
+            console.error("Error loading users:", error);
+            console.log("Firebase load failed or timed out. Falling back to default offline users.");
+            isOfflineMode = true;
+            
+            // Fallback để vẫn đăng nhập được khi chạy local file:/// hoặc mạng lỗi
+            APP_USERS = Object.assign(JSON.parse(JSON.stringify(DEFAULT_USERS)), localUsers);
+            usersLoaded = true;
+            applyRolePermissions();
+            
+            if (document.getElementById('user-management-tbody')) {
+                renderUserTable();
+            }
+            
+            const loadingMsg = document.getElementById('firebase-loading');
+            if (loadingMsg) {
+                loadingMsg.style.color = '#f59e0b';
+                loadingMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Đang chạy offline (không đồng bộ dữ liệu)';
+            }
+        }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
         const overlay = document.getElementById('login-overlay');
         if (overlay) {
-            
+            const msg = document.createElement('div');
+            msg.id = 'firebase-loading';
+            msg.style = 'color: #10b981; margin-top: 20px; font-weight: bold; text-align:center; font-size: 0.95rem;';
+            msg.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Đang đồng bộ dữ liệu với máy chủ...';
+            document.getElementById('role-selection-box').appendChild(msg);
         }
         
         loadUsersFromFirebase();
@@ -6193,14 +5941,14 @@
                 // Save to localStorage as fallback
                 try {
                     let localUsers = {};
-                    const stored = localStorage.getItem('supra_local_users');
+                    const stored = localStorage.getItem('logistics_local_users');
                     if (stored) localUsers = JSON.parse(stored);
                     
                     if (!localUsers[currentlyEditingUser]) {
                         localUsers[currentlyEditingUser] = JSON.parse(JSON.stringify(APP_USERS[currentlyEditingUser]));
                     }
                     localUsers[currentlyEditingUser].allowedTabs = newTabs;
-                    localStorage.setItem('supra_local_users', JSON.stringify(localUsers));
+                    localStorage.setItem('logistics_local_users', JSON.stringify(localUsers));
                     
                     renderUserTable();
                     closeEditModal();
@@ -6216,7 +5964,9 @@
                 const btn = document.querySelector('#edit-user-overlay .btn-primary');
                 const oldText = btn.innerText;
                 btn.innerText = 'Đang lưu...';
-                
+                await db.collection('users').doc(currentlyEditingUser).update({
+                    allowedTabs: newTabs
+                });
                 btn.innerText = oldText;
                 renderUserTable();
                 closeEditModal();
@@ -6268,10 +6018,10 @@
             // Save to localStorage as fallback
             try {
                 let localUsers = {};
-                const stored = localStorage.getItem('supra_local_users');
+                const stored = localStorage.getItem('logistics_local_users');
                 if (stored) localUsers = JSON.parse(stored);
                 localUsers[email] = newUserInfo;
-                localStorage.setItem('supra_local_users', JSON.stringify(localUsers));
+                localStorage.setItem('logistics_local_users', JSON.stringify(localUsers));
                 
                 APP_USERS[email] = newUserInfo;
                 document.getElementById('new-user-email').value = '';
@@ -6319,7 +6069,7 @@
                 let deletedFirebase = false;
                 if (window.location.protocol !== 'file:' && !isOfflineMode) {
                     try {
-                        
+                        await db.collection('users').doc(username).delete();
                         deletedFirebase = true;
                     } catch (err) {
                         console.error(err);
@@ -6331,11 +6081,11 @@
                 // Always clean up from localStorage just in case
                 try {
                     let localUsers = {};
-                    const stored = localStorage.getItem('supra_local_users');
+                    const stored = localStorage.getItem('logistics_local_users');
                     if (stored) localUsers = JSON.parse(stored);
                     if (localUsers[username]) {
                         delete localUsers[username];
-                        localStorage.setItem('supra_local_users', JSON.stringify(localUsers));
+                        localStorage.setItem('logistics_local_users', JSON.stringify(localUsers));
                     }
                 } catch(e) { console.error(e); }
                 
@@ -6409,7 +6159,7 @@
 
         try {
             let localUsers = {};
-            const stored = localStorage.getItem('supra_local_users');
+            const stored = localStorage.getItem('logistics_local_users');
             if (stored) localUsers = JSON.parse(stored);
             
             if (!localUsers[loginUsername]) {
@@ -6417,7 +6167,7 @@
             } else {
                 localUsers[loginUsername].password = newPass;
             }
-            localStorage.setItem('supra_local_users', JSON.stringify(localUsers));
+            localStorage.setItem('logistics_local_users', JSON.stringify(localUsers));
         } catch (e) {
             console.error('Error saving local password:', e);
         }
