@@ -7,6 +7,7 @@ echo Dang tu dong day cac thay doi len GitHub...
 
 git add .
 git commit -m "Auto update data"
+git pull --rebase origin main
 git push origin main
 
 echo.

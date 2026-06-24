@@ -1,4 +1,5 @@
 @echo off
+:LOOP
 echo ========================================================
 echo   DONG BO BOOKING, GIO XUAT VA BIEN SO XE TREN DASHBOARD
 echo ========================================================
@@ -11,3 +12,7 @@ echo KET THUC DONG BO LOKAL.
 echo ========================================================
 echo.
 call "%~dp0Dong_Bo_Github.bat"
+
+echo Dang doi 60 giay de cap nhat tiep theo...
+timeout /t 60 /nobreak >nul
+goto LOOP
