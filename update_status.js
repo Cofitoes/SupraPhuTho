@@ -1,1 +1,1 @@
-﻿window.UPDATE_STATUS = {"status":"error","timestamp":"2026-06-24 18:32:09","message":"Chi tiet loi: warning: in the working copy of test_browser.py, LF will be replaced by CRLF the next time Git touches it","step":"Loi trong qua trinh cap nhat","progress":0};
+﻿window.UPDATE_STATUS = {"status":"running","timestamp":"2026-06-24 18:42:30","message":"","step":"Dang dong bo du lieu len link online...","progress":95};
