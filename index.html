@@ -749,57 +749,7 @@
 }
 </style>
 
-<script src="firebase-app-compat.js"></script>
-<script src="firebase-firestore-compat.js"></script>
 <script>
-  let db = null;
-  try {
-    if (typeof firebase !== 'undefined') {
-      const firebaseConfig = {
-        apiKey: "AIzaSyA9DrBxkEy_s4cOc5ObcFPhfwNQqQLFLRw",
-        authDomain: "logistics-hub-6657b.firebaseapp.com",
-        projectId: "logistics-hub-6657b",
-        storageBucket: "logistics-hub-6657b.firebasestorage.app",
-        messagingSenderId: "1085764364186",
-        appId: "1:1085764364186:web:e235282a9019e5113ebc23",
-        measurementId: "G-WLW0C70CQ0"
-      };
-      firebase.initializeApp(firebaseConfig);
-      db = firebase.firestore();
-      
-      // Kích hoạt Firestore Offline Persistence (Lưu trữ ngoại tuyến)
-      db.enablePersistence().catch((err) => {
-        if (err.code == 'failed-precondition') {
-          console.warn("Firebase persistence failed-precondition (multiple tabs)");
-        } else if (err.code == 'unimplemented') {
-          console.warn("Firebase persistence unimplemented in this browser");
-        }
-      });
-    } else {
-      console.warn("Firebase SDK not loaded. Working in offline mock fallback.");
-    }
-  } catch (e) {
-    console.error("Firebase initialization failed:", e);
-  }
-
-  // Khởi tạo Mock DB nếu Firebase không thể chạy để tránh crash trang web
-  if (!db) {
-    db = {
-      collection: function() {
-        return {
-          get: function() { return Promise.reject(new Error("Firebase is not initialized")); },
-          doc: function(docId) {
-            return {
-              set: function() { return Promise.reject(new Error("Firebase is not initialized")); },
-              update: function() { return Promise.reject(new Error("Firebase is not initialized")); },
-              delete: function() { return Promise.reject(new Error("Firebase is not initialized")); }
-            };
-          }
-        };
-      }
-    };
-  }
-</script>
 
 </head>
 
@@ -5938,95 +5888,27 @@
     let usersLoaded = false;
     let isOfflineMode = false;
 
-    async function loadUsersFromFirebase() {
+    function loadUsersFromFirebase() {
         let localUsers = {};
         try {
             const stored = localStorage.getItem('supra_local_users');
             if (stored) localUsers = JSON.parse(stored);
         } catch(e) { console.error(e); }
-
-        if (window.location.protocol === 'file:') {
-            isOfflineMode = true;
-            APP_USERS = Object.assign(JSON.parse(JSON.stringify(DEFAULT_USERS)), localUsers);
-            const savedLogin = localStorage.getItem('userLogin');
-            if (savedLogin && !APP_USERS[savedLogin]) {
-                APP_USERS[savedLogin] = { password: 'xxx', name: localStorage.getItem('userName') || 'Người dùng', roleTitle: localStorage.getItem('userTitle') || 'Logistics Staff', role: localStorage.getItem('userRole') || 'GHN', isAdmin: false, allowedTabs: DEFAULT_GHN_TABS };
-            }
-            usersLoaded = true;
-            applyRolePermissions();
-            if (document.getElementById('user-management-tbody')) renderUserTable();
-            const loadingMsg = document.getElementById('firebase-loading');
-            if (loadingMsg) {
-                loadingMsg.style.color = '#f59e0b';
-                loadingMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Đang chạy offline';
-            }
-            return;
+        isOfflineMode = true;
+        APP_USERS = Object.assign(JSON.parse(JSON.stringify(DEFAULT_USERS)), localUsers);
+        const savedLoginFallback = localStorage.getItem('userLogin');
+        if (savedLoginFallback && !APP_USERS[savedLoginFallback]) {
+            APP_USERS[savedLoginFallback] = { password: 'xxx', name: localStorage.getItem('userName') || 'Người dùng', roleTitle: localStorage.getItem('userTitle') || 'Logistics Staff', role: localStorage.getItem('userRole') || 'GHN', isAdmin: false, allowedTabs: DEFAULT_GHN_TABS };
         }
-        try {
-            // Thêm timeout 10 giây để không bị treo vĩnh viễn trên file:///
-            const snapshot = await Promise.race([
-                db.collection('users').get(),
-                new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 10000))
-            ]);
-            
-            if (snapshot.empty) {
-                console.log("No users in Firebase, initializing defaults...");
-                for (let key in DEFAULT_USERS) {
-                    await db.collection('users').doc(key).set(DEFAULT_USERS[key]);
-                }
-                APP_USERS = JSON.parse(JSON.stringify(DEFAULT_USERS));
-            } else {
-                APP_USERS = {};
-                snapshot.forEach(doc => {
-                    APP_USERS[doc.id] = doc.data();
-                });
-            }
-            // Merge with local users too, so local custom users still exist
-            Object.assign(APP_USERS, localUsers);
-            usersLoaded = true;
-            
-            applyRolePermissions();
-            
-            if (document.getElementById('user-management-tbody')) {
-                renderUserTable();
-            }
-            
-            const loadingMsg = document.getElementById('firebase-loading');
-            if (loadingMsg) loadingMsg.style.display = 'none';
-        } catch (error) {
-            console.error("Error loading users:", error);
-            console.log("Firebase load failed or timed out. Falling back to default offline users.");
-            isOfflineMode = true;
-            
-            // Fallback để vẫn đăng nhập được khi chạy local file:/// hoặc mạng lỗi
-            APP_USERS = Object.assign(JSON.parse(JSON.stringify(DEFAULT_USERS)), localUsers);
-            const savedLoginFallback = localStorage.getItem('userLogin');
-            if (savedLoginFallback && !APP_USERS[savedLoginFallback]) {
-                APP_USERS[savedLoginFallback] = { password: 'xxx', name: localStorage.getItem('userName') || 'Người dùng', roleTitle: localStorage.getItem('userTitle') || 'Logistics Staff', role: localStorage.getItem('userRole') || 'GHN', isAdmin: false, allowedTabs: DEFAULT_GHN_TABS };
-            }
-            usersLoaded = true;
-            applyRolePermissions();
-            
-            if (document.getElementById('user-management-tbody')) {
-                renderUserTable();
-            }
-            
-            const loadingMsg = document.getElementById('firebase-loading');
-            if (loadingMsg) {
-                loadingMsg.style.color = '#f59e0b';
-                loadingMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Đang chạy offline (không đồng bộ dữ liệu)';
-            }
-        }
+        usersLoaded = true;
+        applyRolePermissions();
+        if (document.getElementById('user-management-tbody')) renderUserTable();
     }
 
     document.addEventListener('DOMContentLoaded', () => {
         const overlay = document.getElementById('login-overlay');
         if (overlay) {
-            const msg = document.createElement('div');
-            msg.id = 'firebase-loading';
-            msg.style = 'color: #10b981; margin-top: 20px; font-weight: bold; text-align:center; font-size: 0.95rem;';
-            msg.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Đang đồng bộ dữ liệu với máy chủ...';
-            document.getElementById('role-selection-box').appendChild(msg);
+            
         }
         
         loadUsersFromFirebase();
@@ -6334,9 +6216,7 @@
                 const btn = document.querySelector('#edit-user-overlay .btn-primary');
                 const oldText = btn.innerText;
                 btn.innerText = 'Đang lưu...';
-                await db.collection('users').doc(currentlyEditingUser).update({
-                    allowedTabs: newTabs
-                });
+                
                 btn.innerText = oldText;
                 renderUserTable();
                 closeEditModal();
@@ -6439,7 +6319,7 @@
                 let deletedFirebase = false;
                 if (window.location.protocol !== 'file:' && !isOfflineMode) {
                     try {
-                        await db.collection('users').doc(username).delete();
+                        
                         deletedFirebase = true;
                     } catch (err) {
                         console.error(err);
