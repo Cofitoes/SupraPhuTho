@@ -215,26 +215,24 @@ function generateTrips() {
             let cw = seed.weight || 0;
             let cv = seed.volume || 0;
 
-            // Cập nhật: Luôn cho phép ghép tối đa lên xe 5T (4900kg / 26CBM) để giảm số chuyến
+            // Priority 3: Trường hợp có Siêu thị nào có lượng hàng = 2 xe 1t9, có thể sắp xe 5 tấn
+            let chunkMaxW = 1900;
+            let chunkMaxV = 14;
+            // Nếu siêu thị mỏ neo vượt quá 1 xe 1.9T thì nâng lên xe 5T
+            if (cw > 1900 || cv > 14) {
+                chunkMaxW = 4900;
+                chunkMaxV = 26;
+            }
+
+            let limit = 15; // Mới nhất: Chỉ sử dụng xe 1.9 Tấn để giao thẳng, tối đa là 15 điểm giao
             let added = true;
-            while (added) {
+            while (added && chunk.length < limit) {
                 added = false;
                 let nearestIdx = -1, minDist = Infinity;
                 for (let i = 0; i < remaining.length; i++) {
                     const p = remaining[i];
                     
-                    let nextW = cw + (p.weight || 0);
-                    let nextV = cv + (p.volume || 0);
-                    let nextLen = chunk.length + 1;
-                    
-                    let valid = false;
-                    // Theo rule mới nhất từ user: Chỉ sử dụng xe 1.9T để giao thẳng, tối đa 15 điểm giao.
-                    // Nếu quá 2 xe 1t9 thì sắp 5T. Tất cả đều max 15 điểm.
-                    if (nextW <= 4900 && nextV <= 26 && nextLen <= 15) {
-                        valid = true;
-                    }
-
-                    if (valid) {
+                    if (cw + (p.weight || 0) <= chunkMaxW && cv + (p.volume || 0) <= chunkMaxV) {
                         const d = calculateDistance(chunk[chunk.length - 1].coords, p.coords);
                         if (d < minDist) { minDist = d; nearestIdx = i; }
                     }
@@ -278,16 +276,18 @@ function generateTrips() {
             };
 
             const isValidChunk = (chunk) => {
-    if (chunk.length === 0) return true;
-    if (chunk.length > 15) return false;
-    let w = 0, v = 0;
-    for (let i = 0; i < chunk.length; i++) {
-        w += chunk[i].weight || 0;
-        v += chunk[i].volume || 0;
-    }
-    if (w > 4900 || v > 26) return false;
-    return true;
-};
+                if (chunk.length === 0) return true;
+                if (chunk.length > 15) return false; // Mới nhất: tối đa là 15 điểm giao
+                let w = 0, v = 0, hasBigStore = false;
+                for (let i = 0; i < chunk.length; i++) {
+                    w += chunk[i].weight || 0;
+                    v += chunk[i].volume || 0;
+                    if ((chunk[i].weight || 0) > 1900 || (chunk[i].volume || 0) > 14) hasBigStore = true;
+                }
+                let maxW = hasBigStore ? 4900 : 1900;
+                let maxV = hasBigStore ? 26 : 14;
+                return w <= maxW && v <= maxV;
+            };
 
             let bestScore = evaluateSolution(clusters);
             let chunkVals = clusters.map(c => getChunkVal(evaluateChunk(c)));
