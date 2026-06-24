@@ -3443,15 +3443,16 @@
             );
 
             filteredStores.sort((a, b) => {
-                const errA = isMockOrMissingCoords(a.coords);
-                const errB = isMockOrMissingCoords(b.coords);
-                if (errA && !errB) return -1;
-                if (!errA && errB) return 1;
+                const distA = a.district || '';
+                const distB = b.district || '';
+                const distComp = distA.localeCompare(distB, 'vi', { sensitivity: 'base' });
+                if (distComp !== 0) return distComp;
 
-                const provA = getProvinceFromNameOrAddress(a.name, a.address) || '';
-                const provB = getProvinceFromNameOrAddress(b.name, b.address) || '';
-                const comp = provA.localeCompare(provB, 'vi', { sensitivity: 'base' });
-                if (comp !== 0) return comp;
+                const classA = a.isGXT ? "Chuyển về GXT" : "Giao Thẳng";
+                const classB = b.isGXT ? "Chuyển về GXT" : "Giao Thẳng";
+                const classComp = classA.localeCompare(classB, 'vi', { sensitivity: 'base' });
+                if (classComp !== 0) return classComp;
+
                 return (a.id || '').localeCompare(b.id || '');
             });
 
