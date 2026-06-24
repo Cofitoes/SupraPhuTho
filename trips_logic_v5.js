@@ -39,7 +39,7 @@ function generateTrips() {
     // --- TRUCK LIMITS ---
     const TRUCK_LIMITS = {
         '1.9T': { maxW: 1900, maxV: 14 },
-        '5T': { maxW: 5550, maxV: 40 },
+        '5T': { maxW: 4900, maxV: 26 },
         '8T': { maxW: 6800, maxV: 55 }
     };
 
@@ -143,8 +143,8 @@ function generateTrips() {
     const splitLargeDirectPoints = (points) => {
         const result = [];
         points.forEach(p => {
-            const maxW = 5550;
-            const maxV = 40;
+            const maxW = 4900;
+            const maxV = 26;
             if ((p.weight && p.weight > maxW) || (p.volume && p.volume > maxV)) {
                 let remW = p.weight || 0;
                 let remV = p.volume || 0;
@@ -220,8 +220,8 @@ function generateTrips() {
             let chunkMaxV = 14;
             // Nếu cửa hàng vượt quá 1 xe 1.9T thì nâng lên xe 5T
             if (cw > 1900 || cv > 14) {
-                chunkMaxW = 5550;
-                chunkMaxV = 40;
+                chunkMaxW = 4900;
+                chunkMaxV = 26;
             }
 
             // Dynamic capacity to balance trips
@@ -292,8 +292,8 @@ function generateTrips() {
                     v += chunk[i].volume || 0;
                     if ((chunk[i].weight || 0) > 1900 || (chunk[i].volume || 0) > 14) hasBigStore = true;
                 }
-                let maxW = hasBigStore ? 5550 : 1900;
-                let maxV = hasBigStore ? 40 : 14;
+                let maxW = hasBigStore ? 4900 : 1900;
+                let maxV = hasBigStore ? 26 : 14;
                 return w <= maxW && v <= maxV;
             };
 
@@ -450,7 +450,7 @@ function generateTrips() {
 
         // Determine best truck type
         let truckType = '8T';
-        if (totalGxtW <= 5550 && totalGxtV <= 40) truckType = '5T';
+        if (totalGxtW <= 4900 && totalGxtV <= 26) truckType = '5T';
         if (totalGxtW <= 1900 && totalGxtV <= 14) truckType = '1.9T';
 
         // If total exceeds 8T, split into multiple transit trips
@@ -488,7 +488,7 @@ function generateTrips() {
             const chunkV = chunk.reduce((s, p) => s + (p.volume || 0), 0);
 
             let chunkTruckType = '8T';
-            if (chunkW <= 5550 && chunkV <= 40) chunkTruckType = '5T';
+            if (chunkW <= 4900 && chunkV <= 26) chunkTruckType = '5T';
             if (chunkW <= 1900 && chunkV <= 14) chunkTruckType = '1.9T';
 
             // Build store names list for display
