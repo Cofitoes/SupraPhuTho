@@ -1892,7 +1892,7 @@
             }
 
             if (typeof generateTrips === 'function') {
-                globalTrips = generateTrips();
+                globalTrips = safeGenerateTrips();
                 window.renderTripsTable(); // Re-render main table if needed
             }
         };
@@ -2265,7 +2265,7 @@
                                         coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords
                                     };
                                 });
-                                const trips = generateTrips();
+                                const trips = safeGenerateTrips();
                                 let c19 = 0, c5 = 0, c8 = 0;
                                 let totalCost = 0;
                                 trips.forEach(t => {
@@ -2386,7 +2386,7 @@
                 const dateVal = document.getElementById('global-date-filter').value;
 
                 try {
-                    globalTrips = generateTrips();
+                    globalTrips = safeGenerateTrips();
 
                     DELIVERY_POINTS.forEach(p => {
                         let isInTrip = false;
@@ -4141,7 +4141,7 @@
                                         coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords
                                     };
                                 });
-                                const tripsForDate = generateTrips();
+                                const tripsForDate = safeGenerateTrips();
                                 window.checkinTripsCache[filterVal] = tripsForDate;
                                 DELIVERY_POINTS = backupPoints;
                             } else {
@@ -4302,7 +4302,7 @@
                                         coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords
                                     };
                                 });
-                                const tripsForDate = generateTrips();
+                                const tripsForDate = safeGenerateTrips();
                                 window.checkinTripsCache[bookingDate] = tripsForDate;
                                 DELIVERY_POINTS = backupPoints;
                             } else {
@@ -4620,7 +4620,7 @@
                             };
                         });
 
-                        tripsForDate = generateTrips();
+                        tripsForDate = safeGenerateTrips();
                         window.DELIVERY_POINTS = originalDeliveryPoints;
                     }
 
@@ -4945,7 +4945,7 @@
                     });
 
                     try {
-                        const trips = generateTrips();
+                        const trips = safeGenerateTrips();
                         trips.forEach((t, idx) => {
                             let plate = '';
                             if (typeof VEHICLE_DATA !== 'undefined' && VEHICLE_DATA[dateVal] && VEHICLE_DATA[dateVal][(idx + 1).toString()]) {
