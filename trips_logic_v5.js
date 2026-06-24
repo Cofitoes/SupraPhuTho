@@ -215,32 +215,28 @@ function generateTrips() {
             let cw = seed.weight || 0;
             let cv = seed.volume || 0;
 
-            // Priority 3: Trường hợp có Siêu thị nào có lượng hàng = 2 xe 1t9, có thể sắp xe 5 tấn
-            let chunkMaxW = 1900;
-            let chunkMaxV = 14;
-            // Nếu cửa hàng vượt quá 1 xe 1.9T thì nâng lên xe 5T
-            if (cw > 1900 || cv > 14) {
-                chunkMaxW = 4900;
-                chunkMaxV = 26;
-            }
-
-            // Dynamic capacity to balance trips
-            let remW = cw, remV = cv;
-            for (let i = 0; i < remaining.length; i++) {
-                  remW += (remaining[i].weight || 0);
-                  remV += (remaining[i].volume || 0);
-              }
-            let neededTrucks = Math.max(1, Math.ceil(remW / 1900), Math.ceil(remV / 14));
-            let dynamicLimit = Math.ceil((remaining.length + 1) / neededTrucks) + 1; // +1 for slack
-            let limit = Math.min(15, Math.max(3, dynamicLimit)); // Bound between 3 and 15
-
+            // Cập nhật: Luôn cho phép ghép tối đa lên xe 5T (4900kg / 26CBM) để giảm số chuyến
             let added = true;
-            while (added && chunk.length < limit) {
+            while (added) {
                 added = false;
                 let nearestIdx = -1, minDist = Infinity;
                 for (let i = 0; i < remaining.length; i++) {
                     const p = remaining[i];
-                    if (cw + (p.weight || 0) <= chunkMaxW && cv + (p.volume || 0) <= chunkMaxV) {
+                    
+                    let nextW = cw + (p.weight || 0);
+                    let nextV = cv + (p.volume || 0);
+                    let nextLen = chunk.length + 1;
+                    
+                    let valid = false;
+                    // Logic: Nếu tổng < 1.9T thì chỉ được tối đa 3 điểm
+                    if (nextW <= 1900 && nextV <= 14) {
+                        if (nextLen <= 3) valid = true;
+                    } else {
+                        // Nâng lên 5T: cho phép tối đa 15 điểm
+                        if (nextW <= 4900 && nextV <= 26 && nextLen <= 15) valid = true;
+                    }
+
+                    if (valid) {
                         const d = calculateDistance(chunk[chunk.length - 1].coords, p.coords);
                         if (d < minDist) { minDist = d; nearestIdx = i; }
                     }
@@ -284,18 +280,20 @@ function generateTrips() {
             };
 
             const isValidChunk = (chunk) => {
-                if (chunk.length === 0) return true;
-                if (chunk.length > 15) return false;
-                let w = 0, v = 0, hasBigStore = false;
-                for (let i = 0; i < chunk.length; i++) {
-                    w += chunk[i].weight || 0;
-                    v += chunk[i].volume || 0;
-                    if ((chunk[i].weight || 0) > 1900 || (chunk[i].volume || 0) > 14) hasBigStore = true;
-                }
-                let maxW = hasBigStore ? 4900 : 1900;
-                let maxV = hasBigStore ? 26 : 14;
-                return w <= maxW && v <= maxV;
-            };
+    if (chunk.length === 0) return true;
+    let w = 0, v = 0;
+    for (let i = 0; i < chunk.length; i++) {
+        w += chunk[i].weight || 0;
+        v += chunk[i].volume || 0;
+    }
+    if (w <= 1900 && v <= 14) {
+        if (chunk.length > 3) return false;
+    } else {
+        if (w > 4900 || v > 26) return false;
+        if (chunk.length > 15) return false;
+    }
+    return true;
+};
 
             let bestScore = evaluateSolution(clusters);
             let chunkVals = clusters.map(c => getChunkVal(evaluateChunk(c)));
