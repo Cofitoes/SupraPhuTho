@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supra Phú Thọ | Quản Lý Vận Tải Thông Minh</title>
+    <title>Logistics Intelligence Hub | Quản Lý Vận Tải Thông Minh</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -910,7 +910,7 @@
                 <div class="user-info"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User">
                     <div>
                         <p class="name">Quản Trị Viên</p>
-                        <p class="role">GHN Manager</p>
+                        <p class="role">Logistics Manager</p>
                     </div>
                 </div>
             </div>
@@ -1319,7 +1319,9 @@
                                             placeholder="Chọn ngày...">
                                     </div>
                                     <div style="display: flex; flex-direction: column; gap: 8px; flex: 1;">
-                                        
+                                        <label style="color: var(--text-dim); font-size: 0.9rem; font-weight: 600;">Mã
+                                            style="width: 100% !important; text-align: left !important;"
+                                            placeholder="Nhập mã đơn...">
                                     </div>
                                 </div>
 
@@ -1617,14 +1619,12 @@
                     if (dp.id) window.GlobalBookingMapById[dp.id] = dp; \
                     if (dp.name) window.GlobalBookingMapByName[dp.name] = dp; \
                 });             } \
-            
         </scr' + 'ipt>');
 
         document.write('<script src="departure_times.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
         document.write('<script src="vehicle_data.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
         document.write('<script src="checkin_data.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
         document.write('<script src="incidents_data.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
-        
         document.write('<script src="Data_Booking/telegram_data.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
     </script>
     <script>
@@ -1892,7 +1892,6 @@
                 const isDateMatch = d1 === d2 || p.date === formattedDate || p.date === ghnDatePicker.value;
                 if (!isDateMatch) return false;
 
-                
                 return true;
             }).map(p => {
                 const store = (typeof STORE_LIST_DATA !== 'undefined') ? STORE_LIST_DATA.find(s => s.id === p.id) : null;
@@ -2648,7 +2647,6 @@
                         if (store.ghn || store['Mã đơn GHN'] || store.maGHN) {
                             doList.push(store.ghn || store['Mã đơn GHN'] || store.maGHN);
                         }
-                        }
 
                         soList = [...new Set(soList)];
                         doList = [...new Set(doList)];
@@ -3349,7 +3347,6 @@
                             }
                             if (s.ghn || s['Mã đơn GHN'] || s.maGHN) {
                                 ghnList.push(s.ghn || s['Mã đơn GHN'] || s.maGHN);
-                            }
                             }
                         }
                     });
@@ -4309,7 +4306,7 @@
                             progressStep.innerText = 'Quá thời gian chờ phản hồi từ hệ thống.';
                             const currentFile = window.location.pathname.split('/').pop() || 'demo.html';
                             errorText.innerText = isOnline
-                                ? `Đồng bộ online mất nhiều thời gian hơn dự kiến hoặc tiến trình local bị chặn. Hãy kiểm tra xem file Dashboard dưới máy local (file:///G:/My%20Drive/Training%20AI/Supra%20Phú%20Thọ/${currentFile}) đã được cập nhật thành công hay chưa!`
+                                ? `Đồng bộ online mất nhiều thời gian hơn dự kiến hoặc tiến trình local bị chặn. Hãy kiểm tra xem file Dashboard dưới máy local (file:///G:/My%20Drive/Training%20AI/LogisticsHub/${currentFile}) đã được cập nhật thành công hay chưa!`
                                 : 'Không nhận được trạng thái từ tiến trình. Hãy kiểm tra xem file cập nhật hoặc PowerShell có bị lỗi hay không.';
                             errorContainer.style.display = 'flex';
                             closeBtn.style.display = 'inline-block';
@@ -5343,7 +5340,6 @@
             if (btnSave) {
                 btnSave.addEventListener('click', () => {
                     const dateVal = datePicker.value;
-                    
                     const plateVal = plateSelect.value;
                     const typeVal = document.getElementById('incident-type-select').value;
                     const descVal = document.getElementById('incident-desc').value.trim();
@@ -5364,7 +5360,6 @@
                     const newIncident = {
                         id: 'INC-' + Date.now(),
                         date: dateVal,
-                        
                         plate: plateVal,
                         type: typeVal,
                         desc: descVal,
@@ -5377,7 +5372,6 @@
 
                     const resetIncidentForm = () => {
                         document.getElementById('incident-desc').value = "";
-                        
                         document.getElementById('incident-type-select').value = "Thiếu hàng";
                         btnRemoveImg.click();
                     };
@@ -5455,7 +5449,6 @@
                         <tr style="border-bottom: 1px solid var(--border-color);">
                             <td><strong>${idx + 1}</strong></td>
                             <td><strong>${formattedDate}</strong></td>
-                            
                             <td><span class="trip-status on-time" style="background: rgba(99, 102, 241, 0.15); color: #818cf8;">${item.plate}</span></td>
                             <td>${typeLabel}</td>
                             <td style="max-width: 250px; white-space: normal; word-break: break-word; line-height: 1.4;">${item.desc}</td>
@@ -5726,7 +5719,6 @@
                     }
 
                     let allData = [];
-                    
                     allData = allData.concat(sheetData);
                     allData = allData.concat(transformedGhnSoData);
 
@@ -5937,8 +5929,8 @@
     const DEFAULT_NCC_TABS = ['scheduler', 'dispatched-trucks', 'incidents', 'order-lookup'];
 
     const DEFAULT_USERS = {
-        'admin@ghn.vn': { password: 'ghn123', name: 'Quản Trị Viên GHN', roleTitle: 'GHN Manager', role: 'GHN', isAdmin: true, allowedTabs: AVAILABLE_TABS.map(t=>t.id) },
-        'demo@ghn.vn': { password: 'ghn123', name: 'Nhân sự Demo', roleTitle: 'GHN Staff', role: 'GHN', isAdmin: false, allowedTabs: DEFAULT_GHN_TABS },
+        'admin@ghn.vn': { password: 'ghn123', name: 'Quản Trị Viên GHN', roleTitle: 'Logistics Manager', role: 'GHN', isAdmin: true, allowedTabs: AVAILABLE_TABS.map(t=>t.id) },
+        'demo@ghn.vn': { password: 'ghn123', name: 'Nhân sự Demo', roleTitle: 'Logistics Staff', role: 'GHN', isAdmin: false, allowedTabs: DEFAULT_GHN_TABS },
         'doitac': { password: 'ncc123', name: 'Đối tác Vận Tải', roleTitle: 'NCC Partner', role: 'NCC', isAdmin: false, allowedTabs: DEFAULT_NCC_TABS }
     };
 
@@ -5958,7 +5950,7 @@
             APP_USERS = Object.assign(JSON.parse(JSON.stringify(DEFAULT_USERS)), localUsers);
             const savedLogin = localStorage.getItem('userLogin');
             if (savedLogin && !APP_USERS[savedLogin]) {
-                APP_USERS[savedLogin] = { password: 'xxx', name: localStorage.getItem('userName') || 'Người dùng', roleTitle: localStorage.getItem('userTitle') || 'GHN Staff', role: localStorage.getItem('userRole') || 'GHN', isAdmin: false, allowedTabs: DEFAULT_GHN_TABS };
+                APP_USERS[savedLogin] = { password: 'xxx', name: localStorage.getItem('userName') || 'Người dùng', roleTitle: localStorage.getItem('userTitle') || 'Logistics Staff', role: localStorage.getItem('userRole') || 'GHN', isAdmin: false, allowedTabs: DEFAULT_GHN_TABS };
             }
             usersLoaded = true;
             applyRolePermissions();
@@ -6010,7 +6002,7 @@
             APP_USERS = Object.assign(JSON.parse(JSON.stringify(DEFAULT_USERS)), localUsers);
             const savedLoginFallback = localStorage.getItem('userLogin');
             if (savedLoginFallback && !APP_USERS[savedLoginFallback]) {
-                APP_USERS[savedLoginFallback] = { password: 'xxx', name: localStorage.getItem('userName') || 'Người dùng', roleTitle: localStorage.getItem('userTitle') || 'GHN Staff', role: localStorage.getItem('userRole') || 'GHN', isAdmin: false, allowedTabs: DEFAULT_GHN_TABS };
+                APP_USERS[savedLoginFallback] = { password: 'xxx', name: localStorage.getItem('userName') || 'Người dùng', roleTitle: localStorage.getItem('userTitle') || 'Logistics Staff', role: localStorage.getItem('userRole') || 'GHN', isAdmin: false, allowedTabs: DEFAULT_GHN_TABS };
             }
             usersLoaded = true;
             applyRolePermissions();
@@ -6386,7 +6378,7 @@
         const newUserInfo = {
             password: pass,
             name: name,
-            roleTitle: role === 'GHN' ? 'GHN Staff' : 'NCC Partner',
+            roleTitle: role === 'GHN' ? 'Logistics Staff' : 'NCC Partner',
             role: role,
             isAdmin: false,
             allowedTabs: selectedTabs
