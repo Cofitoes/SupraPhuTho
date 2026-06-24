@@ -96,6 +96,9 @@ for idx, row in df.iterrows():
             "coords": {"lat": 21.387993, "lng": 105.087082},
             "id": "2CGH"
         },
+        "WM+ PTO Khu 8, Tiêu Sơn, Chân Mộng": {
+            "coords": {"lat": 21.1356817, "lng": 105.9913869}
+        },
         # Add future overrides here
     }
     

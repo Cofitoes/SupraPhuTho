@@ -49225,5 +49225,15 @@ const STORE_LIST_DATA = [
       "lat": 21.387993,
       "lng": 105.087082
     }
+  },
+  {
+    "id": "WM+ PTO Khu 8, Tiêu Sơn, Chân Mộng",
+    "name": "WM+ PTO Khu 8, Tiêu Sơn, Chân Mộng",
+    "address": "WM+ PTO Khu 8, Tiêu Sơn, Chân Mộng",
+    "province": "Phú Thọ",
+    "coords": {
+      "lat": 21.1356817,
+      "lng": 105.9913869
+    }
   }
 ];
