@@ -1614,6 +1614,20 @@
                     if (s.name) window.GlobalStoreMapByName[s.name] = s; \
                 }); \
             } \
+            window.GlobalBookingMapById = {}; \
+            window.GlobalBookingMapByName = {}; \
+            if (typeof BOOKING_DELIVERY_POINTS !== "undefined") { \
+                BOOKING_DELIVERY_POINTS.forEach(dp => { \
+                    if (dp.id) window.GlobalBookingMapById[dp.id] = dp; \
+                    if (dp.name) window.GlobalBookingMapByName[dp.name] = dp; \
+                });             } \
+            window.GlobalConcungMap = {}; \
+            if (typeof concungData !== "undefined") { \
+                concungData.forEach(item => { \
+                    if (item["MÃ CỬA HÀNG"] || item["MA CA HA?NG"]) window.GlobalConcungMap[item["MÃ CỬA HÀNG"] || item["MA CA HA?NG"]] = item; \
+                    if (item["MÃ BUFF"] || item["MA BUFF"]) window.GlobalConcungMap[item["MÃ BUFF"] || item["MA BUFF"]] = item; \
+                }); \
+            } \
         </scr' + 'ipt>');
 
         document.write('<script src="departure_times.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
@@ -1888,7 +1902,7 @@
                 if (typeof concungData !== 'undefined') {
                     const b = p.buff || p.Buff || p.BUFF;
                     if (b) {
-                        const matched = concungData.find(item => item['MÃ CỬA HÀNG'] === b);
+                        const matched = window.GlobalConcungMap[b];
                         if (matched && matched['Trạng thái hệ thống'] === 'Giao hàng thành công') {
                             return false;
                         }
@@ -2649,7 +2663,7 @@
                         if (store.ghn || store['Mã đơn GHN'] || store.maGHN) {
                             doList.push(store.ghn || store['Mã đơn GHN'] || store.maGHN);
                         } else if (searchName && typeof concungData !== 'undefined') {
-                            const matched = concungData.find(item => item['MÃ CỬA HÀNG'] === searchName || item['Mã BUFF'] === searchName);
+                            const matched = window.GlobalConcungMap[b];
                             if (matched && (matched['Vận đơn'] || matched['Mã đơn GHN'])) {
                                 doList.push(matched['Vận đơn'] || matched['Mã đơn GHN']);
                             }
@@ -3349,14 +3363,13 @@
                         if (!ghn) {
                             let b = s.buff || s.Buff || s.BUFF;
                             if (!b && typeof BOOKING_DELIVERY_POINTS !== 'undefined') {
-                                let matched = BOOKING_DELIVERY_POINTS.find(dp => dp.id && s.id && dp.id == s.id);
-                                if (!matched) matched = BOOKING_DELIVERY_POINTS.find(dp => dp.name === s.name);
+                                let matched = window.GlobalBookingMapById[s.id] || window.GlobalBookingMapByName[s.name];
                                 if (matched) b = matched.buff || matched.Buff || matched.BUFF;
                             }
                             if (s.ghn || s['Mã đơn GHN'] || s.maGHN) {
                                 ghnList.push(s.ghn || s['Mã đơn GHN'] || s.maGHN);
                             } else if (b && typeof concungData !== 'undefined') {
-                                const matched = concungData.find(item => item['MÃ CỬA HÀNG'] === b || item['Mã BUFF'] === b);
+                                const matched = window.GlobalConcungMap[b];
                                 if (matched && (matched['Vận đơn'] || matched['Mã đơn GHN'])) {
                                     ghnList.push(matched['Vận đơn'] || matched['Mã đơn GHN']);
                                 }
