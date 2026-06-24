@@ -78,24 +78,44 @@ function Sync-Git-Data {
             if ($LASTEXITCODE -ne 0) {
                 throw "Khong the tao commit moi (git commit failed)."
             }
-            
-            # Pull before push using rebase to avoid merge commits
-            Write-Host "Pulling latest changes from remote..."
-            & $gitPath pull origin main --rebase
-            if ($LASTEXITCODE -ne 0) {
-                # Abort the rebase if it fails to leave the repo in a clean state
-                Write-Warning "Rebase failed! Aborting rebase to keep working directory clean..."
-                & $gitPath rebase --abort | Out-Null
-                throw "Khong the tai du lieu moi tu GitHub (git pull --rebase failed). Co the do xung dot file."
+            $maxRetries = 3
+            $success = $false
+            for ($i = 1; $i -le $maxRetries; $i++) {
+                Write-Host "Attempt $i to sync with GitHub..."
+                
+                # Pull before push using rebase to avoid merge commits
+                Write-Host "Pulling latest changes from remote..."
+                & $gitPath pull origin main --rebase
+                if ($LASTEXITCODE -ne 0) {
+                    Write-Warning "Rebase failed! Aborting rebase to keep working directory clean..."
+                    & $gitPath rebase --abort | Out-Null
+                    
+                    if ($i -eq $maxRetries) {
+                        throw "Khong the tai du lieu moi tu GitHub (git pull --rebase failed). Co the do xung dot file."
+                    }
+                    Start-Sleep -Seconds 5
+                    continue
+                }
+                
+                # Push changes to GitHub
+                Write-Host "Pushing changes to GitHub..."
+                & $gitPath push origin main
+                if ($LASTEXITCODE -eq 0) {
+                    $success = $true
+                    Write-Host "Git push completed successfully!"
+                    break
+                }
+                
+                Write-Warning "Push failed. Remote may have changed."
+                if ($i -eq $maxRetries) {
+                    throw "Khong the day du lieu len GitHub (git push failed) sau $maxRetries lan thu."
+                }
+                Start-Sleep -Seconds 5
             }
             
-            # Push changes to GitHub
-            Write-Host "Pushing changes to GitHub..."
-            & $gitPath push origin main
-            if ($LASTEXITCODE -ne 0) {
-                throw "Khong the day du lieu len GitHub (git push failed)."
+            if (-not $success) {
+                throw "Dong bo Github that bai hoan toan."
             }
-            Write-Host "Git push completed successfully!"
         } else {
             Write-Host "No changes detected. No push needed."
         }
