@@ -1,1 +1,1 @@
-﻿window.UPDATE_STATUS = {"status":"error","timestamp":"2026-06-24 15:43:14","message":"Mot tien trinh cap nhat khac (PID 6064) dang chay. Vui long doi.","step":"Loi trung lap tien trinh","progress":0};
+﻿window.UPDATE_STATUS = {"status":"success","timestamp":"2026-06-24 15:43:16","message":"","step":"Hoan thanh cap nhat!","progress":100};
