@@ -1523,12 +1523,12 @@
                         <table style="width: 100%;">
                             <thead>
                                 <tr>
-                                    <th style="width: 5%;">Trip</th>
-                                    <th style="width: 10%;">Biển Số Xe</th>
-                                    <th style="width: 10%;">Trọng Tải Xe</th>
-                                    <th style="width: 35%;">Lộ Trình</th>
-                                    <th style="width: 20%;">Số SO</th>
-                                    <th style="width: 20%;">Mã GHN</th>
+                                    <th style="width: 3%;">Trip</th>
+                                    <th style="width: 7%;">Biển Số Xe</th>
+                                    <th style="width: 7%;">Trọng Tải Xe</th>
+                                    <th style="width: 23%;">Lộ Trình</th>
+                                    <th style="width: 30%;">Số SO</th>
+                                    <th style="width: 30%;">Mã GHN</th>
                                 </tr>
                             </thead>
                             <tbody id="ghn-trips-table-body">
@@ -3344,14 +3344,14 @@
                     const uniqueSoSet = soList.length > 0 ? [...new Set(soList)] : [];
                     const uniqueGhnSet = ghnList.length > 0 ? [...new Set(ghnList)] : [];
                     
-                    const soHtml = uniqueSoSet.map(code => `<div style="break-inside: avoid; margin-bottom: 2px;">${code}</div>`).join('');
+                    const soHtml = uniqueSoSet.map(code => `<div style="break-inside: avoid; white-space: nowrap; margin-bottom: 1px; font-size: 0.75rem;">${code}</div>`).join('');
                     uniqueSOs = uniqueSoSet.length > 0 
-                        ? `<div style="padding-right: 5px; word-break: break-all; column-count: 3; column-gap: 15px;">${soHtml}</div>` 
+                        ? `<div style="column-count: 3; column-gap: 12px;">${soHtml}</div>` 
                         : '-';
                     
-                    const ghnHtml = uniqueGhnSet.map(code => `<div style="break-inside: avoid; margin-bottom: 2px;">${code}</div>`).join('');
+                    const ghnHtml = uniqueGhnSet.map(code => `<div style="break-inside: avoid; white-space: nowrap; margin-bottom: 1px; font-size: 0.75rem;">${code}</div>`).join('');
                     uniqueGhns = uniqueGhnSet.length > 0 
-                        ? `<div style="padding-right: 5px; word-break: break-all; column-count: 3; column-gap: 15px;">${ghnHtml}</div>` 
+                        ? `<div style="column-count: 3; column-gap: 12px;">${ghnHtml}</div>` 
                         : '<span style="color: #ef4444; font-weight: 500;">Thiếu mã GHN</span>';
 
                     if (t.tripType === 'Trung chuyển') {
