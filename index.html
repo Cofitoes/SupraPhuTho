@@ -1590,7 +1590,6 @@
         document.write('<script src="vehicle_data.js?v=' + cb + '"></scr' + 'ipt>');
         document.write('<script src="checkin_data.js?v=' + cb + '"></scr' + 'ipt>');
         document.write('<script src="incidents_data.js?v=' + cb + '"></scr' + 'ipt>');
-        document.write('<script src="concung_data.js?v=' + cb + '"></scr' + 'ipt>');
         document.write('<script src="Data_Booking/telegram_data.js?v=' + cb + '"></scr' + 'ipt>');
     </script>
     <script>
@@ -1795,7 +1794,7 @@
             return `${Math.floor(totalMins / 60).toString().padStart(2, '0')}:${(totalMins % 60).toString().padStart(2, '0')}`;
         }
     </script>
-    <script>document.write('<script src="trips_logic2.js?v=' + cb + '"><\/script>');</script>
+    <script>document.write('<script src="trips_logic_v5.js?v=' + cb + '"><\/script>');</script>
     <script>
         window.extractStoresFromTrip = function (trip) {
             let stores = [];
@@ -5356,10 +5355,7 @@
                     }
 
                     let allData = [];
-                    if (typeof concungData !== 'undefined') {
-                        allData = allData.concat(concungData);
-                    }
-                    allData = allData.concat(sheetData);
+                                        allData = allData.concat(sheetData);
 
                     const results = allData.filter(item => {
                         const vd = (item['Vận đơn'] || '').toLowerCase();
