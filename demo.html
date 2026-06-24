@@ -1212,7 +1212,8 @@
                                     <th>Mã CH</th>
                                     <th>Tên Cửa Hàng</th>
                                     <th>Địa Chỉ</th>
-                                    <th>Tỉnh/Thành Phố</th>
+                                <th>Huyện/Xã</th>
+                                <th>Tỉnh/Thành Phố</th>
                                 <th>Phân loại</th>
                                     <th>Link Google Maps</th>
                                     <th>Cảnh Báo Định Vị</th>
@@ -3427,6 +3428,7 @@
                         name: store.name || bookingInfoMap[id]?.name || '',
                         address: store.address || bookingInfoMap[id]?.address || '',
                         province: store.province || '',
+                        district: store.district || '',
                         coords: store.coords || null,
                         isGXT: store.isGXT || false
                     });
@@ -3482,7 +3484,8 @@
                     <td><strong>${p.id}</strong></td>
                     <td>${p.name}</td>
                     <td style="color: var(--text-dim); max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${p.address || ''}">${p.address || ''}</td>
-                    <td><strong>${province}</strong></td>
+                    <td><strong>${p.district || \'\'}</strong></td>
+                        <td><strong>${province}</strong></td>
                     <td>${phanLoai}</td>
                                 <td>${mapLink}</td>
                     <td>${warning}</td>
