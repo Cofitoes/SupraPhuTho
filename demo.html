@@ -3655,7 +3655,7 @@
 
                     let isGXT = false;
                     if (typeof window.isGXTStore === 'function') {
-                        isGXT = window.isGXTStore(store.name || bInfo?.name || '');
+                        isGXT = window.isGXTStore(store.name || bInfo?.name || '', district || store.address || bInfo?.address || '');
                     }
 
                     bookingStores.push({
