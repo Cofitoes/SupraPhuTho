@@ -1846,10 +1846,13 @@
                     stores.push(...p.originalPointObjects);
                 } else if (p.originalPoints && Array.isArray(p.originalPoints) && p.originalPoints.length > 0) {
                     p.originalPoints.forEach(storeName => {
-                        let found = typeof DELIVERY_POINTS !== 'undefined' ? DELIVERY_POINTS.find(dp => dp.name === storeName) : null;
-                        if (!found && typeof BOOKING_DELIVERY_POINTS !== 'undefined') {
-                            found = BOOKING_DELIVERY_POINTS.find(dp => dp.name === storeName);
-                        }
+                        let found = null;
+                          if (window.GlobalBookingMapByName) {
+                              found = window.GlobalBookingMapByName[storeName];
+                          }
+                          if (!found && typeof DELIVERY_POINTS !== 'undefined') {
+                              found = DELIVERY_POINTS.find(dp => dp.name === storeName);
+                          }
                         if (found) {
                             stores.push(found);
                         } else {
@@ -2715,9 +2718,9 @@
                             let dist = '';
                             let exactBookingStore = null;
                             if (typeof BOOKING_DELIVERY_POINTS !== 'undefined') {
-                                exactBookingStore = BOOKING_DELIVERY_POINTS.find(dp => dp.name && dp.name.trim().toLowerCase() === (store.name || '').trim().toLowerCase() && dp.date === dateStr);
+                                exactBookingStore = window.GlobalBookingMapByName[store.name] || BOOKING_DELIVERY_POINTS.find(dp => dp.name && dp.name.trim().toLowerCase() === (store.name || '').trim().toLowerCase() && dp.date === dateStr);
                                 if (!exactBookingStore) {
-                                    exactBookingStore = BOOKING_DELIVERY_POINTS.find(dp => dp.name && dp.name.trim().toLowerCase() === (store.name || '').trim().toLowerCase());
+                                    exactBookingStore = window.GlobalBookingMapByName[store.name] || BOOKING_DELIVERY_POINTS.find(dp => dp.name && dp.name.trim().toLowerCase() === (store.name || '').trim().toLowerCase());
                                 }
                             }
 
