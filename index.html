@@ -2423,6 +2423,7 @@
                     fetchActualDistances(globalTrips, runId, dateVal);
                 } catch (err) {
                     console.error('Optimization run error:', err);
+    document.body.innerHTML += '<div style="position:fixed; top:100px; left:0; right:0; background: purple; color: white; padding: 20px; z-index:9999; font-size: 20px;">CLICK HANDLER ERROR: ' + err.toString() + '<br>' + err.stack + '</div>';
                 }
             });
 
