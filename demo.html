@@ -1605,6 +1605,17 @@
         document.write('<script src="booking_data.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
         document.write('<script src="summary_data.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
         document.write('<script src="data_ghn_so.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
+        document.write('<script> \
+            window.GlobalStoreMapById = {}; \
+            window.GlobalStoreMapByName = {}; \
+            if (typeof STORE_LIST_DATA !== "undefined") { \
+                STORE_LIST_DATA.forEach(s => { \
+                    if (s.id) window.GlobalStoreMapById[s.id] = s; \
+                    if (s.name) window.GlobalStoreMapByName[s.name] = s; \
+                }); \
+            } \
+        </scr' + 'ipt>');
+
         document.write('<script src="departure_times.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
         document.write('<script src="vehicle_data.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
         document.write('<script src="checkin_data.js?v=' + cb + '" charset="UTF-8"></scr' + 'ipt>');
@@ -3656,9 +3667,9 @@
             bookingIds.forEach(id => {
                 const bInfo = bookingInfoMap[id];
                 let store = storeMap[id];
-                if (!store && bInfo && typeof STORE_LIST_DATA !== 'undefined') {
-                    store = STORE_LIST_DATA.find(s => s.name === bInfo.name);
-                }
+                  if (!store && bInfo) {
+                      store = window.GlobalStoreMapByName[bInfo.name];
+                  }
                 store = store || bInfo;
                 if (store) {
                                           let district = store.district || '';
@@ -5696,7 +5707,7 @@
                         
                         let storeCode = '';
                         if (typeof STORE_LIST_DATA !== 'undefined') {
-                            const st = STORE_LIST_DATA.find(s => s.name === storeName);
+                            const st = window.GlobalStoreMapByName[storeName];
                             if (st) storeCode = st.id || st.code || '';
                         }
                         

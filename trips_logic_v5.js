@@ -226,7 +226,10 @@ function generateTrips() {
 
             // Dynamic capacity to balance trips
             let remW = cw, remV = cv;
-            remaining.forEach(p => { remW += (p.weight || 0); remV += (p.volume || 0); });
+            for (let i = 0; i < remaining.length; i++) {
+                  remW += (remaining[i].weight || 0);
+                  remV += (remaining[i].volume || 0);
+              }
             let neededTrucks = Math.max(1, Math.ceil(remW / 1900), Math.ceil(remV / 14));
             let dynamicLimit = Math.ceil((remaining.length + 1) / neededTrucks) + 1; // +1 for slack
             let limit = Math.min(15, Math.max(3, dynamicLimit)); // Bound between 3 and 15
