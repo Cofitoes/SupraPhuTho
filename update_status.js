@@ -1,1 +1,1 @@
-﻿window.UPDATE_STATUS = {"status":"running","timestamp":"2026-06-25 08:06:50","message":"","step":"Dang quet email va tai gio xuat xac nhan...","progress":20};
+﻿window.UPDATE_STATUS = {"status":"running","timestamp":"2026-06-25 08:07:22","message":"","step":"Dang chay tu dong trich xuat thong tin xe...","progress":22};
