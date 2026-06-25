@@ -44,6 +44,51 @@ function generateTrips() {
     };
 
     // --- HELPER FUNCTIONS ---
+    const getTripCostDetails = (truckType, distanceKm, weightKg, tripType) => {
+        const cfg = (typeof pricingConfig !== 'undefined') ? pricingConfig : {
+            '1.9T': { minKm: 120, baseCost: 1700000, extraRate: 11000 },
+            '5T': { rates: [1100000, 2400000, 3000000], extraRate: 20000 },
+            '8T': { rates: [1500000, 3000000, 4200000], extraRate: 22000 }
+        };
+        const config = cfg[truckType];
+        let baseCost = 0;
+        let extraCost = 0;
+        let loadingCost = 0;
+
+        if (config) {
+            if (truckType === '1.9T') {
+                const { minKm, baseCost: cfgBaseCost, extraRate } = config;
+                baseCost = cfgBaseCost;
+                if (distanceKm > minKm) {
+                    extraCost = extraRate * (distanceKm - minKm);
+                }
+            } else if (truckType === '5T' || truckType === '8T') {
+                const { rates, extraRate } = config;
+                if (distanceKm <= 50) {
+                    baseCost = rates[0];
+                } else if (distanceKm <= 100) {
+                    baseCost = rates[1];
+                } else if (distanceKm <= 150) {
+                    baseCost = rates[2];
+                } else {
+                    baseCost = rates[2];
+                    extraCost = extraRate * (distanceKm - 150);
+                }
+            }
+        }
+
+        if (tripType === 'Trung chuyển') {
+            loadingCost = (weightKg || 0) * 200;
+        }
+
+        return {
+            baseCost: Math.round(baseCost),
+            extraCost: Math.round(extraCost),
+            loadingCost: Math.round(loadingCost),
+            totalCost: Math.round(baseCost + extraCost + loadingCost)
+        };
+    };
+
     let tripCounter = 0;
     const getNextTripId = () => {
         tripCounter++;
@@ -94,14 +139,7 @@ function generateTrips() {
         const totalVol = points.reduce((s,p) => s + (p.volume||0), 0);
         const totalWeight = points.reduce((s,p) => s + (p.weight||0), 0);
 
-        let totalCost = 0;
-        const testCost = getTripCost('1.9T', 10);
-        if (typeof testCost === 'number') {
-            totalCost = getTripCost(truckType, distFloat);
-        } else {
-            const costObj = getTripCost(totalVol, distFloat);
-            totalCost = (costObj && costObj.total) ? costObj.total : 0;
-        }
+        const costDetails = getTripCostDetails(truckType, distFloat, totalWeight, 'Đi thẳng');
 
         const allOriginalPoints = [];
         points.forEach(p => {
@@ -124,7 +162,10 @@ function generateTrips() {
             totalWeight: totalWeight,
             type: 'DELIVERY',
             points: sequence,
-            cost: totalCost,
+            costBase: costDetails.baseCost,
+            costExtraKm: costDetails.extraCost,
+            costBocXep: costDetails.loadingCost,
+            cost: costDetails.totalCost,
             tripType: 'Đi thẳng',
             groupedPoints: allOriginalPoints,
             hub: 'Kho DC Win Phú Thọ',
@@ -199,14 +240,7 @@ function generateTrips() {
 
             const weightInTons = parseFloat((w / 1000).toFixed(2));
             
-            let tripCost = 0;
-            const testCost = getTripCost('1.9T', 10);
-            if (typeof testCost === 'number') {
-                tripCost = getTripCost(truckType, distFloat);
-            } else {
-                const costObj = getTripCost(v, distFloat);
-                tripCost = (costObj && costObj.total) ? costObj.total : 0;
-            }
+            const costDetails = getTripCostDetails(truckType, distFloat, w, 'Trung chuyển');
             
             const trip = {
                 id: `TC-GXT-${bookingDateStr}-${String(tcCounter).padStart(3, '0')}`,
@@ -220,7 +254,10 @@ function generateTrips() {
                 dist: distFloat,
                 hub: 'GXT Phú Thọ',
                 hubsVisited: ['GXT Phú Thọ'],
-                cost: tripCost,
+                costBase: costDetails.baseCost,
+                costExtraKm: costDetails.extraCost,
+                costBocXep: costDetails.loadingCost,
+                cost: costDetails.totalCost,
                 points: [
                     {
                         name: 'GXT Phú Thọ',
