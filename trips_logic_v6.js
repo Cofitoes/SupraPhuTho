@@ -117,6 +117,7 @@ function generateTrips() {
         return {
             id: tripId,
             route: `Kho DC Win Phú Thọ -> ${deliveryPts.map(p => p.name.replace(/^WM\+\s*/, '')).join(' -> ')}`,
+            routeName: `Kho DC Win Phú Thọ -> ${deliveryPts.map(p => p.name.replace(/^WM\+\s*/, '')).join(' -> ')}`,
             truckType: truckType, vehicle: truckType,
             dist: distFloat,
             totalVolume: parseFloat(totalVol.toFixed(2)),
@@ -140,8 +141,19 @@ function generateTrips() {
         }
     });
 
-    const gxtPoints = DELIVERY_POINTS.filter(p => p.coords && p.coords.lat && p.coords.lng && p.isGXT === true);
-    let directPoints = DELIVERY_POINTS.filter(p => p.coords && p.coords.lat && p.coords.lng && p.isGXT !== true);
+    const gxtStoreNames = (typeof GXT_STORE_LIST !== 'undefined') ? GXT_STORE_LIST : [];
+    const isGXTStore = (p) => {
+        if (p.isGXT === true) return true;
+        if (p.isGXT === false) return false;
+        return gxtStoreNames.some(gxtName => {
+            const normGXT = gxtName.normalize('NFC').trim().toLowerCase();
+            const normStore = p.name.normalize('NFC').trim().toLowerCase();
+            return normGXT === normStore || normStore.includes(normGXT) || normGXT.includes(normStore);
+        });
+    };
+
+    const gxtPoints = DELIVERY_POINTS.filter(p => p.coords && p.coords.lat && p.coords.lng && isGXTStore(p));
+    let directPoints = DELIVERY_POINTS.filter(p => p.coords && p.coords.lat && p.coords.lng && !isGXTStore(p));
 
     if (gxtPoints.length === 0 && directPoints.length === 0) {
         document.body.innerHTML += '<div style="position:fixed; top:50px; left:0; right:0; background: orange; color: white; padding: 20px; z-index:9999; font-size: 20px;">DEBUG: Both gxtPoints and directPoints are EMPTY! DELIVERY_POINTS length: ' + DELIVERY_POINTS.length + '</div>';
@@ -200,6 +212,7 @@ function generateTrips() {
                 id: `TC-GXT-${bookingDateStr}-${String(tcCounter).padStart(3, '0')}`,
                 tripType: 'Trung chuyển',
                 route: `Kho DC Win Phú Thọ -> GXT Phú Thọ (${weightInTons} Tấn)`,
+                routeName: `Kho DC Win Phú Thọ -> GXT Phú Thọ (${weightInTons} Tấn)`,
                 truckType: truckType, vehicle: truckType,
                 totalWeight: w,
                 totalVolume: parseFloat(v.toFixed(2)),

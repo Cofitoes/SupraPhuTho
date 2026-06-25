@@ -1584,16 +1584,16 @@
 
     <!-- <script src="email_data.js"></script> -->
     <script>
-        const cb = new Date().getTime();
-        document.write('<script src="store_data.js?v=' + cb + '"></scr' + 'ipt>');
-        document.write('<script src="booking_data.js?v=' + cb + '"></scr' + 'ipt>');
-        document.write('<script src="gxt_stores.js?v=' + cb + '"></scr' + 'ipt>');
-        document.write('<script src="summary_data.js?v=' + cb + '"></scr' + 'ipt>');
-        document.write('<script src="departure_times.js?v=' + cb + '"></scr' + 'ipt>');
-        document.write('<script src="vehicle_data.js?v=' + cb + '"></scr' + 'ipt>');
-        document.write('<script src="checkin_data.js?v=' + cb + '"></scr' + 'ipt>');
-        document.write('<script src="incidents_data.js?v=' + cb + '"></scr' + 'ipt>');
-        document.write('<script src="Data_Booking/telegram_data.js?v=' + cb + '"></scr' + 'ipt>');
+        const cb = window.location.protocol === 'file:' ? '' : '?v=' + new Date().getTime();
+        document.write('<script src="store_data.js' + cb + '"></scr' + 'ipt>');
+        document.write('<script src="booking_data.js' + cb + '"></scr' + 'ipt>');
+        document.write('<script src="gxt_stores.js' + cb + '"></scr' + 'ipt>');
+        document.write('<script src="summary_data.js' + cb + '"></scr' + 'ipt>');
+        document.write('<script src="departure_times.js' + cb + '"></scr' + 'ipt>');
+        document.write('<script src="vehicle_data.js' + cb + '"></scr' + 'ipt>');
+        document.write('<script src="checkin_data.js' + cb + '"></scr' + 'ipt>');
+        document.write('<script src="incidents_data.js' + cb + '"></scr' + 'ipt>');
+        document.write('<script src="Data_Booking/telegram_data.js' + cb + '"></scr' + 'ipt>');
     </script>
     <script>
         const CONFIG = { START_TIME: "08:00", AVG_SPEED_KMH: 50, UNLOADING_TIME_MIN: 30 };
@@ -1797,7 +1797,10 @@
             return `${Math.floor(totalMins / 60).toString().padStart(2, '0')}:${(totalMins % 60).toString().padStart(2, '0')}`;
         }
     </script>
-    <script>document.write('<script src="trips_logic_v6.js?v=1?v=' + cb + '"><\/script>');</script>
+    <script>
+        const tripsLogicQuery = window.location.protocol === 'file:' ? '' : '?v=' + cb;
+        document.write('<script src="trips_logic_v6.js' + tripsLogicQuery + '"><\/script>');
+    </script>
     <script>
         window.extractStoresFromTrip = function (trip) {
             let stores = [];
@@ -1880,7 +1883,8 @@
                     ...clonedP,
                     name: clonedP.name, // Keep original name from excel
                     address: store && store.address ? store.address : clonedP.address || '',
-                    coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords
+                    coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords,
+                    isGXT: store ? store.isGXT || false : false
                 };
             });
 
@@ -2022,7 +2026,8 @@
                         ...clonedP,
                         name: clonedP.name, // Keep original name from excel
                         address: store && store.address ? store.address : clonedP.address || '',
-                        coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords
+                        coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords,
+                        isGXT: store ? store.isGXT || false : false
                     };
                 });
                 window.renderPendingPoints();
@@ -2056,7 +2061,8 @@
                             ...clonedP,
                             name: clonedP.name, // Keep original name from excel
                             address: store && store.address ? store.address : clonedP.address || '',
-                            coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords
+                            coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords,
+                            isGXT: store ? store.isGXT || false : false
                         };
                     });
                 } else {
@@ -2740,7 +2746,7 @@
                             const hubsList = t.hubsVisited ? t.hubsVisited.join('/') : t.hub;
                             routePath = `Kho DC Win Phú Thọ -> ${hubsList}`;
                         } else {
-                            routePath = t.routeName || 'Kho DC Win Phú Thọ';
+                            routePath = t.route || t.routeName || 'Kho DC Win Phú Thọ';
                         }
 
                         const row = [
@@ -2886,6 +2892,12 @@
                     stockOutDateStr = sOut["all"] || Object.values(sOut)[0];
                 }
             }
+            if (stockOutDateStr === '-' && selectedDate) {
+                const parts = selectedDate.split('-');
+                if (parts.length === 3) {
+                    stockOutDateStr = `${parts[2]}/${parts[1]}/${parts[0]}`;
+                }
+            }
             document.getElementById('route-results-table').innerHTML = globalTrips.map((t, idx) => {
                 let plate = '-';
                 let driverName = '';
@@ -2985,8 +2997,9 @@
                     const hubsList = t.hubsVisited ? t.hubsVisited.join(' / ') : t.hub;
                     routePathHtml = `<strong>Kho DC Win Phú Thọ</strong>${arrowIcon}<strong>${hubsList}</strong>${provinceInfoContainer}`;
                 } else {
-                    const baseRoute = t.routeName
-                        ? t.routeName.split(' -> ').map(x => `<strong>${x}</strong>`).join('<br><i class="fas fa-arrow-right" style="font-size: 0.7rem; color: var(--text-dim); margin: 0 5px;"></i> ')
+                    const routeVal = t.route || t.routeName;
+                    const baseRoute = routeVal
+                        ? routeVal.split(' -> ').map(x => `<strong>${x}</strong>`).join('<br><i class="fas fa-arrow-right" style="font-size: 0.7rem; color: var(--text-dim); margin: 0 5px;"></i> ')
                         : `<strong>${t.hub || 'Kho DC Win Phú Thọ'}</strong>`;
                     
                     // List store names for đi thẳng trips
@@ -3171,8 +3184,9 @@
                         const hubsList = t.hubsVisited ? t.hubsVisited.join(' / ') : t.hub;
                         routePathHtml = `<strong>Kho DC Win Phú Thọ</strong>${arrowIcon}<strong>${hubsList}</strong>`;
                     } else {
-                        routePathHtml = t.routeName
-                            ? t.routeName.split(' -> ').map(x => `<strong>${x}</strong>`).join('<br><i class="fas fa-arrow-right" style="font-size: 0.7rem; color: var(--text-dim); margin: 0 5px;"></i> ')
+                        const routeVal = t.route || t.routeName;
+                        routePathHtml = routeVal
+                            ? routeVal.split(' -> ').map(x => `<strong>${x}</strong>`).join('<br><i class="fas fa-arrow-right" style="font-size: 0.7rem; color: var(--text-dim); margin: 0 5px;"></i> ')
                             : `<strong>${t.hub || 'Kho DC Win Phú Thọ'}</strong>`;
                     }
 
@@ -3220,8 +3234,9 @@
                         </div>
                     `;
                 } else {
-                    displayRoute = t.routeName
-                        ? t.routeName.replace(/->/g, '→').split(' → ').map(x => `<strong>${x}</strong>`).join(' → ')
+                    const routeVal = t.route || t.routeName;
+                    displayRoute = routeVal
+                        ? routeVal.replace(/->/g, '→').split(' → ').map(x => `<strong>${x}</strong>`).join(' → ')
                         : `${t.hub || 'Kho DC Win Phú Thọ'} → ${t.points.filter(p => p.isPoint).map(p => p.name).join(' → ')}`;
                 }
                 const costPerKg = t.totalWeight > 0 ? Math.round(t.cost / t.totalWeight) : 0;
@@ -4734,7 +4749,7 @@
                             const hubsList = t.hubsVisited ? t.hubsVisited.join('/') : t.hub;
                             routePath = `Kho DC Win Phú Thọ -> ${hubsList}`;
                         } else {
-                            routePath = t.routeName || 'Kho DC Win Phú Thọ';
+                            routePath = t.route || t.routeName || 'Kho DC Win Phú Thọ';
                         }
 
                         resolvedVehicles.push({
