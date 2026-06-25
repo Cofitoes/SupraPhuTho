@@ -1,1 +1,1 @@
-﻿window.UPDATE_STATUS = {"status":"running","timestamp":"2026-06-25 07:43:37","message":"","step":"Dang dong bo du lieu len link online...","progress":95};
+﻿window.UPDATE_STATUS = {"status":"running","timestamp":"2026-06-25 07:44:05","message":"","step":"Dang dong bo du lieu len link online...","progress":95};
