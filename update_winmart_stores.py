@@ -25,6 +25,8 @@ id_col = get_col(df, ["Site Store", "Mã cửa hàng (Mã CH)", "Mã cửa hàng
 name_col = get_col(df, ["Tên cửa hàng", "Name", "Store_Name"])
 addr_col = get_col(df, ["địa chỉ", "Địa chỉ", "Address"])
 prov_col = get_col(df, ["Tỉnh giao", "Thành Phố/Tỉnh", "Tỉnh", "Province", "Tên tỉnh chuẩn"])
+dist_col = get_col(df, ["District", "Quận/Huyện", "Huyện/Xã", "Huyện"])
+type_col = get_col(df, ["Trip_Type", "Phân loại", "Trip Type"])
 lat_col = get_col(df, ["Lat", "Vi Do", "Vĩ độ"])
 lng_col = get_col(df, ["Long", "Lng", "Kinh Do", "Kinh độ"])
 latlong_col = get_col(df, ["Vị trí Lat/Long", "LatLong", "Lat/Long"])
@@ -36,7 +38,7 @@ if not all([id_col, name_col, addr_col]):
 store_list = []
 updated = 0
 
-print(f"Columns matched: ID={id_col}, Name={name_col}, Addr={addr_col}, Prov={prov_col}, Lat={lat_col}, Lng={lng_col}, LatLong={latlong_col}")
+print(f"Columns matched: ID={id_col}, Name={name_col}, Addr={addr_col}, Prov={prov_col}, Dist={dist_col}, Type={type_col}, Lat={lat_col}, Lng={lng_col}, LatLong={latlong_col}")
 
 for idx, row in df.iterrows():
     store_id = str(row[id_col]).strip()
@@ -46,6 +48,8 @@ for idx, row in df.iterrows():
     name = str(row[name_col]).strip() if pd.notna(row[name_col]) else ""
     address = str(row[addr_col]).strip() if pd.notna(row[addr_col]) else ""
     prov = str(row[prov_col]).strip() if prov_col and pd.notna(row[prov_col]) else ""
+    district = str(row[dist_col]).strip() if dist_col and pd.notna(row[dist_col]) else ""
+    trip_type = str(row[type_col]).strip() if type_col and pd.notna(row[type_col]) else ""
     
     lat = 0.0
     lng = 0.0
@@ -123,6 +127,9 @@ for idx, row in df.iterrows():
         "name": name,
         "address": address,
         "province": prov,
+        "district": district,
+        "trip_type": trip_type,
+        "isGXT": trip_type == "GXT",
         "coords": coords
     })
 
@@ -130,11 +137,15 @@ for idx, row in df.iterrows():
 found_names = {s['name'] for s in store_list}
 for o_name, o_data in MANUAL_OVERRIDES.items():
     if o_name not in found_names:
+        is_gxt = "Phú Thọ" in o_name or "Việt Trì" in o_name or o_data.get("id") in ["1649", "1564"]
         store_list.append({
             "id": o_data.get("id", o_name),
             "name": o_name,
             "address": o_name,
             "province": "Phú Thọ",
+            "district": "TX. Phú Thọ" if "Phú Thọ" in o_name else "TP. Việt Trì",
+            "trip_type": "GXT" if is_gxt else "Giao Thang",
+            "isGXT": is_gxt,
             "coords": o_data["coords"]
         })
         print(f"Injected missing store from overrides: {o_name}")

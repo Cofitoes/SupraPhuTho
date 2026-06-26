@@ -1839,12 +1839,25 @@
         }
 
         window.checkIsGXTStore = function(name) {
-            if (!name || typeof GXT_STORE_LIST === 'undefined') return false;
-            return GXT_STORE_LIST.some(gxtName => {
-                const normGXT = gxtName.normalize('NFC').trim().toLowerCase();
+            if (!name) return false;
+            if (typeof STORE_LIST_DATA !== 'undefined' && Array.isArray(STORE_LIST_DATA)) {
                 const normStore = name.normalize('NFC').trim().toLowerCase();
-                return normGXT === normStore || normStore.includes(normGXT) || normGXT.includes(normStore);
-            });
+                const foundStore = STORE_LIST_DATA.find(s => {
+                    const normS = s.name.normalize('NFC').trim().toLowerCase();
+                    return normS === normStore || normStore.includes(normS) || normS.includes(normStore);
+                });
+                if (foundStore) {
+                    return foundStore.isGXT === true || foundStore.trip_type === 'GXT';
+                }
+            }
+            if (typeof GXT_STORE_LIST !== 'undefined') {
+                return GXT_STORE_LIST.some(gxtName => {
+                    const normGXT = gxtName.normalize('NFC').trim().toLowerCase();
+                    const normStore = name.normalize('NFC').trim().toLowerCase();
+                    return normGXT === normStore || normStore.includes(normGXT) || normGXT.includes(normStore);
+                });
+            }
+            return false;
         };
     </script>
     <script>
