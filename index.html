@@ -2910,8 +2910,8 @@
 
                             row[11] = storeGeo.province || ''; // Tỉnh
                             row[12] = storeGeo.district || ''; // Quận
-                            row[13] = tripCode; // Mã giờ
-                            row[14] = tripTimeFraction; // Giờ nhận hàng
+                            row[13] = ''; // Mã giờ (Để trống để điền thủ công)
+                            row[14] = ''; // Giờ nhận hàng (Để trống để điền thủ công)
 
                             if (isFirstRowOfTrip) {
                                 row[15] = stores.length; // Số điểm giao
@@ -2941,9 +2941,9 @@
                                 row[28] = '';
                             }
 
-                            row[29] = tripBKS; // BKS
-                            row[30] = tripDriverName; // Tên Tài Xế
-                            row[31] = String(tripDriverPhone).startsWith('0') ? tripDriverPhone : `0${tripDriverPhone}`; // SĐT
+                            row[29] = ''; // BKS (Để trống để điền thủ công)
+                            row[30] = ''; // Tên Tài Xế (Để trống để điền thủ công)
+                            row[31] = ''; // SĐT (Để trống để điền thủ công)
 
                             aoa.push(row);
                         });
@@ -2995,6 +2995,7 @@
                                 cell.f = `TODAY()+1`;
                                 cell.v = 0;
                                 cell.t = 'n';
+                                cell.z = 'dd/mm/yyyy';
                                 delete cell.w;
                             } else if (cIdx === 8) {
                                 cell.f = `IF(COUNTIF($N$2:N${r},N${r})=1,SUMIFS($H:$H,$N:$N,N${r}),"")`;
