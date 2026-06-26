@@ -1508,7 +1508,7 @@
                                     <th style="width: 120px;">Biển Số Xe</th>
                                     <th style="width: 120px;">Trọng Tải Xe</th>
                                     <th>Lộ Trình</th>
-                                    <th style="width: 250px;">Mã BUFF</th>
+                                    <th style="width: 250px;">Mã DO</th>
                                     <th style="width: 250px;">Mã GHN</th>
                                 </tr>
                             </thead>
@@ -1585,6 +1585,7 @@
         const cb = window.location.protocol === 'file:' ? '' : '?v=' + new Date().getTime();
         document.write('<script src="store_data.js' + cb + '"></scr' + 'ipt>');
         document.write('<script src="booking_data.js' + cb + '"></scr' + 'ipt>');
+        document.write('<script src="data_ghn_so.js' + cb + '"></scr' + 'ipt>');
         document.write('<script src="gxt_stores.js' + cb + '"></scr' + 'ipt>');
         document.write('<script src="summary_data.js' + cb + '"></scr' + 'ipt>');
         document.write('<script src="departure_times.js' + cb + '"></scr' + 'ipt>');
@@ -3185,47 +3186,57 @@
                     }
 
                     let routePathHtml = '';
-                    let uniqueBuffs = '';
+                    let uniqueDos = '';
                     let uniqueGhns = '';
 
                     const storesList = typeof window.extractStoresFromTrip === 'function' ? window.extractStoresFromTrip(t) : [];
 
-                    let buffs = [];
-                    storesList.forEach(s => {
-                        let b = s.buff || s.Buff || s.BUFF;
-                        if (!b && typeof BOOKING_DELIVERY_POINTS !== 'undefined') {
-                            let matched = BOOKING_DELIVERY_POINTS.find(dp => dp.id && s.id && dp.id == s.id);
-                            if (!matched) matched = BOOKING_DELIVERY_POINTS.find(dp => dp.name === s.name);
-                            if (matched) b = matched.buff || matched.Buff || matched.BUFF;
-                        } 
-                        if (!b && typeof DELIVERY_POINTS !== 'undefined') {
-                            let matched = DELIVERY_POINTS.find(dp => dp.id && s.id && dp.id == s.id);
-                            if (!matched) matched = DELIVERY_POINTS.find(dp => dp.name === s.name);
-                            if (matched) b = matched.buff || matched.Buff || matched.BUFF;
-                        }
-                        if (b) buffs.push(b);
-                    });
-                    buffs = buffs.filter(Boolean);
-                    uniqueBuffs = buffs.length > 0 ? [...new Set(buffs)].join('<br>') : '-';
-
+                    let doList = [];
                     let ghnList = [];
+
                     storesList.forEach(s => {
-                        let b = s.buff || s.Buff || s.BUFF;
-                        if (!b && typeof BOOKING_DELIVERY_POINTS !== 'undefined') {
-                            let matched = BOOKING_DELIVERY_POINTS.find(dp => dp.id && s.id && dp.id == s.id);
-                            if (!matched) matched = BOOKING_DELIVERY_POINTS.find(dp => dp.name === s.name);
-                            if (matched) b = matched.buff || matched.Buff || matched.BUFF;
+                        // 1. Try matching against online sheetData
+                        let matchedRows = [];
+                        if (typeof sheetData !== 'undefined' && Array.isArray(sheetData)) {
+                            matchedRows = sheetData.filter(item => {
+                                const isStoreMatch = (item['MÃ CỬA HÀNG'] && s.id && String(item['MÃ CỬA HÀNG']).trim() === String(s.id).trim());
+                                if (!isStoreMatch) return false;
+                                
+                                if (t.date && item['Ngày xuất']) {
+                                    const parts = item['Ngày xuất'].split('/');
+                                    if (parts.length === 3) {
+                                        const normalizedDate = `${parts[2]}-${parts[1].padStart(2, '0')}-${parts[0].padStart(2, '0')}`;
+                                        return normalizedDate === t.date;
+                                    }
+                                }
+                                return false;
+                            });
                         }
 
-                        if (s.ghn || s['Mã đơn GHN'] || s.maGHN) {
-                            ghnList.push(s.ghn || s['Mã đơn GHN'] || s.maGHN);
-                        } else if (b && typeof concungData !== 'undefined') {
-                            const matched = concungData.find(item => item['MÃ CỬA HÀNG'] === b || item['Mã BUFF'] === b);
-                            if (matched && (matched['Vận đơn'] || matched['Mã đơn GHN'])) {
-                                ghnList.push(matched['Vận đơn'] || matched['Mã đơn GHN']);
+                        if (matchedRows.length > 0) {
+                            matchedRows.forEach(row => {
+                                if (row['Số DO']) doList.push(row['Số DO']);
+                                if (row['Vận đơn']) ghnList.push(row['Vận đơn']);
+                            });
+                        } else {
+                            // 2. Try matching against local STORE_GHN_SO_DATA fallback
+                            if (typeof STORE_GHN_SO_DATA !== 'undefined' && t.date && STORE_GHN_SO_DATA[t.date]) {
+                                const dayData = STORE_GHN_SO_DATA[t.date];
+                                const storeKey = Object.keys(dayData).find(k => k === s.name || k.includes(s.name) || s.name.includes(k));
+                                if (storeKey) {
+                                    const localGhns = dayData[storeKey]['ghn'] || [];
+                                    const localDos = dayData[storeKey]['so'] || [];
+                                    localGhns.forEach(g => ghnList.push(g));
+                                    localDos.forEach(d => doList.push(d));
+                                }
                             }
                         }
                     });
+
+                    doList = doList.filter(Boolean);
+                    ghnList = ghnList.filter(Boolean);
+
+                    uniqueDos = doList.length > 0 ? [...new Set(doList)].join('<br>') : '-';
                     uniqueGhns = ghnList.length > 0 ? [...new Set(ghnList)].join('<br>') : '<span style="color: #ef4444; font-weight: 500;">Thiếu mã GHN</span>';
 
                     if (t.tripType === 'Trung chuyển') {
@@ -3248,7 +3259,7 @@
                             <div style="margin-bottom: 8px;">${routePathHtml}</div>
                             <a href="${mapsUrl}" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; font-size: 0.8rem; color: #3b82f6; text-decoration: none; padding: 4px 8px; background: rgba(59, 130, 246, 0.1); border-radius: 4px; transition: all 0.2s;"><i class="fas fa-map-marked-alt"></i> Xem lộ trình Google Maps</a>
                         </td>
-                        <td><span style="font-size: 0.85rem; color: var(--text-dim);">${uniqueBuffs || '-'}</span></td>
+                        <td><span style="font-size: 0.85rem; color: var(--text-dim);">${uniqueDos || '-'}</span></td>
                         <td><span style="font-size: 0.85rem; color: var(--text-dim);">${uniqueGhns || '-'}</span></td>
                     </tr>`;
                 }).join('');
@@ -5320,7 +5331,7 @@
             let sheetData = [];
             async function fetchGoogleSheetData() {
                 try {
-                    const url = 'https://docs.google.com/spreadsheets/d/1-rs6U38LCGxVFEl3hzSWihMBkVvYthp9JG8VPBaJaMg/export?format=csv&gid=615448727';
+                    const url = 'https://docs.google.com/spreadsheets/d/1fifr6Wacb5zMxWiWgM-HH9xl_z2Px9bGJ4mJk1twHiY/export?format=csv&gid=0';
                     const response = await fetch(url);
                     const csvText = await response.text();
 
@@ -5343,34 +5354,21 @@
                         }
                         rowArray.push(cur.trim().replace(/^"|"$/g, ''));
 
-                        let ghnCode = rowArray[1] ? rowArray[1].trim() : '';
+                        let ghnCode = rowArray[2] ? rowArray[2].trim() : '';
                         if (!ghnCode || !ghnCode.startsWith('GY')) continue;
 
-                        let storeCode = '';
-                        if (rowArray[15]) {
-                            storeCode = rowArray[15].split('-')[0].trim();
-                        }
-                        if (!storeCode || isNaN(storeCode)) {
-                            let maCH = rowArray[14] || '';
-                            let parts = maCH.split('-');
-                            for (let k = parts.length - 1; k >= 0; k--) {
-                                if (!isNaN(parts[k]) && parts[k].trim() !== '') {
-                                    storeCode = parts[k].trim();
-                                    break;
-                                }
-                            }
-                        }
+                        let storeCode = rowArray[8] ? rowArray[8].trim() : '';
 
                         sheetData.push({
                             'Vận đơn': ghnCode,
+                            'Số DO': rowArray[7] ? rowArray[7].trim() : '',
                             'MÃ CỬA HÀNG': storeCode,
-                            'TÊN CỬA HÀNG': rowArray[15] || '',
-                            'Ngày tạo đơn': rowArray[7] || '',
-                            'Ngày lấy thành công': rowArray[6] || '',
-                            'Tỉnh giao': rowArray[2] || '',
-                            'Trạng thái hệ thống': rowArray[9] && rowArray[9] !== '#N/A' ? rowArray[9] : 'Thiếu thông tin',
-                            'Tỉnh lấy': rowArray[4] || '',
-                            'Ngày giao dự kiến': rowArray[8] || ''
+                            'TÊN CỬA HÀNG': rowArray[9] ? rowArray[9].trim() : '',
+                            'Ngày tạo đơn': rowArray[1] ? rowArray[1].trim() : '',
+                            'Ngày xuất': rowArray[5] ? rowArray[5].trim() : '',
+                            'Trạng thái hệ thống': rowArray[3] && rowArray[3] !== '#N/A' ? rowArray[3].trim() : 'Thiếu thông tin',
+                            'Tỉnh giao': rowArray[15] ? rowArray[15].trim() : '',
+                            'Quận giao': rowArray[16] ? rowArray[16].trim() : ''
                         });
                     }
                 } catch (e) {
