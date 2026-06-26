@@ -3249,35 +3249,28 @@
                 let displayRoute = '';
                 if (t.tripType === 'Trung chuyển') {
                     const hubsList = t.hubsVisited ? t.hubsVisited.join(' → ') : t.hub;
-                    let hyProvincesStr = '';
-                    let hn02ProvincesStr = '';
-                    if (t.hubProvinces) {
-                        if (t.hubProvinces['GXT Phú Thọ'] && t.hubProvinces['GXT Phú Thọ'].length > 0) {
-                            hyProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${t.hubProvinces['GXT Phú Thọ'].join(', ')})</div>`;
-                        }
-                        if (t.hubProvinces['GXT Phú Thọ'] && t.hubProvinces['GXT Phú Thọ'].length > 0) {
-                            hn02ProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${t.hubProvinces['GXT Phú Thọ'].join(', ')})</div>`;
-                        }
-                    } else {
-                        const rightProvinces = ['Tỉnh Hà Giang', 'Tỉnh Tuyên Quang', 'Tỉnh Lai Châu', 'Tỉnh Lào Cai', 'Tỉnh Yên Bái', 'Tỉnh Hòa Bình'];
-                        const provincesList = t.points.map(p => p.name).filter(Boolean);
-                        const hyList = provincesList.filter(p => !rightProvinces.includes(p));
-                        const hn02List = provincesList.filter(p => rightProvinces.includes(p));
-                        if (hyList.length > 0) hyProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${hyList.join(', ')})</div>`;
-                        if (hn02List.length > 0) hn02ProvincesStr = `<div style="margin-top: 2px;"><strong>GXT Phú Thọ</strong> (${hn02List.join(', ')})</div>`;
-                    }
-                    displayRoute = `
-                        <strong>Kho DC Win Phú Thọ</strong> → <strong>${hubsList}</strong>
-                        <div style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; padding-left: 8px; border-left: 2px solid rgba(255,255,255,0.1); margin-top: 4px;">
-                            ${hyProvincesStr}
-                            ${hn02ProvincesStr}
-                        </div>
-                    `;
+                    const rightProvinces = ['Tỉnh Hà Giang', 'Tỉnh Tuyên Quang', 'Tỉnh Lai Châu', 'Tỉnh Lào Cai', 'Tỉnh Yên Bái', 'Tỉnh Hòa Bình'];
+                    const provincesList = t.points.map(p => p.name).filter(Boolean);
+                    const hyList = provincesList.filter(p => !rightProvinces.includes(p));
+                    const hn02List = provincesList.filter(p => rightProvinces.includes(p));
+                    
+                    let storesListText = '';
+                    if (hyList.length > 0) storesListText += `GXT Phú Thọ: ${hyList.join(', ')}\n`;
+                    if (hn02List.length > 0) storesListText += `GXT Phú Thọ: ${hn02List.join(', ')}\n`;
+                    
+                    const fullRouteTooltip = `Lộ trình: Kho DC Win Phú Thọ → ${hubsList}\nDanh sách bưu cục:\n${storesListText.trim()}`;
+                    
+                    displayRoute = `<span title="${fullRouteTooltip.replace(/"/g, '&quot;')}" style="cursor: help; border-bottom: 1px dashed rgba(255,255,255,0.3); padding-bottom: 2px; color: #c084fc;"><strong>Trung chuyển GXT</strong></span>`;
                 } else {
                     const routeVal = t.route || t.routeName;
-                    displayRoute = routeVal
-                        ? routeVal.replace(/->/g, '→').split(' → ').map(x => `<strong>${x}</strong>`).join(' → ')
+                    const routeClean = routeVal 
+                        ? routeVal.replace(/->/g, '→')
                         : `${t.hub || 'Kho DC Win Phú Thọ'} → ${t.points.filter(p => p.isPoint).map(p => p.name).join(' → ')}`;
+                    
+                    const storeNames = t.points.filter(p => p.isPoint).map(p => p.name);
+                    const fullRouteTooltip = `Lộ trình chi tiết:\n${routeClean}\n\nTổng số: ${storeNames.length} cửa hàng:\n${storeNames.join('\n')}`;
+                    
+                    displayRoute = `<span title="${fullRouteTooltip.replace(/"/g, '&quot;')}" style="cursor: help; border-bottom: 1px dashed rgba(255,255,255,0.3); padding-bottom: 2px; color: #10b981;"><strong>Giao thẳng</strong> (${storeNames.length} CH)</span>`;
                 }
                 let cBase = t.costBase;
                 let cExtra = t.costExtraKm;
