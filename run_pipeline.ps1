@@ -64,7 +64,7 @@ function Sync-Git-Data {
         & $gitPath add -u
         
         # Explicitly stage dynamic data files to guarantee they are tracked and synced even if recreated
-        & $gitPath add "*.js" "*.html" "*.py" "vehicle_data.js" "departure_times.js" "incidents_data.js" "checkin_data.js" "Form*.xlsb" "Data_Booking/Booking Supra*" 2>$null
+        & $gitPath add "*.js" "*.html" "*.py" "Lichsu*.md" "vehicle_data.js" "departure_times.js" "incidents_data.js" "checkin_data.js" "Form*.xlsb" "Data_Booking/Booking Supra*" 2>$null
         
         if ($LASTEXITCODE -ne 0) {
             # Ignore minor errors if files do not exist
