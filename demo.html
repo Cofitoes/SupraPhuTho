@@ -3241,7 +3241,9 @@
                                 const storeKey = Object.keys(dayData).find(k => k === s.name || k.includes(s.name) || s.name.includes(k));
                                 if (storeKey) {
                                     const localGhns = dayData[storeKey]['ghn'] || [];
-                                    const localDos = dayData[storeKey]['so'] || [];
+                                    const localDos = (dayData[storeKey]['do'] && dayData[storeKey]['do'].length > 0)
+                                        ? dayData[storeKey]['do']
+                                        : (dayData[storeKey]['so'] || []);
                                     localGhns.forEach(g => ghnList.push(g));
                                     localDos.forEach(d => doList.push(d));
                                 }
@@ -5355,10 +5357,12 @@
                     }
                     for (const [storeName, data] of Object.entries(stores)) {
                         const ghns = data.ghn || [];
+                        const dos = data.do || [];
                         const sos = data.so || [];
-                        const maxOrders = Math.max(ghns.length, sos.length);
+                        const maxOrders = Math.max(ghns.length, dos.length, sos.length);
                         for (let k = 0; k < maxOrders; k++) {
                             const gCode = ghns[k] || '';
+                            const dCode = dos[k] || '';
                             const sCode = sos[k] || '';
                             if (gCode && existingVd.has(gCode)) continue;
                             let sId = '';
@@ -5372,8 +5376,8 @@
                             }
                             sheetData.push({
                                 'Vận đơn': gCode,
-                                'Số DO': sCode,
-                                'Số SO': '',
+                                'Số DO': dCode,
+                                'Số SO': sCode,
                                 'MÃ CỬA HÀNG': sId,
                                 'TÊN CỬA HÀNG': storeName,
                                 'Ngày tạo đơn': formattedDate,

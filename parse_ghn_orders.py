@@ -40,23 +40,26 @@ def process_dataframe(df, default_date_str):
     df = df.iloc[header_row_idx+1:]
     df.columns = [str(c).strip().lower() for c in df.columns]
     
-    col_ghn = next((c for c in df.columns if 'mã đơn ghn' in c or 'số do' in c), None)
-    col_so = next((c for c in df.columns if 'số so' in c), None)
+    col_ghn = next((c for c in df.columns if 'mã đơn ghn' in c or 'vận đơn' in c), None)
+    col_do = next((c for c in df.columns if 'số do' in c or 'mã do' in c), None)
+    col_so = next((c for c in df.columns if 'số so' in c or 'mã so' in c), None)
     col_store = next((c for c in df.columns if 'tên siêu thị' in c or 'store name' in c), None)
     col_date = next((c for c in df.columns if 'ngày xuất' in c or 'ngày' in c), None)
     
-    if not col_ghn or not col_so or not col_store:
+    if not col_so or not col_store:
         return
         
     for _, row in df.iterrows():
         store_name = str(row[col_store]).strip()
         if store_name == 'nan' or not store_name: continue
         
-        ghn = str(row[col_ghn]).strip()
-        so = str(row[col_so]).strip()
+        ghn = str(row[col_ghn]).strip() if col_ghn and pd.notna(row[col_ghn]) else ''
+        so = str(row[col_so]).strip() if col_so and pd.notna(row[col_so]) else ''
+        do_code = str(row[col_do]).strip() if col_do and pd.notna(row[col_do]) else ''
         if ghn == 'nan': ghn = ''
         if so == 'nan': so = ''
-        if not ghn and not so: continue
+        if do_code == 'nan': do_code = ''
+        if not ghn and not so and not do_code: continue
         
         date_str = default_date_str
         if col_date and pd.notna(row[col_date]):
@@ -79,10 +82,12 @@ def process_dataframe(df, default_date_str):
         if date_str not in store_ghn_so_data:
             store_ghn_so_data[date_str] = {}
         if store_name not in store_ghn_so_data[date_str]:
-            store_ghn_so_data[date_str][store_name] = {'so': [], 'ghn': []}
+            store_ghn_so_data[date_str][store_name] = {'so': [], 'do': [], 'ghn': []}
             
         if so and so not in store_ghn_so_data[date_str][store_name]['so']:
             store_ghn_so_data[date_str][store_name]['so'].append(so)
+        if do_code and do_code not in store_ghn_so_data[date_str][store_name]['do']:
+            store_ghn_so_data[date_str][store_name]['do'].append(do_code)
         if ghn and ghn not in store_ghn_so_data[date_str][store_name]['ghn']:
             store_ghn_so_data[date_str][store_name]['ghn'].append(ghn)
 
