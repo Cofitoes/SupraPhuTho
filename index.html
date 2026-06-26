@@ -606,6 +606,7 @@
         }
     </style>
     <script>
+        var sheetData = [];
         window.onerror = function (message, source, lineno, colno, error) {
             var errDiv = document.getElementById('demo-error-overlay');
             if (!errDiv) {
@@ -1430,6 +1431,7 @@
                             <thead>
                                 <tr>
                                     <th>Vận Đơn</th>
+                                    <th>Mã DO</th>
                                     <th>Ngày Tạo Đơn</th>
                                     <th>Mã Cửa Hàng</th>
                                     <th>Tên Cửa Hàng</th>
