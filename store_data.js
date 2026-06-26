@@ -1448,8 +1448,8 @@ const STORE_LIST_DATA = [
     "address": "TX. Phú Thọ, T. Phú Thọ",
     "province": "T. Phú Thọ",
     "district": "TX. Phú Thọ",
-    "trip_type": "Giao Thang",
-    "isGXT": false,
+    "trip_type": "GXT",
+    "isGXT": true,
     "coords": {
       "lat": 21.3989531,
       "lng": 105.2072326
@@ -1461,8 +1461,8 @@ const STORE_LIST_DATA = [
     "address": "TX. Phú Thọ, T. Phú Thọ",
     "province": "T. Phú Thọ",
     "district": "TX. Phú Thọ",
-    "trip_type": "Giao Thang",
-    "isGXT": false,
+    "trip_type": "GXT",
+    "isGXT": true,
     "coords": {
       "lat": 21.4365374,
       "lng": 105.22492363
@@ -1474,8 +1474,8 @@ const STORE_LIST_DATA = [
     "address": "TX. Phú Thọ, T. Phú Thọ",
     "province": "T. Phú Thọ",
     "district": "TX. Phú Thọ",
-    "trip_type": "Giao Thang",
-    "isGXT": false,
+    "trip_type": "GXT",
+    "isGXT": true,
     "coords": {
       "lat": 21.4056097,
       "lng": 105.2122986
@@ -1487,8 +1487,8 @@ const STORE_LIST_DATA = [
     "address": "TX. Phú Thọ, T. Phú Thọ",
     "province": "T. Phú Thọ",
     "district": "TX. Phú Thọ",
-    "trip_type": "Giao Thang",
-    "isGXT": false,
+    "trip_type": "GXT",
+    "isGXT": true,
     "coords": {
       "lat": 21.4184405,
       "lng": 105.2118986
@@ -1500,8 +1500,8 @@ const STORE_LIST_DATA = [
     "address": "TX. Phú Thọ, T. Phú Thọ",
     "province": "T. Phú Thọ",
     "district": "TX. Phú Thọ",
-    "trip_type": "Giao Thang",
-    "isGXT": false,
+    "trip_type": "GXT",
+    "isGXT": true,
     "coords": {
       "lat": 21.39997677,
       "lng": 105.18893261
@@ -1513,8 +1513,8 @@ const STORE_LIST_DATA = [
     "address": "TX. Phú Thọ, T. Phú Thọ",
     "province": "T. Phú Thọ",
     "district": "TX. Phú Thọ",
-    "trip_type": "Giao Thang",
-    "isGXT": false,
+    "trip_type": "GXT",
+    "isGXT": true,
     "coords": {
       "lat": 21.3974913,
       "lng": 105.22075527
@@ -1526,8 +1526,8 @@ const STORE_LIST_DATA = [
     "address": "TX. Phú Thọ, T. Phú Thọ",
     "province": "T. Phú Thọ",
     "district": "TX. Phú Thọ",
-    "trip_type": "Giao Thang",
-    "isGXT": false,
+    "trip_type": "GXT",
+    "isGXT": true,
     "coords": {
       "lat": 21.422604,
       "lng": 105.215882
@@ -1539,8 +1539,8 @@ const STORE_LIST_DATA = [
     "address": "TX. Phú Thọ, T. Phú Thọ",
     "province": "T. Phú Thọ",
     "district": "TX. Phú Thọ",
-    "trip_type": "Giao Thang",
-    "isGXT": false,
+    "trip_type": "GXT",
+    "isGXT": true,
     "coords": {
       "lat": 21.39540409,
       "lng": 105.21548335
