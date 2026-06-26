@@ -114,11 +114,19 @@ def run():
     url = f"http://localhost:{PORT}/index.html"
     print(f"========================================================")
     print(f"Logistics Hub Local Server running at {url}")
-    print(f"Giao dien tu dong mo tren Chrome. Nhan Ctrl+C de dung.")
+    print(f"Giao dien tu dong mo tren Microsoft Edge. Nhan Ctrl+C de dung.")
     print(f"========================================================")
     
-    # Auto-open dashboard in default browser
-    webbrowser.open(url)
+    # Auto-open dashboard in Microsoft Edge
+    try:
+        edge_path = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+        if os.path.exists(edge_path):
+            webbrowser.register('edge', None, webbrowser.BackgroundBrowser(edge_path))
+            webbrowser.get('edge').open(url)
+        else:
+            webbrowser.open(url)
+    except Exception:
+        webbrowser.open(url)
     
     try:
         httpd.serve_forever()

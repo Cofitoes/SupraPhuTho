@@ -1,1 +1,0 @@
-const CONCUNG_DATA = {};
