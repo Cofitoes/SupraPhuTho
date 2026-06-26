@@ -7,10 +7,10 @@ import sys
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-file_path = r"G:\My Drive\Training AI\Supra Phú Thọ\DS_Winmart_Extracted.xlsx"
+file_path = r"G:\My Drive\Training AI\Supra Phú Thọ\DSCuaHangFinal.xlsx"
 js_path = r"G:\My Drive\Training AI\Supra Phú Thọ\store_data.js"
 
-print("Loading DS_Winmart_Extracted.xlsx...")
+print("Loading DSCuaHangFinal.xlsx...")
 df = pd.read_excel(file_path, engine="openpyxl")
 
 # Find index of columns
@@ -21,8 +21,8 @@ def get_col(df, options):
                 return c
     return None
 
-id_col = get_col(df, ["Site Store", "Mã cửa hàng (Mã CH)", "Mã cửa hàng", "ID"])
-name_col = get_col(df, ["Tên cửa hàng", "Name"])
+id_col = get_col(df, ["Site Store", "Mã cửa hàng (Mã CH)", "Mã cửa hàng", "ID", "Store_ID"])
+name_col = get_col(df, ["Tên cửa hàng", "Name", "Store_Name"])
 addr_col = get_col(df, ["địa chỉ", "Địa chỉ", "Address"])
 prov_col = get_col(df, ["Tỉnh giao", "Thành Phố/Tỉnh", "Tỉnh", "Province", "Tên tỉnh chuẩn"])
 lat_col = get_col(df, ["Lat", "Vi Do", "Vĩ độ"])

@@ -13,17 +13,17 @@ def get_col_index(headers, col_name):
 def main():
     folder_path = os.path.dirname(os.path.abspath(__file__))
     data_folder = os.path.join(folder_path, "Data_Booking")
-    store_file = os.path.join(folder_path, "DS_Cua_Hang.xlsm")
+    store_file = os.path.join(folder_path, "DSCuaHangFinal.xlsx")
 
     if not os.path.exists(store_file):
         print(f"Error: {store_file} not found.")
         return
 
     # 1. Load existing stores
-    print("Loading existing stores from DS_Cua_Hang.xlsm...")
+    print("Loading existing stores from DSCuaHangFinal.xlsx...")
     try:
-        wb_store = openpyxl.load_workbook(store_file, keep_vba=True)
-        sheet_store = wb_store["DS Cua Hang"]
+        wb_store = openpyxl.load_workbook(store_file)
+        sheet_store = wb_store["Sheet1"]
     except Exception as e:
         print(f"Failed to load DS_Cua_Hang.xlsm: {e}")
         return
@@ -126,15 +126,15 @@ def main():
 
     # 3. Append new stores
     if new_stores:
-        print(f"Found {len(new_stores)} new stores. Appending to DS_Cua_Hang.xlsm...")
+        print(f"Found {len(new_stores)} new stores. Appending to DSCuaHangFinal.xlsx...")
         start_row = sheet_store.max_row + 1
         for i, store in enumerate(new_stores):
             r = start_row + i
             sheet_store.cell(row=r, column=1, value=store['id'])
             sheet_store.cell(row=r, column=2, value=store['name'])
             sheet_store.cell(row=r, column=3, value=store['addr'])
-            sheet_store.cell(row=r, column=4, value=store['prov'])
-            sheet_store.cell(row=r, column=5, value=store['region'])
+            sheet_store.cell(row=r, column=4, value="")  # District (leave blank)
+            sheet_store.cell(row=r, column=5, value=store['prov'])  # Province
             
         wb_store.save(store_file)
         print("Stores appended successfully.")
