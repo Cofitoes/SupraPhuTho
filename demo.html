@@ -1834,6 +1834,15 @@
             const totalMins = hrs * 60 + ms + mins;
             return `${Math.floor(totalMins / 60).toString().padStart(2, '0')}:${(totalMins % 60).toString().padStart(2, '0')}`;
         }
+
+        window.checkIsGXTStore = function(name) {
+            if (!name || typeof GXT_STORE_LIST === 'undefined') return false;
+            return GXT_STORE_LIST.some(gxtName => {
+                const normGXT = gxtName.normalize('NFC').trim().toLowerCase();
+                const normStore = name.normalize('NFC').trim().toLowerCase();
+                return normGXT === normStore || normStore.includes(normGXT) || normGXT.includes(normStore);
+            });
+        };
     </script>
     <script>
         const tripsLogicQuery = window.location.protocol === 'file:' ? '' : '?v=' + cb;
@@ -1922,7 +1931,7 @@
                     name: clonedP.name, // Keep original name from excel
                     address: store && store.address ? store.address : clonedP.address || '',
                     coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords,
-                    isGXT: store ? store.isGXT || false : false
+                    isGXT: store ? (typeof window.checkIsGXTStore === 'function' ? window.checkIsGXTStore(store.name) : false) : false
                 };
             });
 
@@ -2066,7 +2075,7 @@
                         name: clonedP.name, // Keep original name from excel
                         address: store && store.address ? store.address : clonedP.address || '',
                         coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords,
-                        isGXT: store ? store.isGXT || false : false
+                        isGXT: store ? (typeof window.checkIsGXTStore === 'function' ? window.checkIsGXTStore(store.name) : false) : false
                     };
                 });
                 window.renderPendingPoints();
@@ -2101,7 +2110,7 @@
                             name: clonedP.name, // Keep original name from excel
                             address: store && store.address ? store.address : clonedP.address || '',
                             coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords,
-                            isGXT: store ? store.isGXT || false : false
+                            isGXT: store ? (typeof window.checkIsGXTStore === 'function' ? window.checkIsGXTStore(store.name) : false) : false
                         };
                     });
                 } else {
@@ -3491,7 +3500,7 @@
                         province: store.province || '',
                         district: store.district || '',
                         coords: store.coords || null,
-                        isGXT: store.isGXT || false
+                        isGXT: typeof window.checkIsGXTStore === 'function' ? window.checkIsGXTStore(store.name) : false
                     });
                 }
             });
