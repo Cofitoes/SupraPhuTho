@@ -11,9 +11,9 @@ function generateTrips() {
     let hubDC = HUBS.find(h => h.id === 'QM' || h.name === 'Kho DC Win Phú Thọ');
     if (hubDC) {
         hubDC.name = 'Kho DC Win Phú Thọ';
-        hubDC.coords = { lat: 21.3885189, lng: 105.1738604 };
+        hubDC.coords = { lat: 21.3879985, lng: 105.1803274 };
     } else {
-        hubDC = { id: 'QM', name: 'Kho DC Win Phú Thọ', coords: { lat: 21.3885189, lng: 105.1738604 } };
+        hubDC = { id: 'QM', name: 'Kho DC Win Phú Thọ', coords: { lat: 21.3879985, lng: 105.1803274 } };
         HUBS.unshift(hubDC);
     }
 

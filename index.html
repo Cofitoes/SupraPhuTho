@@ -1816,7 +1816,7 @@
         }
 
         const HUBS = [
-            { id: 'QM', name: 'Kho DC Win Phú Thọ', coords: { lat: 21.3885189, lng: 105.1738604 } },
+            { id: 'QM', name: 'Kho DC Win Phú Thọ', coords: { lat: 21.3879985, lng: 105.1803274 } },
             { id: 'GXT', name: 'GXT Phú Thọ', coords: { lat: 21.3264875, lng: 105.3246094 } }
         ];
         let DELIVERY_POINTS = [];
@@ -2706,7 +2706,7 @@
 
                     // 1. Get and sort stores LIFO
                     let stores = window.extractStoresFromTrip(t);
-                    const mqCoords = { lat: 21.3885189, lng: 105.1738604 };
+                    const mqCoords = { lat: 21.3879985, lng: 105.1803274 };
                     let hubCoords = mqCoords;
                     if (typeof HUBS !== 'undefined' && Array.isArray(HUBS)) {
                         const foundHub = HUBS.find(h => h.name === t.hub);
@@ -3194,12 +3194,12 @@
                         const validPoints = t.points.filter(p => p.coords && p.coords.lat && p.coords.lng && p.type !== 'HUB_RETURN');
                         let originCoords = null;
                         if (t.tripType === 'Trung chuyển') {
-                            originCoords = { lat: 21.3885189, lng: 105.1738604 }; // Kho DC Win Phú Thọ
+                            originCoords = { lat: 21.3879985, lng: 105.1803274 }; // Kho DC Win Phú Thọ
                         } else {
-                            if (t.hub === 'Kho DC Win Phú Thọ') originCoords = { lat: 21.3885189, lng: 105.1738604 };
+                            if (t.hub === 'Kho DC Win Phú Thọ') originCoords = { lat: 21.3879985, lng: 105.1803274 };
                             else if (t.hub === 'GXT Phú Thọ') originCoords = { lat: 21.3264875, lng: 105.3246094 };
                             else if (t.hub === 'GXT Phú Thọ') originCoords = { lat: 21.3264875, lng: 105.3246094 };
-                            else originCoords = { lat: 21.3885189, lng: 105.1738604 };
+                            else originCoords = { lat: 21.3879985, lng: 105.1803274 };
                         }
 
                         let routeCoords = [];
@@ -3308,12 +3308,12 @@
                     const validPoints = t.points.filter(p => p.coords && p.coords.lat && p.coords.lng && p.type !== 'HUB_RETURN');
                     let originCoords = null;
                     if (t.tripType === 'Trung chuyển') {
-                        originCoords = { lat: 21.3885189, lng: 105.1738604 }; // Kho DC Win Phú Thọ
+                        originCoords = { lat: 21.3879985, lng: 105.1803274 }; // Kho DC Win Phú Thọ
                     } else {
-                        if (t.hub === 'Kho DC Win Phú Thọ') originCoords = { lat: 21.3885189, lng: 105.1738604 };
+                        if (t.hub === 'Kho DC Win Phú Thọ') originCoords = { lat: 21.3879985, lng: 105.1803274 };
                         else if (t.hub === 'GXT Phú Thọ') originCoords = { lat: 21.3264875, lng: 105.3246094 };
                         else if (t.hub === 'GXT Phú Thọ') originCoords = { lat: 21.3264875, lng: 105.3246094 };
-                        else originCoords = { lat: 21.3885189, lng: 105.1738604 };
+                        else originCoords = { lat: 21.3879985, lng: 105.1803274 };
                     }
 
                     let routeCoords = [];
@@ -3480,12 +3480,12 @@
                         const validPoints = t.points.filter(p => p.coords && p.coords.lat && p.coords.lng && p.type !== 'HUB_RETURN');
                         let originCoords = null;
                         if (t.tripType === 'Trung chuyển') {
-                            originCoords = { lat: 21.3885189, lng: 105.1738604 };
+                            originCoords = { lat: 21.3879985, lng: 105.1803274 };
                         } else {
-                            if (t.hub === 'Kho DC Win Phú Thọ') originCoords = { lat: 21.3885189, lng: 105.1738604 };
+                            if (t.hub === 'Kho DC Win Phú Thọ') originCoords = { lat: 21.3879985, lng: 105.1803274 };
                             else if (t.hub === 'GXT Phú Thọ') originCoords = { lat: 21.3264875, lng: 105.3246094 };
                             else if (t.hub === 'GXT Phú Thọ') originCoords = { lat: 21.3264875, lng: 105.3246094 };
-                            else originCoords = { lat: 21.3885189, lng: 105.1738604 };
+                            else originCoords = { lat: 21.3879985, lng: 105.1803274 };
                         }
                         let routeCoords = [];
                         if (t.tripType === 'Trung chuyển') {
