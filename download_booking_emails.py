@@ -156,9 +156,27 @@ def download_attachments():
                                 if filename.lower().endswith(('.xlsx', '.xls', '.xlsb')):
                                     is_planning = filename.upper().startswith("PLANNING")
                                     is_booking = not is_planning
+                                    
+                                    # Try to extract date from filename first
+                                    file_date = None
+                                    # Pattern: DD.MM.YYYY or DD-MM-YYYY (e.g. 26.6.2026)
+                                    f_match = re.search(r'(\d{1,2})[\.\-](\d{1,2})[\.\-](\d{4})', filename)
+                                    if f_match:
+                                        fd, fm, fy = f_match.groups()
+                                        file_date = f"{fy}-{fm.zfill(2)}-{fd.zfill(2)}"
+                                    else:
+                                        # Pattern: DD.MM or DD-MM (e.g. 26.6)
+                                        f_match2 = re.search(r'(\d{1,2})[\.\-](\d{1,2})', filename)
+                                        if f_match2:
+                                            fd, fm = f_match2.groups()
+                                            if 1 <= int(fd) <= 31 and 1 <= int(fm) <= 12:
+                                                file_date = f"2026-{fm.zfill(2)}-{fd.zfill(2)}"
+                                    
+                                    active_booking_date = file_date if file_date else booking_date
+                                    
                                     if True:
-                                        if is_planning and booking_date:
-                                            target_filename = f"Planning_{booking_date}.xlsx"
+                                        if is_planning and active_booking_date:
+                                            target_filename = f"Planning_{active_booking_date}.xlsx"
                                             dest_path = os.path.join(OUTPUT_DIR, target_filename)
                                             
                                             is_ghn = "ghn.vn" in sender.lower()
@@ -206,8 +224,8 @@ def download_attachments():
                                             should_download = False
                                             reason = ""
                                             
-                                            if booking_date not in processed_planning_dates:
-                                                processed_planning_dates.add(booking_date)
+                                            if active_booking_date not in processed_planning_dates:
+                                                processed_planning_dates.add(active_booking_date)
                                                 
                                                 if not os.path.exists(dest_path):
                                                     should_download = True
@@ -228,7 +246,7 @@ def download_attachments():
                                                     reason = f"Bản cũ hơn từ email có nhiều biển số hơn bản hiện tại ({new_plates} > {disk_plates})"
                                             
                                             if should_download:
-                                                print(f" -> Tải file Planning cho {booking_date} ({sender_type}, {new_plates} biển số): {filename}")
+                                                print(f" -> Tải file Planning cho {active_booking_date} ({sender_type}, {new_plates} biển số): {filename}")
                                                 print(f"    Chi tiết: {reason}")
                                                 with open(dest_path, "wb") as f:
                                                     f.write(file_data)
@@ -236,11 +254,11 @@ def download_attachments():
                                             else:
                                                 # Tránh in quá nhiều nếu trùng khớp
                                                 if new_plates < disk_plates or new_hash != disk_hash:
-                                                    print(f" -> Bỏ qua file Planning cho {booking_date} ({new_plates} biển số): {filename}. Chi tiết: {reason}")
+                                                    print(f" -> Bỏ qua file Planning cho {active_booking_date} ({new_plates} biển số): {filename}. Chi tiết: {reason}")
                                         
                                         elif is_booking:
-                                            if booking_date:
-                                                y, m, d = booking_date.split('-')
+                                            if active_booking_date:
+                                                y, m, d = active_booking_date.split('-')
                                                 ext = os.path.splitext(filename)[1]
                                                 target_filename = f"Booking Supra {d}-{m}-{y}{ext}"
                                             else:
