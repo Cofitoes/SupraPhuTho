@@ -16,23 +16,81 @@ def extract_date_from_filename(filename):
     match = re.search(r'(\d{4})(\d{2})(\d{2})', filename)
     if match:
         return f"{match.group(1)}-{match.group(2)}-{match.group(3)}"
-    # Pattern 2: DD.MM.YYYY or DD-MM-YYYY (e.g., 22.06.2026 or 22-06-2026)
-    match = re.search(r'(\d{1,2})[\.\-](\d{2})[\.\-](\d{4})', filename)
+    # Pattern 2: DD.MM.YYYY or DD-MM-YYYY (e.g., 22.6.2026 or 22-06-2026)
+    match = re.search(r'(\d{1,2})[\.\-](\d{1,2})[\.\-](\d{4})', filename)
     if match:
-        return f"{match.group(3)}-{match.group(2)}-{match.group(1).zfill(2)}"
-    # Pattern 3: DD.MM or DD-MM (e.g., 19.06) - assume current year 2026
-    match = re.search(r'(\d{1,2})[\.\-](\d{2})', filename)
+        return f"{match.group(3)}-{match.group(2).zfill(2)}-{match.group(1).zfill(2)}"
+    # Pattern 3: DD.MM or DD-MM (e.g., 27.6 or 19.06) - assume current year 2026
+    match = re.search(r'(\d{1,2})[\.\-](\d{1,2})', filename)
     if match:
-        return f"2026-{match.group(2)}-{match.group(1).zfill(2)}"
+        return f"2026-{match.group(2).zfill(2)}-{match.group(1).zfill(2)}"
     return None
 
 def main():
     booking_points = []
     summary_data = {}
 
-    files = glob.glob(os.path.join(DATA_DIR, "*.xls*"))
-    for file in files:
+    all_files = glob.glob(os.path.join(DATA_DIR, "*.xls*"))
+    date_groups = {}
+    
+    for file in all_files:
         if "~$" in file: continue
+        filename = os.path.basename(file)
+        date_str = extract_date_from_filename(filename)
+        
+        # If date is not found in filename, try reading it
+        if not date_str:
+            try:
+                if file.lower().endswith(".xlsb"):
+                    df = pd.read_excel(file, engine="pyxlsb", nrows=10)
+                else:
+                    df = pd.read_excel(file, engine="openpyxl", nrows=10)
+                
+                # Check for "Ngày xuất"
+                for col in df.columns:
+                    if 'Ngày xuất' in str(col):
+                        first_date = df[col].dropna().iloc[0]
+                        if pd.notnull(first_date):
+                            date_str = pd.to_datetime(first_date).strftime('%Y-%m-%d')
+                            break
+            except Exception:
+                pass
+                
+        if not date_str:
+            print(f"Skipping {filename}: Cannot determine date")
+            continue
+            
+        if date_str not in date_groups:
+            date_groups[date_str] = []
+        date_groups[date_str].append(file)
+
+    # Deduplicate: select one file per date
+    selected_files = []
+    for date_str, group in date_groups.items():
+        if len(group) == 1:
+            selected_files.append((group[0], date_str))
+        else:
+            # Multiple files for the same date! Prioritize Booking Supra over others
+            best_file = None
+            for file in group:
+                filename = os.path.basename(file)
+                if filename.startswith("Booking Supra"):
+                    best_file = file
+                    break
+            if not best_file:
+                for file in group:
+                    filename = os.path.basename(file)
+                    if "GHN" in filename:
+                        best_file = file
+                        break
+            if not best_file:
+                best_file = group[0]
+                
+            ignored = [os.path.basename(f) for f in group if f != best_file]
+            print(f"For date {date_str}, processed {os.path.basename(best_file)} and ignored duplicates: {ignored}")
+            selected_files.append((best_file, date_str))
+
+    for file, date_str in selected_files:
         filename = os.path.basename(file)
         
         # Determine engine
@@ -99,15 +157,8 @@ def main():
                 if header_idx is not None and header_idx > 0:
                     df = pd.read_excel(file, engine="openpyxl", header=header_idx)
                 
-            date_str = extract_date_from_filename(filename)
+            # Date is already determined as date_str
             if not date_str:
-                if 'Ngày xuất' in df.columns:
-                    first_date = df['Ngày xuất'].dropna().iloc[0]
-                    if pd.notnull(first_date):
-                        date_str = pd.to_datetime(first_date).strftime('%Y-%m-%d')
-            
-            if not date_str:
-                print(f"Skipping {filename}: Cannot determine date")
                 continue
                 
             # Rename columns to handle slight variations like spaces

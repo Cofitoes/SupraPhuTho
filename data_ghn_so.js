@@ -7022,6 +7022,896 @@ const STORE_GHN_SO_DATA = {
       ]
     }
   },
+  "2026-06-24": {
+    "WM+ PTO Khu 21, Vạn Xuân": {
+      "so": [
+        "SOWINSAL1298033",
+        "SOWINSAL1303173"
+      ],
+      "ghn": [
+        "GYXFNKQW",
+        "GYXFN4EA"
+      ]
+    },
+    "WM+ PTO 58 Hồ Thiên Hương": {
+      "so": [
+        "SOWINSAL1298014",
+        "SOWINSAL1303505"
+      ],
+      "ghn": [
+        "GYXFNKQT",
+        "GYXFNKQU"
+      ]
+    },
+    "WM+ PTO Khu 5, Xuân Lộc": {
+      "so": [
+        "SOWINSAL1298002",
+        "SOWINSAL1303249"
+      ],
+      "ghn": [
+        "GYXFNKQ8",
+        "GYXFN4ER"
+      ]
+    },
+    "WM+ PTO Khu 14, Đào Xá": {
+      "so": [
+        "SOWINSAL1297981",
+        "SOWINSAL1303252"
+      ],
+      "ghn": [
+        "GYXFNKQ3",
+        "GYXFNKQD"
+      ]
+    },
+    "WM+ PTO Khu Phố, TT Thanh Thủy": {
+      "so": [
+        "SOWINSAL1298003",
+        "SOWINSAL1303174"
+      ],
+      "ghn": [
+        "GYXFN4EX",
+        "GYXFNKQ9"
+      ]
+    },
+    "WM+ PTO Khu 1, Bảo Yên": {
+      "so": [
+        "SOWINSAL1297848",
+        "SOWINSAL1303258"
+      ],
+      "ghn": [
+        "GYXFNKQH",
+        "GYXFN4EY"
+      ]
+    },
+    "WM+ PTO Khu 11, Tu Vũ": {
+      "so": [
+        "SOWINSAL1297864",
+        "SOWINSAL1303293"
+      ],
+      "ghn": [
+        "GYXFNKQ4",
+        "GYXFNKQA"
+      ]
+    },
+    "WM+ PTO Khu 2, Tu Vũ": {
+      "so": [
+        "SOWINSAL1297948",
+        "SOWINSAL1303184"
+      ],
+      "ghn": [
+        "GYXFNKQL",
+        "GYXFNKQY"
+      ]
+    },
+    "WM+ PTO Khu 4, Đoan Hạ": {
+      "so": [
+        "SOWINSAL1298032",
+        "SOWINSAL1303172"
+      ],
+      "ghn": [
+        "GYXFNKQ6",
+        "GYXFNKQP"
+      ]
+    },
+    "WM+ PTO Khu 22 Hoàng Xá": {
+      "so": [
+        "SOWINSAL1297970",
+        "SOWINSAL1303210"
+      ],
+      "ghn": [
+        "GYXFNKQQ",
+        "GYXFNKQB"
+      ]
+    },
+    "WM+ PTO Khu 3, Thanh Thủy": {
+      "so": [
+        "SOWINSAL1297875",
+        "SOWINSAL1303539"
+      ],
+      "ghn": [
+        "GYXFN4E8",
+        "GYXFNKQK"
+      ]
+    },
+    "WM+ PTO Quyết Tiến, Cự Đồng": {
+      "so": [
+        "SOWINSAL1297945",
+        "SOWINSAL1303428"
+      ],
+      "ghn": [
+        "GYXFNKQF",
+        "GYXFNKQC"
+      ]
+    },
+    "WM+ PTO Tân Hương, Hương Cần": {
+      "so": [
+        "SOWINSAL1298017",
+        "SOWINSAL1303401"
+      ],
+      "ghn": [
+        "GYXFN4EE",
+        "GYXFNKQ7"
+      ]
+    },
+    "WM+ PTO Đề Ngữ, Yên Sơn": {
+      "so": [
+        "SOWINSAL1297938",
+        "SOWINSAL1303278"
+      ],
+      "ghn": [
+        "GYXFN4EM",
+        "GYXFNKQG"
+      ]
+    },
+    "WM+ PTO Xóm Dẹ 1, Văn Miếu": {
+      "so": [
+        "SOWINSAL1297852",
+        "SOWINSAL1303265"
+      ],
+      "ghn": [
+        "GYXFNKQV",
+        "GYXFNKQN"
+      ]
+    },
+    "WM+ PTO Đống Cả, Xuân Đài": {
+      "so": [
+        "SOWINSAL1297941",
+        "SOWINSAL1303285"
+      ],
+      "ghn": [
+        "GYXFNKLB",
+        "GYXFNKLV"
+      ]
+    },
+    "WM+ PTO 28 Phố Vàng": {
+      "so": [
+        "SOWINSAL1297849",
+        "SOWINSAL1303261"
+      ],
+      "ghn": [
+        "GYXFNKLT",
+        "GYXFNKLW"
+      ]
+    },
+    "WM+ PTO Hùng Nhĩ, Thanh Sơn": {
+      "so": [
+        "SOWINSAL1297929",
+        "SOWINSAL1303511"
+      ],
+      "ghn": [
+        "GYXFNKLM",
+        "GYXFNKLA"
+      ]
+    },
+    "WM+ PTO 191B Ba Mỏ": {
+      "so": [
+        "SOWINSAL1298001",
+        "SOWINSAL1303208"
+      ],
+      "ghn": [
+        "GYXFNKL3",
+        "GYXFNKL4"
+      ]
+    },
+    "WM+ PTO Khu 13, Minh Hòa": {
+      "so": [
+        "SOWINSAL1297872",
+        "SOWINSAL1303432"
+      ],
+      "ghn": [
+        "GYXFNKFL",
+        "GYXFNKL6"
+      ]
+    },
+    "WM+ PTO Đồng Ve, Sơn Lương": {
+      "so": [
+        "SOWINSAL1298054",
+        "SOWINSAL1303406"
+      ],
+      "ghn": [
+        "GYXFNKLY",
+        "GYXFNKLG"
+      ]
+    },
+    "WM+ PTO Khu Trung Tâm, Lương Sơn": {
+      "so": [
+        "SOWINSAL1297851",
+        "SOWINSAL1303402"
+      ],
+      "ghn": [
+        "GYXFNKFG",
+        "GYXFNKLN"
+      ]
+    },
+    "WM+ PTO Tân An 4, Yên Lập": {
+      "so": [
+        "SOWINSAL1297973",
+        "SOWINSAL1303503"
+      ],
+      "ghn": [
+        "GYXFNKFU",
+        "GYXFNKFC"
+      ]
+    },
+    "WM+ PTO Giáp Xuân, Phú Khê": {
+      "so": [
+        "SOWINSAL1297854",
+        "SOWINSAL1303408"
+      ],
+      "ghn": [
+        "GYXFNKLP",
+        "GYXFNKLR"
+      ]
+    },
+    "WM+ PTO Khu Suông 2, Phú Khê": {
+      "so": [
+        "SOWINSAL1295043",
+        "SOWINSAL1298063",
+        "SOWINSAL1303454"
+      ],
+      "ghn": [
+        "GYXFNKF7",
+        "GYXFNKLX",
+        "GYXFNKL9"
+      ]
+    },
+    "WM+ PTO Khu Tiền Phong": {
+      "so": [
+        "SOWINSAL1297944",
+        "SOWINSAL1303301"
+      ],
+      "ghn": [
+        "GYXFNKFQ",
+        "GYXFNKLC"
+      ]
+    },
+    "WM+ PTO Khu An Ninh, Hùng Việt": {
+      "so": [
+        "SOWINSAL1297856",
+        "SOWINSAL1303177"
+      ],
+      "ghn": [
+        "GYXFNKLE",
+        "GYXFNKLK"
+      ]
+    },
+    "WM+ PTO Trung Tiến 2, Hùng Việt": {
+      "so": [
+        "SOWINSAL1297939",
+        "SOWINSAL1303411"
+      ],
+      "ghn": [
+        "GYXFNKL8",
+        "GYXFNKFF"
+      ]
+    },
+    "WM+ PTO 234 Đông Phú": {
+      "so": [
+        "SOWINSAL1297943",
+        "SOWINSAL1303298"
+      ],
+      "ghn": [
+        "GYXFNKLH",
+        "GYXFNKLU"
+      ]
+    },
+    "WM+ PTO Bắc Tiến 2, Hùng Việt": {
+      "so": [
+        "SOWINSAL1298035",
+        "SOWINSAL1303178"
+      ],
+      "ghn": [
+        "GYXFNKLD",
+        "GYXFNK77"
+      ]
+    },
+    "WM+ PTO Khu Cống 2, Cẩm Khê": {
+      "so": [
+        "SOWINSAL1298039",
+        "SOWINSAL1303431"
+      ],
+      "ghn": [
+        "GYXFNK74",
+        "GYXFNK79"
+      ]
+    },
+    "WM+ PTO Hoa Khê, Cẩm Khê": {
+      "so": [
+        "SOWINSAL1297972",
+        "SOWINSAL1303215"
+      ],
+      "ghn": [
+        "GYXFNKFR",
+        "GYXFNK7Q"
+      ]
+    },
+    "WM+ PTO Minh Tân, Cẩm Khê": {
+      "so": [
+        "SOWINSAL1298013",
+        "SOWINSAL1303222"
+      ],
+      "ghn": [
+        "GYXFNKFE",
+        "GYXFNK7G"
+      ]
+    },
+    "WM+ PTO Nương Sơn, Vân Bán": {
+      "so": [
+        "SOWINSAL1298037",
+        "SOWINSAL1303229"
+      ],
+      "ghn": [
+        "GYXFNKF8",
+        "GYXFNKFA"
+      ]
+    },
+    "WM+ PTO Khu 4, Phú Mỹ": {
+      "so": [
+        "SOWINSAL1297996",
+        "SOWINSAL1303274"
+      ],
+      "ghn": [
+        "GYXFNK7N",
+        "GYXFNK7F"
+      ]
+    },
+    "WM+ PTO Khu 2, Trạm Thản": {
+      "so": [
+        "SOWINSAL1298068",
+        "SOWINSAL1303171"
+      ],
+      "ghn": [
+        "GYXFNK7B",
+        "GYXFNKFT"
+      ]
+    },
+    "WM+ PTO Khu 12 Phú Hộ": {
+      "so": [
+        "SOWINSAL1297902",
+        "SOWINSAL1303510"
+      ],
+      "ghn": [
+        "GYXFNKFH",
+        "GYXFNKF4"
+      ]
+    },
+    "WM+ PTO Khu 10, Phù Ninh": {
+      "so": [
+        "SOWINSAL1297950",
+        "SOWINSAL1303185"
+      ],
+      "ghn": [
+        "GYXFNK7C",
+        "GYXFNKFW"
+      ]
+    },
+    "WM+ PTO Bình Phú, Phù Ninh": {
+      "so": [
+        "SOWINSAL1298053",
+        "SOWINSAL1303381"
+      ],
+      "ghn": [
+        "GYXFNK76",
+        "GYXFNKFM"
+      ]
+    },
+    "WM+ PTO Núi Trang, Phù Ninh": {
+      "so": [
+        "SOWINSAL1297834",
+        "SOWINSAL1303392"
+      ],
+      "ghn": [
+        "GYXFNKFK",
+        "GYXFNKF3"
+      ]
+    },
+    "WM+ PTO 188 Đường Nam, Phù Ninh": {
+      "so": [
+        "SOWINSAL1298048",
+        "SOWINSAL1303337"
+      ],
+      "ghn": [
+        "GYXFNK7U",
+        "GYXFNKFX"
+      ]
+    },
+    "WM+ PTO Khu 3, TT Phong Châu": {
+      "so": [
+        "SOWINSAL1297935",
+        "SOWINSAL1303404"
+      ],
+      "ghn": [
+        "GYXFNK7D",
+        "GYXFNKFB"
+      ]
+    },
+    "WM+ PTO Phú Lộc, Phù Ninh": {
+      "so": [
+        "SOWINSAL1297971",
+        "SOWINSAL1303213"
+      ],
+      "ghn": [
+        "GYXFNKFP",
+        "GYXFNK73"
+      ]
+    },
+    "WM+ PTO Khu 10, Xuân Lũng": {
+      "so": [
+        "SOWINSAL1297857",
+        "SOWINSAL1303414"
+      ],
+      "ghn": [
+        "GYXFNK7L",
+        "GYXFNK7V"
+      ]
+    },
+    "WM+ PTO Khu 2, Xuân Lũng": {
+      "so": [
+        "SOWINSAL1297855",
+        "SOWINSAL1303276"
+      ],
+      "ghn": [
+        "GYXFNKFY",
+        "GYXFNKGV"
+      ]
+    },
+    "WM+ PTO Khu 12, TT Lâm Thao": {
+      "so": [
+        "SOWINSAL1298052",
+        "SOWINSAL1303372"
+      ],
+      "ghn": [
+        "GYXFNKG7",
+        "GYXFNK7Y"
+      ]
+    },
+    "WM+ PTO 26 Âu Cơ": {
+      "so": [
+        "SOWINSAL1298000",
+        "SOWINSAL1303346"
+      ],
+      "ghn": [
+        "GYXFNKGP",
+        "GYXFNKGL"
+      ]
+    },
+    "WM+ PTO Khu 15, Dục Mỹ": {
+      "so": [
+        "SOWINSAL1297951",
+        "SOWINSAL1303437"
+      ],
+      "ghn": [
+        "GYXFNKGW",
+        "GYXFNKGT"
+      ]
+    },
+    "WM+ PTO Cao Xá, Lâm Thao": {
+      "so": [
+        "SOWINSAL1297917"
+      ],
+      "ghn": [
+        "GYXFNKGX"
+      ]
+    },
+    "WM+ PTO Khu 1, Bản Nguyên": {
+      "so": [
+        "SOWINSAL1297873",
+        "SOWINSAL1303304"
+      ],
+      "ghn": [
+        "GYXFNKGF",
+        "GYXFNKGD"
+      ]
+    },
+    "WM+ PTO Khu 5, Tứ Xã": {
+      "so": [
+        "SOWINSAL1297847",
+        "SOWINSAL1303255"
+      ],
+      "ghn": [
+        "GYXFNKG8",
+        "GYXFNKGH"
+      ]
+    },
+    "WM+ PTO 235-235B TT Hùng Sơn": {
+      "so": [
+        "SOWINSAL1297922",
+        "SOWINSAL1303374"
+      ],
+      "ghn": [
+        "GYXFNKGY",
+        "GYXFNK7R"
+      ]
+    },
+    "WM+ PTO Khu 3 Hùng Lô, Việt Trì": {
+      "so": [
+        "SOWINSAL1297993",
+        "SOWINSAL1303504"
+      ],
+      "ghn": [
+        "GYXFNKGQ",
+        "GYXFNKGA"
+      ]
+    },
+    "WM+ PTO Tổ 1, khu 1A, Vân Phú": {
+      "so": [
+        "SOWINSAL1298043",
+        "SOWINSAL1303309"
+      ],
+      "ghn": [
+        "GYXFNK78",
+        "GYXFNKG9"
+      ]
+    },
+    "WM+ PTO Khu 3 Vân Phú": {
+      "so": [
+        "SOWINSAL1298024",
+        "SOWINSAL1303200"
+      ],
+      "ghn": [
+        "GYXFNKGR",
+        "GYXFNKGC"
+      ]
+    },
+    "WM+ PTO Đội 3, Nông Trang": {
+      "so": [
+        "SOWINSAL1297984",
+        "SOWINSAL1303281"
+      ],
+      "ghn": [
+        "GYXFNK7M",
+        "GYXFNKG3"
+      ]
+    },
+    "WM+ PTO Khu 6, Hy Cương": {
+      "so": [
+        "SOWINSAL1297869",
+        "SOWINSAL1303425"
+      ],
+      "ghn": [
+        "GYXFNKG4",
+        "GYXFNKGN"
+      ]
+    },
+    "WM+ PTO 3023 Đại Lộ Hùng Vương": {
+      "so": [
+        "SOWINSAL1297998",
+        "SOWINSAL1303188"
+      ],
+      "ghn": [
+        "GYXFNKGG",
+        "GYXFNK7E"
+      ]
+    },
+    "WM+ PTO Khu Trung Phương, Việt Trì": {
+      "so": [
+        "SOWINSAL1298034",
+        "SOWINSAL1303501"
+      ],
+      "ghn": [
+        "GYXFNKGK",
+        "GYXFNKGU"
+      ]
+    },
+    "WM+ PTO 44 Đại Nải": {
+      "so": [
+        "SOWINSAL1298046",
+        "SOWINSAL1303313"
+      ],
+      "ghn": [
+        "GYXFNKG6",
+        "GYXFNKGB"
+      ]
+    },
+    "WM+ PTO 167-169 Nguyễn Trãi": {
+      "so": [
+        "SOWINSAL1297992",
+        "SOWINSAL1303209"
+      ],
+      "ghn": [
+        "GYXFNKUR",
+        "GYXFNKUX"
+      ]
+    },
+    "WM+ PTO Vũ Duệ, Việt Trì": {
+      "so": [
+        "SOWINSAL1297974",
+        "SOWINSAL1303217"
+      ],
+      "ghn": [
+        "GYXFNKCU",
+        "GYXFNKUH"
+      ]
+    },
+    "WM+ PTO Khu 6B, Nông Trang": {
+      "so": [
+        "SOWINSAL1297999",
+        "SOWINSAL1303194"
+      ],
+      "ghn": [
+        "GYXFNKUP",
+        "GYXFNKU4"
+      ]
+    },
+    "WM+ PTO 44 Nguyễn Du": {
+      "so": [
+        "SOWINSAL1297958",
+        "SOWINSAL1303189"
+      ],
+      "ghn": [
+        "GYXFNKU8",
+        "GYXFNKUM"
+      ]
+    },
+    "WM+ PTO Khu 2A, Nông Trang": {
+      "so": [
+        "SOWINSAL1298044",
+        "SOWINSAL1303310"
+      ],
+      "ghn": [
+        "GYXFNKUY",
+        "GYXFNKCF"
+      ]
+    },
+    "WM+ PTO Khu 8 Nông Trang": {
+      "so": [
+        "SOWINSAL1297988",
+        "SOWINSAL1303199"
+      ],
+      "ghn": [
+        "GYXFNKCL",
+        "GYXFNKUK"
+      ]
+    },
+    "WM+ PTO 73 Quang Trung": {
+      "so": [
+        "SOWINSAL1298022",
+        "SOWINSAL1303193"
+      ],
+      "ghn": [
+        "GYXFNKU3",
+        "GYXFNKUE"
+      ]
+    },
+    "WM+ PTO 62 Phan Châu Trinh": {
+      "so": [
+        "SOWINSAL1298021",
+        "SOWINSAL1303308"
+      ],
+      "ghn": [
+        "GYXFNKUB",
+        "GYXFNKC7"
+      ]
+    },
+    "WM+ PTO Băng 1, Quang Trung": {
+      "so": [
+        "SOWINSAL1297986",
+        "SOWINSAL1303195"
+      ],
+      "ghn": [
+        "GYXFNKCQ",
+        "GYXFNKCC"
+      ]
+    },
+    "WM+ PTO Khu 5 Nông Trang": {
+      "so": [
+        "SOWINSAL1297991",
+        "SOWINSAL1303502"
+      ],
+      "ghn": [
+        "GYXFNKCG",
+        "GYXFNKUT"
+      ]
+    },
+    "WM+ PTO Khu Tân Thịnh, Tân Dân": {
+      "so": [
+        "SOWINSAL1297987",
+        "SOWINSAL1303311"
+      ],
+      "ghn": [
+        "GYXFNKUW",
+        "GYXFNKUA"
+      ]
+    },
+    "WM+ PTO 545 Trần Phú": {
+      "so": [
+        "SOWINSAL1297995",
+        "SOWINSAL1303220"
+      ],
+      "ghn": [
+        "GYXFNGB9",
+        "GYXFNGBB"
+      ]
+    },
+    "WM+ PTO 12 Tổ 5 Trần Phú": {
+      "so": [
+        "SOWINSAL1297976",
+        "SOWINSAL1303370"
+      ],
+      "ghn": [
+        "GYXFNG3G",
+        "GYXFNGBH"
+      ]
+    },
+    "WM+ PTO Khu Tân An, Tân Dân": {
+      "so": [
+        "SOWINSAL1298023",
+        "SOWINSAL1303196"
+      ],
+      "ghn": [
+        "GYXFNGBV",
+        "GYXFNG39"
+      ]
+    },
+    "WM+ PTO 192-194 Trần Phú, Việt Trì": {
+      "so": [
+        "SOWINSAL1298036"
+      ],
+      "ghn": [
+        "GYXFNGBY"
+      ]
+    },
+    "WM+ PTO 66 Hàn Thuyên": {
+      "so": [
+        "SOWINSAL1298045",
+        "SOWINSAL1303197"
+      ],
+      "ghn": [
+        "GYXFNG3L",
+        "GYXFNGBK"
+      ]
+    },
+    "WM+ PTO 35 Hà Chương": {
+      "so": [
+        "SOWINSAL1297979",
+        "SOWINSAL1303245"
+      ],
+      "ghn": [
+        "GYXFNGBN",
+        "GYXFNGBP"
+      ]
+    },
+    "WM+ PTO 476 Châu Phong": {
+      "so": [
+        "SOWINSAL1298029",
+        "SOWINSAL1303352"
+      ],
+      "ghn": [
+        "GYXFNG3V",
+        "GYXFNGBX"
+      ]
+    },
+    "WM+ PTO Đồng Gia, Việt Trì": {
+      "so": [
+        "SOWINSAL1297975",
+        "SOWINSAL1303218"
+      ],
+      "ghn": [
+        "GYXFNGBR",
+        "GYXFNGB4"
+      ]
+    },
+    "WM+ PTO 130 Lê Quý Đôn": {
+      "so": [
+        "SOWINSAL1297959",
+        "SOWINSAL1303191"
+      ],
+      "ghn": [
+        "GYXFNGB8",
+        "GYXFNGBA"
+      ]
+    },
+    "WM VCP PTO Việt Trì": {
+      "so": [
+        "SOWINSAL1302983",
+        "SOWINSAL1303163"
+      ],
+      "ghn": [
+        "GYXFNG37",
+        "GYXFNG3U"
+      ]
+    },
+    "WM+ PTO 439 Tiên Dung": {
+      "so": [
+        "SOWINSAL1297931",
+        "SOWINSAL1303169"
+      ],
+      "ghn": [
+        "GYXFNG3C",
+        "GYXFNGBM"
+      ]
+    },
+    "WM+ PTO 1343 Hùng Vương": {
+      "so": [
+        "SOWINSAL1297960",
+        "SOWINSAL1303312"
+      ],
+      "ghn": [
+        "GYXFNGBW",
+        "GYXFNGBT"
+      ]
+    },
+    "WM+ PTO 1250 Hùng Vương": {
+      "so": [
+        "SOWINSAL1298055",
+        "SOWINSAL1303190"
+      ],
+      "ghn": [
+        "GYXFNG3Q",
+        "GYXFNG3F"
+      ]
+    },
+    "WM+ PTO 965 Hùng Vương": {
+      "so": [
+        "SOWINSAL1298058",
+        "SOWINSAL1303513"
+      ],
+      "ghn": [
+        "GYXFNGB6",
+        "GYXFNG36"
+      ]
+    },
+    "WM+ PTO Tổ 26A Hai Bà Trưng": {
+      "so": [
+        "SOWINSAL1297961",
+        "SOWINSAL1303198"
+      ],
+      "ghn": [
+        "GYXFNGBD",
+        "GYXFNGB3"
+      ]
+    },
+    "WM+ PTO 107 Bạch Hạc": {
+      "so": [
+        "SOWINSAL1297994",
+        "SOWINSAL1303550"
+      ],
+      "ghn": [
+        "GYXFNGBE",
+        "GYXFNG3B"
+      ]
+    },
+    "WM+ PTO Băng 1, Nguyễn Tất Thành": {
+      "so": [
+        "SOWINSAL1297983",
+        "SOWINSAL1303267"
+      ],
+      "ghn": [
+        "GYXFNG33",
+        "GYXFNG34"
+      ]
+    },
+    "WM+ PTO Thành Công, Việt Trì": {
+      "so": [
+        "SOWINSAL1298004",
+        "SOWINSAL1303192"
+      ],
+      "ghn": [
+        "GYXFNG3K",
+        "GYXFNG3W"
+      ]
+    }
+  },
   "2026-04-13": {
     "WM+ PTO Trung Kiên, Sơn Đông": {
       "so": [
@@ -7662,1501 +8552,1419 @@ const STORE_GHN_SO_DATA = {
       ]
     }
   },
-  "2026-06-24": {
+  "2026-06-25": {
     "WM+ PTO Khu 21, Vạn Xuân": {
       "so": [
         "SOWINSAL1298033",
-        "SOWINSAL1303173"
+        "SOWINSAL1303173",
+        "SOWINSAL1312168",
+        "SOWINSAL1310703",
+        "SOWIN9B27EDCFA0"
       ],
       "ghn": [
         "7078895795",
-        "7078933817"
+        "7078933817",
+        "7078984050",
+        "7078981280",
+        "7078979913"
       ]
     },
     "WM+ PTO 58 Hồ Thiên Hương": {
       "so": [
         "SOWINSAL1298014",
-        "SOWINSAL1303505"
+        "SOWINSAL1303505",
+        "SOWINSAL1312361",
+        "SOWINSAL1310618",
+        "SOWIND653EEC521"
       ],
       "ghn": [
         "7078889644",
-        "7078937210"
+        "7078937210",
+        "7078984965",
+        "7078980154",
+        "7078980900"
       ]
     },
     "WM+ PTO Khu 5, Xuân Lộc": {
       "so": [
         "SOWINSAL1298002",
-        "SOWINSAL1303249"
+        "SOWINSAL1303249",
+        "SOWINSAL1312218",
+        "SOWINSAL1310582",
+        "SOWINB573AA7716"
       ],
       "ghn": [
         "7078895109",
-        "7078937720"
+        "7078937720",
+        "7078981401",
+        "7078979991",
+        "7078983214"
       ]
     },
     "WM+ PTO Khu 14, Đào Xá": {
       "so": [
         "SOWINSAL1297981",
-        "SOWINSAL1303252"
+        "SOWINSAL1303252",
+        "SOWINSAL1312174",
+        "SOWINSAL1310918",
+        "SOWINEC4B064BCB"
       ],
       "ghn": [
         "7078880282",
-        "7078937206"
+        "7078937206",
+        "7078984108",
+        "7078981238",
+        "7078979916"
       ]
     },
     "WM+ PTO Khu Phố, TT Thanh Thủy": {
       "so": [
         "SOWINSAL1298003",
-        "SOWINSAL1303174"
+        "SOWINSAL1303174",
+        "SOWINSAL1312312",
+        "SOWINSAL1310931",
+        "SOWINE0C6043579"
       ],
       "ghn": [
         "7078888587",
-        "7078936505"
+        "7078936505",
+        "7078983306",
+        "7078981488",
+        "7078980973"
       ]
     },
     "WM+ PTO Khu 1, Bảo Yên": {
       "so": [
         "SOWINSAL1297848",
-        "SOWINSAL1303258"
+        "SOWINSAL1303258",
+        "SOWINSAL1312221",
+        "SOWINSAL1310699",
+        "SOWINC266CB92D9"
       ],
       "ghn": [
         "7078895016",
-        "7078937689"
+        "7078937689",
+        "7078983242",
+        "7078980785",
+        "7078981541"
       ]
     },
     "WM+ PTO Khu 11, Tu Vũ": {
       "so": [
         "SOWINSAL1297864",
-        "SOWINSAL1303293"
+        "SOWINSAL1303293",
+        "SOWINSAL1312334",
+        "SOWINSAL1310585",
+        "SOWIN742BEDB53F"
       ],
       "ghn": [
         "7078893814",
-        "7078938006"
+        "7078938006",
+        "7078983939",
+        "7078981104",
+        "7078980859"
       ]
     },
     "WM+ PTO Khu 2, Tu Vũ": {
       "so": [
         "SOWINSAL1297948",
-        "SOWINSAL1303184"
+        "SOWINSAL1303184",
+        "SOWINSAL1312283",
+        "SOWINSAL1310761",
+        "SOWIN5A98BE945F"
       ],
       "ghn": [
         "7078889909",
-        "7078935355"
+        "7078935355",
+        "7078976507",
+        "7078981295",
+        "7078965274"
       ]
     },
     "WM+ PTO Khu 4, Đoan Hạ": {
       "so": [
         "SOWINSAL1298032",
-        "SOWINSAL1303172"
+        "SOWINSAL1303172",
+        "SOWINSAL1312219",
+        "SOWINSAL1310920",
+        "SOWIN3BE592AF7E"
       ],
       "ghn": [
         "7078893245",
-        "7078937305"
+        "7078937305",
+        "7078976524",
+        "7078981457",
+        "7078980570"
       ]
     },
     "WM+ PTO Khu 22 Hoàng Xá": {
       "so": [
         "SOWINSAL1297970",
-        "SOWINSAL1303210"
+        "SOWINSAL1303210",
+        "SOWINSAL1312362",
+        "SOWINSAL1310638",
+        "SOWIND0C432F755"
       ],
       "ghn": [
         "7078895606",
-        "7078934461"
+        "7078934461",
+        "7078979498",
+        "7078980028",
+        "7078976461"
       ]
     },
     "WM+ PTO Khu 3, Thanh Thủy": {
       "so": [
         "SOWINSAL1297875",
-        "SOWINSAL1303539"
+        "SOWINSAL1303539",
+        "SOWINSAL1312345",
+        "SOWINSAL1310767",
+        "SOWIN4237FFA285"
       ],
       "ghn": [
         "7078895793",
-        "7078937435"
+        "7078937435",
+        "7078985097",
+        "7078979849",
+        "7078981427"
       ]
     },
     "WM+ PTO Quyết Tiến, Cự Đồng": {
       "so": [
         "SOWINSAL1297945",
-        "SOWINSAL1303428"
+        "SOWINSAL1303428",
+        "SOWINSAL1312280",
+        "SOWINSAL1310587",
+        "SOWIN73E0D7FAAC"
       ],
       "ghn": [
         "7078889208",
-        "7078930038"
+        "7078930038",
+        "7078987071",
+        "7078980375",
+        "7078981684"
       ]
     },
     "WM+ PTO Tân Hương, Hương Cần": {
       "so": [
         "SOWINSAL1298017",
-        "SOWINSAL1303401"
+        "SOWINSAL1303401",
+        "SOWINSAL1312220",
+        "SOWINSAL1310930",
+        "SOWINB3A395BE72"
       ],
       "ghn": [
         "7078888101",
-        "7078938320"
+        "7078938320",
+        "7078981304",
+        "7078979481",
+        "7078980989"
       ]
     },
     "WM+ PTO Đề Ngữ, Yên Sơn": {
       "so": [
         "SOWINSAL1297938",
-        "SOWINSAL1303278"
+        "SOWINSAL1303278",
+        "SOWINSAL1312274",
+        "SOWINSAL1310936",
+        "SOWINC6E82ED313"
       ],
       "ghn": [
         "7078893244",
-        "7078938096"
+        "7078938096",
+        "7078981697",
+        "7078981046",
+        "7078983215"
       ]
     },
     "WM+ PTO Xóm Dẹ 1, Văn Miếu": {
       "so": [
         "SOWINSAL1297852",
-        "SOWINSAL1303265"
+        "SOWINSAL1303265",
+        "SOWINSAL1312181",
+        "SOWINSAL1310706",
+        "SOWIN0902C38259"
       ],
       "ghn": [
         "7078883228",
-        "7078936932"
+        "7078936932",
+        "7078981547",
+        "7078979191",
+        "7078982194"
       ]
     },
     "WM+ PTO Đống Cả, Xuân Đài": {
       "so": [
         "SOWINSAL1297941",
-        "SOWINSAL1303285"
+        "SOWINSAL1303285",
+        "SOWINSAL1312313",
+        "SOWINSAL1310584",
+        "SOWIND20EEC6D22"
       ],
       "ghn": [
         "7078893890",
-        "7078934391"
+        "7078934391",
+        "7078987087",
+        "7078978450",
+        "7078981791"
       ]
     },
     "WM+ PTO 28 Phố Vàng": {
       "so": [
         "SOWINSAL1297849",
-        "SOWINSAL1303261"
+        "SOWINSAL1303261",
+        "SOWINSAL1312222",
+        "SOWINSAL1310701",
+        "SOWINFEBD613EA1"
       ],
       "ghn": [
         "7078894357",
-        "7078937613"
+        "7078937613",
+        "7078981748",
+        "7078981108",
+        "7078980899"
       ]
     },
     "WM+ PTO Hùng Nhĩ, Thanh Sơn": {
       "so": [
         "SOWINSAL1297929",
-        "SOWINSAL1303511"
+        "SOWINSAL1303511",
+        "SOWINSAL1312213",
+        "SOWINSAL1310873",
+        "SOWINDCBF69A0BB"
       ],
       "ghn": [
         "7078888913",
-        "7078938327"
+        "7078938327",
+        "7078984999",
+        "7078981237",
+        "7078981449"
       ]
     },
     "WM+ PTO 191B Ba Mỏ": {
       "so": [
         "SOWINSAL1298001",
-        "SOWINSAL1303208"
+        "SOWINSAL1303208",
+        "SOWINSAL1312251",
+        "SOWINSAL1310675",
+        "SOWIN2E5D83132A"
       ],
       "ghn": [
         "7078893892",
-        "7078938126"
+        "7078938126",
+        "7078987054",
+        "7078980379",
+        "7078981603"
       ]
     },
     "WM+ PTO Khu 13, Minh Hòa": {
       "so": [
         "SOWINSAL1297872",
-        "SOWINSAL1303432"
+        "SOWINSAL1303432",
+        "SOWINSAL1312314",
+        "SOWINSAL1310757",
+        "SOWINBD78F6D18B"
       ],
       "ghn": [
         "7078892823",
-        "7078938048"
+        "7078938048",
+        "7078981307",
+        "7078979764",
+        "7078980891"
       ]
     },
     "WM+ PTO Đồng Ve, Sơn Lương": {
       "so": [
         "SOWINSAL1298054",
-        "SOWINSAL1303406"
+        "SOWINSAL1303406",
+        "SOWINSAL1312329",
+        "SOWINSAL1310623",
+        "SOWIN672B61BEC4"
       ],
       "ghn": [
         "7078893306",
-        "7078937861"
+        "7078937861",
+        "7078979497",
+        "7078979593",
+        "7078983279"
       ]
     },
     "WM+ PTO Khu Trung Tâm, Lương Sơn": {
       "so": [
         "SOWINSAL1297851",
-        "SOWINSAL1303402"
+        "SOWINSAL1303402",
+        "SOWINSAL1312234",
+        "SOWINSAL1310650",
+        "SOWINF0AA3B891A"
       ],
       "ghn": [
         "7078879501",
-        "7078938336"
+        "7078938336",
+        "7078985250",
+        "7078981152",
+        "7078982082"
       ]
     },
     "WM+ PTO Tân An 4, Yên Lập": {
       "so": [
         "SOWINSAL1297973",
-        "SOWINSAL1303503"
+        "SOWINSAL1303503",
+        "SOWINSAL1312363",
+        "SOWINSAL1310885",
+        "SOWIN29281C72D2"
       ],
       "ghn": [
         "7078893382",
-        "7078937864"
+        "7078937864",
+        "7078983953",
+        "7078978456",
+        "7078981539"
       ]
     },
     "WM+ PTO Giáp Xuân, Phú Khê": {
       "so": [
         "SOWINSAL1297854",
-        "SOWINSAL1303408"
+        "SOWINSAL1303408",
+        "SOWINSAL1312273",
+        "SOWINSAL1310720",
+        "SOWIN0704B7BC80"
       ],
       "ghn": [
         "7078875739",
-        "7078937829"
+        "7078937829",
+        "7078983191",
+        "7078980337",
+        "7078981117"
       ]
     },
     "WM+ PTO Khu Suông 2, Phú Khê": {
       "so": [
         "SOWINSAL1295043",
         "SOWINSAL1298063",
-        "SOWINSAL1303454"
+        "SOWINSAL1303454",
+        "SOWINSAL1312392"
       ],
       "ghn": [
         "7078866914",
         "7078896257",
-        "7078930039"
+        "7078930039",
+        "7078987151"
       ]
     },
     "WM+ PTO Khu Tiền Phong": {
       "so": [
         "SOWINSAL1297944",
-        "SOWINSAL1303301"
+        "SOWINSAL1303301",
+        "SOWINSAL1310752",
+        "SOWINC92136D58F",
+        "SOWINSAL1312339"
       ],
       "ghn": [
         "7078896190",
-        "7078937692"
+        "7078937692",
+        "7078980331",
+        "7078979915",
+        "7078976203"
       ]
     },
     "WM+ PTO Khu An Ninh, Hùng Việt": {
       "so": [
         "SOWINSAL1297856",
-        "SOWINSAL1303177"
+        "SOWINSAL1303177",
+        "SOWINSAL1312330",
+        "SOWINSAL1310583",
+        "SOWINEC10D432D4"
       ],
       "ghn": [
         "7078894052",
-        "7078936872"
+        "7078936872",
+        "7078984374",
+        "7078980374",
+        "7078983249"
       ]
     },
     "WM+ PTO Trung Tiến 2, Hùng Việt": {
       "so": [
         "SOWINSAL1297939",
-        "SOWINSAL1303411"
+        "SOWINSAL1303411",
+        "SOWINSAL1312169",
+        "SOWINSAL1310724",
+        "SOWIN0A1AEE0440"
       ],
       "ghn": [
         "7078894531",
-        "7078930035"
+        "7078930035",
+        "7078981735",
+        "7078980329",
+        "7078981288"
       ]
     },
     "WM+ PTO 234 Đông Phú": {
       "so": [
         "SOWINSAL1297943",
-        "SOWINSAL1303298"
+        "SOWINSAL1303298",
+        "SOWINSAL1312338",
+        "SOWINSAL1310748",
+        "SOWIN9C2C780CE3"
       ],
       "ghn": [
         "7078880809",
-        "7078937432"
+        "7078937432",
+        "7078980356",
+        "7078981268",
+        "7078977127"
       ]
     },
     "WM+ PTO Bắc Tiến 2, Hùng Việt": {
       "so": [
         "SOWINSAL1298035",
-        "SOWINSAL1303178"
+        "SOWINSAL1303178",
+        "SOWINSAL1310728",
+        "SOWIN2B01553CB1",
+        "SOWINSAL1312275"
       ],
       "ghn": [
         "7078880283",
-        "7078936911"
+        "7078936911",
+        "7078981266",
+        "7078981197",
+        "7078984371"
       ]
     },
     "WM+ PTO Khu Cống 2, Cẩm Khê": {
       "so": [
         "SOWINSAL1298039",
-        "SOWINSAL1303431"
+        "SOWINSAL1303431",
+        "SOWINSAL1312187",
+        "SOWINSAL1310588",
+        "SOWIN81A13986D3"
       ],
       "ghn": [
         "7078893499",
-        "7078933676"
+        "7078933676",
+        "7078980396",
+        "7078981214",
+        "7078977141"
       ]
     },
     "WM+ PTO Hoa Khê, Cẩm Khê": {
       "so": [
         "SOWINSAL1297972",
-        "SOWINSAL1303215"
+        "SOWINSAL1303215",
+        "SOWINSAL1312302",
+        "SOWINSAL1310878",
+        "SOWIN4A937D53D4"
       ],
       "ghn": [
         "7078896176",
-        "7078935484"
+        "7078935484",
+        "7078975895",
+        "7078980045",
+        "7078981018"
       ]
     },
     "WM+ PTO Minh Tân, Cẩm Khê": {
       "so": [
         "SOWINSAL1298013",
-        "SOWINSAL1303222"
+        "SOWINSAL1303222",
+        "SOWINSAL1312241",
+        "SOWINSAL1310645",
+        "SOWINBD7C2AEB4A"
       ],
       "ghn": [
         "7078895794",
-        "7078937873"
+        "7078937873",
+        "7078982051",
+        "7078979817",
+        "7078983262"
       ]
     },
     "WM+ PTO Nương Sơn, Vân Bán": {
       "so": [
         "SOWINSAL1298037",
-        "SOWINSAL1303229"
+        "SOWINSAL1303229",
+        "SOWINSAL1312235",
+        "SOWINSAL1310653",
+        "SOWIN1C7794ADFD"
       ],
       "ghn": [
         "7078891350",
-        "7078937557"
+        "7078937557",
+        "7078976525",
+        "7078980326",
+        "7078982197"
       ]
     },
     "WM+ PTO Khu 4, Phú Mỹ": {
       "so": [
         "SOWINSAL1297996",
-        "SOWINSAL1303274"
+        "SOWINSAL1303274",
+        "SOWINSAL1312164",
+        "SOWINSAL1310935",
+        "SOWINDC71D19769"
       ],
       "ghn": [
         "7078894489",
-        "7078933901"
+        "7078933901",
+        "7078984289",
+        "7078981315",
+        "7078983171"
       ]
     },
     "WM+ PTO Khu 2, Trạm Thản": {
       "so": [
         "SOWINSAL1298068",
-        "SOWINSAL1303171"
+        "SOWINSAL1303171",
+        "SOWINSAL1312245",
+        "SOWINSAL1310929",
+        "SOWIN2CC902AD2E"
       ],
       "ghn": [
         "7078896224",
-        "7078933146"
+        "7078933146",
+        "7078983314",
+        "7078981439",
+        "7078981467"
       ]
     },
     "WM+ PTO Khu 12 Phú Hộ": {
       "so": [
         "SOWINSAL1297902",
-        "SOWINSAL1303510"
+        "SOWINSAL1303510",
+        "SOWINSAL1312196",
+        "SOWINSAL1310666",
+        "SOWIN123A967ADD"
       ],
       "ghn": [
         "7078895696",
-        "7078937531"
+        "7078937531",
+        "7078985264",
+        "7078974999",
+        "7078981445"
       ]
     },
     "WM+ PTO Khu 10, Phù Ninh": {
       "so": [
         "SOWINSAL1297950",
-        "SOWINSAL1303185"
+        "SOWINSAL1303185",
+        "SOWINSAL1312344",
+        "SOWINSAL1310659",
+        "SOWINFE0E432FFA"
       ],
       "ghn": [
         "7078886140",
-        "7078937125"
+        "7078937125",
+        "7078985265",
+        "7078981153",
+        "7078965275"
       ]
     },
     "WM+ PTO Bình Phú, Phù Ninh": {
       "so": [
         "SOWINSAL1298053",
-        "SOWINSAL1303381"
+        "SOWINSAL1303381",
+        "SOWINSAL1312204",
+        "SOWINSAL1310906",
+        "SOWIND181B31E04"
       ],
       "ghn": [
         "7078877723",
-        "7078937749"
+        "7078937749",
+        "7078980440",
+        "7078981486",
+        "7078983310"
       ]
     },
     "WM+ PTO Núi Trang, Phù Ninh": {
       "so": [
         "SOWINSAL1297834",
-        "SOWINSAL1303392"
+        "SOWINSAL1303392",
+        "SOWINSAL1312322",
+        "SOWINSAL1310685",
+        "SOWIN9DF60AE83C"
       ],
       "ghn": [
         "7078881163",
-        "7078933674"
+        "7078933674",
+        "7078975980",
+        "7078980993",
+        "7078980858"
       ]
     },
     "WM+ PTO 188 Đường Nam, Phù Ninh": {
       "so": [
         "SOWINSAL1298048",
-        "SOWINSAL1303337"
+        "SOWINSAL1303337",
+        "SOWINSAL1312246",
+        "SOWINSAL1310921",
+        "SOWINFE2FCB55E6"
       ],
       "ghn": [
         "7078895300",
-        "7078933671"
+        "7078933671",
+        "7078985219",
+        "7078981274",
+        "7078981392"
       ]
     },
     "WM+ PTO Khu 3, TT Phong Châu": {
       "so": [
         "SOWINSAL1297935",
-        "SOWINSAL1303404"
+        "SOWINSAL1303404",
+        "SOWINSAL1312269",
+        "SOWINSAL1310933",
+        "SOWIN2A8E0E4F5F"
       ],
       "ghn": [
         "7078895578",
-        "7078937208"
+        "7078937208",
+        "7078982052",
+        "7078981298",
+        "7078983119"
       ]
     },
     "WM+ PTO Phú Lộc, Phù Ninh": {
       "so": [
         "SOWINSAL1297971",
-        "SOWINSAL1303213"
+        "SOWINSAL1303213",
+        "SOWINSAL1312175",
+        "SOWINSAL1310641",
+        "SOWIN0FBB2C8308"
       ],
       "ghn": [
         "7078895299",
-        "7078937480"
+        "7078937480",
+        "7078980681",
+        "7078979684",
+        "7078979197"
       ]
     },
     "WM+ PTO Khu 10, Xuân Lũng": {
       "so": [
         "SOWINSAL1297857",
-        "SOWINSAL1303414"
+        "SOWINSAL1303414",
+        "SOWINSAL1310938",
+        "SOWINE88D0279D3",
+        "SOWINSAL1312276"
       ],
       "ghn": [
         "7078895982",
-        "7078937751"
+        "7078937751",
+        "7078981162",
+        "7078983123",
+        "7078981658"
       ]
     },
     "WM+ PTO Khu 2, Xuân Lũng": {
       "so": [
         "SOWINSAL1297855",
-        "SOWINSAL1303276"
+        "SOWINSAL1303276",
+        "SOWINSAL1312183",
+        "SOWINSAL1310625",
+        "SOWIN5E829040CA"
       ],
       "ghn": [
         "7078894395",
-        "7078937690"
+        "7078937690",
+        "7078981916",
+        "7078980376",
+        "7078983183"
       ]
     },
     "WM+ PTO Khu 12, TT Lâm Thao": {
       "so": [
         "SOWINSAL1298052",
-        "SOWINSAL1303372"
+        "SOWINSAL1303372",
+        "SOWINSAL1312385",
+        "SOWINSAL1310897",
+        "SOWINEBCD85DC2B"
       ],
       "ghn": [
         "7078893847",
-        "7078933852"
+        "7078933852",
+        "7078980635",
+        "7078981334",
+        "7078983167"
       ]
     },
     "WM+ PTO 26 Âu Cơ": {
       "so": [
         "SOWINSAL1298000",
-        "SOWINSAL1303346"
+        "SOWINSAL1303346",
+        "SOWINSAL1312260",
+        "SOWINSAL1310849",
+        "SOWIN6AFC7D5481"
       ],
       "ghn": [
         "7078896177",
-        "7078933149"
+        "7078933149",
+        "7078983305",
+        "7078981235",
+        "7078983247"
       ]
     },
     "WM+ PTO Khu 15, Dục Mỹ": {
       "so": [
         "SOWINSAL1297951",
-        "SOWINSAL1303437"
+        "SOWINSAL1303437",
+        "SOWINSAL1312256",
+        "SOWINSAL1310762",
+        "SOWINC7E50DB7BA"
       ],
       "ghn": [
         "7078894739",
-        "7078933853"
+        "7078933853",
+        "7078983190",
+        "7078980996",
+        "7078980519"
       ]
     },
     "WM+ PTO Cao Xá, Lâm Thao": {
       "so": [
-        "SOWINSAL1297917"
+        "SOWINSAL1297917",
+        "SOWINSAL1312306",
+        "SOWINSAL1310884",
+        "SOWIN79973CD70E"
       ],
       "ghn": [
-        "7078895938"
+        "7078895938",
+        "7078984085",
+        "7078981333",
+        "7078981450"
       ]
     },
     "WM+ PTO Khu 1, Bản Nguyên": {
       "so": [
         "SOWINSAL1297873",
-        "SOWINSAL1303304"
+        "SOWINSAL1303304",
+        "SOWINSAL1312342",
+        "SOWINSAL1310589",
+        "SOWINBBF8F67775"
       ],
       "ghn": [
         "7078895760",
-        "7078938238"
+        "7078938238",
+        "7078978124",
+        "7078980602",
+        "7078983248"
       ]
     },
     "WM+ PTO Khu 5, Tứ Xã": {
       "so": [
         "SOWINSAL1297847",
-        "SOWINSAL1303255"
+        "SOWINSAL1303255",
+        "SOWINSAL1312327",
+        "SOWINSAL1310696",
+        "SOWIN64B623C9EB"
       ],
       "ghn": [
         "7078894762",
-        "7078937688"
+        "7078937688",
+        "7078984176",
+        "7078981202",
+        "7078976475"
       ]
     },
     "WM+ PTO 235-235B TT Hùng Sơn": {
       "so": [
         "SOWINSAL1297922",
-        "SOWINSAL1303374"
+        "SOWINSAL1303374",
+        "SOWINSAL1312162",
+        "SOWINSAL1310670",
+        "SOWIN5E1665F960"
       ],
       "ghn": [
         "7078875741",
-        "7078933673"
+        "7078933673",
+        "7078985093",
+        "7078980380",
+        "7078973541"
       ]
     },
     "WM+ PTO Khu 3 Hùng Lô, Việt Trì": {
       "so": [
         "SOWINSAL1297993",
-        "SOWINSAL1303504"
+        "SOWINSAL1303504",
+        "SOWINSAL1312167",
+        "SOWINSAL1310887",
+        "SOWIN092292EC36"
       ],
       "ghn": [
         "7078894533",
-        "7078938495"
+        "7078938495",
+        "7078980281",
+        "7078981378",
+        "7078983124"
       ]
     },
     "WM+ PTO Tổ 1, khu 1A, Vân Phú": {
       "so": [
         "SOWINSAL1298043",
-        "SOWINSAL1303309"
+        "SOWINSAL1303309",
+        "SOWINSAL1312189",
+        "SOWINSAL1310596",
+        "SOWINCE70FAC9B9"
       ],
       "ghn": [
         "7078895779",
-        "7078938159"
+        "7078938159",
+        "7078987038",
+        "7078979478",
+        "7078978055"
       ]
     },
     "WM+ PTO Khu 3 Vân Phú": {
       "so": [
         "SOWINSAL1298024",
-        "SOWINSAL1303200"
+        "SOWINSAL1303200",
+        "SOWINSAL1312366",
+        "SOWINSAL1310600",
+        "SOWINBC80481ABA"
       ],
       "ghn": [
         "7078895778",
-        "7078935676"
+        "7078935676",
+        "7078972869",
+        "7078981230",
+        "7078981394"
       ]
     },
     "WM+ PTO Đội 3, Nông Trang": {
       "so": [
         "SOWINSAL1297984",
-        "SOWINSAL1303281"
+        "SOWINSAL1303281",
+        "SOWINSAL1312230",
+        "SOWINSAL1310727",
+        "SOWIN93F82333FE"
       ],
       "ghn": [
         "7078894456",
-        "7078937069"
+        "7078937069",
+        "7078984109",
+        "7078978828",
+        "7078979692"
       ]
     },
     "WM+ PTO Khu 6, Hy Cương": {
       "so": [
         "SOWINSAL1297869",
-        "SOWINSAL1303425"
+        "SOWINSAL1303425",
+        "SOWINSAL1312186",
+        "SOWINSAL1310654",
+        "SOWIN7ED39D6F4D"
       ],
       "ghn": [
         "7078893305",
-        "7078937752"
+        "7078937752",
+        "7078984367",
+        "7078978759",
+        "7078980896"
       ]
     },
     "WM+ PTO 3023 Đại Lộ Hùng Vương": {
       "so": [
         "SOWINSAL1297998",
-        "SOWINSAL1303188"
+        "SOWINSAL1303188",
+        "SOWINSAL1312292",
+        "SOWINSAL1310592",
+        "SOWIN55DAA951FE"
       ],
       "ghn": [
         "7078863848",
-        "7078928133"
+        "7078928133",
+        "7078981660",
+        "7078981198",
+        "7078981508"
       ]
     },
     "WM+ PTO Khu Trung Phương, Việt Trì": {
       "so": [
         "SOWINSAL1298034",
-        "SOWINSAL1303501"
+        "SOWINSAL1303501",
+        "SOWINSAL1312328",
+        "SOWINSAL1310710",
+        "SOWINB3217E0901"
       ],
       "ghn": [
         "7078896159",
-        "7078936845"
+        "7078936845",
+        "7078981639",
+        "7078981265",
+        "7078974779"
       ]
     },
     "WM+ PTO 44 Đại Nải": {
       "so": [
         "SOWINSAL1298046",
-        "SOWINSAL1303313"
+        "SOWINSAL1303313",
+        "SOWINSAL1312311",
+        "SOWINSAL1310601",
+        "SOWINE3DB51C3F7"
       ],
       "ghn": [
         "7078893817",
-        "7078932888"
+        "7078932888",
+        "7078974517",
+        "7078981042",
+        "7078974778"
       ]
     },
     "WM+ PTO 167-169 Nguyễn Trãi": {
       "so": [
         "SOWINSAL1297992",
-        "SOWINSAL1303209"
+        "SOWINSAL1303209",
+        "SOWINSAL1312207",
+        "SOWINSAL1310864",
+        "SOWINF6B92C4FDE"
       ],
       "ghn": [
         "7078893692",
-        "7078937307"
+        "7078937307",
+        "7078981303",
+        "7078981112",
+        "7078981688"
       ]
     },
     "WM+ PTO Vũ Duệ, Việt Trì": {
       "so": [
         "SOWINSAL1297974",
-        "SOWINSAL1303217"
+        "SOWINSAL1303217",
+        "SOWINSAL1312208",
+        "SOWINSAL1310888",
+        "SOWINB1E5544715"
       ],
       "ghn": [
         "7078893891",
-        "7078937762"
+        "7078937762",
+        "7078981747",
+        "7078981313",
+        "7078981812"
       ]
     },
     "WM+ PTO Khu 6B, Nông Trang": {
       "so": [
         "SOWINSAL1297999",
-        "SOWINSAL1303194"
+        "SOWINSAL1303194",
+        "SOWINSAL1312352",
+        "SOWINSAL1310597",
+        "SOWIND2C3DF9FC4"
       ],
       "ghn": [
         "7078895607",
-        "7078938001"
+        "7078938001",
+        "7078980893",
+        "7078980944",
+        "7078981148"
       ]
     },
     "WM+ PTO 44 Nguyễn Du": {
       "so": [
         "SOWINSAL1297958",
-        "SOWINSAL1303189"
+        "SOWINSAL1303189",
+        "SOWINSAL1312205",
+        "SOWINSAL1310593",
+        "SOWINF9E6AE2678"
       ],
       "ghn": [
         "7078884795",
-        "7078937366"
+        "7078937366",
+        "7078979799",
+        "7078976137",
+        "7078983121"
       ]
     },
     "WM+ PTO Khu 2A, Nông Trang": {
       "so": [
         "SOWINSAL1298044",
-        "SOWINSAL1303310"
+        "SOWINSAL1303310",
+        "SOWINSAL1312294",
+        "SOWINSAL1310786",
+        "SOWIN6A04A28692"
       ],
       "ghn": [
         "7078896286",
-        "7078933820"
+        "7078933820",
+        "7078978866",
+        "7078981343",
+        "7078983326"
       ]
     },
     "WM+ PTO Khu 8 Nông Trang": {
       "so": [
         "SOWINSAL1297988",
-        "SOWINSAL1303199"
+        "SOWINSAL1303199",
+        "SOWINSAL1312210",
+        "SOWINSAL1310599",
+        "SOWIN112EEC983E"
       ],
       "ghn": [
         "7078893724",
-        "7078937761"
+        "7078937761",
+        "7078980955",
+        "7078979992",
+        "7078983120"
       ]
     },
     "WM+ PTO 73 Quang Trung": {
       "so": [
         "SOWINSAL1298022",
-        "SOWINSAL1303193"
+        "SOWINSAL1303193",
+        "SOWINSAL1312206",
+        "SOWINSAL1310630",
+        "SOWINE69BB541AF"
       ],
       "ghn": [
         "7078895444",
-        "7078938015"
+        "7078938015",
+        "7078985184",
+        "7078966356",
+        "7078981177"
       ]
     },
     "WM+ PTO 62 Phan Châu Trinh": {
       "so": [
         "SOWINSAL1298021",
-        "SOWINSAL1303308"
+        "SOWINSAL1303308",
+        "SOWINSAL1312291",
+        "SOWINSAL1310785",
+        "SOWINA8138467D2"
       ],
       "ghn": [
         "7078895744",
-        "7078937258"
+        "7078937258",
+        "7078983952",
+        "7078981207",
+        "7078983128"
       ]
     },
     "WM+ PTO Băng 1, Quang Trung": {
       "so": [
         "SOWINSAL1297986",
-        "SOWINSAL1303195"
+        "SOWINSAL1303195",
+        "SOWINSAL1312190",
+        "SOWINSAL1310787",
+        "SOWIN5F02B241D9"
       ],
       "ghn": [
         "7078853337",
-        "7078936268"
+        "7078936268",
+        "7078981400",
+        "7078980774",
+        "7078980820"
       ]
     },
     "WM+ PTO Khu 5 Nông Trang": {
       "so": [
         "SOWINSAL1297991",
-        "SOWINSAL1303502"
+        "SOWINSAL1303502",
+        "SOWINSAL1312358",
+        "SOWINSAL1310861",
+        "SOWINF6E7D7A06F"
       ],
       "ghn": [
         "7078896112",
-        "7078938420"
+        "7078938420",
+        "7078983940",
+        "7078979193",
+        "7078981687"
       ]
     },
     "WM+ PTO Khu Tân Thịnh, Tân Dân": {
       "so": [
         "SOWINSAL1297987",
-        "SOWINSAL1303311"
+        "SOWINSAL1303311",
+        "SOWINSAL1312353",
+        "SOWINSAL1310788",
+        "SOWINB390D700C0"
       ],
       "ghn": [
         "7078892140",
-        "7078938254"
+        "7078938254",
+        "7078981661",
+        "7078979148",
+        "7078983129"
       ]
     },
     "WM+ PTO 545 Trần Phú": {
       "so": [
         "SOWINSAL1297995",
-        "SOWINSAL1303220"
+        "SOWINSAL1303220",
+        "SOWINSAL1312215",
+        "SOWINSAL1310617",
+        "SOWIN89EEFD2183"
       ],
       "ghn": [
         "7078895443",
-        "7078936965"
+        "7078936965",
+        "7078981875",
+        "7078976138",
+        "7078983134"
       ]
     },
     "WM+ PTO 12 Tổ 5 Trần Phú": {
       "so": [
         "SOWINSAL1297976",
-        "SOWINSAL1303370"
+        "SOWINSAL1303370",
+        "SOWINSAL1312375",
+        "SOWINSAL1310616",
+        "SOWINEF26B1C604"
       ],
       "ghn": [
         "7078895809",
-        "7078937207"
+        "7078937207",
+        "7078977878",
+        "7078974997",
+        "7078978792"
       ]
     },
     "WM+ PTO Khu Tân An, Tân Dân": {
       "so": [
         "SOWINSAL1298023",
-        "SOWINSAL1303196"
+        "SOWINSAL1303196",
+        "SOWINSAL1312295",
+        "SOWINSAL1310598",
+        "SOWIN66CB9CB0AA"
       ],
       "ghn": [
         "7078895033",
-        "7078938002"
+        "7078938002",
+        "7078983192",
+        "7078977320",
+        "7078982196"
       ]
     },
     "WM+ PTO 192-194 Trần Phú, Việt Trì": {
       "so": [
-        "SOWINSAL1298036"
+        "SOWINSAL1298036",
+        "SOWINSAL1312178",
+        "SOWINSAL1310729",
+        "SOWINEBDCE77CDD"
       ],
       "ghn": [
-        "7078894692"
+        "7078894692",
+        "7078981301",
+        "7078980539",
+        "7078983166"
       ]
     },
     "WM+ PTO 66 Hàn Thuyên": {
       "so": [
         "SOWINSAL1298045",
-        "SOWINSAL1303197"
+        "SOWINSAL1303197",
+        "SOWINSAL1312354",
+        "SOWINSAL1310673",
+        "SOWINC778F03450"
       ],
       "ghn": [
         "7078895126",
-        "7078937872"
+        "7078937872",
+        "7078978867",
+        "7078979818",
+        "7078982198"
       ]
     },
     "WM+ PTO 35 Hà Chương": {
       "so": [
         "SOWINSAL1297979",
-        "SOWINSAL1303245"
+        "SOWINSAL1303245",
+        "SOWINSAL1312319",
+        "SOWINSAL1310578",
+        "SOWIN71906D07CD"
       ],
       "ghn": [
         "7078893953",
-        "7078933900"
+        "7078933900",
+        "7078980344",
+        "7078975482",
+        "7078979644"
       ]
     },
     "WM+ PTO 476 Châu Phong": {
       "so": [
         "SOWINSAL1298029",
-        "SOWINSAL1303352"
+        "SOWINSAL1303352",
+        "SOWINSAL1312166",
+        "SOWINSAL1310610",
+        "SOWIN78FEEC6501"
       ],
       "ghn": [
         "7078896240",
-        "7078937769"
+        "7078937769",
+        "7078983817",
+        "7078981246",
+        "7078980855"
       ]
     },
     "WM+ PTO Đồng Gia, Việt Trì": {
       "so": [
         "SOWINSAL1297975",
-        "SOWINSAL1303218"
+        "SOWINSAL1303218",
+        "SOWINSAL1312163",
+        "SOWINSAL1310889",
+        "SOWIN5EBEC97AB7"
       ],
       "ghn": [
         "7078884796",
-        "7078937479"
+        "7078937479",
+        "7078979565",
+        "7078976346",
+        "7078981540"
       ]
     },
     "WM+ PTO 130 Lê Quý Đôn": {
       "so": [
         "SOWINSAL1297959",
-        "SOWINSAL1303191"
+        "SOWINSAL1303191",
+        "SOWINSAL1312293",
+        "SOWINSAL1310629",
+        "SOWIN5F99BDBD96"
       ],
       "ghn": [
         "7078886747",
-        "7078937871"
+        "7078937871",
+        "7078978123",
+        "7078975820",
+        "7078980898"
       ]
     },
     "WM VCP PTO Việt Trì": {
       "so": [
         "SOWINSAL1302983",
-        "SOWINSAL1303163"
+        "SOWINSAL1303163",
+        "SOWINSAL1311141"
       ],
       "ghn": [
         "7078937179",
-        "7078936084"
+        "7078936084",
+        "7078981602"
       ]
     },
     "WM+ PTO 439 Tiên Dung": {
       "so": [
         "SOWINSAL1297931",
-        "SOWINSAL1303169"
+        "SOWINSAL1303169",
+        "SOWINSAL1312229",
+        "SOWINSAL1310649",
+        "SOWIN5D7D1A8E9B"
       ],
       "ghn": [
         "7078889207",
-        "7078936930"
+        "7078936930",
+        "7078984962",
+        "7078978349",
+        "7078979691"
       ]
     },
     "WM+ PTO 1343 Hùng Vương": {
       "so": [
         "SOWINSAL1297960",
-        "SOWINSAL1303312"
+        "SOWINSAL1303312",
+        "SOWINSAL1312296",
+        "SOWINSAL1310789",
+        "SOWINBB8751488C"
       ],
       "ghn": [
         "7078895426",
-        "7078933821"
+        "7078933821",
+        "7078976508",
+        "7078980850",
+        "7078980824"
       ]
     },
     "WM+ PTO 1250 Hùng Vương": {
       "so": [
         "SOWINSAL1298055",
-        "SOWINSAL1303190"
+        "SOWINSAL1303190",
+        "SOWINSAL1312255",
+        "SOWINSAL1310594",
+        "SOWIN73B3C2D3F6"
       ],
       "ghn": [
         "7078895813",
-        "7078930134"
+        "7078930134",
+        "7078981736",
+        "7078979865",
+        "7078976391"
       ]
     },
     "WM+ PTO 965 Hùng Vương": {
       "so": [
         "SOWINSAL1298058",
-        "SOWINSAL1303513"
+        "SOWINSAL1303513",
+        "SOWINSAL1312290",
+        "SOWINSAL1310660",
+        "SOWINC88E98E18E"
       ],
       "ghn": [
         "7078893725",
-        "7078937637"
+        "7078937637",
+        "7078980634",
+        "7078981263",
+        "7078982016"
       ]
     },
     "WM+ PTO Tổ 26A Hai Bà Trưng": {
       "so": [
         "SOWINSAL1297961",
-        "SOWINSAL1303198"
+        "SOWINSAL1303198",
+        "SOWINSAL1312297",
+        "SOWINSAL1310790",
+        "SOWIND2DEC67C4A"
       ],
       "ghn": [
         "7078894532",
-        "7078935483"
-      ]
-    },
-    "WM+ PTO Thành Công, Việt Trì": {
-      "so": [
-        "SOWINSAL1298004",
-        "SOWINSAL1303192"
-      ],
-      "ghn": [
-        "7078895872",
-        "7078935836"
+        "7078935483",
+        "7078987102",
+        "7078978115",
+        "7078983118"
       ]
     },
     "WM+ PTO 107 Bạch Hạc": {
       "so": [
         "SOWINSAL1297994",
-        "SOWINSAL1303550"
+        "SOWINSAL1303550",
+        "SOWINSAL1312176",
+        "SOWINSAL1310615",
+        "SOWINCD4326A806"
       ],
       "ghn": [
         "7078895221",
-        "7078938176"
+        "7078938176",
+        "7078984357",
+        "7078978758",
+        "7078981285"
       ]
     },
     "WM+ PTO Băng 1, Nguyễn Tất Thành": {
       "so": [
         "SOWINSAL1297983",
-        "SOWINSAL1303267"
+        "SOWINSAL1303267",
+        "SOWINSAL1312268",
+        "SOWINSAL1310708",
+        "SOWINAFC34BEECE"
       ],
       "ghn": [
         "7078893816",
-        "7078934323"
-      ]
-    }
-  },
-  "2026-06-25": {
-    "WM+ PTO Khu 21, Vạn Xuân": {
-      "so": [
-        "SOWINSAL1312168",
-        "SOWINSAL1310703",
-        "SOWIN9B27EDCFA0",
-        "SOWINSAL1298033",
-        "SOWINSAL1303173"
-      ],
-      "ghn": [
-        "7078984050",
-        "7078981280",
-        "7078979913",
-        "7078895795",
-        "7078933817"
+        "7078934323",
+        "7078981638",
+        "7078980868",
+        "7078981393"
       ]
     },
-    "WM+ PTO Khu 23 Vạn Xuân": {
+    "WM+ PTO Thành Công, Việt Trì": {
       "so": [
-        "SOWINSAL1312259",
-        "SOWINSAL1298028",
-        "SOWINSAL1303470",
-        "SOWINSAL1310665",
-        "SOWIN7913178AF9"
+        "SOWINSAL1298004",
+        "SOWINSAL1303192",
+        "SOWINSAL1312224",
+        "SOWINSAL1310595",
+        "SOWIN345815517E"
       ],
       "ghn": [
-        "7078985001",
-        "7078895125",
-        "7078937863",
-        "7078975483",
-        "7078981986"
-      ]
-    },
-    "WM+ PTO 58 Hồ Thiên Hương": {
-      "so": [
-        "SOWINSAL1312361",
-        "SOWINSAL1310618",
-        "SOWIND653EEC521",
-        "SOWINSAL1298014",
-        "SOWINSAL1303505"
-      ],
-      "ghn": [
-        "7078984965",
-        "7078980154",
-        "7078980900",
-        "7078889644",
-        "7078937210"
-      ]
-    },
-    "WM+ PTO Khu 5, Xuân Lộc": {
-      "so": [
-        "SOWINSAL1312218",
-        "SOWINSAL1310582",
-        "SOWINB573AA7716",
-        "SOWINSAL1298002",
-        "SOWINSAL1303249"
-      ],
-      "ghn": [
-        "7078981401",
-        "7078979991",
-        "7078983214",
-        "7078895109",
-        "7078937720"
-      ]
-    },
-    "WM+ PTO Khu 14, Đào Xá": {
-      "so": [
-        "SOWINSAL1312174",
-        "SOWINSAL1310918",
-        "SOWINEC4B064BCB",
-        "SOWINSAL1297981",
-        "SOWINSAL1303252"
-      ],
-      "ghn": [
-        "7078984108",
-        "7078981238",
-        "7078979916",
-        "7078880282",
-        "7078937206"
-      ]
-    },
-    "WM+ PTO Khu Phố, TT Thanh Thủy": {
-      "so": [
-        "SOWINSAL1312312",
-        "SOWINSAL1310931",
-        "SOWINE0C6043579",
-        "SOWINSAL1298003",
-        "SOWINSAL1303174"
-      ],
-      "ghn": [
-        "7078983306",
-        "7078981488",
-        "7078980973",
-        "7078888587",
-        "7078936505"
-      ]
-    },
-    "WM+ PTO Khu 1, Bảo Yên": {
-      "so": [
-        "SOWINSAL1312221",
-        "SOWINSAL1310699",
-        "SOWINC266CB92D9",
-        "SOWINSAL1297848",
-        "SOWINSAL1303258"
-      ],
-      "ghn": [
-        "7078983242",
-        "7078980785",
-        "7078981541",
-        "7078895016",
-        "7078937689"
-      ]
-    },
-    "WM+ PTO Khu 11, Tu Vũ": {
-      "so": [
-        "SOWINSAL1312334",
-        "SOWINSAL1310585",
-        "SOWIN742BEDB53F",
-        "SOWINSAL1297864",
-        "SOWINSAL1303293"
-      ],
-      "ghn": [
-        "7078983939",
-        "7078981104",
-        "7078980859",
-        "7078893814",
-        "7078938006"
-      ]
-    },
-    "WM+ PTO Khu 2, Tu Vũ": {
-      "so": [
-        "SOWINSAL1312283",
-        "SOWINSAL1310761",
-        "SOWIN5A98BE945F",
-        "SOWINSAL1297948",
-        "SOWINSAL1303184"
-      ],
-      "ghn": [
-        "7078976507",
-        "7078981295",
-        "7078965274",
-        "7078889909",
-        "7078935355"
-      ]
-    },
-    "WM+ PTO Khu 4, Đoan Hạ": {
-      "so": [
-        "SOWINSAL1312219",
-        "SOWINSAL1310920",
-        "SOWIN3BE592AF7E",
-        "SOWINSAL1298032",
-        "SOWINSAL1303172"
-      ],
-      "ghn": [
-        "7078976524",
-        "7078981457",
-        "7078980570",
-        "7078893245",
-        "7078937305"
-      ]
-    },
-    "WM+ PTO Khu 22 Hoàng Xá": {
-      "so": [
-        "SOWINSAL1312362",
-        "SOWINSAL1310638",
-        "SOWIND0C432F755",
-        "SOWINSAL1297970",
-        "SOWINSAL1303210"
-      ],
-      "ghn": [
-        "7078979498",
-        "7078980028",
-        "7078976461",
-        "7078895606",
-        "7078934461"
-      ]
-    },
-    "WM+ PTO Khu 3, Thanh Thủy": {
-      "so": [
-        "SOWINSAL1312345",
-        "SOWINSAL1310767",
-        "SOWIN4237FFA285",
-        "SOWINSAL1297875",
-        "SOWINSAL1303539"
-      ],
-      "ghn": [
-        "7078985097",
-        "7078979849",
-        "7078981427",
-        "7078895793",
-        "7078937435"
-      ]
-    },
-    "WM+ PTO Quyết Tiến, Cự Đồng": {
-      "so": [
-        "SOWINSAL1312280",
-        "SOWINSAL1310587",
-        "SOWIN73E0D7FAAC",
-        "SOWINSAL1297945",
-        "SOWINSAL1303428"
-      ],
-      "ghn": [
-        "7078987071",
-        "7078980375",
-        "7078981684",
-        "7078889208",
-        "7078930038"
-      ]
-    },
-    "WM+ PTO Tân Hương, Hương Cần": {
-      "so": [
-        "SOWINSAL1312220",
-        "SOWINSAL1310930",
-        "SOWINB3A395BE72",
-        "SOWINSAL1298017",
-        "SOWINSAL1303401"
-      ],
-      "ghn": [
-        "7078981304",
-        "7078979481",
-        "7078980989",
-        "7078888101",
-        "7078938320"
-      ]
-    },
-    "WM+ PTO Đề Ngữ, Yên Sơn": {
-      "so": [
-        "SOWINSAL1312274",
-        "SOWINSAL1310936",
-        "SOWINC6E82ED313",
-        "SOWINSAL1297938",
-        "SOWINSAL1303278"
-      ],
-      "ghn": [
-        "7078981697",
-        "7078981046",
-        "7078983215",
-        "7078893244",
-        "7078938096"
-      ]
-    },
-    "WM+ PTO Xóm Dẹ 1, Văn Miếu": {
-      "so": [
-        "SOWINSAL1312181",
-        "SOWINSAL1310706",
-        "SOWIN0902C38259",
-        "SOWINSAL1297852",
-        "SOWINSAL1303265"
-      ],
-      "ghn": [
-        "7078981547",
-        "7078979191",
-        "7078982194",
-        "7078883228",
-        "7078936932"
-      ]
-    },
-    "WM+ PTO Đống Cả, Xuân Đài": {
-      "so": [
-        "SOWINSAL1312313",
-        "SOWINSAL1310584",
-        "SOWIND20EEC6D22",
-        "SOWINSAL1297941",
-        "SOWINSAL1303285"
-      ],
-      "ghn": [
-        "7078987087",
-        "7078978450",
-        "7078981791",
-        "7078893890",
-        "7078934391"
-      ]
-    },
-    "WM+ PTO 28 Phố Vàng": {
-      "so": [
-        "SOWINSAL1312222",
-        "SOWINSAL1310701",
-        "SOWINFEBD613EA1",
-        "SOWINSAL1297849",
-        "SOWINSAL1303261"
-      ],
-      "ghn": [
-        "7078981748",
-        "7078981108",
-        "7078980899",
-        "7078894357",
-        "7078937613"
-      ]
-    },
-    "WM+ PTO Hùng Nhĩ, Thanh Sơn": {
-      "so": [
-        "SOWINSAL1312213",
-        "SOWINSAL1310873",
-        "SOWINDCBF69A0BB",
-        "SOWINSAL1297929",
-        "SOWINSAL1303511"
-      ],
-      "ghn": [
-        "7078984999",
-        "7078981237",
-        "7078981449",
-        "7078888913",
-        "7078938327"
-      ]
-    },
-    "WM+ PTO 191B Ba Mỏ": {
-      "so": [
-        "SOWINSAL1312251",
-        "SOWINSAL1310675",
-        "SOWIN2E5D83132A",
-        "SOWINSAL1298001",
-        "SOWINSAL1303208"
-      ],
-      "ghn": [
-        "7078987054",
-        "7078980379",
-        "7078981603",
-        "7078893892",
-        "7078938126"
-      ]
-    },
-    "WM+ PTO Khu 13, Minh Hòa": {
-      "so": [
-        "SOWINSAL1312314",
-        "SOWINSAL1310757",
-        "SOWINBD78F6D18B",
-        "SOWINSAL1297872",
-        "SOWINSAL1303432"
-      ],
-      "ghn": [
-        "7078981307",
-        "7078979764",
-        "7078980891",
-        "7078892823",
-        "7078938048"
-      ]
-    },
-    "WM+ PTO Đồng Ve, Sơn Lương": {
-      "so": [
-        "SOWINSAL1312329",
-        "SOWINSAL1310623",
-        "SOWIN672B61BEC4",
-        "SOWINSAL1298054",
-        "SOWINSAL1303406"
-      ],
-      "ghn": [
-        "7078979497",
-        "7078979593",
-        "7078983279",
-        "7078893306",
-        "7078937861"
-      ]
-    },
-    "WM+ PTO Khu Trung Tâm, Lương Sơn": {
-      "so": [
-        "SOWINSAL1312234",
-        "SOWINSAL1310650",
-        "SOWINF0AA3B891A",
-        "SOWINSAL1297851",
-        "SOWINSAL1303402"
-      ],
-      "ghn": [
-        "7078985250",
-        "7078981152",
-        "7078982082",
-        "7078879501",
-        "7078938336"
-      ]
-    },
-    "WM+ PTO Tân An 4, Yên Lập": {
-      "so": [
-        "SOWINSAL1312363",
-        "SOWINSAL1310885",
-        "SOWIN29281C72D2",
-        "SOWINSAL1297973",
-        "SOWINSAL1303503"
-      ],
-      "ghn": [
-        "7078983953",
-        "7078978456",
-        "7078981539",
-        "7078893382",
-        "7078937864"
-      ]
-    },
-    "WM+ PTO Giáp Xuân, Phú Khê": {
-      "so": [
-        "SOWINSAL1312273",
-        "SOWINSAL1310720",
-        "SOWIN0704B7BC80",
-        "SOWINSAL1297854",
-        "SOWINSAL1303408"
-      ],
-      "ghn": [
-        "7078983191",
-        "7078980337",
-        "7078981117",
-        "7078875739",
-        "7078937829"
-      ]
-    },
-    "WM+ PTO Khu Suông 2, Phú Khê": {
-      "so": [
-        "SOWINSAL1312392",
-        "SOWINSAL1295043",
-        "SOWINSAL1298063",
-        "SOWINSAL1303454"
-      ],
-      "ghn": [
-        "7078987151",
-        "7078866914",
-        "7078896257",
-        "7078930039"
-      ]
-    },
-    "WM+ PTO Khu Tiền Phong": {
-      "so": [
-        "SOWINSAL1310752",
-        "SOWINC92136D58F",
-        "SOWINSAL1312339",
-        "SOWINSAL1297944",
-        "SOWINSAL1303301"
-      ],
-      "ghn": [
-        "7078980331",
-        "7078979915",
-        "7078976203",
-        "7078896190",
-        "7078937692"
-      ]
-    },
-    "WM+ PTO Khu An Ninh, Hùng Việt": {
-      "so": [
-        "SOWINSAL1312330",
-        "SOWINSAL1310583",
-        "SOWINEC10D432D4",
-        "SOWINSAL1297856",
-        "SOWINSAL1303177"
-      ],
-      "ghn": [
-        "7078984374",
-        "7078980374",
-        "7078983249",
-        "7078894052",
-        "7078936872"
-      ]
-    },
-    "WM+ PTO Trung Tiến 2, Hùng Việt": {
-      "so": [
-        "SOWINSAL1312169",
-        "SOWINSAL1310724",
-        "SOWIN0A1AEE0440",
-        "SOWINSAL1297939",
-        "SOWINSAL1303411"
-      ],
-      "ghn": [
-        "7078981735",
-        "7078980329",
-        "7078981288",
-        "7078894531",
-        "7078930035"
-      ]
-    },
-    "WM+ PTO 234 Đông Phú": {
-      "so": [
-        "SOWINSAL1312338",
-        "SOWINSAL1310748",
-        "SOWIN9C2C780CE3",
-        "SOWINSAL1297943",
-        "SOWINSAL1303298"
-      ],
-      "ghn": [
-        "7078980356",
-        "7078981268",
-        "7078977127",
-        "7078880809",
-        "7078937432"
-      ]
-    },
-    "WM+ PTO Bắc Tiến 2, Hùng Việt": {
-      "so": [
-        "SOWINSAL1310728",
-        "SOWIN2B01553CB1",
-        "SOWINSAL1312275",
-        "SOWINSAL1298035",
-        "SOWINSAL1303178"
-      ],
-      "ghn": [
-        "7078981266",
-        "7078981197",
-        "7078984371",
-        "7078880283",
-        "7078936911"
-      ]
-    },
-    "WM+ PTO Khu Cống 2, Cẩm Khê": {
-      "so": [
-        "SOWINSAL1312187",
-        "SOWINSAL1310588",
-        "SOWIN81A13986D3",
-        "SOWINSAL1298039",
-        "SOWINSAL1303431"
-      ],
-      "ghn": [
-        "7078980396",
-        "7078981214",
-        "7078977141",
-        "7078893499",
-        "7078933676"
-      ]
-    },
-    "WM+ PTO Hoa Khê, Cẩm Khê": {
-      "so": [
-        "SOWINSAL1312302",
-        "SOWINSAL1310878",
-        "SOWIN4A937D53D4",
-        "SOWINSAL1297972",
-        "SOWINSAL1303215"
-      ],
-      "ghn": [
-        "7078975895",
-        "7078980045",
-        "7078981018",
-        "7078896176",
-        "7078935484"
-      ]
-    },
-    "WM+ PTO Minh Tân, Cẩm Khê": {
-      "so": [
-        "SOWINSAL1312241",
-        "SOWINSAL1310645",
-        "SOWINBD7C2AEB4A",
-        "SOWINSAL1298013",
-        "SOWINSAL1303222"
-      ],
-      "ghn": [
-        "7078982051",
-        "7078979817",
-        "7078983262",
-        "7078895794",
-        "7078937873"
-      ]
-    },
-    "WM+ PTO Nương Sơn, Vân Bán": {
-      "so": [
-        "SOWINSAL1312235",
-        "SOWINSAL1310653",
-        "SOWIN1C7794ADFD",
-        "SOWINSAL1298037",
-        "SOWINSAL1303229"
-      ],
-      "ghn": [
-        "7078976525",
-        "7078980326",
-        "7078982197",
-        "7078891350",
-        "7078937557"
-      ]
-    },
-    "WM+ PTO 425-427 Lạc Long Quân": {
-      "so": [
-        "SOWINSAL1312214",
-        "SOWINSAL1310668",
-        "SOWIN064C7F2A99"
-      ],
-      "ghn": [
-        "7078975661",
-        "7078981200",
-        "7078976474"
-      ]
-    },
-    "WM+ PTO TĐ 24 Khu 8, Hạ Hòa": {
-      "so": [
-        "SOWINSAL1312188",
-        "SOWINSAL1310941",
-        "SOWINBB2A39991A"
-      ],
-      "ghn": [
-        "7078985249",
-        "7078980852",
-        "7078980823"
-      ]
-    },
-    "WM+ PTO Khu 10, Hạ Hòa": {
-      "so": [
-        "SOWINSAL1312343",
-        "SOWINSAL1310658",
-        "SOWIN319FF2AB21"
-      ],
-      "ghn": [
-        "7078983853",
-        "7078980040",
-        "7078981811"
-      ]
-    },
-    "WM+ PTO Khu 6 Hương Xạ, Yên Kỳ": {
-      "so": [
-        "SOWINSAL1312288",
-        "SOWINSAL1310770",
-        "SOWINCE1A5A14D3"
-      ],
-      "ghn": [
-        "7078985061",
-        "7078980871",
-        "7078982195"
+        "7078895872",
+        "7078935836",
+        "7078982114",
+        "7078980152",
+        "7078983231"
       ]
     },
     "WM+ PTO Khu Phố, Đoan Hùng": {
@@ -9453,14 +10261,6 @@ const STORE_GHN_SO_DATA = {
         "7078981116"
       ]
     },
-    "WM VC+ PTO Phú Thọ": {
-      "so": [
-        "SOWINSAL1311144"
-      ],
-      "ghn": [
-        "7078976109"
-      ]
-    },
     "WM+ PTO 25 tổ 10 Tân An": {
       "so": [
         "SOWINSAL1312357",
@@ -9525,876 +10325,1942 @@ const STORE_GHN_SO_DATA = {
         "7078977154"
       ]
     },
-    "WM+ PTO Khu 4, Phú Mỹ": {
+    "WM VC+ PTO Phú Thọ": {
       "so": [
-        "SOWINSAL1312164",
-        "SOWINSAL1310935",
-        "SOWINDC71D19769",
-        "SOWINSAL1297996",
-        "SOWINSAL1303274"
+        "SOWINSAL1311144"
       ],
       "ghn": [
-        "7078984289",
-        "7078981315",
-        "7078983171",
-        "7078894489",
-        "7078933901"
+        "7078976109"
+      ]
+    },
+    "WM+ PTO 425-427 Lạc Long Quân": {
+      "so": [
+        "SOWINSAL1312214",
+        "SOWINSAL1310668",
+        "SOWIN064C7F2A99"
+      ],
+      "ghn": [
+        "7078975661",
+        "7078981200",
+        "7078976474"
+      ]
+    },
+    "WM+ PTO TĐ 24 Khu 8, Hạ Hòa": {
+      "so": [
+        "SOWINSAL1312188",
+        "SOWINSAL1310941",
+        "SOWINBB2A39991A"
+      ],
+      "ghn": [
+        "7078985249",
+        "7078980852",
+        "7078980823"
+      ]
+    },
+    "WM+ PTO Khu 10, Hạ Hòa": {
+      "so": [
+        "SOWINSAL1312343",
+        "SOWINSAL1310658",
+        "SOWIN319FF2AB21"
+      ],
+      "ghn": [
+        "7078983853",
+        "7078980040",
+        "7078981811"
+      ]
+    },
+    "WM+ PTO Khu 6 Hương Xạ, Yên Kỳ": {
+      "so": [
+        "SOWINSAL1312288",
+        "SOWINSAL1310770",
+        "SOWINCE1A5A14D3"
+      ],
+      "ghn": [
+        "7078985061",
+        "7078980871",
+        "7078982195"
+      ]
+    },
+    "WM+ PTO Khu 23 Vạn Xuân": {
+      "so": [
+        "SOWINSAL1312259",
+        "SOWINSAL1298028",
+        "SOWINSAL1303470",
+        "SOWINSAL1310665",
+        "SOWIN7913178AF9"
+      ],
+      "ghn": [
+        "7078985001",
+        "7078895125",
+        "7078937863",
+        "7078975483",
+        "7078981986"
+      ]
+    }
+  },
+  "2026-06-26": {
+    "WM+ PTO Khu 21, Vạn Xuân": {
+      "so": [
+        "SOWINSAL1318142"
+      ],
+      "ghn": [
+        "7079032732"
+      ]
+    },
+    "WM+ PTO Khu 23 Vạn Xuân": {
+      "so": [
+        "SOWINSAL1318269"
+      ],
+      "ghn": [
+        "7079033808"
+      ]
+    },
+    "WM+ PTO 58 Hồ Thiên Hương": {
+      "so": [
+        "SOWINSAL1318296"
+      ],
+      "ghn": [
+        "7079033982"
+      ]
+    },
+    "WM+ PTO Khu 5, Xuân Lộc": {
+      "so": [
+        "SOWINSAL1318311"
+      ],
+      "ghn": [
+        "7079033444"
+      ]
+    },
+    "WM+ PTO Khu 14, Đào Xá": {
+      "so": [
+        "SOWINSAL1318202"
+      ],
+      "ghn": [
+        "7079027994"
+      ]
+    },
+    "WM+ PTO Khu Phố, TT Thanh Thủy": {
+      "so": [
+        "SOWINSAL1318208"
+      ],
+      "ghn": [
+        "7079032603"
+      ]
+    },
+    "WM+ PTO Khu 1, Bảo Yên": {
+      "so": [
+        "SOWINSAL1318206"
+      ],
+      "ghn": [
+        "7079033763"
+      ]
+    },
+    "WM+ PTO Khu 11, Tu Vũ": {
+      "so": [
+        "SOWINSAL1318151"
+      ],
+      "ghn": [
+        "7079033822"
+      ]
+    },
+    "WM+ PTO Khu 2, Tu Vũ": {
+      "so": [
+        "SOWINSAL1318234"
+      ],
+      "ghn": [
+        "7079032647"
+      ]
+    },
+    "WM+ PTO Khu 4, Đoan Hạ": {
+      "so": [
+        "SOWINSAL1318205"
+      ],
+      "ghn": [
+        "7079033870"
+      ]
+    },
+    "WM+ PTO Khu 22 Hoàng Xá": {
+      "so": [
+        "SOWINSAL1318274"
+      ],
+      "ghn": [
+        "7079033299"
+      ]
+    },
+    "WM+ PTO Khu 3, Thanh Thủy": {
+      "so": [
+        "SOWINSAL1318238"
+      ],
+      "ghn": [
+        "7079033029"
+      ]
+    },
+    "WM+ PTO Quyết Tiến, Cự Đồng": {
+      "so": [
+        "SOWINSAL1318230"
+      ],
+      "ghn": [
+        "7079033351"
+      ]
+    },
+    "WM+ PTO Tân Hương, Hương Cần": {
+      "so": [
+        "SOWINSAL1318139"
+      ],
+      "ghn": [
+        "7079012747"
+      ]
+    },
+    "WM+ PTO Đề Ngữ, Yên Sơn": {
+      "so": [
+        "SOWINSAL1318146"
+      ],
+      "ghn": [
+        "7079025609"
+      ]
+    },
+    "WM+ PTO Xóm Dẹ 1, Văn Miếu": {
+      "so": [
+        "SOWINSAL1318210"
+      ],
+      "ghn": [
+        "7079033224"
+      ]
+    },
+    "WM+ PTO Đống Cả, Xuân Đài": {
+      "so": [
+        "SOWINSAL1318221"
+      ],
+      "ghn": [
+        "7079027995"
+      ]
+    },
+    "WM+ PTO 28 Phố Vàng": {
+      "so": [
+        "SOWINSAL1318207"
+      ],
+      "ghn": [
+        "7079033194"
+      ]
+    },
+    "WM+ PTO Hùng Nhĩ, Thanh Sơn": {
+      "so": [
+        "SOWINSAL1318180"
+      ],
+      "ghn": [
+        "7079032733"
+      ]
+    },
+    "WM+ PTO 191B Ba Mỏ": {
+      "so": [
+        "SOWINSAL1318270"
+      ],
+      "ghn": [
+        "7079033353"
+      ]
+    },
+    "WM+ PTO Khu 13, Minh Hòa": {
+      "so": [
+        "SOWINSAL1318319"
+      ],
+      "ghn": [
+        "7079033033"
+      ]
+    },
+    "WM+ PTO Đồng Ve, Sơn Lương": {
+      "so": [
+        "SOWINSAL1318212"
+      ],
+      "ghn": [
+        "7079033285"
+      ]
+    },
+    "WM+ PTO Khu Trung Tâm, Lương Sơn": {
+      "so": [
+        "SOWINSAL1318209"
+      ],
+      "ghn": [
+        "7079031978"
+      ]
+    },
+    "WM+ PTO Tân An 4, Yên Lập": {
+      "so": [
+        "SOWINSAL1318287"
+      ],
+      "ghn": [
+        "7079033682"
+      ]
+    },
+    "WM+ PTO Giáp Xuân, Phú Khê": {
+      "so": [
+        "SOWINSAL1318145"
+      ],
+      "ghn": [
+        "7079033539"
+      ]
+    },
+    "WM+ PTO Khu Suông 2, Phú Khê": {
+      "so": [
+        "SOWINSAL1310964",
+        "SOWINSAL1317934"
+      ],
+      "ghn": [
+        "7078981344",
+        "7079031775"
+      ]
+    },
+    "WM+ PTO Khu Tiền Phong": {
+      "so": [
+        "SOWINSAL1318229"
+      ],
+      "ghn": [
+        "7079032813"
+      ]
+    },
+    "WM+ PTO Khu An Ninh, Hùng Việt": {
+      "so": [
+        "SOWINSAL1318218"
+      ],
+      "ghn": [
+        "7079031682"
+      ]
+    },
+    "WM+ PTO Trung Tiến 2, Hùng Việt": {
+      "so": [
+        "SOWINSAL1318217"
+      ],
+      "ghn": [
+        "7079033764"
+      ]
+    },
+    "WM+ PTO 234 Đông Phú": {
+      "so": [
+        "SOWINSAL1318154"
+      ],
+      "ghn": [
+        "7079033000"
+      ]
+    },
+    "WM+ PTO Bắc Tiến 2, Hùng Việt": {
+      "so": [
+        "SOWINSAL1318219"
+      ],
+      "ghn": [
+        "7079033840"
+      ]
+    },
+    "WM+ PTO Khu Cống 2, Cẩm Khê": {
+      "so": [
+        "SOWINSAL1318318"
+      ],
+      "ghn": [
+        "7079033826"
+      ]
+    },
+    "WM+ PTO Hoa Khê, Cẩm Khê": {
+      "so": [
+        "SOWINSAL1318309"
+      ],
+      "ghn": [
+        "7079033951"
+      ]
+    },
+    "WM+ PTO Minh Tân, Cẩm Khê": {
+      "so": [
+        "SOWINSAL1318189"
+      ],
+      "ghn": [
+        "7079033823"
+      ]
+    },
+    "WM+ PTO Nương Sơn, Vân Bán": {
+      "so": [
+        "SOWINSAL1318222"
+      ],
+      "ghn": [
+        "7079033824"
+      ]
+    },
+    "WM+ PTO 425-427 Lạc Long Quân": {
+      "so": [
+        "SOWINSAL1318182"
+      ],
+      "ghn": [
+        "7079032602"
+      ]
+    },
+    "WM+ PTO TĐ 24 Khu 8, Hạ Hòa": {
+      "so": [
+        "SOWINSAL1318156"
+      ],
+      "ghn": [
+        "7079031976"
+      ]
+    },
+    "WM+ PTO Khu 10, Hạ Hòa": {
+      "so": [
+        "SOWINSAL1318236"
+      ],
+      "ghn": [
+        "7079033508"
+      ]
+    },
+    "WM+ PTO Khu 6 Hương Xạ, Yên Kỳ": {
+      "so": [
+        "SOWINSAL1318241"
+      ],
+      "ghn": [
+        "7079031683"
+      ]
+    },
+    "WM+ PTO Khu Phố, Đoan Hùng": {
+      "so": [
+        "SOWINSAL1318126"
+      ],
+      "ghn": [
+        "7079025608"
+      ]
+    },
+    "WM+ PTO Phượng Hùng 1, Chí Đám": {
+      "so": [
+        "SOWINSAL1318228"
+      ],
+      "ghn": [
+        "7079024320"
+      ]
+    },
+    "WM+ PTO Khu Ngọc Chúc 3, Đoan Hùng": {
+      "so": [
+        "SOWINSAL1318278"
+      ],
+      "ghn": [
+        "7079033479"
+      ]
+    },
+    "WM+ PTO 574 Tân Tiến": {
+      "so": [
+        "SOWINSAL1318336"
+      ],
+      "ghn": [
+        "7079033301"
+      ]
+    },
+    "WM+ PTO Khu 2, Chân Mộng": {
+      "so": [
+        "SOWINSAL1318140"
+      ],
+      "ghn": [
+        "7079032313"
+      ]
+    },
+    "WM+ PTO Khu 4 Vụ Quang, Chân Mộng": {
+      "so": [
+        "SOWINSAL1318159"
+      ],
+      "ghn": [
+        "7079032413"
+      ]
+    },
+    "WM+ PTO Khu 5, Chân Mộng": {
+      "so": [
+        "SOWINSAL1318245"
+      ],
+      "ghn": [
+        "7079033871"
+      ]
+    },
+    "WM+ PTO Khu 8, Tiêu Sơn, Chân Mộng": {
+      "so": [
+        "SOWINSAL1310963",
+        "SOWINSAL1317933"
+      ],
+      "ghn": [
+        "7078981379",
+        "7079033093"
+      ]
+    },
+    "WM+ PTO Khu 4, Hoàng Cương": {
+      "so": [
+        "SOWINSAL1318148"
+      ],
+      "ghn": [
+        "7079032601"
+      ]
+    },
+    "WM+ PTO Khu 8, Đông Thành": {
+      "so": [
+        "SOWINSAL1318215"
+      ],
+      "ghn": [
+        "7079032245"
+      ]
+    },
+    "WM+ PTO Khu 6 Đồng Xuân, Thanh Ba": {
+      "so": [
+        "SOWINSAL1318226"
+      ],
+      "ghn": [
+        "7079033507"
+      ]
+    },
+    "WM+ PTO 12 Hàn Thuyên": {
+      "so": [
+        "SOWINSAL1318337"
+      ],
+      "ghn": [
+        "7079033983"
+      ]
+    },
+    "WM+ PTO Khu 8 Thanh Ba": {
+      "so": [
+        "SOWINSAL1318178"
+      ],
+      "ghn": [
+        "7079033284"
+      ]
+    },
+    "WM+ PTO Khu 15, Yển Khê": {
+      "so": [
+        "SOWINSAL1318141"
+      ],
+      "ghn": [
+        "7079033775"
+      ]
+    },
+    "WM+ PTO Khu 3, Thanh Ba": {
+      "so": [
+        "SOWINSAL1318152"
+      ],
+      "ghn": [
+        "7079033350"
+      ]
+    },
+    "WM+ PTO Khu 9, Chí Tiên": {
+      "so": [
+        "SOWINSAL1318157"
+      ],
+      "ghn": [
+        "7079013466"
+      ]
+    },
+    "WM+ PTO Khu 3, Liên Minh": {
+      "so": [
+        "SOWINSAL1317932"
+      ],
+      "ghn": [
+        "7079032086"
+      ]
+    },
+    "WM+ PTO Thanh Bình, Âu Cơ": {
+      "so": [
+        "SOWINSAL1318320"
+      ],
+      "ghn": [
+        "7079032709"
+      ]
+    },
+    "WM+ PTO 75 Cao Bang": {
+      "so": [
+        "SOWINSAL1318268"
+      ],
+      "ghn": [
+        "7079033902"
+      ]
+    },
+    "WM+ PTO 191 Cao Du": {
+      "so": [
+        "SOWINSAL1318334"
+      ],
+      "ghn": [
+        "7079033226"
+      ]
+    },
+    "WM VC+ PTO Phú Thọ": {
+      "so": [
+        "SOWINSAL1318113"
+      ],
+      "ghn": [
+        "7079033538"
+      ]
+    },
+    "WM+ PTO 25 tổ 10 Tân An": {
+      "so": [
+        "SOWINSAL1318333"
+      ],
+      "ghn": [
+        "7079033952"
+      ]
+    },
+    "WM+ PTO An Ninh Hạ, Phú Thọ": {
+      "so": [
+        "SOWINSAL1318240"
+      ],
+      "ghn": [
+        "7079032067"
+      ]
+    },
+    "WM+ PTO KĐT Âu Cơ, Âu Cơ": {
+      "so": [
+        "SOWINSAL1318248"
+      ],
+      "ghn": [
+        "7079031245"
+      ]
+    },
+    "WM+ PTO Khu Km5, Hà Lộc": {
+      "so": [
+        "SOWINSAL1318312"
+      ],
+      "ghn": [
+        "7079032534"
+      ]
+    },
+    "WM+ PTO Khu 4, Phú Mỹ": {
+      "so": [
+        "SOWINSAL1318214"
+      ],
+      "ghn": [
+        "7079030853"
       ]
     },
     "WM+ PTO Khu 2, Trạm Thản": {
       "so": [
-        "SOWINSAL1312245",
-        "SOWINSAL1310929",
-        "SOWIN2CC902AD2E",
-        "SOWINSAL1298068",
-        "SOWINSAL1303171"
+        "SOWINSAL1318138"
       ],
       "ghn": [
-        "7078983314",
-        "7078981439",
-        "7078981467",
-        "7078896224",
-        "7078933146"
+        "7079033475"
       ]
     },
     "WM+ PTO Khu 12 Phú Hộ": {
       "so": [
-        "SOWINSAL1312196",
-        "SOWINSAL1310666",
-        "SOWIN123A967ADD",
-        "SOWINSAL1297902",
-        "SOWINSAL1303510"
+        "SOWINSAL1318177"
       ],
       "ghn": [
-        "7078985264",
-        "7078974999",
-        "7078981445",
-        "7078895696",
-        "7078937531"
+        "7079033838"
       ]
     },
     "WM+ PTO Khu 10, Phù Ninh": {
       "so": [
-        "SOWINSAL1312344",
-        "SOWINSAL1310659",
-        "SOWINFE0E432FFA",
-        "SOWINSAL1297950",
-        "SOWINSAL1303185"
+        "SOWINSAL1318237"
       ],
       "ghn": [
-        "7078985265",
-        "7078981153",
-        "7078965275",
-        "7078886140",
-        "7078937125"
+        "7079032246"
       ]
     },
     "WM+ PTO Bình Phú, Phù Ninh": {
       "so": [
-        "SOWINSAL1312204",
-        "SOWINSAL1310906",
-        "SOWIND181B31E04",
-        "SOWINSAL1298053",
-        "SOWINSAL1303381"
+        "SOWINSAL1318294"
       ],
       "ghn": [
-        "7078980440",
-        "7078981486",
-        "7078983310",
-        "7078877723",
-        "7078937749"
+        "7079026322"
       ]
     },
     "WM+ PTO Núi Trang, Phù Ninh": {
       "so": [
-        "SOWINSAL1312322",
-        "SOWINSAL1310685",
-        "SOWIN9DF60AE83C",
-        "SOWINSAL1297834",
-        "SOWINSAL1303392"
+        "SOWINSAL1318195"
       ],
       "ghn": [
-        "7078975980",
-        "7078980993",
-        "7078980858",
-        "7078881163",
-        "7078933674"
+        "7079033762"
       ]
     },
     "WM+ PTO 188 Đường Nam, Phù Ninh": {
       "so": [
-        "SOWINSAL1312246",
-        "SOWINSAL1310921",
-        "SOWINFE2FCB55E6",
-        "SOWINSAL1298048",
-        "SOWINSAL1303337"
+        "SOWINSAL1318331"
       ],
       "ghn": [
-        "7078985219",
-        "7078981274",
-        "7078981392",
-        "7078895300",
-        "7078933671"
+        "7079033495"
       ]
     },
     "WM+ PTO Khu 3, TT Phong Châu": {
       "so": [
-        "SOWINSAL1312269",
-        "SOWINSAL1310933",
-        "SOWIN2A8E0E4F5F",
-        "SOWINSAL1297935",
-        "SOWINSAL1303404"
+        "SOWINSAL1318144"
       ],
       "ghn": [
-        "7078982052",
-        "7078981298",
-        "7078983119",
-        "7078895578",
-        "7078937208"
+        "7079033790"
       ]
     },
     "WM+ PTO Phú Lộc, Phù Ninh": {
       "so": [
-        "SOWINSAL1312175",
-        "SOWINSAL1310641",
-        "SOWIN0FBB2C8308",
-        "SOWINSAL1297971",
-        "SOWINSAL1303213"
+        "SOWINSAL1318308"
       ],
       "ghn": [
-        "7078980681",
-        "7078979684",
-        "7078979197",
-        "7078895299",
-        "7078937480"
+        "7079032330"
       ]
     },
     "WM+ PTO Khu 10, Xuân Lũng": {
       "so": [
-        "SOWINSAL1310938",
-        "SOWINE88D0279D3",
-        "SOWINSAL1312276",
-        "SOWINSAL1297857",
-        "SOWINSAL1303414"
+        "SOWINSAL1318220"
       ],
       "ghn": [
-        "7078981162",
-        "7078983123",
-        "7078981658",
-        "7078895982",
-        "7078937751"
+        "7079031243"
       ]
     },
     "WM+ PTO Khu 2, Xuân Lũng": {
       "so": [
-        "SOWINSAL1312183",
-        "SOWINSAL1310625",
-        "SOWIN5E829040CA",
-        "SOWINSAL1297855",
-        "SOWINSAL1303276"
+        "SOWINSAL1318216"
       ],
       "ghn": [
-        "7078981916",
-        "7078980376",
-        "7078983183",
-        "7078894395",
-        "7078937690"
+        "7079033541"
       ]
     },
     "WM+ PTO Khu 12, TT Lâm Thao": {
       "so": [
-        "SOWINSAL1312385",
-        "SOWINSAL1310897",
-        "SOWINEBCD85DC2B",
-        "SOWINSAL1298052",
-        "SOWINSAL1303372"
+        "SOWINSAL1318292"
       ],
       "ghn": [
-        "7078980635",
-        "7078981334",
-        "7078983167",
-        "7078893847",
-        "7078933852"
+        "7079029965"
       ]
     },
     "WM+ PTO 26 Âu Cơ": {
       "so": [
-        "SOWINSAL1312260",
-        "SOWINSAL1310849",
-        "SOWIN6AFC7D5481",
-        "SOWINSAL1298000",
-        "SOWINSAL1303346"
+        "SOWINSAL1318335"
       ],
       "ghn": [
-        "7078983305",
-        "7078981235",
-        "7078983247",
-        "7078896177",
-        "7078933149"
+        "7079033121"
       ]
     },
     "WM+ PTO Khu 15, Dục Mỹ": {
       "so": [
-        "SOWINSAL1312256",
-        "SOWINSAL1310762",
-        "SOWINC7E50DB7BA",
-        "SOWINSAL1297951",
-        "SOWINSAL1303437"
+        "SOWINSAL1318321"
       ],
       "ghn": [
-        "7078983190",
-        "7078980996",
-        "7078980519",
-        "7078894739",
-        "7078933853"
+        "7079033967"
       ]
     },
     "WM+ PTO Cao Xá, Lâm Thao": {
       "so": [
-        "SOWINSAL1312306",
-        "SOWINSAL1310884",
-        "SOWIN79973CD70E",
-        "SOWINSAL1297917"
+        "SOWINSAL1318183"
       ],
       "ghn": [
-        "7078984085",
-        "7078981333",
-        "7078981450",
-        "7078895938"
+        "7079033001"
       ]
     },
     "WM+ PTO Khu 1, Bản Nguyên": {
       "so": [
-        "SOWINSAL1312342",
-        "SOWINSAL1310589",
-        "SOWINBBF8F67775",
-        "SOWINSAL1297873",
-        "SOWINSAL1303304"
+        "SOWINSAL1318233"
       ],
       "ghn": [
-        "7078978124",
-        "7078980602",
-        "7078983248",
-        "7078895760",
-        "7078938238"
+        "7079033286"
       ]
     },
     "WM+ PTO Khu 5, Tứ Xã": {
       "so": [
-        "SOWINSAL1312327",
-        "SOWINSAL1310696",
-        "SOWIN64B623C9EB",
-        "SOWINSAL1297847",
-        "SOWINSAL1303255"
+        "SOWINSAL1318137"
       ],
       "ghn": [
-        "7078984176",
-        "7078981202",
-        "7078976475",
-        "7078894762",
-        "7078937688"
+        "7079033376"
       ]
     },
     "WM+ PTO 235-235B TT Hùng Sơn": {
       "so": [
-        "SOWINSAL1312162",
-        "SOWINSAL1310670",
-        "SOWIN5E1665F960",
-        "SOWINSAL1297922",
-        "SOWINSAL1303374"
+        "SOWINSAL1318186"
       ],
       "ghn": [
-        "7078985093",
-        "7078980380",
-        "7078973541",
-        "7078875741",
-        "7078933673"
+        "7079033540"
       ]
     },
     "WM+ PTO Khu 3 Hùng Lô, Việt Trì": {
       "so": [
-        "SOWINSAL1312167",
-        "SOWINSAL1310887",
-        "SOWIN092292EC36",
-        "SOWINSAL1297993",
-        "SOWINSAL1303504"
+        "SOWINSAL1318184"
       ],
       "ghn": [
-        "7078980281",
-        "7078981378",
-        "7078983124",
-        "7078894533",
-        "7078938495"
+        "7079024319"
       ]
     },
     "WM+ PTO Tổ 1, khu 1A, Vân Phú": {
       "so": [
-        "SOWINSAL1312189",
-        "SOWINSAL1310596",
-        "SOWINCE70FAC9B9",
-        "SOWINSAL1298043",
-        "SOWINSAL1303309"
+        "SOWINSAL1318357"
       ],
       "ghn": [
-        "7078987038",
-        "7078979478",
-        "7078978055",
-        "7078895779",
-        "7078938159"
+        "7079026323"
       ]
     },
     "WM+ PTO Khu 3 Vân Phú": {
       "so": [
-        "SOWINSAL1312366",
-        "SOWINSAL1310600",
-        "SOWINBC80481ABA",
-        "SOWINSAL1298024",
-        "SOWINSAL1303200"
+        "SOWINSAL1318303"
       ],
       "ghn": [
-        "7078972869",
-        "7078981230",
-        "7078981394",
-        "7078895778",
-        "7078935676"
+        "7079033966"
       ]
     },
     "WM+ PTO Đội 3, Nông Trang": {
       "so": [
-        "SOWINSAL1312230",
-        "SOWINSAL1310727",
-        "SOWIN93F82333FE",
-        "SOWINSAL1297984",
-        "SOWINSAL1303281"
+        "SOWINSAL1318347"
       ],
       "ghn": [
-        "7078984109",
-        "7078978828",
-        "7078979692",
-        "7078894456",
-        "7078937069"
+        "7079032331"
       ]
     },
     "WM+ PTO Khu 6, Hy Cương": {
       "so": [
-        "SOWINSAL1312186",
-        "SOWINSAL1310654",
-        "SOWIN7ED39D6F4D",
-        "SOWINSAL1297869",
-        "SOWINSAL1303425"
+        "SOWINSAL1318227"
       ],
       "ghn": [
-        "7078984367",
-        "7078978759",
-        "7078980896",
-        "7078893305",
-        "7078937752"
+        "7079033778"
       ]
     },
     "WM+ PTO 3023 Đại Lộ Hùng Vương": {
       "so": [
-        "SOWINSAL1312292",
-        "SOWINSAL1310592",
-        "SOWIN55DAA951FE",
-        "SOWINSAL1297998",
-        "SOWINSAL1303188"
+        "SOWINSAL1318124"
       ],
       "ghn": [
-        "7078981660",
-        "7078981198",
-        "7078981508",
-        "7078863848",
-        "7078928133"
+        "7079033525"
       ]
     },
     "WM+ PTO Khu Trung Phương, Việt Trì": {
       "so": [
-        "SOWINSAL1312328",
-        "SOWINSAL1310710",
-        "SOWINB3217E0901",
-        "SOWINSAL1298034",
-        "SOWINSAL1303501"
+        "SOWINSAL1318344"
       ],
       "ghn": [
-        "7078981639",
-        "7078981265",
-        "7078974779",
-        "7078896159",
-        "7078936845"
+        "7079033543"
       ]
     },
     "WM+ PTO 44 Đại Nải": {
       "so": [
-        "SOWINSAL1312311",
-        "SOWINSAL1310601",
-        "SOWINE3DB51C3F7",
-        "SOWINSAL1298046",
-        "SOWINSAL1303313"
+        "SOWINSAL1318304"
       ],
       "ghn": [
-        "7078974517",
-        "7078981042",
-        "7078974778",
-        "7078893817",
-        "7078932888"
+        "7079033542"
       ]
     },
     "WM+ PTO 167-169 Nguyễn Trãi": {
       "so": [
-        "SOWINSAL1312207",
-        "SOWINSAL1310864",
-        "SOWINF6B92C4FDE",
-        "SOWINSAL1297992",
-        "SOWINSAL1303209"
+        "SOWINSAL1318273"
       ],
       "ghn": [
-        "7078981303",
-        "7078981112",
-        "7078981688",
-        "7078893692",
-        "7078937307"
+        "7079031979"
       ]
     },
     "WM+ PTO Vũ Duệ, Việt Trì": {
       "so": [
-        "SOWINSAL1312208",
-        "SOWINSAL1310888",
-        "SOWINB1E5544715",
-        "SOWINSAL1297974",
-        "SOWINSAL1303217"
+        "SOWINSAL1318352"
       ],
       "ghn": [
-        "7078981747",
-        "7078981313",
-        "7078981812",
-        "7078893891",
-        "7078937762"
+        "7079033968"
       ]
     },
     "WM+ PTO Khu 6B, Nông Trang": {
       "so": [
-        "SOWINSAL1312352",
-        "SOWINSAL1310597",
-        "SOWIND2C3DF9FC4",
-        "SOWINSAL1297999",
-        "SOWINSAL1303194"
+        "SOWINSAL1318301"
       ],
       "ghn": [
-        "7078980893",
-        "7078980944",
-        "7078981148",
-        "7078895607",
-        "7078938001"
+        "7079033225"
       ]
     },
     "WM+ PTO 44 Nguyễn Du": {
       "so": [
-        "SOWINSAL1312205",
-        "SOWINSAL1310593",
-        "SOWINF9E6AE2678",
-        "SOWINSAL1297958",
-        "SOWINSAL1303189"
+        "SOWINSAL1318249"
       ],
       "ghn": [
-        "7078979799",
-        "7078976137",
-        "7078983121",
-        "7078884795",
-        "7078937366"
+        "7079033463"
       ]
     },
     "WM+ PTO Khu 2A, Nông Trang": {
       "so": [
-        "SOWINSAL1312294",
-        "SOWINSAL1310786",
-        "SOWIN6A04A28692",
-        "SOWINSAL1298044",
-        "SOWINSAL1303310"
+        "SOWINSAL1318302"
       ],
       "ghn": [
-        "7078978866",
-        "7078981343",
-        "7078983326",
-        "7078896286",
-        "7078933820"
+        "7079033063"
       ]
     },
     "WM+ PTO Khu 8 Nông Trang": {
       "so": [
-        "SOWINSAL1312210",
-        "SOWINSAL1310599",
-        "SOWIN112EEC983E",
-        "SOWINSAL1297988",
-        "SOWINSAL1303199"
+        "SOWINSAL1318342"
       ],
       "ghn": [
-        "7078980955",
-        "7078979992",
-        "7078983120",
-        "7078893724",
-        "7078937761"
+        "7079033767"
       ]
     },
     "WM+ PTO 73 Quang Trung": {
       "so": [
-        "SOWINSAL1312206",
-        "SOWINSAL1310630",
-        "SOWINE69BB541AF",
-        "SOWINSAL1298022",
-        "SOWINSAL1303193"
+        "SOWINSAL1318250"
       ],
       "ghn": [
-        "7078985184",
-        "7078966356",
-        "7078981177",
-        "7078895444",
-        "7078938015"
+        "7079033509"
       ]
     },
     "WM+ PTO 62 Phan Châu Trinh": {
       "so": [
-        "SOWINSAL1312291",
-        "SOWINSAL1310785",
-        "SOWINA8138467D2",
-        "SOWINSAL1298021",
-        "SOWINSAL1303308"
+        "SOWINSAL1318123"
       ],
       "ghn": [
-        "7078983952",
-        "7078981207",
-        "7078983128",
-        "7078895744",
-        "7078937258"
+        "7079032797"
       ]
     },
     "WM+ PTO Băng 1, Quang Trung": {
       "so": [
-        "SOWINSAL1312190",
-        "SOWINSAL1310787",
-        "SOWIN5F02B241D9",
-        "SOWINSAL1297986",
-        "SOWINSAL1303195"
+        "SOWINSAL1318251"
       ],
       "ghn": [
-        "7078981400",
-        "7078980774",
-        "7078980820",
-        "7078853337",
-        "7078936268"
+        "7079033918"
       ]
     },
     "WM+ PTO Khu 5 Nông Trang": {
       "so": [
-        "SOWINSAL1312358",
-        "SOWINSAL1310861",
-        "SOWINF6E7D7A06F",
-        "SOWINSAL1297991",
-        "SOWINSAL1303502"
+        "SOWINSAL1318351"
       ],
       "ghn": [
-        "7078983940",
-        "7078979193",
-        "7078981687",
-        "7078896112",
-        "7078938420"
+        "7079033446"
       ]
     },
     "WM+ PTO Khu Tân Thịnh, Tân Dân": {
       "so": [
-        "SOWINSAL1312353",
-        "SOWINSAL1310788",
-        "SOWINB390D700C0",
-        "SOWINSAL1297987",
-        "SOWINSAL1303311"
+        "SOWINSAL1318356"
       ],
       "ghn": [
-        "7078981661",
-        "7078979148",
-        "7078983129",
-        "7078892140",
-        "7078938254"
+        "7079033768"
       ]
     },
     "WM+ PTO 545 Trần Phú": {
       "so": [
-        "SOWINSAL1312215",
-        "SOWINSAL1310617",
-        "SOWIN89EEFD2183",
-        "SOWINSAL1297995",
-        "SOWINSAL1303220"
+        "SOWINSAL1318353"
       ],
       "ghn": [
-        "7078981875",
-        "7078976138",
-        "7078983134",
-        "7078895443",
-        "7078936965"
+        "7079032649"
       ]
     },
     "WM+ PTO 12 Tổ 5 Trần Phú": {
       "so": [
-        "SOWINSAL1312375",
-        "SOWINSAL1310616",
-        "SOWINEF26B1C604",
-        "SOWINSAL1297976",
-        "SOWINSAL1303370"
+        "SOWINSAL1318359"
       ],
       "ghn": [
-        "7078977878",
-        "7078974997",
-        "7078978792",
-        "7078895809",
-        "7078937207"
+        "7079032884"
       ]
     },
     "WM+ PTO Khu Tân An, Tân Dân": {
       "so": [
-        "SOWINSAL1312295",
-        "SOWINSAL1310598",
-        "SOWIN66CB9CB0AA",
-        "SOWINSAL1298023",
-        "SOWINSAL1303196"
+        "SOWINSAL1318125"
       ],
       "ghn": [
-        "7078983192",
-        "7078977320",
-        "7078982196",
-        "7078895033",
-        "7078938002"
+        "7079033474"
       ]
     },
     "WM+ PTO 192-194 Trần Phú, Việt Trì": {
       "so": [
-        "SOWINSAL1312178",
-        "SOWINSAL1310729",
-        "SOWINEBDCE77CDD",
-        "SOWINSAL1298036"
+        "SOWINSAL1318345"
       ],
       "ghn": [
-        "7078981301",
-        "7078980539",
-        "7078983166",
-        "7078894692"
+        "7079033812"
       ]
     },
     "WM+ PTO 66 Hàn Thuyên": {
       "so": [
-        "SOWINSAL1312354",
-        "SOWINSAL1310673",
-        "SOWINC778F03450",
-        "SOWINSAL1298045",
-        "SOWINSAL1303197"
+        "SOWINSAL1318163"
       ],
       "ghn": [
-        "7078978867",
-        "7078979818",
-        "7078982198",
-        "7078895126",
-        "7078937872"
+        "7079033806"
       ]
     },
     "WM+ PTO 35 Hà Chương": {
       "so": [
-        "SOWINSAL1312319",
-        "SOWINSAL1310578",
-        "SOWIN71906D07CD",
-        "SOWINSAL1297979",
-        "SOWINSAL1303245"
+        "SOWINSAL1318354"
       ],
       "ghn": [
-        "7078980344",
-        "7078975482",
-        "7078979644",
-        "7078893953",
-        "7078933900"
+        "7079032844"
       ]
     },
     "WM+ PTO 476 Châu Phong": {
       "so": [
-        "SOWINSAL1312166",
-        "SOWINSAL1310610",
-        "SOWIN78FEEC6501",
-        "SOWINSAL1298029",
-        "SOWINSAL1303352"
+        "SOWINSAL1318341"
       ],
       "ghn": [
-        "7078983817",
-        "7078981246",
-        "7078980855",
-        "7078896240",
-        "7078937769"
+        "7079032249"
       ]
     },
     "WM+ PTO Đồng Gia, Việt Trì": {
       "so": [
-        "SOWINSAL1312163",
-        "SOWINSAL1310889",
-        "SOWIN5EBEC97AB7",
-        "SOWINSAL1297975",
-        "SOWINSAL1303218"
+        "SOWINSAL1318289"
       ],
       "ghn": [
-        "7078979565",
-        "7078976346",
-        "7078981540",
-        "7078884796",
-        "7078937479"
+        "7079016461"
       ]
     },
     "WM+ PTO 130 Lê Quý Đôn": {
       "so": [
-        "SOWINSAL1312293",
-        "SOWINSAL1310629",
-        "SOWIN5F99BDBD96",
-        "SOWINSAL1297959",
-        "SOWINSAL1303191"
+        "SOWINSAL1318162"
       ],
       "ghn": [
-        "7078978123",
-        "7078975820",
-        "7078980898",
-        "7078886747",
-        "7078937871"
+        "7079031679"
       ]
     },
     "WM VCP PTO Việt Trì": {
       "so": [
-        "SOWINSAL1311141",
-        "SOWINSAL1302983",
-        "SOWINSAL1303163"
+        "SOWINSAL1318117"
       ],
       "ghn": [
-        "7078981602",
-        "7078937179",
-        "7078936084"
+        "7079029050"
       ]
     },
     "WM+ PTO 439 Tiên Dung": {
       "so": [
-        "SOWINSAL1312229",
-        "SOWINSAL1310649",
-        "SOWIN5D7D1A8E9B",
-        "SOWINSAL1297931",
-        "SOWINSAL1303169"
+        "SOWINSAL1318349"
       ],
       "ghn": [
-        "7078984962",
-        "7078978349",
-        "7078979691",
-        "7078889207",
-        "7078936930"
+        "7079033889"
       ]
     },
     "WM+ PTO 1343 Hùng Vương": {
       "so": [
-        "SOWINSAL1312296",
-        "SOWINSAL1310789",
-        "SOWINBB8751488C",
-        "SOWINSAL1297960",
-        "SOWINSAL1303312"
+        "SOWINSAL1318252"
       ],
       "ghn": [
-        "7078976508",
-        "7078980850",
-        "7078980824",
-        "7078895426",
-        "7078933821"
+        "7079027997"
       ]
     },
     "WM+ PTO 1250 Hùng Vương": {
       "so": [
-        "SOWINSAL1312255",
-        "SOWINSAL1310594",
-        "SOWIN73B3C2D3F6",
-        "SOWINSAL1298055",
-        "SOWINSAL1303190"
+        "SOWINSAL1318300"
       ],
       "ghn": [
-        "7078981736",
-        "7078979865",
-        "7078976391",
-        "7078895813",
-        "7078930134"
+        "7079033744"
       ]
     },
     "WM+ PTO 965 Hùng Vương": {
       "so": [
-        "SOWINSAL1312290",
-        "SOWINSAL1310660",
-        "SOWINC88E98E18E",
-        "SOWINSAL1298058",
-        "SOWINSAL1303513"
+        "SOWINSAL1318355"
       ],
       "ghn": [
-        "7078980634",
-        "7078981263",
-        "7078982016",
-        "7078893725",
-        "7078937637"
+        "7079033906"
       ]
     },
     "WM+ PTO Tổ 26A Hai Bà Trưng": {
       "so": [
-        "SOWINSAL1312297",
-        "SOWINSAL1310790",
-        "SOWIND2DEC67C4A",
-        "SOWINSAL1297961",
-        "SOWINSAL1303198"
+        "SOWINSAL1318358"
       ],
       "ghn": [
-        "7078987102",
-        "7078978115",
-        "7078983118",
-        "7078894532",
-        "7078935483"
+        "7079033984"
       ]
     },
     "WM+ PTO Thành Công, Việt Trì": {
       "so": [
-        "SOWINSAL1312224",
-        "SOWINSAL1310595",
-        "SOWIN345815517E",
-        "SOWINSAL1298004",
-        "SOWINSAL1303192"
+        "SOWINSAL1318346"
       ],
       "ghn": [
-        "7078982114",
-        "7078980152",
-        "7078983231",
-        "7078895872",
-        "7078935836"
+        "7079033003"
       ]
     },
     "WM+ PTO 107 Bạch Hạc": {
       "so": [
-        "SOWINSAL1312176",
-        "SOWINSAL1310615",
-        "SOWINCD4326A806",
-        "SOWINSAL1297994",
-        "SOWINSAL1303550"
+        "SOWINSAL1318348"
       ],
       "ghn": [
-        "7078984357",
-        "7078978758",
-        "7078981285",
-        "7078895221",
-        "7078938176"
+        "7079026360"
       ]
     },
     "WM+ PTO Băng 1, Nguyễn Tất Thành": {
       "so": [
-        "SOWINSAL1312268",
-        "SOWINSAL1310708",
-        "SOWINAFC34BEECE",
-        "SOWINSAL1297983",
-        "SOWINSAL1303267"
+        "SOWINSAL1318350"
       ],
       "ghn": [
-        "7078981638",
-        "7078980868",
-        "7078981393",
-        "7078893816",
-        "7078934323"
+        "7079031921"
+      ]
+    }
+  },
+  "2026-06-27": {
+    "WM+ PTO Khu 21, Vạn Xuân": {
+      "so": [
+        "SOWINSAL1324503"
+      ],
+      "ghn": [
+        "7079052414"
+      ]
+    },
+    "WM+ PTO Khu 23 Vạn Xuân": {
+      "so": [
+        "SOWINSAL1324451"
+      ],
+      "ghn": [
+        "7079052025"
+      ]
+    },
+    "WM+ PTO 58 Hồ Thiên Hương": {
+      "so": [
+        "SOWINSAL1324478"
+      ],
+      "ghn": [
+        "7079050562"
+      ]
+    },
+    "WM+ PTO Khu 5, Xuân Lộc": {
+      "so": [
+        "SOWINSAL1324597"
+      ],
+      "ghn": [
+        "7079049954"
+      ]
+    },
+    "WM+ PTO Khu 14, Đào Xá": {
+      "so": [
+        "SOWINSAL1324495"
+      ],
+      "ghn": [
+        "7079050563"
+      ]
+    },
+    "WM+ PTO Khu Phố, TT Thanh Thủy": {
+      "so": [
+        "SOWINSAL1324504"
+      ],
+      "ghn": [
+        "7079047930"
+      ]
+    },
+    "WM+ PTO Khu 1, Bảo Yên": {
+      "so": [
+        "SOWINSAL1324500"
+      ],
+      "ghn": [
+        "7079051126"
+      ]
+    },
+    "WM+ PTO Khu 11, Tu Vũ": {
+      "so": [
+        "SOWINSAL1324592"
+      ],
+      "ghn": [
+        "7079050169"
+      ]
+    },
+    "WM+ PTO Khu 2, Tu Vũ": {
+      "so": [
+        "SOWINSAL1324526"
+      ],
+      "ghn": [
+        "7079050971"
+      ]
+    },
+    "WM+ PTO Khu 4, Đoan Hạ": {
+      "so": [
+        "SOWINSAL1324499"
+      ],
+      "ghn": [
+        "7079051050"
+      ]
+    },
+    "WM+ PTO Khu 22 Hoàng Xá": {
+      "so": [
+        "SOWINSAL1324556"
+      ],
+      "ghn": [
+        "7079051178"
+      ]
+    },
+    "WM+ PTO Khu 3, Thanh Thủy": {
+      "so": [
+        "SOWINSAL1324417"
+      ],
+      "ghn": [
+        "7079051560"
+      ]
+    },
+    "WM+ PTO Quyết Tiến, Cự Đồng": {
+      "so": [
+        "SOWINSAL1324523"
+      ],
+      "ghn": [
+        "7079052259"
+      ]
+    },
+    "WM+ PTO Tân Hương, Hương Cần": {
+      "so": [
+        "SOWINSAL1324578"
+      ],
+      "ghn": [
+        "7079048044"
+      ]
+    },
+    "WM+ PTO Đề Ngữ, Yên Sơn": {
+      "so": [
+        "SOWINSAL1324511"
+      ],
+      "ghn": [
+        "7079050970"
+      ]
+    },
+    "WM+ PTO Xóm Dẹ 1, Văn Miếu": {
+      "so": [
+        "SOWINSAL1324506"
+      ],
+      "ghn": [
+        "7079052029"
+      ]
+    },
+    "WM+ PTO Đống Cả, Xuân Đài": {
+      "so": [
+        "SOWINSAL1324514"
+      ],
+      "ghn": [
+        "7079052386"
+      ]
+    },
+    "WM+ PTO 28 Phố Vàng": {
+      "so": [
+        "SOWINSAL1324404"
+      ],
+      "ghn": [
+        "7079049908"
+      ]
+    },
+    "WM+ PTO Hùng Nhĩ, Thanh Sơn": {
+      "so": [
+        "SOWINSAL1324463"
+      ],
+      "ghn": [
+        "7079047401"
+      ]
+    },
+    "WM+ PTO 191B Ba Mỏ": {
+      "so": [
+        "SOWINSAL1324458"
+      ],
+      "ghn": [
+        "7079051138"
+      ]
+    },
+    "WM+ PTO Khu 13, Minh Hòa": {
+      "so": [
+        "SOWINSAL1324609"
+      ],
+      "ghn": [
+        "7079052463"
+      ]
+    },
+    "WM+ PTO Đồng Ve, Sơn Lương": {
+      "so": [
+        "SOWINSAL1324579"
+      ],
+      "ghn": [
+        "7079048885"
+      ]
+    },
+    "WM+ PTO Khu Trung Tâm, Lương Sơn": {
+      "so": [
+        "SOWINSAL1324505"
+      ],
+      "ghn": [
+        "7079051563"
+      ]
+    },
+    "WM+ PTO Tân An 4, Yên Lập": {
+      "so": [
+        "SOWINSAL1324565"
+      ],
+      "ghn": [
+        "7079052263"
+      ]
+    },
+    "WM+ PTO Giáp Xuân, Phú Khê": {
+      "so": [
+        "SOWINSAL1324598"
+      ],
+      "ghn": [
+        "7079044006"
+      ]
+    },
+    "WM+ PTO Khu Tiền Phong": {
+      "so": [
+        "SOWINSAL1324413"
+      ],
+      "ghn": [
+        "7079052193"
+      ]
+    },
+    "WM+ PTO Khu An Ninh, Hùng Việt": {
+      "so": [
+        "SOWINSAL1324512"
+      ],
+      "ghn": [
+        "7079051051"
+      ]
+    },
+    "WM+ PTO Trung Tiến 2, Hùng Việt": {
+      "so": [
+        "SOWINSAL1324607"
+      ],
+      "ghn": [
+        "7079049955"
+      ]
+    },
+    "WM+ PTO 234 Đông Phú": {
+      "so": [
+        "SOWINSAL1324582"
+      ],
+      "ghn": [
+        "7079051922"
+      ]
+    },
+    "WM+ PTO Bắc Tiến 2, Hùng Việt": {
+      "so": [
+        "SOWINSAL1324580"
+      ],
+      "ghn": [
+        "7079051356"
+      ]
+    },
+    "WM+ PTO Khu Cống 2, Cẩm Khê": {
+      "so": [
+        "SOWINSAL1324600"
+      ],
+      "ghn": [
+        "7079052246"
+      ]
+    },
+    "WM+ PTO Hoa Khê, Cẩm Khê": {
+      "so": [
+        "SOWINSAL1324559"
+      ],
+      "ghn": [
+        "7079048349"
+      ]
+    },
+    "WM+ PTO Minh Tân, Cẩm Khê": {
+      "so": [
+        "SOWINSAL1324605"
+      ],
+      "ghn": [
+        "7079051180"
+      ]
+    },
+    "WM+ PTO Nương Sơn, Vân Bán": {
+      "so": [
+        "SOWINSAL1324515"
+      ],
+      "ghn": [
+        "7079050635"
+      ]
+    },
+    "WM+ PTO 425-427 Lạc Long Quân": {
+      "so": [
+        "SOWINSAL1324465"
+      ],
+      "ghn": [
+        "7079045302"
+      ]
+    },
+    "WM+ PTO TĐ 24 Khu 8, Hạ Hòa": {
+      "so": [
+        "SOWINSAL1324601"
+      ],
+      "ghn": [
+        "7079052102"
+      ]
+    },
+    "WM+ PTO Khu 10, Hạ Hòa": {
+      "so": [
+        "SOWINSAL1324528"
+      ],
+      "ghn": [
+        "7079047932"
+      ]
+    },
+    "WM+ PTO Khu 6 Hương Xạ, Yên Kỳ": {
+      "so": [
+        "SOWINSAL1324611"
+      ],
+      "ghn": [
+        "7079052433"
+      ]
+    },
+    "WM+ PTO Khu Phố, Đoan Hùng": {
+      "so": [
+        "SOWINSAL1324480"
+      ],
+      "ghn": [
+        "7079049433"
+      ]
+    },
+    "WM+ PTO Phượng Hùng 1, Chí Đám": {
+      "so": [
+        "SOWINSAL1324581"
+      ],
+      "ghn": [
+        "7079052371"
+      ]
+    },
+    "WM+ PTO Khu Ngọc Chúc 3, Đoan Hùng": {
+      "so": [
+        "SOWINSAL1324557"
+      ],
+      "ghn": [
+        "7079048043"
+      ]
+    },
+    "WM+ PTO 574 Tân Tiến": {
+      "so": [
+        "SOWINSAL1324553"
+      ],
+      "ghn": [
+        "7079047402"
+      ]
+    },
+    "WM+ PTO Khu 2, Chân Mộng": {
+      "so": [
+        "SOWINSAL1324501"
+      ],
+      "ghn": [
+        "7079052369"
+      ]
+    },
+    "WM+ PTO Khu 4 Vụ Quang, Chân Mộng": {
+      "so": [
+        "SOWINSAL1324418"
+      ],
+      "ghn": [
+        "7079050882"
+      ]
+    },
+    "WM+ PTO Khu 4, Hoàng Cương": {
+      "so": [
+        "SOWINSAL1324517"
+      ],
+      "ghn": [
+        "7079048347"
+      ]
+    },
+    "WM+ PTO Khu 8, Đông Thành": {
+      "so": [
+        "SOWINSAL1324510"
+      ],
+      "ghn": [
+        "7079052113"
+      ]
+    },
+    "WM+ PTO Khu 6 Đồng Xuân, Thanh Ba": {
+      "so": [
+        "SOWINSAL1324412"
+      ],
+      "ghn": [
+        "7079051239"
+      ]
+    },
+    "WM+ PTO 12 Hàn Thuyên": {
+      "so": [
+        "SOWINSAL1324453"
+      ],
+      "ghn": [
+        "7079052351"
+      ]
+    },
+    "WM+ PTO Khu 8 Thanh Ba": {
+      "so": [
+        "SOWINSAL1324455"
+      ],
+      "ghn": [
+        "7079052398"
+      ]
+    },
+    "WM+ PTO Khu 15, Yển Khê": {
+      "so": [
+        "SOWINSAL1324502"
+      ],
+      "ghn": [
+        "7079050492"
+      ]
+    },
+    "WM+ PTO Khu 3, Thanh Ba": {
+      "so": [
+        "SOWINSAL1324411"
+      ],
+      "ghn": [
+        "7079052350"
+      ]
+    },
+    "WM+ PTO Khu 9, Chí Tiên": {
+      "so": [
+        "SOWINSAL1324583"
+      ],
+      "ghn": [
+        "7079051564"
+      ]
+    },
+    "WM+ PTO Thanh Bình, Âu Cơ": {
+      "so": [
+        "SOWINSAL1324525"
+      ],
+      "ghn": [
+        "7079052007"
+      ]
+    },
+    "WM+ PTO 75 Cao Bang": {
+      "so": [
+        "SOWINSAL1324551"
+      ],
+      "ghn": [
+        "7079052290"
+      ]
+    },
+    "WM+ PTO 191 Cao Du": {
+      "so": [
+        "SOWINSAL1324616"
+      ],
+      "ghn": [
+        "7079044329"
+      ]
+    },
+    "WM VC+ PTO Phú Thọ": {
+      "so": [
+        "SOWINSAL1324216"
+      ],
+      "ghn": [
+        "7079048314"
+      ]
+    },
+    "WM+ PTO 25 tổ 10 Tân An": {
+      "so": [
+        "SOWINSAL1324450"
+      ],
+      "ghn": [
+        "7079052367"
+      ]
+    },
+    "WM+ PTO An Ninh Hạ, Phú Thọ": {
+      "so": [
+        "SOWINSAL1324529"
+      ],
+      "ghn": [
+        "7079052260"
+      ]
+    },
+    "WM+ PTO KĐT Âu Cơ, Âu Cơ": {
+      "so": [
+        "SOWINSAL1324623"
+      ],
+      "ghn": [
+        "7079049956"
+      ]
+    },
+    "WM+ PTO Khu Km5, Hà Lộc": {
+      "so": [
+        "SOWINSAL1324591"
+      ],
+      "ghn": [
+        "7079050345"
+      ]
+    },
+    "WM+ PTO Khu 4, Phú Mỹ": {
+      "so": [
+        "SOWINSAL1324509"
+      ],
+      "ghn": [
+        "7079052050"
+      ]
+    },
+    "WM+ PTO Khu 2, Trạm Thản": {
+      "so": [
+        "SOWINSAL1324403"
+      ],
+      "ghn": [
+        "7079051113"
+      ]
+    },
+    "WM+ PTO Khu 12 Phú Hộ": {
+      "so": [
+        "SOWINSAL1324552"
+      ],
+      "ghn": [
+        "7079050567"
+      ]
+    },
+    "WM+ PTO Khu 10, Phù Ninh": {
+      "so": [
+        "SOWINSAL1324416"
+      ],
+      "ghn": [
+        "7079051672"
+      ]
+    },
+    "WM+ PTO Bình Phú, Phù Ninh": {
+      "so": [
+        "SOWINSAL1324574"
+      ],
+      "ghn": [
+        "7079051242"
+      ]
+    },
+    "WM+ PTO Núi Trang, Phù Ninh": {
+      "so": [
+        "SOWINSAL1324484"
+      ],
+      "ghn": [
+        "7079052028"
+      ]
+    },
+    "WM+ PTO 188 Đường Nam, Phù Ninh": {
+      "so": [
+        "SOWINSAL1324547"
+      ],
+      "ghn": [
+        "7079051002"
+      ]
+    },
+    "WM+ PTO Phú Lộc, Phù Ninh": {
+      "so": [
+        "SOWINSAL1324558"
+      ],
+      "ghn": [
+        "7079052051"
+      ]
+    },
+    "WM+ PTO Khu 2, Xuân Lũng": {
+      "so": [
+        "SOWINSAL1324599"
+      ],
+      "ghn": [
+        "7079052245"
+      ]
+    },
+    "WM+ PTO Khu 12, TT Lâm Thao": {
+      "so": [
+        "SOWINSAL1324476"
+      ],
+      "ghn": [
+        "7079050984"
+      ]
+    },
+    "WM+ PTO 26 Âu Cơ": {
+      "so": [
+        "SOWINSAL1324452"
+      ],
+      "ghn": [
+        "7079051814"
+      ]
+    },
+    "WM+ PTO Khu 15, Dục Mỹ": {
+      "so": [
+        "SOWINSAL1324602"
+      ],
+      "ghn": [
+        "7079052432"
+      ]
+    },
+    "WM+ PTO Cao Xá, Lâm Thao": {
+      "so": [
+        "SOWINSAL1324564"
+      ],
+      "ghn": [
+        "7079051003"
+      ]
+    },
+    "WM+ PTO Khu 1, Bản Nguyên": {
+      "so": [
+        "SOWINSAL1324415"
+      ],
+      "ghn": [
+        "7079050999"
+      ]
+    },
+    "WM+ PTO Khu 5, Tứ Xã": {
+      "so": [
+        "SOWINSAL1324498"
+      ],
+      "ghn": [
+        "7079051322"
+      ]
+    },
+    "WM+ PTO 235-235B TT Hùng Sơn": {
+      "so": [
+        "SOWINSAL1324572"
+      ],
+      "ghn": [
+        "7079043179"
+      ]
+    },
+    "WM+ PTO Khu 3 Hùng Lô, Việt Trì": {
+      "so": [
+        "SOWINSAL1324217",
+        "SOWINSAL1324471"
+      ],
+      "ghn": [
+        "7079048594",
+        "7079048694"
+      ]
+    },
+    "WM+ PTO Tổ 1, khu 1A, Vân Phú": {
+      "so": [
+        "SOWINSAL1324427"
+      ],
+      "ghn": [
+        "7079049909"
+      ]
+    },
+    "WM+ PTO Khu 3 Vân Phú": {
+      "so": [
+        "SOWINSAL1324437"
+      ],
+      "ghn": [
+        "7079052335"
+      ]
+    },
+    "WM+ PTO Đội 3, Nông Trang": {
+      "so": [
+        "SOWINSAL1324408"
+      ],
+      "ghn": [
+        "7079051861"
+      ]
+    },
+    "WM+ PTO Khu 6, Hy Cương": {
+      "so": [
+        "SOWINSAL1324617"
+      ],
+      "ghn": [
+        "7079051923"
+      ]
+    },
+    "WM+ PTO 3023 Đại Lộ Hùng Vương": {
+      "so": [
+        "SOWINSAL1324422"
+      ],
+      "ghn": [
+        "7079052303"
+      ]
+    },
+    "WM+ PTO Khu Trung Phương, Việt Trì": {
+      "so": [
+        "SOWINSAL1324406"
+      ],
+      "ghn": [
+        "7079049638"
+      ]
+    },
+    "WM+ PTO 44 Đại Nải": {
+      "so": [
+        "SOWINSAL1324438"
+      ],
+      "ghn": [
+        "7079048405"
+      ]
+    },
+    "WM+ PTO 167-169 Nguyễn Trãi": {
+      "so": [
+        "SOWINSAL1324461"
+      ],
+      "ghn": [
+        "7079052383"
+      ]
+    },
+    "WM+ PTO Vũ Duệ, Việt Trì": {
+      "so": [
+        "SOWINSAL1324472"
+      ],
+      "ghn": [
+        "7079052352"
+      ]
+    },
+    "WM+ PTO Khu 6B, Nông Trang": {
+      "so": [
+        "SOWINSAL1324428"
+      ],
+      "ghn": [
+        "7079047956"
+      ]
+    },
+    "WM+ PTO 44 Nguyễn Du": {
+      "so": [
+        "SOWINSAL1324423"
+      ],
+      "ghn": [
+        "7079051673"
+      ]
+    },
+    "WM+ PTO Khu 2A, Nông Trang": {
+      "so": [
+        "SOWINSAL1324429"
+      ],
+      "ghn": [
+        "7079048692"
+      ]
+    },
+    "WM+ PTO Khu 8 Nông Trang": {
+      "so": [
+        "SOWINSAL1324436"
+      ],
+      "ghn": [
+        "7079052258"
+      ]
+    },
+    "WM+ PTO 73 Quang Trung": {
+      "so": [
+        "SOWINSAL1324426"
+      ],
+      "ghn": [
+        "7079051047"
+      ]
+    },
+    "WM+ PTO 62 Phan Châu Trinh": {
+      "so": [
+        "SOWINSAL1324421"
+      ],
+      "ghn": [
+        "7079052256"
+      ]
+    },
+    "WM+ PTO Băng 1, Quang Trung": {
+      "so": [
+        "SOWINSAL1324430"
+      ],
+      "ghn": [
+        "7079052287"
+      ]
+    },
+    "WM+ PTO Khu 5 Nông Trang": {
+      "so": [
+        "SOWINSAL1324457"
+      ],
+      "ghn": [
+        "7079052336"
+      ]
+    },
+    "WM+ PTO Khu Tân Thịnh, Tân Dân": {
+      "so": [
+        "SOWINSAL1324432"
+      ],
+      "ghn": [
+        "7079052288"
+      ]
+    },
+    "WM+ PTO 545 Trần Phú": {
+      "so": [
+        "SOWINSAL1324475"
+      ],
+      "ghn": [
+        "7079051000"
+      ]
+    },
+    "WM+ PTO 12 Tổ 5 Trần Phú": {
+      "so": [
+        "SOWINSAL1324474"
+      ],
+      "ghn": [
+        "7079052099"
+      ]
+    },
+    "WM+ PTO Khu Tân An, Tân Dân": {
+      "so": [
+        "SOWINSAL1324431"
+      ],
+      "ghn": [
+        "7079052304"
+      ]
+    },
+    "WM+ PTO 192-194 Trần Phú, Việt Trì": {
+      "so": [
+        "SOWINSAL1324622"
+      ],
+      "ghn": [
+        "7079052373"
+      ]
+    },
+    "WM+ PTO 66 Hàn Thuyên": {
+      "so": [
+        "SOWINSAL1324434"
+      ],
+      "ghn": [
+        "7079045301"
+      ]
+    },
+    "WM+ PTO 35 Hà Chương": {
+      "so": [
+        "SOWINSAL1324396"
+      ],
+      "ghn": [
+        "7079048057"
+      ]
+    },
+    "WM+ PTO 476 Châu Phong": {
+      "so": [
+        "SOWINSAL1324456"
+      ],
+      "ghn": [
+        "7079051562"
+      ]
+    },
+    "WM+ PTO Đồng Gia, Việt Trì": {
+      "so": [
+        "SOWINSAL1324473"
+      ],
+      "ghn": [
+        "7079048346"
+      ]
+    },
+    "WM+ PTO 130 Lê Quý Đôn": {
+      "so": [
+        "SOWINSAL1324425"
+      ],
+      "ghn": [
+        "7079051561"
+      ]
+    },
+    "WM VCP PTO Việt Trì": {
+      "so": [
+        "SOWINSAL1324210"
+      ],
+      "ghn": [
+        "7079048483"
+      ]
+    },
+    "WM+ PTO 439 Tiên Dung": {
+      "so": [
+        "SOWINSAL1324402"
+      ],
+      "ghn": [
+        "7079050969"
+      ]
+    },
+    "WM+ PTO 1343 Hùng Vương": {
+      "so": [
+        "SOWINSAL1324433"
+      ],
+      "ghn": [
+        "7079051674"
+      ]
+    },
+    "WM+ PTO 1250 Hùng Vương": {
+      "so": [
+        "SOWINSAL1324424"
+      ],
+      "ghn": [
+        "7079052257"
+      ]
+    },
+    "WM+ PTO 965 Hùng Vương": {
+      "so": [
+        "SOWINSAL1324420"
+      ],
+      "ghn": [
+        "7079051046"
+      ]
+    },
+    "WM+ PTO Tổ 26A Hai Bà Trưng": {
+      "so": [
+        "SOWINSAL1324435"
+      ],
+      "ghn": [
+        "7079051547"
+      ]
+    },
+    "WM+ PTO Thành Công, Việt Trì": {
+      "so": [
+        "SOWINSAL1324532"
+      ],
+      "ghn": [
+        "7079045445"
+      ]
+    },
+    "WM+ PTO 107 Bạch Hạc": {
+      "so": [
+        "SOWINSAL1324566"
+      ],
+      "ghn": [
+        "7079052415"
+      ]
+    },
+    "WM+ PTO Băng 1, Nguyễn Tất Thành": {
+      "so": [
+        "SOWINSAL1324405"
+      ],
+      "ghn": [
+        "7079048404"
       ]
     }
   }
