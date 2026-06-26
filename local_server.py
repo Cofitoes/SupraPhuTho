@@ -121,8 +121,8 @@ def run():
     try:
         edge_path = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
         if os.path.exists(edge_path):
-            webbrowser.register('edge', None, webbrowser.BackgroundBrowser(edge_path))
-            webbrowser.get('edge').open(url)
+            import subprocess
+            subprocess.Popen([edge_path, url], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         else:
             webbrowser.open(url)
     except Exception:
