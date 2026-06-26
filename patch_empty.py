@@ -4,7 +4,7 @@ with open('trips_logic_v6.js', 'r', encoding='utf-8') as f:
 
 patch = '''
     if (gxtPoints.length === 0 && directPoints.length === 0) {
-        document.body.innerHTML += '<div style="position:fixed; top:50px; left:0; right:0; background: orange; color: white; padding: 20px; z-index:9999; font-size: 20px;">DEBUG: Both gxtPoints and directPoints are EMPTY! DELIVERY_POINTS length: ' + DELIVERY_POINTS.length + '</div>';
+        console.warn('DEBUG: Both gxtPoints and directPoints are EMPTY! DELIVERY_POINTS length: ' + DELIVERY_POINTS.length);
     }
 '''
 

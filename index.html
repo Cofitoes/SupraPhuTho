@@ -613,7 +613,7 @@
                 errDiv = document.createElement('div');
                 errDiv.id = 'demo-error-overlay';
                 errDiv.style = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);color:red;z-index:999999;padding:20px;font-family:monospace;white-space:pre-wrap;overflow:auto;';
-                document.body.appendChild(errDiv);
+                (document.body || document.documentElement).appendChild(errDiv);
             }
             errDiv.innerText += "\nError: " + message + "\nSource: " + source + "\nLine: " + lineno + "\nCol: " + colno + "\n" + (error ? error.stack : "") + "\n-------------------\n";
             console.error("Error: " + message + "\nLine: " + lineno + "\nCol: " + colno + "\n" + (error ? error.stack : ""));
@@ -625,7 +625,7 @@
                 errDiv = document.createElement('div');
                 errDiv.id = 'demo-error-overlay';
                 errDiv.style = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);color:red;z-index:999999;padding:20px;font-family:monospace;white-space:pre-wrap;overflow:auto;';
-                document.body.appendChild(errDiv);
+                (document.body || document.documentElement).appendChild(errDiv);
             }
             errDiv.innerText += "\nUnhandled Promise Rejection: " + event.reason + "\n-------------------\n";
             console.error(event.reason);
@@ -637,7 +637,7 @@
                     errDiv = document.createElement('div');
                     errDiv.id = 'demo-error-overlay';
                     errDiv.style = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);color:orange;z-index:999999;padding:20px;font-family:monospace;white-space:pre-wrap;overflow:auto;';
-                    document.body.appendChild(errDiv);
+                    (document.body || document.documentElement).appendChild(errDiv);
                 }
                 errDiv.innerText += "\nResource Load Error: Failed to load " + e.target.tagName + " from: " + (e.target.src || e.target.href) + "\n-------------------\n";
             }
@@ -5014,10 +5014,10 @@
                     // Tạo lại lộ trình (trips) tương ứng với ngày booking này
                     let tripsForDate = [];
                     if (typeof generateTrips === 'function') {
-                        const originalDeliveryPoints = window.DELIVERY_POINTS;
+                        const originalDeliveryPoints = DELIVERY_POINTS;
                         const originalBookingPoints = typeof BOOKING_DELIVERY_POINTS !== 'undefined' ? BOOKING_DELIVERY_POINTS : [];
 
-                        window.DELIVERY_POINTS = originalBookingPoints.filter(p => p.date === bookingDate).map(p => {
+                        DELIVERY_POINTS = originalBookingPoints.filter(p => p.date === bookingDate).map(p => {
                             const store = (typeof STORE_LIST_DATA !== 'undefined') ? STORE_LIST_DATA.find(s => s.id === p.id) : null;
                             const clonedP = JSON.parse(JSON.stringify(p));
                             return {
@@ -5029,7 +5029,7 @@
                         });
 
                         tripsForDate = safeGenerateTrips();
-                        window.DELIVERY_POINTS = originalDeliveryPoints;
+                        DELIVERY_POINTS = originalDeliveryPoints;
                     }
 
                     tripsForDate.forEach((t, idx) => {
