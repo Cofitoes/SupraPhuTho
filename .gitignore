@@ -15,3 +15,7 @@ web_release/
 sync_log.txt
 *.tmp
 *.bak
+
+# Exclusions
+!Form Xuất Báo Cáo.xlsb
+!Data_Booking/Booking Supra*

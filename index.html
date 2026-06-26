@@ -2532,8 +2532,23 @@
                 }
 
                 // Helper to extract province and district
-                function extractProvinceAndDistrict(name, address) {
-                    let province = getProvinceFromNameOrAddress(name, address) || 'Khác';
+                function extractProvinceAndDistrict(name, id, address) {
+                    // Try looking up in STORE_LIST_DATA first
+                    if (typeof STORE_LIST_DATA !== 'undefined' && Array.isArray(STORE_LIST_DATA)) {
+                        const found = STORE_LIST_DATA.find(s => 
+                            (id && s.id && s.id.toLowerCase() === id.toLowerCase()) || 
+                            (name && s.name && s.name.toLowerCase() === name.toLowerCase())
+                        );
+                        if (found) {
+                            return {
+                                province: found.province || 'T. Phú Thọ',
+                                district: found.district || 'Khác'
+                            };
+                        }
+                    }
+
+                    // Fallback to extraction
+                    let province = getProvinceFromNameOrAddress(name, address) || 'Phú Thọ';
                     let district = '';
 
                     if (address) {
@@ -2551,8 +2566,28 @@
                         }
                     }
 
+                    // Formatting fallback province to start with "T. "
+                    if (province && !/^(T\.|Tỉnh|TP\.)/i.test(province)) {
+                        if (province.toLowerCase().includes('hà nội') || province.toLowerCase().includes('hồ chí minh') || province.toLowerCase().includes('hải phòng') || province.toLowerCase().includes('đà nẵng') || province.toLowerCase().includes('cần thơ')) {
+                            province = 'TP. ' + province;
+                        } else {
+                            province = 'T. ' + province;
+                        }
+                    }
+
+                    // Formatting fallback district to start with "H. " or "TP. " or "Tx. "
+                    if (district && !/^(H\.|Q\.|TP\.|Tx\.)/i.test(district)) {
+                        if (district.toLowerCase().includes('việt trì') || district.toLowerCase().includes('hòa bình') || district.toLowerCase().includes('phủ lý') || district.toLowerCase().includes('nam định')) {
+                            district = 'TP. ' + district;
+                        } else if (district.toLowerCase().includes('phú thọ') || district.toLowerCase().includes('thị xã')) {
+                            district = 'Tx. ' + district;
+                        } else {
+                            district = 'H. ' + district;
+                        }
+                    }
+
                     return {
-                        province: province,
+                        province: province || 'T. Phú Thọ',
                         district: district || 'Khác'
                     };
                 }
@@ -2681,8 +2716,8 @@
                     }
 
                     stores.sort((a, b) => {
-                        const storeGeoA = extractProvinceAndDistrict(a.name, a.address);
-                        const storeGeoB = extractProvinceAndDistrict(b.name, b.address);
+                        const storeGeoA = extractProvinceAndDistrict(a.name, a.id, a.address);
+                        const storeGeoB = extractProvinceAndDistrict(b.name, b.id, b.address);
                         let provA = storeGeoA.province;
                         let provB = storeGeoB.province;
 
@@ -2756,15 +2791,12 @@
                     }
                     const tripTimeFraction = convertTimeToFraction(t.departureTime || '08:00');
 
-                    // Calculate total PCS of the trip for Col 9
-                    const tripTotalPcs = stores.reduce((sum, s) => sum + (s.pcs || 0), 0);
+                    // 3. Resolve all orders for each store in this trip
+                    const tripStoresWithOrders = [];
+                    let tripTotalQty = 0;
+                    let tripTotalPcs = 0;
 
-                    // 3. Process each store
-                    stores.forEach((store, storeIdx) => {
-                        const currentChẵn = loadingSeqCounter++;
-                        const storeGeo = extractProvinceAndDistrict(store.name, store.address);
-
-                        // Find corresponding orders in rawRows (from Data_Booking Excel)
+                    stores.forEach((store) => {
                         let storeOrders = [];
                         if (rawRows && rawRows.length > 0) {
                             storeOrders = rawRows.filter(row => {
@@ -2778,7 +2810,6 @@
                             });
                         }
 
-                        // Fallback if no matching rows in the raw booking excel
                         if (storeOrders.length === 0) {
                             storeOrders = [{
                                 'Số SO': '',
@@ -2786,9 +2817,47 @@
                                 'Weight (kg)': store.weight || 0,
                                 'Volume up (m3)': store.volume || 0,
                                 'Qty': store.qty || 0,
-                                'Số kiện': store.pcs || 0
+                                'Số kiện': store.pcs || 0,
+                                'Ghi chú': ''
                             }];
                         }
+
+                        storeOrders.forEach(o => {
+                            let orderPcs = 0;
+                            if (o['Số kiện'] !== undefined) {
+                                orderPcs = o['Số kiện'];
+                            } else if (o['Số kiện'] !== undefined) {
+                                orderPcs = o['Số kiện'];
+                            } else if (o['Kiện'] !== undefined) {
+                                orderPcs = o['Kiện'];
+                            } else if (o['Kiện'] !== undefined) {
+                                orderPcs = o['Kiện'];
+                            } else if (o['Tổng PCS/Mã chuyến'] !== undefined && o['Kiện'] === undefined && o['Số kiện'] === undefined && o['Số kiện'] === undefined) {
+                                orderPcs = o['Tổng PCS/Mã chuyến'];
+                            }
+                            
+                            const pcsNum = parseFloat(orderPcs) || 0;
+                            o._resolvedPcs = pcsNum;
+
+                            const qtyNum = parseFloat(o['Qty'] || o['qty'] || 0);
+                            o._resolvedQty = qtyNum;
+
+                            tripTotalQty += qtyNum;
+                            tripTotalPcs += pcsNum;
+                        });
+
+                        tripStoresWithOrders.push({
+                            store: store,
+                            orders: storeOrders
+                        });
+                    });
+
+                    // 4. Process each store
+                    tripStoresWithOrders.forEach((item, storeIdx) => {
+                        const store = item.store;
+                        const storeOrders = item.orders;
+                        const currentChẵn = loadingSeqCounter++;
+                        const storeGeo = extractProvinceAndDistrict(store.name, store.id, store.address);
 
                         // Calculate total store weight & volume for columns 10, 11
                         const totalStoreWeight = storeOrders.reduce((sum, o) => {
@@ -2808,13 +2877,13 @@
                             const isFirstRowOfTrip = (storeIdx === 0 && oIdx === 0);
                             const isFirstRowOfStore = (oIdx === 0);
 
-                            const orderSO = o['Số SO'] || o['Số SO'] || o['so'] || '';
-                            const orderDO = o['Số DO'] || o['Số DO'] || o['do'] || '';
+                            const orderSO = o['Số SO'] || o['so'] || '';
+                            const orderDO = o['Số DO'] || o['do'] || '';
                             
-                            const orderPcs = o['Số kiện'] || o['Số kiện'] || o['Pcs'] || o['pcs'] || 0;
-                            const orderQty = o['Qty'] || o['qty'] || 0;
-                            const orderWeight = o['Weight (kg)'] || o['Weight'] || o['weight'] || 0;
-                            const orderVolume = o['Volume up (m3)'] || o['Volume'] || o['volume'] || 0;
+                            const orderPcs = o._resolvedPcs;
+                            const orderQty = o._resolvedQty;
+                            const orderWeight = o['Weight'] !== undefined ? o['Weight'] : (o['Weight (kg)'] || o['weight'] || 0);
+                            const orderVolume = o['Volume'] !== undefined ? o['Volume'] : (o['Volume up (m3)'] || o['volume'] || 0);
 
                             row[0] = sttCounter++; // STT
                             row[1] = serialDate; // Ngày xuất
@@ -2826,7 +2895,7 @@
                             row[7] = parseFloat(orderQty) || 0; // Qty
 
                             if (isFirstRowOfTrip) {
-                                row[8] = parseFloat(tripTotalPcs) || 0; // Tổng PCS/Mã chuyến
+                                row[8] = parseFloat(tripTotalQty) || 0; // Tổng PCS/Mã chuyến
                             } else {
                                 row[8] = '';
                             }
@@ -2854,9 +2923,9 @@
                                 row[17] = '';
                             }
 
-                            row[18] = ''; // Ghi chú
+                            row[18] = o['Ghi chú'] !== undefined ? o['Ghi chú'] : ''; // Ghi chú
                             row[19] = currentChẵn; // Chẵn
-                            row[20] = ''; // Gợi ý lot sau
+                            row[20] = o['Gợi ý lot sau'] || o['Gợi ý lot sau'] || o['Gợi ý lot sau '] || ''; // Gợi ý lot sau
                             row[21] = `xe ${globalTripCounter}`; // Ghi chú 2
                             row[22] = 'GHN'; // Đơn vị vận tải
                             row[23] = isFirstRowOfStore ? 1 : 0; // Count
@@ -2874,7 +2943,7 @@
 
                             row[29] = tripBKS; // BKS
                             row[30] = tripDriverName; // Tên Tài Xế
-                            row[31] = tripDriverPhone; // SĐT
+                            row[31] = String(tripDriverPhone).startsWith('0') ? tripDriverPhone : `0${tripDriverPhone}`; // SĐT
 
                             aoa.push(row);
                         });
