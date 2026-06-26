@@ -185,7 +185,7 @@ function generateTrips() {
     const gxtStoreNames = (typeof GXT_STORE_LIST !== 'undefined') ? GXT_STORE_LIST : [];
     const isGXTStore = (p) => {
         if (typeof window.checkIsGXTStore === 'function') {
-            return window.checkIsGXTStore(p.name);
+            return window.checkIsGXTStore(p.name, p.id);
         }
         if (p.isGXT === true) return true;
         if (p.isGXT === false) return false;

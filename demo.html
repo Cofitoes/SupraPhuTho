@@ -1838,9 +1838,17 @@
             return `${Math.floor(totalMins / 60).toString().padStart(2, '0')}:${(totalMins % 60).toString().padStart(2, '0')}`;
         }
 
-        window.checkIsGXTStore = function(name) {
+        window.checkIsGXTStore = function(name, id) {
             if (!name) return false;
             if (typeof STORE_LIST_DATA !== 'undefined' && Array.isArray(STORE_LIST_DATA)) {
+                // 1. Try matching by ID first (most accurate!)
+                if (id) {
+                    const foundStore = STORE_LIST_DATA.find(s => String(s.id).trim() === String(id).trim());
+                    if (foundStore) {
+                        return foundStore.isGXT === true || foundStore.trip_type === 'GXT';
+                    }
+                }
+                // 2. Try matching by Name
                 const normStore = name.normalize('NFC').trim().toLowerCase();
                 const foundStore = STORE_LIST_DATA.find(s => {
                     const normS = s.name.normalize('NFC').trim().toLowerCase();
@@ -1947,7 +1955,7 @@
                     name: clonedP.name, // Keep original name from excel
                     address: store && store.address ? store.address : clonedP.address || '',
                     coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords,
-                    isGXT: store ? (typeof window.checkIsGXTStore === 'function' ? window.checkIsGXTStore(store.name) : false) : false
+                    isGXT: store ? (typeof window.checkIsGXTStore === 'function' ? window.checkIsGXTStore(store.name, store.id) : false) : false
                 };
             });
 
@@ -2091,7 +2099,7 @@
                         name: clonedP.name, // Keep original name from excel
                         address: store && store.address ? store.address : clonedP.address || '',
                         coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords,
-                        isGXT: store ? (typeof window.checkIsGXTStore === 'function' ? window.checkIsGXTStore(store.name) : false) : false
+                        isGXT: store ? (typeof window.checkIsGXTStore === 'function' ? window.checkIsGXTStore(store.name, store.id) : false) : false
                     };
                 });
                 window.renderPendingPoints();
@@ -2126,7 +2134,7 @@
                             name: clonedP.name, // Keep original name from excel
                             address: store && store.address ? store.address : clonedP.address || '',
                             coords: (store && store.coords && store.coords.lat && store.coords.lng) ? JSON.parse(JSON.stringify(store.coords)) : clonedP.coords,
-                            isGXT: store ? (typeof window.checkIsGXTStore === 'function' ? window.checkIsGXTStore(store.name) : false) : false
+                            isGXT: store ? (typeof window.checkIsGXTStore === 'function' ? window.checkIsGXTStore(store.name, store.id) : false) : false
                         };
                     });
                 } else {
@@ -3524,7 +3532,7 @@
                         province: store.province || '',
                         district: store.district || '',
                         coords: store.coords || null,
-                        isGXT: typeof window.checkIsGXTStore === 'function' ? window.checkIsGXTStore(store.name) : false
+                        isGXT: typeof window.checkIsGXTStore === 'function' ? window.checkIsGXTStore(store.name, store.id) : false
                     });
                 }
             });
