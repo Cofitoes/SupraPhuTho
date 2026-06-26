@@ -1421,7 +1421,7 @@
                         <div class="header-search" style="width: 400px; position: relative;">
                             <i class="fas fa-search"
                                 style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-dim);"></i>
-                            <input type="text" id="order-lookup-search" placeholder="Nhập Vận Đơn hoặc Mã Cửa Hàng..."
+                            <input type="text" id="order-lookup-search" placeholder="Nhập Vận Đơn, Mã Cửa Hàng hoặc Mã DO/SO..."
                                 style="width: 100%; padding: 10px 12px 10px 48px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); border-radius: 10px; color: white; outline: none;">
                         </div>
                     </div>
@@ -1442,7 +1442,7 @@
                             </thead>
                             <tbody id="order-lookup-body">
                                 <tr>
-                                    <td colspan="9" style="text-align: center; color: var(--text-dim); padding: 40px;">
+                                    <td colspan="10" style="text-align: center; color: var(--text-dim); padding: 40px;">
                                         <i class="fas fa-search-location"
                                             style="font-size: 2rem; margin-bottom: 10px; opacity:0.3;"></i><br>
                                         Nhập từ khóa để tra cứu đơn hàng
@@ -5329,7 +5329,49 @@
             const orderSearchInput = document.getElementById('order-lookup-search');
             const orderLookupBody = document.getElementById('order-lookup-body');
 
-            let sheetData = [];
+            function mergeLocalDataIntoSheetData() {
+                if (typeof STORE_GHN_SO_DATA === 'undefined') return;
+                const existingVd = new Set(sheetData.map(x => x['Vận đơn']).filter(Boolean));
+                for (const [dateVal, stores] of Object.entries(STORE_GHN_SO_DATA)) {
+                    let formattedDate = dateVal;
+                    const parts = dateVal.split('-');
+                    if (parts.length === 3) {
+                        formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
+                    }
+                    for (const [storeName, data] of Object.entries(stores)) {
+                        const ghns = data.ghn || [];
+                        const sos = data.so || [];
+                        const maxOrders = Math.max(ghns.length, sos.length);
+                        for (let k = 0; k < maxOrders; k++) {
+                            const gCode = ghns[k] || '';
+                            const sCode = sos[k] || '';
+                            if (gCode && existingVd.has(gCode)) continue;
+                            let sId = '';
+                            let prov = '';
+                            if (typeof STORE_LIST_DATA !== 'undefined') {
+                                const store = STORE_LIST_DATA.find(x => x.name === storeName || storeName.includes(x.name));
+                                if (store) {
+                                    sId = store.id;
+                                    prov = store.province || '';
+                                }
+                            }
+                            sheetData.push({
+                                'Vận đơn': gCode,
+                                'Số DO': sCode,
+                                'Số SO': '',
+                                'MÃ CỬA HÀNG': sId,
+                                'TÊN CỬA HÀNG': storeName,
+                                'Ngày tạo đơn': formattedDate,
+                                'Ngày xuất': formattedDate,
+                                'Trạng thái hệ thống': 'Đơn thô (Local)',
+                                'Tỉnh giao': prov,
+                                'Quận giao': ''
+                            });
+                        }
+                    }
+                }
+            }
+
             async function fetchGoogleSheetData() {
                 try {
                     const url = 'https://docs.google.com/spreadsheets/d/1fifr6Wacb5zMxWiWgM-HH9xl_z2Px9bGJ4mJk1twHiY/export?format=csv&gid=0';
@@ -5363,6 +5405,7 @@
                         sheetData.push({
                             'Vận đơn': ghnCode,
                             'Số DO': rowArray[7] ? rowArray[7].trim() : '',
+                            'Số SO': rowArray[6] ? rowArray[6].trim() : '',
                             'MÃ CỬA HÀNG': storeCode,
                             'TÊN CỬA HÀNG': rowArray[9] ? rowArray[9].trim() : '',
                             'Ngày tạo đơn': rowArray[1] ? rowArray[1].trim() : '',
@@ -5375,6 +5418,8 @@
                 } catch (e) {
                     console.error('Error fetching google sheet data', e);
                 }
+
+                mergeLocalDataIntoSheetData();
             }
             // Fetch immediately
             fetchGoogleSheetData();
@@ -5383,7 +5428,7 @@
                 if (!results || results.length === 0) {
                     orderLookupBody.innerHTML = `
                         <tr>
-                            <td colspan="9" style="text-align: center; color: var(--text-dim); padding: 40px;">
+                            <td colspan="10" style="text-align: center; color: var(--text-dim); padding: 40px;">
                                 <i class="fas fa-search-location" style="font-size: 2rem; margin-bottom: 10px; opacity:0.3;"></i><br>
                                 Không tìm thấy kết quả nào.
                             </td>
@@ -5397,6 +5442,7 @@
                     return `
                         <tr style="border-bottom: 1px solid var(--border-color);">
                             <td><strong style="color: var(--primary);">${item['Vận đơn'] || ''}</strong></td>
+                            <td><strong style="color: #c084fc;">${item['Số DO'] || ''}</strong></td>
                             <td>${item['Ngày tạo đơn'] || ''}</td>
                             <td>${item['MÃ CỬA HÀNG'] || ''}</td>
                             <td><div style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${item['TÊN CỬA HÀNG'] || ''}">${item['TÊN CỬA HÀNG'] || ''}</div></td>
@@ -5428,12 +5474,20 @@
                     }
 
                     let allData = [];
-                                        allData = allData.concat(sheetData);
+                    allData = allData.concat(sheetData);
 
                     const results = allData.filter(item => {
                         const vd = (item['Vận đơn'] || '').toLowerCase();
                         const ma = (item['MÃ CỬA HÀNG'] || '').toLowerCase();
-                        return vd.includes(val) || ma.includes(val);
+                        const doCode = (item['Số DO'] || '').toLowerCase();
+                        const soCode = (item['Số SO'] || '').toLowerCase();
+                        const name = (item['TÊN CỬA HÀNG'] || '').toLowerCase();
+                        
+                        return vd.includes(val) || 
+                               ma.includes(val) || 
+                               doCode.includes(val) || 
+                               soCode.includes(val) || 
+                               name.includes(val);
                     });
                     renderOrderLookup(results.slice(0, 50));
                 });
