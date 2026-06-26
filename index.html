@@ -2958,29 +2958,111 @@
                     outWorkbook = templateWb;
                     const totalSheet = outWorkbook.Sheets['Total'];
 
-                    // 1. Clear old data from row 2 onwards (preserve format/styles)
+                    // 1. Clear old cells from row 2 onwards that are beyond the new data's length
+                    const maxRow = aoa.length;
                     Object.keys(totalSheet).forEach(key => {
-                        if (key[0] === '!') return; // Keep meta keys like !ref, !cols
+                        if (key[0] === '!') return; // Keep meta keys
                         const rowNum = parseInt(key.replace(/^[A-Z]+/i, ''));
-                        if (rowNum >= 2) {
+                        if (rowNum > maxRow) {
                             delete totalSheet[key];
                         }
                     });
 
-                    // 2. Add new data aoa starting at A1 (this overlays the headers and places all rows)
-                    XLSX.utils.sheet_add_aoa(totalSheet, aoa, { origin: "A1" });
+                    // 2. Manually populate cells row-by-row, writing formulas dynamically and preserving existing styles
+                    const colLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "AA", "AB", "AC", "AD", "AE", "AF"];
+                    
+                    for (let rIdx = 1; rIdx < aoa.length; rIdx++) {
+                        const r = rIdx + 1; // 1-based row index for Excel
+                        const rowData = aoa[rIdx];
+
+                        for (let cIdx = 0; cIdx < 32; cIdx++) {
+                            const colLetter = colLetters[cIdx];
+                            const cellRef = colLetter + r;
+                            
+                            // Initialize cell object if it doesn't exist
+                            if (!totalSheet[cellRef]) {
+                                totalSheet[cellRef] = {};
+                            }
+                            const cell = totalSheet[cellRef];
+
+                            // Check if this column is a formula column
+                            if (cIdx === 0) {
+                                cell.f = `IF(B${r}="","",COUNTA($B$2:B${r}))`;
+                                cell.v = 0;
+                                cell.t = 'n';
+                                delete cell.w;
+                            } else if (cIdx === 1) {
+                                cell.f = `TODAY()+1`;
+                                cell.v = 0;
+                                cell.t = 'n';
+                                delete cell.w;
+                            } else if (cIdx === 8) {
+                                cell.f = `IF(COUNTIF($N$2:N${r},N${r})=1,SUMIFS($H:$H,$N:$N,N${r}),"")`;
+                                cell.v = 0;
+                                cell.t = 'n';
+                                delete cell.w;
+                            } else if (cIdx === 9) {
+                                cell.f = `IF(E${r}<>E${r-1},SUMIF(E:E,E${r},Y:Y)," ")`;
+                                cell.v = 0;
+                                cell.t = 'n';
+                                delete cell.w;
+                            } else if (cIdx === 10) {
+                                cell.f = `IF(E${r}<>E${r-1},SUMIF(E:E,E${r},Z:Z)," ")`;
+                                cell.v = 0;
+                                cell.t = 'n';
+                                delete cell.w;
+                            } else if (cIdx === 15) {
+                                cell.f = `IF(R${r}="","",COUNTIFS($N:$N,N${r},$X:$X,"1"))`;
+                                cell.v = 0;
+                                cell.t = 'n';
+                                delete cell.w;
+                            } else if (cIdx === 23) {
+                                cell.f = `IF(COUNTIFS($N$2:$N${r},N${r},$E$2:$E${r},E${r})=1,1,0)`;
+                                cell.v = 0;
+                                cell.t = 'n';
+                                delete cell.w;
+                            } else if (cIdx === 26) {
+                                cell.f = `IF(COUNTIF(L$2:L${r},L${r})=1,SUMIF(L:L,L${r},I:I)/SUMIF(L:L,L${r},X:X),"")`;
+                                cell.v = 0;
+                                cell.t = 'n';
+                                delete cell.w;
+                            } else if (cIdx === 27) {
+                                cell.f = `IF(COUNTIF($N$2:N${r},N${r})=1,SUMIF(N:N,N${r},Y:Y),"")`;
+                                cell.v = 0;
+                                cell.t = 'n';
+                                delete cell.w;
+                            } else if (cIdx === 28) {
+                                cell.f = `IF(COUNTIF($N$2:N${r},N${r})=1,SUMIF(N:N,N${r},Z:Z),"")`;
+                                cell.v = 0;
+                                cell.t = 'n';
+                                delete cell.w;
+                            } else {
+                                // Standard data column
+                                const val = rowData[cIdx];
+                                cell.v = val;
+                                if (typeof val === 'number') {
+                                    cell.t = 'n';
+                                } else if (typeof val === 'boolean') {
+                                    cell.t = 'b';
+                                } else {
+                                    cell.t = 's';
+                                    cell.v = val !== null && val !== undefined ? String(val) : '';
+                                }
+                                delete cell.f;
+                            }
+                        }
+                    }
 
                     // 3. Update the sheet range
-                    const maxRow = aoa.length;
                     totalSheet['!ref'] = `A1:AF${maxRow}`;
 
-                    // 4. Save and write macro-preserved .xlsb
-                    const wbout = XLSX.write(outWorkbook, { bookType: 'xlsb', bookVBA: true, type: 'array' });
+                    // 4. Save and write macro-preserved .xlsm
+                    const wbout = XLSX.write(outWorkbook, { bookType: 'xlsm', bookVBA: true, type: 'array' });
                     const blob = new Blob([wbout], { type: 'application/octet-stream' });
                     const url = URL.createObjectURL(blob);
                     const a = document.createElement('a');
                     a.href = url;
-                    a.download = `TuyenCC_${fileDateStr}.xlsb`;
+                    a.download = `TuyenCC_${fileDateStr}.xlsm`;
                     document.body.appendChild(a);
                     a.click();
                     document.body.removeChild(a);

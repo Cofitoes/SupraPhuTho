@@ -10,8 +10,11 @@ WORKSPACE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 class LogisticsHandler(SimpleHTTPRequestHandler):
     def translate_path(self, path):
+        import urllib.parse
         # Strip query parameters and fragment identifiers
         path = path.split('?', 1)[0].split('#', 1)[0]
+        # Decode URL-encoded characters (like %20 or Vietnamese accents)
+        path = urllib.parse.unquote(path)
         # Serve static files from WORKSPACE_DIR
         return os.path.join(WORKSPACE_DIR, path.lstrip('/'))
 
