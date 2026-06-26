@@ -2516,24 +2516,14 @@
                 XLSX.writeFile(wb, `Bao_Cao_Chi_Phi_${dateStr}.xlsx`);
             });
 
-            document.getElementById('btn-export-planner').addEventListener('click', () => {
+            document.getElementById('btn-export-planner').addEventListener('click', async () => {
                 if (!globalTrips || globalTrips.length === 0) {
                     alert('Chưa có dữ liệu tuyến đường để xuất!');
                     return;
                 }
 
-                // Row 1 headers (originally row2)
-                const row1 = [
-                    "Ship code", "Address", "Receive Goods date", "CBM Booking", "Region",
-                    "Province", "District", "Key", "Loading sequences", "Total CBM",
-                    "Trip", "Truck Number", "Driver Name", "SĐT", "Location Receive goods",
-                    "Subcontractor", "Truck type", "Goods Available time", "Register Time", "Time Out ",
-                    "Total Weight (Ton)", "Weight", "PCS", "Buff Number", "Third party loading/ unloading ",
-                    "Key WH", "Stock Out", "Reason delay goods out of WH ", "Sattus", "Split code ",
-                    "Reconciliation", "Blacklist", "Booking number", "KTC"
-                ];
-
-                const aoa = [row1];
+                // Show basic loading info in console
+                console.log('Exporting Excel using Form Xuất Báo Cáo.xlsb template...');
 
                 // Helper to normalize text (remove accents)
                 function removeAccents(str) {
@@ -2567,11 +2557,11 @@
                     };
                 }
 
-                // Get date serial for Column 3
+                // Get date serial for Column 2
                 const dateFilterVal = document.getElementById('global-date-filter').value;
                 let dateStr = dateFilterVal || new Date().toISOString().slice(0, 10);
 
-                // If there's an actual stock out date from the email, use it for "Receive Goods date" in Excel
+                // Check stock out dates
                 if (typeof STOCK_OUT_DATES !== 'undefined' && STOCK_OUT_DATES[dateFilterVal]) {
                     const sOut = STOCK_OUT_DATES[dateFilterVal];
                     let displayOut = '';
@@ -2593,15 +2583,94 @@
                 const excelEpoch = new Date(1899, 11, 30);
                 const serialDate = Math.round((d.getTime() - excelEpoch.getTime()) / (24 * 60 * 60 * 1000));
 
-                let globalTripCounter = 0;
+                const datePartsForMsg = dateStr.split('-');
+                const dd = datePartsForMsg[2];
+                const mm = datePartsForMsg[1];
+                const yyyy = datePartsForMsg[0];
+                const dateFormattedStr = `${dd}-${mm}-${yyyy}`; // DD-MM-YYYY
 
-                globalTrips.forEach((t) => {
+                // 1. Fetch raw booking excel to get detail SO/DO/Qty
+                let rawRows = [];
+                try {
+                    let response = await fetch(`Data_Booking/Booking Supra ${dateFormattedStr}.xlsx`);
+                    if (!response.ok) {
+                        response = await fetch(`Data_Booking/Booking Supra ${dateFormattedStr}.xlsb`);
+                    }
+                    
+                    if (response.ok) {
+                        const arrayBuffer = await response.arrayBuffer();
+                        const rawWb = XLSX.read(new Uint8Array(arrayBuffer), { type: 'array' });
+                        let rawSheet = null;
+                        for (const sName of rawWb.SheetNames) {
+                            const sh = rawWb.Sheets[sName];
+                            const jsonAoa = XLSX.utils.sheet_to_json(sh, {header: 1});
+                            if (jsonAoa.length > 0 && jsonAoa.some(row => row.some(cell => String(cell).toLowerCase().includes('siêu thị')))) {
+                                rawSheet = sh;
+                                break;
+                            }
+                        }
+                        if (!rawSheet) rawSheet = rawWb.Sheets[rawWb.SheetNames[0]];
+                        rawRows = XLSX.utils.sheet_to_json(rawSheet);
+                        console.log(`Loaded ${rawRows.length} raw booking detail rows.`);
+                    } else {
+                        console.warn(`Booking detail file for date ${dateFormattedStr} not found. Fallback to summary mode.`);
+                    }
+                } catch (e) {
+                    console.error('Failed to fetch booking details:', e);
+                }
+
+                // 2. Fetch template 'Form Xuất Báo Cáo.xlsb'
+                let templateWb = null;
+                try {
+                    const response = await fetch('Form Xuất Báo Cáo.xlsb');
+                    if (response.ok) {
+                        const arrayBuffer = await response.arrayBuffer();
+                        templateWb = XLSX.read(new Uint8Array(arrayBuffer), { type: 'array', bookVBA: true });
+                        console.log('Successfully loaded Form Xuất Báo Cáo.xlsb template.');
+                    } else {
+                        console.warn('Form Xuất Báo Cáo.xlsb not found on server.');
+                    }
+                } catch (e) {
+                    console.error('Failed to fetch Form Xuất Báo Cáo.xlsb:', e);
+                }
+
+                // Sort trips: largest capacity first (10T > 8T > 5T > 1.9T)
+                const sortedTrips = [...globalTrips].sort((a, b) => {
+                    const getCapacity = (type) => {
+                        if (!type) return 0;
+                        const match = type.match(/(\d+(\.\d+)?)/);
+                        return match ? parseFloat(match[1]) : 0;
+                    };
+                    return getCapacity(b.truckType) - getCapacity(a.truckType);
+                });
+
+                // Prepare output headers
+                let headers = [
+                    "STT", "Ngày xuất", "Số SO", "Số DO", "Mã siêu thị ", "Tên siêu thị", "Số kiện", "Qty", 
+                    "Tổng PCS/Mã chuyến", "Weight (kg)", "Volume up (m3)", "Tỉnh", "Quận", "Mã giờ", 
+                    "Giờ nhận hàng", "Số điểm giao", "Tổng số kiện xe", "Trọng tải", "Ghi chú", "Chẵn", 
+                    "Gợi ý lot sau", "Ghi chú 2", "Đơn vị vận tải", "Count", "Weight", "Volume", 
+                    "PCS/DROP/Tỉnh", "KG/Lot", "CBM/Lot", "BKS", "Tên Tài Xế", "SĐT"
+                ];
+
+                if (templateWb && templateWb.Sheets['Total']) {
+                    const sh = templateWb.Sheets['Total'];
+                    const existingAoa = XLSX.utils.sheet_to_json(sh, { header: 1 });
+                    if (existingAoa.length > 0) {
+                        headers = existingAoa[0];
+                    }
+                }
+
+                const aoa = [headers];
+                let globalTripCounter = 0;
+                let loadingSeqCounter = 1;
+                let sttCounter = 1;
+
+                sortedTrips.forEach((t) => {
                     globalTripCounter++;
 
-                    // Get all stores for this trip using the shared helper
+                    // 1. Get and sort stores LIFO
                     let stores = window.extractStoresFromTrip(t);
-
-                    // Sort stores in descending order of distance to the Hub (furthest first, closest last)
                     const mqCoords = { lat: 21.3885189, lng: 105.1738604 };
                     let hubCoords = mqCoords;
                     if (typeof HUBS !== 'undefined' && Array.isArray(HUBS)) {
@@ -2617,22 +2686,14 @@
                         let provA = storeGeoA.province;
                         let provB = storeGeoB.province;
 
-                        if (provA === 'Tỉnh Hà Nam' || provA === 'Tỉnh Nam Định') {
-                            provA = 'Tỉnh Hà Nam - Nam Định';
-                        }
-                        if (provB === 'Tỉnh Hà Nam' || provB === 'Tỉnh Nam Định') {
-                            provB = 'Tỉnh Hà Nam - Nam Định';
-                        }
+                        if (provA === 'Tỉnh Hà Nam' || provA === 'Tỉnh Nam Định') provA = 'Tỉnh Hà Nam - Nam Định';
+                        if (provB === 'Tỉnh Hà Nam' || provB === 'Tỉnh Nam Định') provB = 'Tỉnh Hà Nam - Nam Định';
 
-                        // Chuyến trung chuyển: sắp xếp theo thứ tự BỐC hàng (LIFO)
-                        // Hạ GXT Phú Thọ trước -> bốc HY sau (nằm trên) -> HY xếp cuối file
-                        // Hạ GXT Phú Thọ sau -> bốc HN02 trước (nằm dưới) -> HN02 xếp đầu file
                         if (t.tripType === 'Trung chuyển') {
                             const rightProvinces = ['Tỉnh Hà Giang', 'Tỉnh Tuyên Quang', 'Tỉnh Lai Châu', 'Tỉnh Lào Cai', 'Tỉnh Yên Bái', 'Tỉnh Hòa Bình'];
                             const isHN02_A = rightProvinces.includes(provA);
                             const isHN02_B = rightProvinces.includes(provB);
                             if (isHN02_A !== isHN02_B) {
-                                // HN02 (bốc trước) xếp trước trong file, HY (bốc sau) xếp sau
                                 return isHN02_A ? -1 : 1;
                             }
                         }
@@ -2648,16 +2709,14 @@
                         }
 
                         if (idxA !== idxB && idxA !== -1 && idxB !== -1) {
-                            // Thứ tự bốc hàng (LIFO): tỉnh xa nhất bốc trước (dưới xe), tỉnh gần nhất bốc sau (trên xe, hạ trước)
                             return idxB - idxA;
                         }
                         const distA = (a.coords && a.coords.lat) ? calculateDistance(hubCoords, a.coords) : 0;
                         const distB = (b.coords && b.coords.lat) ? calculateDistance(hubCoords, b.coords) : 0;
-                        // Sắp xếp theo thứ tự bốc hàng: xa hub trước (bốc trước), gần hub sau (bốc sau)
                         return distB - distA;
                     });
 
-                    // Static mapping for trips 1 to 5
+                    // 2. Driver mapping
                     const driverMapping = {
                         1: { plate: '29E60370', name: 'HÀ KHẮC TUYÊN', phone: '393886638' },
                         2: { plate: '29K04243', name: 'NGUYỄN VĂN CHIẾN', phone: '363321602' },
@@ -2668,7 +2727,6 @@
 
                     let driverDetails = driverMapping[globalTripCounter];
                     if (!driverDetails) {
-                        // Fallback for > 5 trips
                         const fallbacks = [
                             { plate: '29C55555', name: 'NGUYỄN VĂN A', phone: '901234567' },
                             { plate: '29C66666', name: 'TRẦN VĂN B', phone: '907654321' },
@@ -2678,97 +2736,192 @@
                         driverDetails = fallbacks[(globalTripCounter - 6) % fallbacks.length];
                     }
 
+                    const tripBKS = t.licensePlate || driverDetails.plate;
+                    const tripDriverName = t.driverName || driverDetails.name;
+                    const tripDriverPhone = t.driverPhone || driverDetails.phone;
+
+                    // Code & time formats
+                    const tripNoDigits = String(globalTripCounter).padStart(2, '0');
+                    const rawDateNoDashes = dateFormattedStr.replace(/-/g, ''); // DDMMYYYY
+                    const ddmmyy = rawDateNoDashes.substring(0, 4) + rawDateNoDashes.substring(6, 8); // e.g. 270626
+                    const tripCode = parseInt(ddmmyy + tripNoDigits); // e.g. 27062601
+
+                    function convertTimeToFraction(timeStr) {
+                        if (!timeStr) return 0.3333333333333333; // 8:00 AM
+                        const parts = timeStr.split(':');
+                        if (parts.length < 2) return 0.3333333333333333;
+                        const hours = parseInt(parts[0]) || 0;
+                        const minutes = parseInt(parts[1]) || 0;
+                        return (hours * 60 + minutes) / 1440;
+                    }
+                    const tripTimeFraction = convertTimeToFraction(t.departureTime || '08:00');
+
+                    // Calculate total PCS of the trip for Col 9
+                    const tripTotalPcs = stores.reduce((sum, s) => sum + (s.pcs || 0), 0);
+
+                    // 3. Process each store
                     stores.forEach((store, storeIdx) => {
-                        const isFirstStore = (storeIdx === 0);
+                        const currentChẵn = loadingSeqCounter++;
                         const storeGeo = extractProvinceAndDistrict(store.name, store.address);
 
-                        const row = Array(34).fill('');
-
-                        row[0] = store.id || ''; // Ship code
-                        row[1] = store.name || ''; // Address
-                        row[2] = serialDate; // Receive Goods date
-                        row[3] = store.volume || 0; // CBM Booking
-                        row[4] = store.region || 'North'; // Region
-                        row[5] = removeAccents(storeGeo.province); // Province
-                        row[6] = removeAccents(storeGeo.district); // District
-                        row[7] = removeAccents(storeGeo.province) + removeAccents(storeGeo.district); // Key
-                        row[8] = storeIdx + 1; // Loading sequences
-
-                        // Columns that only appear on the first row of each trip
-                        if (isFirstStore) {
-                            row[9] = t.totalVolume || 0; // Total CBM
-                            row[11] = t.licensePlate || ''; // Truck Number
-                            row[12] = t.driverName || ''; // Driver Name
-                            row[13] = t.driverPhone || ''; // SĐT
-                            row[16] = t.truckType || '8T'; // Truck type
-                            row[17] = ''; // Goods Available time (Empty per request)
-                            row[20] = (t.totalWeight || 0) / 1000; // Total Weight (Ton)
-                        } else {
-                            row[9] = '';
-                            row[11] = '';
-                            row[12] = '';
-                            row[13] = '';
-                            row[16] = '';
-                            row[17] = '';
-                            row[20] = '';
+                        // Find corresponding orders in rawRows (from Data_Booking Excel)
+                        let storeOrders = [];
+                        if (rawRows && rawRows.length > 0) {
+                            storeOrders = rawRows.filter(row => {
+                                const rowStoreId = String(row['Mã siêu thị'] || row['Mã siêu thị '] || row['Site Store'] || '').trim();
+                                const rowStoreName = String(row['Tên siêu thị'] || row['Store Name'] || '').trim().toLowerCase();
+                                
+                                const isIdMatch = rowStoreId && store.id && (rowStoreId.toLowerCase() === store.id.toLowerCase());
+                                const isNameMatch = rowStoreName && store.name && (rowStoreName === store.name.toLowerCase() || store.name.toLowerCase().includes(rowStoreName));
+                                
+                                return isIdMatch || isNameMatch;
+                            });
                         }
 
-                        // Column 11: Trip (Sequential number written on all rows of the trip)
-                        row[10] = globalTripCounter; // Trip
-
-                        // Columns 15, 16: Location Receive goods, Subcontractor (Blank)
-                        row[14] = '';
-                        row[15] = '';
-
-                        // Columns 19, 20: Register Time, Time Out (Blank)
-                        row[18] = '';
-                        row[19] = '';
-
-                        // Store level details
-                        row[21] = store.weight || 0; // Weight
-                        row[22] = store.pcs || 0; // PCS
-                        row[23] = store.buff || ''; // Buff Number
-
-                        // Columns 25 to 33: Blank
-                        row[24] = ''; // Third party loading/ unloading
-                        row[25] = ''; // Key WH
-                        row[26] = ''; // \
-                        row[27] = ''; // Reason delay goods out of WH
-                        row[28] = ''; // Sattus
-                        row[29] = ''; // Split code
-                        row[30] = ''; // Reconciliation
-                        row[31] = ''; // Blacklist
-                        row[32] = ''; // Booking number
-
-                        // Column 34: KTC
-                        let ktcVal = '';
-                        if (t.tripType === 'Trung chuyển') {
-                            const rightProvinces = ['Tỉnh Hà Giang', 'Tỉnh Tuyên Quang', 'Tỉnh Lai Châu', 'Tỉnh Lào Cai', 'Tỉnh Yên Bái', 'Tỉnh Hòa Bình'];
-                            if (rightProvinces.includes(storeGeo.province)) {
-                                ktcVal = 'GXT Phú Thọ';
-                            } else {
-                                ktcVal = 'GXT Phú Thọ';
-                            }
-                        } else {
-                            const group1 = ['Thành Phố Hà Nội', 'Tỉnh Bắc Ninh', 'Tỉnh Hưng Yên', 'Tỉnh Hải Dương'];
-                            if (t.truckType === '1.9T' && group1.includes(storeGeo.province)) {
-                                ktcVal = 'Giao thẳng Store';
-                            } else {
-                                ktcVal = 'Đi thẳng Tỉnh';
-                            }
+                        // Fallback if no matching rows in the raw booking excel
+                        if (storeOrders.length === 0) {
+                            storeOrders = [{
+                                'Số SO': '',
+                                'Số DO': '',
+                                'Weight (kg)': store.weight || 0,
+                                'Volume up (m3)': store.volume || 0,
+                                'Qty': store.qty || 0,
+                                'Số kiện': store.pcs || 0
+                            }];
                         }
-                        row[33] = ktcVal; // KTC
 
-                        aoa.push(row);
+                        // Calculate total store weight & volume for columns 10, 11
+                        const totalStoreWeight = storeOrders.reduce((sum, o) => {
+                            const val = o['Weight (kg)'] || o['Weight'] || o['weight'] || 0;
+                            return sum + (parseFloat(val) || 0);
+                        }, 0);
+
+                        const totalStoreVolume = storeOrders.reduce((sum, o) => {
+                            const val = o['Volume up (m3)'] || o['Volume'] || o['volume'] || 0;
+                            return sum + (parseFloat(val) || 0);
+                        }, 0);
+
+                        // Write rows for each order of this store
+                        storeOrders.forEach((o, oIdx) => {
+                            const row = Array(32).fill('');
+
+                            const isFirstRowOfTrip = (storeIdx === 0 && oIdx === 0);
+                            const isFirstRowOfStore = (oIdx === 0);
+
+                            const orderSO = o['Số SO'] || o['Số SO'] || o['so'] || '';
+                            const orderDO = o['Số DO'] || o['Số DO'] || o['do'] || '';
+                            
+                            const orderPcs = o['Số kiện'] || o['Số kiện'] || o['Pcs'] || o['pcs'] || 0;
+                            const orderQty = o['Qty'] || o['qty'] || 0;
+                            const orderWeight = o['Weight (kg)'] || o['Weight'] || o['weight'] || 0;
+                            const orderVolume = o['Volume up (m3)'] || o['Volume'] || o['volume'] || 0;
+
+                            row[0] = sttCounter++; // STT
+                            row[1] = serialDate; // Ngày xuất
+                            row[2] = orderSO; // Số SO
+                            row[3] = orderDO; // Số DO
+                            row[4] = store.id || ''; // Mã siêu thị 
+                            row[5] = store.name || ''; // Tên siêu thị
+                            row[6] = parseFloat(orderPcs) || 0; // Số kiện
+                            row[7] = parseFloat(orderQty) || 0; // Qty
+
+                            if (isFirstRowOfTrip) {
+                                row[8] = parseFloat(tripTotalPcs) || 0; // Tổng PCS/Mã chuyến
+                            } else {
+                                row[8] = '';
+                            }
+
+                            if (isFirstRowOfStore) {
+                                row[9] = parseFloat(totalStoreWeight) || 0; // Weight (kg)
+                                row[10] = parseFloat(totalStoreVolume) || 0; // Volume up (m3)
+                            } else {
+                                row[9] = '';
+                                row[10] = '';
+                            }
+
+                            row[11] = storeGeo.province || ''; // Tỉnh
+                            row[12] = storeGeo.district || ''; // Quận
+                            row[13] = tripCode; // Mã giờ
+                            row[14] = tripTimeFraction; // Giờ nhận hàng
+
+                            if (isFirstRowOfTrip) {
+                                row[15] = stores.length; // Số điểm giao
+                                row[16] = ''; // Tổng số kiện xe (Empty)
+                                row[17] = parseFloat(t.truckType) || 1.9; // Trọng tải
+                            } else {
+                                row[15] = '';
+                                row[16] = '';
+                                row[17] = '';
+                            }
+
+                            row[18] = ''; // Ghi chú
+                            row[19] = currentChẵn; // Chẵn
+                            row[20] = ''; // Gợi ý lot sau
+                            row[21] = `xe ${globalTripCounter}`; // Ghi chú 2
+                            row[22] = 'GHN'; // Đơn vị vận tải
+                            row[23] = isFirstRowOfStore ? 1 : 0; // Count
+                            row[24] = parseFloat(orderWeight) || 0; // Weight
+                            row[25] = parseFloat(orderVolume) || 0; // Volume
+                            row[26] = ''; // PCS/DROP/Tỉnh
+
+                            if (isFirstRowOfTrip) {
+                                row[27] = t.totalWeight || 0; // KG/Lot
+                                row[28] = t.totalVolume || 0; // CBM/Lot
+                            } else {
+                                row[27] = '';
+                                row[28] = '';
+                            }
+
+                            row[29] = tripBKS; // BKS
+                            row[30] = tripDriverName; // Tên Tài Xế
+                            row[31] = tripDriverPhone; // SĐT
+
+                            aoa.push(row);
+                        });
                     });
                 });
 
-                const ws = XLSX.utils.aoa_to_sheet(aoa);
-                const wb = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(wb, ws, "Form");
-
+                // Write output workbook
+                let outWorkbook = XLSX.utils.book_new();
                 const fileDateStr = dateStr.replace(/-/g, '');
-                XLSX.writeFile(wb, `TuyenCC_${fileDateStr}.xlsx`);
+
+                if (templateWb && templateWb.Sheets['Total']) {
+                    outWorkbook = templateWb;
+                    const totalSheet = outWorkbook.Sheets['Total'];
+
+                    // 1. Clear old data from row 2 onwards (preserve format/styles)
+                    Object.keys(totalSheet).forEach(key => {
+                        if (key[0] === '!') return; // Keep meta keys like !ref, !cols
+                        const rowNum = parseInt(key.replace(/^[A-Z]+/i, ''));
+                        if (rowNum >= 2) {
+                            delete totalSheet[key];
+                        }
+                    });
+
+                    // 2. Add new data aoa starting at A1 (this overlays the headers and places all rows)
+                    XLSX.utils.sheet_add_aoa(totalSheet, aoa, { origin: "A1" });
+
+                    // 3. Update the sheet range
+                    const maxRow = aoa.length;
+                    totalSheet['!ref'] = `A1:AF${maxRow}`;
+
+                    // 4. Save and write macro-preserved .xlsb
+                    const wbout = XLSX.write(outWorkbook, { bookType: 'xlsb', bookVBA: true, type: 'array' });
+                    const blob = new Blob([wbout], { type: 'application/octet-stream' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `TuyenCC_${fileDateStr}.xlsb`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                } else {
+                    // Fallback to standard xlsx if no template could be fetched
+                    const ws = XLSX.utils.aoa_to_sheet(aoa);
+                    XLSX.utils.book_append_sheet(outWorkbook, ws, "Form");
+                    XLSX.writeFile(outWorkbook, `TuyenCC_${fileDateStr}.xlsx`);
+                }
             });
 
             const btnExportNcc = document.getElementById('btn-export-ncc');
