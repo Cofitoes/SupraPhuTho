@@ -258,6 +258,10 @@ function generateTrips() {
             const limit = 20; // Mới nhất: tối đa 20 điểm giao
             let added = true;
             
+            // Calculate seed round trip distance to set allowed distance limit for this trip
+            const seedRT = calculateDistance(hubDC.coords, seed.coords) * 2;
+            const allowedLimit = Math.max(120, seedRT + 15); // Strict 120km limit, but allow far seeds + 15km buffer
+            
             while (added && chunk.length < limit) {
                 added = false;
                 let nearestIdx = -1, minDist = Infinity;
@@ -268,7 +272,24 @@ function generateTrips() {
                     if (cw + (p.weight || 0) <= chunkMaxW && cv + (p.volume || 0) <= chunkMaxV) {
                         // Greedily pick nearest point to the last point in chunk
                         const d = calculateDistance(chunk[chunk.length - 1].coords, p.coords);
-                        if (d < minDist) { minDist = d; nearestIdx = i; }
+                        
+                        // Check if adding this point keeps the trip round-trip distance within limits
+                        const prospectivePoints = [...chunk, p];
+                        const tsp = solveTSP(hubDC, prospectivePoints);
+                        let prospectiveDist = 0;
+                        let last = hubDC;
+                        tsp.sequence.forEach(pt => {
+                            prospectiveDist += calculateDistance(last.coords, pt.coords);
+                            last = pt;
+                        });
+                        prospectiveDist += calculateDistance(last.coords, hubDC.coords);
+                        
+                        if (prospectiveDist <= allowedLimit) {
+                            if (d < minDist) {
+                                minDist = d;
+                                nearestIdx = i;
+                            }
+                        }
                     }
                 }
                 
