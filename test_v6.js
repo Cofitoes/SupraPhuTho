@@ -255,7 +255,7 @@ function generateTrips() {
                 chunkMaxV = TRUCK_LIMITS['5T'].maxV;
             }
 
-            const limit = 15; // Mới nhất: tối đa 15 điểm giao
+            const limit = 20; // Mới nhất: tối đa 20 điểm giao
             let added = true;
             
             while (added && chunk.length < limit) {

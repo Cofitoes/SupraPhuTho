@@ -3673,7 +3673,7 @@
                 let bgColor = pct < 50 ? 'rgba(239, 68, 68, 0.1)' : (pct < 80 ? 'rgba(245, 158, 11, 0.1)' : 'rgba(16, 185, 129, 0.1)');
                 let textColor = pct < 50 ? 'var(--delayed)' : (pct < 80 ? '#fbbf24' : 'var(--on-time)');
 
-                const maxW = (t.truckType === '1.9T') ? 1900 : (t.truckType === '5T' ? 5000 : (t.truckType === '8T' ? 7400 : 7400));
+                const maxW = (t.truckType === '1.9T') ? 1900 : (t.truckType === '5T' ? 5000 : (t.truckType === '8T' ? 6800 : 6800));
                 const wPct = Math.min(100, Math.round((t.totalWeight / maxW) * 100));
                 let wBgColor = wPct < 50 ? 'rgba(239, 68, 68, 0.1)' : (wPct < 80 ? 'rgba(245, 158, 11, 0.1)' : 'rgba(16, 185, 129, 0.1)');
                 let wTextColor = wPct < 50 ? 'var(--delayed)' : (wPct < 80 ? '#fbbf24' : 'var(--on-time)');
@@ -3745,7 +3745,7 @@
             const row = input.closest('tr');
             const weight = parseFloat(input.value) || 0;
             const truckType = input.dataset.truck || '8T';
-            const maxWeight = (truckType === '1.9T') ? 1900 : (truckType === '5T' ? 5000 : (truckType === '8T' ? 7400 : 7400));
+            const maxWeight = (truckType === '1.9T') ? 1900 : (truckType === '5T' ? 5000 : (truckType === '8T' ? 6800 : 6800));
             const pct = Math.min(100, Math.round((weight / maxWeight) * 100));
             const statusCell = row.querySelector('.weight-rate-status');
             let bgColor = pct < 50 ? 'rgba(239, 68, 68, 0.1)' : (pct < 80 ? 'rgba(245, 158, 11, 0.1)' : 'rgba(16, 185, 129, 0.1)');
