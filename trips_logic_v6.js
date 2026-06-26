@@ -287,109 +287,141 @@ function generateTrips() {
     // STEP 2: DIRECT DELIVERY (Giao thẳng)
     // ========================================
     if (directPoints.length > 0) {
-        let remaining = [...directPoints];
-        let directTrips = [];
+        const runDirectPlanning = (multiplier) => {
+            // Reset sequential trip ID counter so IDs are assigned sequentially for the chosen plan
+            tripCounter = 0;
+            let directTrips = [];
+            let remaining = [...directPoints];
 
-        while (remaining.length > 0) {
-            // Find farthest point as seed
-            let seedIdx = 0;
-            let maxDist = -1;
-            for (let i = 0; i < remaining.length; i++) {
-                const d = calculateDistance(hubDC.coords, remaining[i].coords);
-                if (d > maxDist) { maxDist = d; seedIdx = i; }
-            }
-
-            const seed = remaining[seedIdx];
-            let chunk = [seed];
-            remaining.splice(seedIdx, 1);
-
-            let cw = seed.weight || 0;
-            let cv = seed.volume || 0;
-
-            // Logic: Base limit is 1.9T.
-            // As per the rule: if a supermarket has cargo = 1.5 of 1.9T (>= 2850kg or >= 21 CBM), we can use a 5T truck.
-            // Also, if the store cargo strictly exceeds a single 1.9T truck, we must use a 5T truck.
-            let chunkMaxW = TRUCK_LIMITS['1.9T'].maxWAllowed;
-            let chunkMaxV = TRUCK_LIMITS['1.9T'].maxV;
-            
-            const thresholdW = TRUCK_LIMITS['1.9T'].maxW * 1.5; // 2850
-            const thresholdV = TRUCK_LIMITS['1.9T'].maxV * 1.5; // 21
-            
-            if (seed.weight >= thresholdW || seed.volume >= thresholdV) {
-                chunkMaxW = TRUCK_LIMITS['5T'].maxWAllowed;
-                chunkMaxV = TRUCK_LIMITS['5T'].maxV;
-            } else if (seed.weight > TRUCK_LIMITS['1.9T'].maxWAllowed || seed.volume > TRUCK_LIMITS['1.9T'].maxV) {
-                chunkMaxW = TRUCK_LIMITS['5T'].maxWAllowed;
-                chunkMaxV = TRUCK_LIMITS['5T'].maxV;
-            }
-
-            const limit = 20; // Mới nhất: tối đa 20 điểm giao
-            let added = true;
-            
-            // Calculate seed round trip distance to set allowed distance limit for this trip
-            const seedRT = calculateDistance(hubDC.coords, seed.coords) * 2;
-            
-            // Calculate base cost details of seed to get minimum extra cost
-            const seedCost = getTripCostDetails('1.9T', seedRT, seed.weight || 0, 'Đi thẳng');
-            const seedExtraCost = seedCost.extraCost || 0;
-            // Extra cost must not exceed 1,200,000 VND, unless the seed itself already exceeds it
-            const allowedExtraCostLimit = Math.max(1200000, seedExtraCost);
-            
-            while (added && chunk.length < limit) {
-                added = false;
-                let nearestIdx = -1, minDist = Infinity;
-                
+            while (remaining.length > 0) {
+                // Find farthest point as seed
+                let seedIdx = 0;
+                let maxDist = -1;
                 for (let i = 0; i < remaining.length; i++) {
-                    const p = remaining[i];
+                    const d = calculateDistance(hubDC.coords, remaining[i].coords);
+                    if (d > maxDist) { maxDist = d; seedIdx = i; }
+                }
+
+                const seed = remaining[seedIdx];
+                let chunk = [seed];
+                remaining.splice(seedIdx, 1);
+
+                let cw = seed.weight || 0;
+                let cv = seed.volume || 0;
+
+                // Logic: Base limit is 1.9T.
+                // As per the rule: if a supermarket has cargo = 1.5 of 1.9T (>= 2850kg or >= 21 CBM), we can use a 5T truck.
+                // Also, if the store cargo strictly exceeds a single 1.9T truck, we must use a 5T truck.
+                let chunkMaxW = TRUCK_LIMITS['1.9T'].maxWAllowed;
+                let chunkMaxV = TRUCK_LIMITS['1.9T'].maxV;
+                
+                const thresholdW = TRUCK_LIMITS['1.9T'].maxW * 1.5; // 2850
+                const thresholdV = TRUCK_LIMITS['1.9T'].maxV * 1.5; // 21
+                
+                if (seed.weight >= thresholdW || seed.volume >= thresholdV) {
+                    chunkMaxW = TRUCK_LIMITS['5T'].maxWAllowed;
+                    chunkMaxV = TRUCK_LIMITS['5T'].maxV;
+                } else if (seed.weight > TRUCK_LIMITS['1.9T'].maxWAllowed || seed.volume > TRUCK_LIMITS['1.9T'].maxV) {
+                    chunkMaxW = TRUCK_LIMITS['5T'].maxWAllowed;
+                    chunkMaxV = TRUCK_LIMITS['5T'].maxV;
+                }
+
+                // Apply multiplier to scale down capacity limits and force split
+                chunkMaxW *= multiplier;
+                chunkMaxV *= multiplier;
+
+                const limit = 20; // Mới nhất: tối đa 20 điểm giao
+                const currentLimit = Math.max(1, Math.floor(limit * multiplier));
+                let added = true;
+                
+                // Calculate seed round trip distance to set allowed distance limit for this trip
+                const seedRT = calculateDistance(hubDC.coords, seed.coords) * 2;
+                
+                // Calculate base cost details of seed to get minimum extra cost
+                const seedCost = getTripCostDetails('1.9T', seedRT, seed.weight || 0, 'Đi thẳng');
+                const seedExtraCost = seedCost.extraCost || 0;
+                // Extra cost must not exceed 1,200,000 VND, unless the seed itself already exceeds it
+                const allowedExtraCostLimit = Math.max(1200000, seedExtraCost);
+                
+                while (added && chunk.length < currentLimit) {
+                    added = false;
+                    let nearestIdx = -1, minDist = Infinity;
                     
-                    if (cw + (p.weight || 0) <= chunkMaxW && cv + (p.volume || 0) <= chunkMaxV) {
-                        // Greedily pick nearest point to the last point in chunk
-                        const d = calculateDistance(chunk[chunk.length - 1].coords, p.coords);
+                    for (let i = 0; i < remaining.length; i++) {
+                        const p = remaining[i];
                         
-                        // Check prospective round trip distance
-                        const prospectivePoints = [...chunk, p];
-                        const tsp = solveTSP(hubDC, prospectivePoints);
-                        let prospectiveDist = 0;
-                        let last = hubDC;
-                        tsp.sequence.forEach(pt => {
-                            prospectiveDist += calculateDistance(last.coords, pt.coords);
-                            last = pt;
-                        });
-                        prospectiveDist += calculateDistance(last.coords, hubDC.coords);
-                        
-                        // Check prospective extra cost
-                        const prospectiveTruckType = (cw + (p.weight || 0) > TRUCK_LIMITS['1.9T'].maxWAllowed || cv + (p.volume || 0) > TRUCK_LIMITS['1.9T'].maxV) ? '5T' : '1.9T';
-                        const prospectiveCost = getTripCostDetails(prospectiveTruckType, prospectiveDist, cw + (p.weight || 0), 'Đi thẳng');
-                        
-                        // Enforce trip limit of 120km soft constraint and extra cost limit
-                        if (prospectiveDist <= 120 || prospectiveCost.extraCost <= allowedExtraCostLimit) {
-                            if (d < minDist) {
-                                minDist = d;
-                                nearestIdx = i;
+                        if (cw + (p.weight || 0) <= chunkMaxW && cv + (p.volume || 0) <= chunkMaxV) {
+                            // Greedily pick nearest point to the last point in chunk
+                            const d = calculateDistance(chunk[chunk.length - 1].coords, p.coords);
+                            
+                            // Check prospective round trip distance
+                            const prospectivePoints = [...chunk, p];
+                            const tsp = solveTSP(hubDC, prospectivePoints);
+                            let prospectiveDist = 0;
+                            let last = hubDC;
+                            tsp.sequence.forEach(pt => {
+                                prospectiveDist += calculateDistance(last.coords, pt.coords);
+                                last = pt;
+                            });
+                            prospectiveDist += calculateDistance(last.coords, hubDC.coords);
+                            
+                            // Check prospective extra cost
+                            const prospectiveTruckType = (cw + (p.weight || 0) > TRUCK_LIMITS['1.9T'].maxWAllowed || cv + (p.volume || 0) > TRUCK_LIMITS['1.9T'].maxV) ? '5T' : '1.9T';
+                            const prospectiveCost = getTripCostDetails(prospectiveTruckType, prospectiveDist, cw + (p.weight || 0), 'Đi thẳng');
+                            
+                            // Enforce trip limit of 120km soft constraint and extra cost limit
+                            if (prospectiveDist <= 120 || prospectiveCost.extraCost <= allowedExtraCostLimit) {
+                                if (d < minDist) {
+                                    minDist = d;
+                                    nearestIdx = i;
+                                }
                             }
                         }
                     }
+                    
+                    if (nearestIdx !== -1) {
+                        const p = remaining[nearestIdx];
+                        cw += p.weight || 0; cv += p.volume || 0;
+                        chunk.push(p);
+                        remaining.splice(nearestIdx, 1);
+                        added = true;
+                    }
                 }
                 
-                if (nearestIdx !== -1) {
-                    const p = remaining[nearestIdx];
-                    cw += p.weight || 0; cv += p.volume || 0;
-                    chunk.push(p);
-                    remaining.splice(nearestIdx, 1);
-                    added = true;
+                // Build the trip
+                let truckType = '1.9T';
+                if (cw >= thresholdW || cv >= thresholdV) {
+                    truckType = '5T';
+                } else if (cw > TRUCK_LIMITS['1.9T'].maxWAllowed || cv > TRUCK_LIMITS['1.9T'].maxV) {
+                    truckType = '5T';
                 }
+                
+                const trip = createDirectTrip(chunk, hubDC, truckType);
+                directTrips.push(trip);
             }
-            
-            // Build the trip
-            let truckType = '1.9T';
-            if (cw >= thresholdW || cv >= thresholdV) {
-                truckType = '5T';
-            } else if (cw > TRUCK_LIMITS['1.9T'].maxWAllowed || cv > TRUCK_LIMITS['1.9T'].maxV) {
-                truckType = '5T';
+
+            return directTrips;
+        };
+
+        // Run initial planning with full capacity (multiplier = 1.0)
+        let directTrips = runDirectPlanning(1.0);
+
+        // Sum extra km cost across all generated direct trips
+        let totalExtraCost = directTrips.reduce((sum, t) => sum + (t.costExtraKm || 0), 0);
+
+        // If total extra km cost exceeds 1,700,000 VND, run feedback loop to split off at least 1 more truck
+        if (totalExtraCost > 1700000) {
+            const initialTripsCount = directTrips.length;
+            let multiplier = 0.95;
+            while (multiplier >= 0.5) {
+                const newDirectTrips = runDirectPlanning(multiplier);
+                if (newDirectTrips.length >= initialTripsCount + 1) {
+                    directTrips = newDirectTrips;
+                    console.log(`Split trip successfully with multiplier = ${multiplier}. Total vehicles increased from ${initialTripsCount} to ${newDirectTrips.length}`);
+                    break;
+                }
+                multiplier -= 0.05;
             }
-            
-            const trip = createDirectTrip(chunk, hubDC, truckType);
-            directTrips.push(trip);
         }
 
         // Sort direct delivery trips in ascending order of round-trip distance (from nearest to farthest)
