@@ -38,9 +38,9 @@ function generateTrips() {
 
     // --- TRUCK LIMITS ---
     const TRUCK_LIMITS = {
-        '1.9T': { maxW: 1900, maxV: 14 },
-        '5T': { maxW: 5000, maxV: 26 }, // As per Logic_Chia_Tuyen.docx: 5000kg
-        '8T': { maxW: 6800, maxV: 55 }
+        '1.9T': { maxW: 1900, maxWAllowed: 1900 * 1.1, maxV: 14 },
+        '5T': { maxW: 5000, maxWAllowed: 5000 * 1.1, maxV: 26 }, // As per Logic_Chia_Tuyen.docx: 5000kg
+        '8T': { maxW: 6800, maxWAllowed: 6800 * 1.1, maxV: 55 }
     };
 
     // --- HELPER FUNCTIONS ---
@@ -226,7 +226,7 @@ function generateTrips() {
             // Try to pack up to 8T limit
             while (remainingGXT.length > 0) {
                 const p = remainingGXT[0];
-                if (w + (p.weight || 0) <= TRUCK_LIMITS['8T'].maxW && v + (p.volume || 0) <= TRUCK_LIMITS['8T'].maxV) {
+                if (w + (p.weight || 0) <= TRUCK_LIMITS['8T'].maxWAllowed && v + (p.volume || 0) <= TRUCK_LIMITS['8T'].maxV) {
                     chunk.push(p);
                     w += (p.weight || 0);
                     v += (p.volume || 0);
@@ -238,8 +238,8 @@ function generateTrips() {
 
             // Determine best truck type for this chunk
             let truckType = '8T';
-            if (w <= TRUCK_LIMITS['5T'].maxW && v <= TRUCK_LIMITS['5T'].maxV) truckType = '5T';
-            if (w <= TRUCK_LIMITS['1.9T'].maxW && v <= TRUCK_LIMITS['1.9T'].maxV) truckType = '1.9T';
+            if (w <= TRUCK_LIMITS['5T'].maxWAllowed && v <= TRUCK_LIMITS['5T'].maxV) truckType = '5T';
+            if (w <= TRUCK_LIMITS['1.9T'].maxWAllowed && v <= TRUCK_LIMITS['1.9T'].maxV) truckType = '1.9T';
 
             const weightInTons = parseFloat((w / 1000).toFixed(2));
             
@@ -309,17 +309,17 @@ function generateTrips() {
             // Logic: Base limit is 1.9T.
             // As per the rule: if a supermarket has cargo = 1.5 of 1.9T (>= 2850kg or >= 21 CBM), we can use a 5T truck.
             // Also, if the store cargo strictly exceeds a single 1.9T truck, we must use a 5T truck.
-            let chunkMaxW = TRUCK_LIMITS['1.9T'].maxW;
+            let chunkMaxW = TRUCK_LIMITS['1.9T'].maxWAllowed;
             let chunkMaxV = TRUCK_LIMITS['1.9T'].maxV;
             
             const thresholdW = TRUCK_LIMITS['1.9T'].maxW * 1.5; // 2850
             const thresholdV = TRUCK_LIMITS['1.9T'].maxV * 1.5; // 21
             
             if (seed.weight >= thresholdW || seed.volume >= thresholdV) {
-                chunkMaxW = TRUCK_LIMITS['5T'].maxW;
+                chunkMaxW = TRUCK_LIMITS['5T'].maxWAllowed;
                 chunkMaxV = TRUCK_LIMITS['5T'].maxV;
-            } else if (seed.weight > TRUCK_LIMITS['1.9T'].maxW || seed.volume > TRUCK_LIMITS['1.9T'].maxV) {
-                chunkMaxW = TRUCK_LIMITS['5T'].maxW;
+            } else if (seed.weight > TRUCK_LIMITS['1.9T'].maxWAllowed || seed.volume > TRUCK_LIMITS['1.9T'].maxV) {
+                chunkMaxW = TRUCK_LIMITS['5T'].maxWAllowed;
                 chunkMaxV = TRUCK_LIMITS['5T'].maxV;
             }
 
@@ -358,7 +358,7 @@ function generateTrips() {
                         prospectiveDist += calculateDistance(last.coords, hubDC.coords);
                         
                         // Check prospective extra cost
-                        const prospectiveTruckType = (cw + (p.weight || 0) > TRUCK_LIMITS['1.9T'].maxW || cv + (p.volume || 0) > TRUCK_LIMITS['1.9T'].maxV) ? '5T' : '1.9T';
+                        const prospectiveTruckType = (cw + (p.weight || 0) > TRUCK_LIMITS['1.9T'].maxWAllowed || cv + (p.volume || 0) > TRUCK_LIMITS['1.9T'].maxV) ? '5T' : '1.9T';
                         const prospectiveCost = getTripCostDetails(prospectiveTruckType, prospectiveDist, cw + (p.weight || 0), 'Đi thẳng');
                         
                         // Enforce trip limit of 120km soft constraint and extra cost limit
@@ -384,7 +384,7 @@ function generateTrips() {
             let truckType = '1.9T';
             if (cw >= thresholdW || cv >= thresholdV) {
                 truckType = '5T';
-            } else if (cw > TRUCK_LIMITS['1.9T'].maxW || cv > TRUCK_LIMITS['1.9T'].maxV) {
+            } else if (cw > TRUCK_LIMITS['1.9T'].maxWAllowed || cv > TRUCK_LIMITS['1.9T'].maxV) {
                 truckType = '5T';
             }
             
