@@ -3190,6 +3190,7 @@
                     let uniqueGhns = '';
 
                     const storesList = typeof window.extractStoresFromTrip === 'function' ? window.extractStoresFromTrip(t) : [];
+                    const activeDate = t.date || (document.getElementById('ghn-booking-date') ? document.getElementById('ghn-booking-date').value : '');
 
                     let doList = [];
                     let ghnList = [];
@@ -3202,11 +3203,11 @@
                                 const isStoreMatch = (item['MÃ CỬA HÀNG'] && s.id && String(item['MÃ CỬA HÀNG']).trim() === String(s.id).trim());
                                 if (!isStoreMatch) return false;
                                 
-                                if (t.date && item['Ngày xuất']) {
+                                if (activeDate && item['Ngày xuất']) {
                                     const parts = item['Ngày xuất'].split('/');
                                     if (parts.length === 3) {
                                         const normalizedDate = `${parts[2]}-${parts[1].padStart(2, '0')}-${parts[0].padStart(2, '0')}`;
-                                        return normalizedDate === t.date;
+                                        return normalizedDate === activeDate;
                                     }
                                 }
                                 return false;
@@ -3220,8 +3221,8 @@
                             });
                         } else {
                             // 2. Try matching against local STORE_GHN_SO_DATA fallback
-                            if (typeof STORE_GHN_SO_DATA !== 'undefined' && t.date && STORE_GHN_SO_DATA[t.date]) {
-                                const dayData = STORE_GHN_SO_DATA[t.date];
+                            if (typeof STORE_GHN_SO_DATA !== 'undefined' && activeDate && STORE_GHN_SO_DATA[activeDate]) {
+                                const dayData = STORE_GHN_SO_DATA[activeDate];
                                 const storeKey = Object.keys(dayData).find(k => k === s.name || k.includes(s.name) || s.name.includes(k));
                                 if (storeKey) {
                                     const localGhns = dayData[storeKey]['ghn'] || [];
