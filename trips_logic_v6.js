@@ -208,41 +208,44 @@ function generateTrips() {
     // STEP 1: TRANSIT (Trung chuyển) - GXT stores
     // ========================================
     if (gxtPoints.length > 0) {
-        const totalGxtW = gxtPoints.reduce((sum, p) => sum + (p.weight || 0), 0);
-        const totalGxtV = gxtPoints.reduce((sum, p) => sum + (p.volume || 0), 0);
-
-        // Calculate direct distance DC -> GXT
         const distToGXT = calculateDistance(hubDC.coords, hubGXT.coords);
         const distFloat = parseFloat((distToGXT * 2).toFixed(2)); // Round trip
 
-        // Pack into chunks fitting 8T, then 5T, then 1.9T sequentially
-        let remainingGXT = [...gxtPoints];
-        let tcCounter = 1;
-
-        while (remainingGXT.length > 0) {
-            let chunk = [];
-            let w = 0, v = 0;
-            
-            // Try to pack up to 8T limit
-            while (remainingGXT.length > 0) {
-                const p = remainingGXT[0];
-                if (w + (p.weight || 0) <= TRUCK_LIMITS['8T'].maxWAllowed && v + (p.volume || 0) <= TRUCK_LIMITS['8T'].maxV) {
-                    chunk.push(p);
-                    w += (p.weight || 0);
-                    v += (p.volume || 0);
-                    remainingGXT.shift();
-                } else {
-                    break; // Move to next truck
+        // Pack GXT points into chunks using First-Fit Decreasing (FFD) bin packing
+        const sortedGxt = [...gxtPoints].sort((a, b) => (b.weight || 0) - (a.weight || 0));
+        let chunks = [];
+        sortedGxt.forEach(p => {
+            let packed = false;
+            for (let i = 0; i < chunks.length; i++) {
+                let c = chunks[i];
+                if (c.w + (p.weight || 0) <= TRUCK_LIMITS['8T'].maxWAllowed && c.v + (p.volume || 0) <= TRUCK_LIMITS['8T'].maxV) {
+                    c.points.push(p);
+                    c.w += (p.weight || 0);
+                    c.v += (p.volume || 0);
+                    packed = true;
+                    break;
                 }
             }
+            if (!packed) {
+                chunks.push({
+                    points: [p],
+                    w: (p.weight || 0),
+                    v: (p.volume || 0)
+                });
+            }
+        });
 
+        let tcCounter = 1;
+        chunks.forEach(chunk => {
+            const w = chunk.w;
+            const v = chunk.v;
+            
             // Determine best truck type for this chunk
             let truckType = '8T';
             if (w <= TRUCK_LIMITS['5T'].maxWAllowed && v <= TRUCK_LIMITS['5T'].maxV) truckType = '5T';
             if (w <= TRUCK_LIMITS['1.9T'].maxWAllowed && v <= TRUCK_LIMITS['1.9T'].maxV) truckType = '1.9T';
 
             const weightInTons = parseFloat((w / 1000).toFixed(2));
-            
             const costDetails = getTripCostDetails(truckType, distFloat, w, 'Trung chuyển');
             
             const trip = {
@@ -269,7 +272,7 @@ function generateTrips() {
                         arrival: CONFIG.START_TIME,
                         type: 'HUB_DELIVERY',
                         isPoint: true,
-                        originalPoints: chunk.map(p => p.name)
+                        originalPoints: chunk.points.map(p => p.name)
                     },
                     {
                         name: 'Kho DC Win Phú Thọ',
@@ -281,7 +284,7 @@ function generateTrips() {
             };
             trips.push(trip);
             tcCounter++;
-        }
+        });
     }
 
     // ========================================
