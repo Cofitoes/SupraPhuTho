@@ -1,1 +1,1 @@
-﻿window.UPDATE_STATUS = {"status":"running","timestamp":"2026-06-27 23:40:49","message":"","step":"Dang quet email va tai gio xuat xac nhan...","progress":20};
+﻿window.UPDATE_STATUS = {"status":"error","timestamp":"2026-06-27 23:41:18","message":"Mot tien trinh cap nhat khac (PID 30068) dang chay. Vui long doi.","step":"Loi trung lap tien trinh","progress":0};
