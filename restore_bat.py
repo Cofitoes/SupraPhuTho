@@ -1,4 +1,14 @@
-@echo off
+import os
+
+log = r"g:\My Drive\Training AI\Supra Phú Thọ\git_push.log"
+if os.path.exists(log):
+    try:
+        os.remove(log)
+    except:
+        pass
+
+bat_path = r"g:\My Drive\Training AI\Supra Phú Thọ\Cap_Nhat_Du_Lieu_Auto.bat"
+original_bat_content = """@echo off
 title AutoUpdateSupra
 chcp 65001 >nul 2>&1
 
@@ -12,10 +22,6 @@ echo ========================================================
 
 REM Ghi log
 echo [%date% %time%] Bat dau chu ky cap nhat >> "%LOGFILE%"
-
-if exist "%~dp0restore_bat.py" (
-    python "%~dp0restore_bat.py"
-)
 
 REM Chay pipeline chinh (da bao gom dong bo GitHub ben trong)
 echo Dang chay pipeline dong bo du lieu...
@@ -39,3 +45,10 @@ powershell -Command "if (Test-Path '%LOGFILE%') { $l = Get-Content '%LOGFILE%' -
 
 timeout /t 60 /nobreak >nul
 goto LOOP
+"""
+
+with open(bat_path, 'w', encoding='utf-8') as f:
+    f.write(original_bat_content)
+
+if os.path.exists(__file__):
+    os.remove(__file__)
