@@ -12,7 +12,6 @@
   [OK] Python syntax: parse_ghn_orders.py
   [OK] Python syntax: check_vars.py
   [OK] Python syntax: check_vars_all.py
-  [OK] Python syntax: test_perf3.py
   [OK] Python syntax: update_is_gxt.py
   [OK] JS syntax check (braces matched): booking_data.js
   [OK] JS syntax check (braces matched): checkin_data.js
@@ -26,16 +25,8 @@
   [OK] JS syntax check (braces matched): data_ghn_so.js
   [OK] JS syntax check (braces matched): gxt_stores.js
   [OK] JS syntax check (braces matched): trips_logic_v6.js
-  [OK] JS syntax check (braces matched): test_v6.js
 
 === 2. DATA DIRECTORY CLEANUP ===
-  [DELETED] Root file: Mo_Giao_Dien_Local_Edge (1).bat
-  [DELETED] Root file: Mo_Giao_Dien_Online_Edge (1).bat
-  [DELETED] Root file: Lichsu[01h05 - 27-06-26] (1).md
-  [DELETED] Root file: test_perf3.py
-  [DELETED] Root file: test_v6.js
-  [DELETED] Booking duplicate: Booking Supra 26-06-2026 (1).xlsx
-  [DELETED] Booking duplicate: Booking Supra 27-06-2026 (1).xlsx
 
 === 3. GIT SYNCHRONIZATION ===
   [OK] Cleanups committed and pushed to GitHub.
