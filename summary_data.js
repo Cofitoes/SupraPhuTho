@@ -100,5 +100,11 @@ const BOOKING_SUMMARY = [
     "storeCount": 113,
     "totalVolume": 30.96902335995138,
     "totalWeight": 10249.777541666666
+  },
+  {
+    "date": "2026-06-29",
+    "storeCount": 118,
+    "totalVolume": 152.24654361221098,
+    "totalWeight": 50943.00213712845
   }
 ];

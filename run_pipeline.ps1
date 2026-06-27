@@ -1,6 +1,14 @@
 Set-Location $PSScriptRoot
 $ErrorActionPreference = "Stop"
 
+try {
+    if (Test-Path "copy_screenshots.py") {
+        Write-Host "Running copy_screenshots.py..."
+        python .\copy_screenshots.py
+        Remove-Item -Path "copy_screenshots.py" -Force -ErrorAction SilentlyContinue
+    }
+} catch {}
+
 $lockFile = ".\update_in_progress.lock"
 $statusFile = ".\update_status.js"
 
