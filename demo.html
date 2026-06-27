@@ -1604,7 +1604,7 @@
                     <!-- Bảng chi tiết tuyến cố định -->
                     <div class="card" style="margin-bottom: 24px; padding: 20px;">
                         <div style="margin-bottom: 15px;">
-                            <h4 style="color: var(--primary); font-weight: 600;"><i class="fas fa-truck-moving"></i> Chi Tiết Ghép Xe Theo Phương Án Tối Ưu Động (So Sánh)</h4>
+                            <h4 style="color: var(--primary); font-weight: 600;"><i class="fas fa-truck-moving"></i> Chi Tiết Ghép Xe Theo Logic Quá Khứ</h4>
                         </div>
                         <table style="width: 100%;">
                             <thead>
@@ -1619,7 +1619,7 @@
                                     <th>KM Phụ Trội (VNĐ)</th>
                                     <th>Thành Tiền (VNĐ)</th>
                                     <th>Danh Sách Cửa Hàng</th>
-                                </tr>
+                                  </tr>
                             </thead>
                             <tbody id="test-fixed-table-body">
                                 <tr>
@@ -1638,8 +1638,8 @@
                             <thead>
                                 <tr>
                                     <th>Chỉ số (Direct Delivery)</th>
-                                    <th>Phương Án Cố Định Tuyến (Hiện Tại)</th>
-                                    <th>Phương Án Tối Ưu Động (So Sánh)</th>
+                                    <th>Logic Hiện Tại</th>
+                                    <th>Logic Quá Khứ</th>
                                     <th>Chênh Lệch</th>
                                     <th>Đánh giá</th>
                                 </tr>
@@ -7177,7 +7177,7 @@
         }
 
         proposedTrips.forEach((t, idx) => {
-            t.groupName = `Chuyến ${idx + 1} (Tối ưu động)`;
+            t.groupName = `Chuyến ${idx + 1} (Logic Quá Khứ)`;
         });
 
         // Get current optimized direct trips
@@ -7195,11 +7195,11 @@
         document.getElementById('test-cost-diff').innerText = proposedCost.toLocaleString() + ' VNĐ';
         const costDiffLabel = document.getElementById('test-cost-comparison-label');
         if (costDiff > 0) {
-            costDiffLabel.innerHTML = `<span style="color:#ef4444; font-weight: 600;"><i class="fas fa-arrow-up"></i> Tăng ${costDiff.toLocaleString()} VNĐ (${pctDiff.toFixed(1)}%)</span> so với cố định tuyến`;
+            costDiffLabel.innerHTML = `<span style="color:#ef4444; font-weight: 600;"><i class="fas fa-arrow-up"></i> Tăng ${costDiff.toLocaleString()} VNĐ (${pctDiff.toFixed(1)}%)</span> so với Logic Hiện Tại`;
         } else if (costDiff < 0) {
-            costDiffLabel.innerHTML = `<span style="color:#10b981; font-weight: 600;"><i class="fas fa-arrow-down"></i> Giảm ${Math.abs(costDiff).toLocaleString()} VNĐ (${Math.abs(pctDiff).toFixed(1)}%)</span> so với cố định tuyến`;
+            costDiffLabel.innerHTML = `<span style="color:#10b981; font-weight: 600;"><i class="fas fa-arrow-down"></i> Giảm ${Math.abs(costDiff).toLocaleString()} VNĐ (${Math.abs(pctDiff).toFixed(1)}%)</span> so với Logic Hiện Tại`;
         } else {
-            costDiffLabel.innerText = 'Bằng chi pháp cố định tuyến';
+            costDiffLabel.innerText = 'Bằng chi pháp Logic Hiện Tại';
         }
 
         document.getElementById('test-trips-ratio').innerText = `${proposedTrips.length} / ${currentDirectTrips.length}`;
@@ -7208,11 +7208,11 @@
         const distDiff = proposedDist - currentDirectDist;
         const distDiffLabel = document.getElementById('test-dist-diff-label');
         if (distDiff > 0) {
-            distDiffLabel.innerHTML = `<span style="color:#ef4444; font-weight: 600;"><i class="fas fa-arrow-up"></i> Tăng ${distDiff.toFixed(1)} km</span> so với cố định tuyến`;
+            distDiffLabel.innerHTML = `<span style="color:#ef4444; font-weight: 600;"><i class="fas fa-arrow-up"></i> Tăng ${distDiff.toFixed(1)} km</span> so với Logic Hiện Tại`;
         } else if (distDiff < 0) {
-            distDiffLabel.innerHTML = `<span style="color:#10b981; font-weight: 600;"><i class="fas fa-arrow-down"></i> Giảm ${Math.abs(distDiff).toFixed(1)} km</span> so với cố định tuyến`;
+            distDiffLabel.innerHTML = `<span style="color:#10b981; font-weight: 600;"><i class="fas fa-arrow-down"></i> Giảm ${Math.abs(distDiff).toFixed(1)} km</span> so với Logic Hiện Tại`;
         } else {
-            distDiffLabel.innerText = 'Bằng quãng đường cố định tuyến';
+            distDiffLabel.innerText = 'Bằng quãng đường Logic Hiện Tại';
         }
 
         // Render detailed fixed trips table
