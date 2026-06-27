@@ -9,12 +9,12 @@ try:
     if not os.path.exists(git_path):
         git_path = "git"
 
-    # 2. Reset bat ky thay doi loi nao trong demo.html va index.html
-    subprocess.run([git_path, "checkout", "--", "demo.html", "index.html"], cwd=r"g:\My Drive\Training AI\Supra Phú Thọ", check=True)
+    # 2. Checkout demo.html va index.html tu commit sach e3692bb
+    subprocess.run([git_path, "checkout", "e3692bb", "--", "demo.html", "index.html"], cwd=r"g:\My Drive\Training AI\Supra Phú Thọ", check=True)
     with open(log_path, 'w', encoding='utf-8') as log:
-        log.write("Successfully checked out clean demo.html and index.html.\n")
+        log.write("Successfully checked out clean files from commit e3692bb.\n")
 
-    # 3. Doc file demo.html sach de apply patch
+    # 3. Patch the clean HTML files
     html_files = [
         r"g:\My Drive\Training AI\Supra Phú Thọ\demo.html",
         r"g:\My Drive\Training AI\Supra Phú Thọ\index.html"
@@ -150,15 +150,23 @@ try:
                 f.write(content)
             
             with open(log_path, 'a', encoding='utf-8') as log:
-                log.write(f"Successfully patched {os.path.basename(f_path)}.\n")
+                log.write(f"Successfully patched clean {os.path.basename(f_path)}.\n")
 
-    # 4. Clean up temporary files on disk
+    # 4. Git add commit and push
+    subprocess.run([git_path, "add", "demo.html", "index.html"], cwd=r"g:\My Drive\Training AI\Supra Phú Thọ", check=True)
+    subprocess.run([git_path, "commit", "-m", "Change dashboard vehicle summary to use detailed badges (fixed)"], cwd=r"g:\My Drive\Training AI\Supra Phú Thọ", check=True)
+    subprocess.run([git_path, "push", "origin", "main"], cwd=r"g:\My Drive\Training AI\Supra Phú Thọ", check=True)
+
+    with open(log_path, 'a', encoding='utf-8') as log:
+        log.write("Successfully committed and pushed detailed badges changes to GitHub.\n")
+
+    # 5. Clean up temporary files on disk
     for scrap in ["git_restore.py", "push_badge_changes.py", "patch_dashboard_badges.py", "fix_git_config.py", "restore_bat.py"]:
         scrap_path = os.path.join(r"g:\My Drive\Training AI\Supra Phú Thọ", scrap)
         if os.path.exists(scrap_path):
             os.remove(scrap_path)
 
-    # 5. Restore Cap_Nhat_Du_Lieu_Auto.bat to original state
+    # 6. Restore Cap_Nhat_Du_Lieu_Auto.bat to original state
     bat_path = r"g:\My Drive\Training AI\Supra Phú Thọ\Cap_Nhat_Du_Lieu_Auto.bat"
     original_bat_content = """@echo off
 title AutoUpdateSupra
