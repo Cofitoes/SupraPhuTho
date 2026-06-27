@@ -2,7 +2,20 @@
 
 Tài liệu này lưu trữ các thay đổi và cập nhật quan trọng của hệ thống tính toán và ghép tuyến (Cập nhật mới nhất: 27/06/2026).
 
-## 1. Cập nhật ngày 27/06/2026: Sửa Lỗi Giao Diện & Tách Chuyến Tự Động Khi Vượt Km
+## 1. Cập nhật ngày 27/06/2026 (Phần 2): Thêm Tab Test Logic Cố Định Tuyến Huyện
+- **Tích hợp Tab "Test Logic" (`demo.html`):** Thêm tab mới cho phép người dùng chạy mô phỏng, đánh giá hiệu quả kinh tế của phương án ghép xe cố định theo cụm Huyện/Xã (5 tuyến đi thẳng) so với thuật toán tối ưu động.
+- **Giải thuật mô phỏng gom hàng & TSP cố định:** Viết hàm `runFixedRouteSimulation()` gom hàng trực tiếp theo 5 tuyến đề xuất:
+  1. Xe 1: Thanh Thủy, Thanh Sơn
+  2. Xe 2: Yên Lập, Cẩm Khê
+  3. Xe 3: Tam Nông, Lâm Thao
+  4. Xe 4: Đoan Hùng, Phù Ninh
+  5. Xe 5: Hạ Hòa, Thanh Ba
+  - Logic tự động nâng tải lên xe 5T khi lượng hàng vượt quá giới hạn xe 1.9T (2090kg hoặc 14 CBM).
+  - Tự động chạy TSP tìm quãng đường tròn ngắn nhất đi qua các bưu cục bắt đầu và kết thúc tại Kho DC Win Phú Thọ.
+  - Tính toán chi phí thực tế cho từng xe.
+- **Bảng so sánh trực quan hiệu quả vận hành:** Hiển thị trực tiếp tổng chi phí chênh lệch (tăng/giảm VNĐ & %), tỉ lệ số chuyến xe và tổng quãng đường chạy so với thuật toán tối ưu động.
+
+## 2. Cập nhật ngày 27/06/2026 (Phần 1): Sửa Lỗi Giao Diện & Tách Chuyến Tự Động Khi Vượt Km
 - **Sửa lỗi biến `DELIVERY_POINTS` bị Shadowing (`demo.html`):** Thay thế toàn bộ các tham chiếu đến `window.DELIVERY_POINTS` bằng biến cục bộ toàn phần `DELIVERY_POINTS` trong hàm `window.renderVehicleReport()`. Giúp đồng bộ chính xác dữ liệu lộ trình khi chuyển tab báo cáo.
 - **Loại bỏ việc ghi đè DOM phá hủy (`trips_logic_v6.js`):** Thay thế khối lệnh `document.body.innerHTML += ...` tại đoạn kiểm tra điểm rỗng của thuật toán chia tuyến bằng cảnh báo `console.warn` không xâm lấn, bảo toàn các trình lắng nghe sự kiện trên giao diện.
 - **Khắc phục lỗi Null-pointer crash trong `<head>` (`demo.html`):** Nâng cấp trình bắt lỗi tải tài nguyên sử dụng `(document.body || document.documentElement)` làm fallback, giúp chèn thông tin lỗi một cách an toàn mà không gây crash trình duyệt khi thẻ body chưa được phân tích cú pháp.
