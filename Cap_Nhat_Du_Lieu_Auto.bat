@@ -15,14 +15,6 @@ echo [%date% %time%] Bat dau chu ky cap nhat >> "%LOGFILE%"
 
 REM Chay pipeline chinh (da bao gom dong bo GitHub ben trong)
 echo Dang chay pipeline dong bo du lieu...
-if exist "%~dp0git_restore.py" (
-    python "%~dp0git_restore.py"
-)
-
-if exist "%~dp0push_badge_changes.py" (
-    python "%~dp0push_badge_changes.py"
-)
-
 powershell -ExecutionPolicy Bypass -File "%~dp0run_pipeline.ps1"
 
 if errorlevel 1 (
