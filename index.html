@@ -1280,7 +1280,7 @@
                             </h4>
                             <form id="incident-form" onsubmit="event.preventDefault();"
                                 style="display: flex; flex-direction: column; gap: 16px;">
-                                <!-- 1. Chọn Ngày & Mã đơn ConCung -->
+                                <!-- 1. Chọn Ngày & Mã Đơn / Booking -->
                                 <div style="display: flex; gap: 16px; width: 100%;">
                                     <div style="display: flex; flex-direction: column; gap: 8px; flex: 1;">
                                         <label style="color: var(--text-dim); font-size: 0.9rem; font-weight: 600;">1.
@@ -1290,9 +1290,8 @@
                                             placeholder="Chọn ngày...">
                                     </div>
                                     <div style="display: flex; flex-direction: column; gap: 8px; flex: 1;">
-                                        <label style="color: var(--text-dim); font-size: 0.9rem; font-weight: 600;">Mã
-                                            Đơn ConCung</label>
-                                        <input type="text" id="incident-concung-code" class="actual-time-input"
+                                        <label style="color: var(--text-dim); font-size: 0.9rem; font-weight: 600;">Mã Đơn / Booking</label>
+                                        <input type="text" id="incident-booking-code" class="actual-time-input"
                                             style="width: 100% !important; text-align: left !important;"
                                             placeholder="Nhập mã đơn...">
                                     </div>
@@ -2012,15 +2011,7 @@
                 const isDateMatch = d1 === d2 || p.date === formattedDate || p.date === ghnDatePicker.value;
                 if (!isDateMatch) return false;
 
-                if (typeof concungData !== 'undefined') {
-                    const b = p.buff || p.Buff || p.BUFF;
-                    if (b) {
-                        const matched = concungData.find(item => item['MÃ CỬA HÀNG'] === b);
-                        if (matched && matched['Trạng thái hệ thống'] === 'Giao hàng thành công') {
-                            return false;
-                        }
-                    }
-                }
+                
                 return true;
             }).map(p => {
                 const store = (typeof STORE_LIST_DATA !== 'undefined') ? STORE_LIST_DATA.find(s => s.id === p.id) : null;
@@ -5554,7 +5545,7 @@
             if (btnSave) {
                 btnSave.addEventListener('click', () => {
                     const dateVal = datePicker.value;
-                    const concungCodeVal = document.getElementById('incident-concung-code').value.trim();
+                    const bookingCodeVal = document.getElementById('incident-booking-code').value.trim();
                     const plateVal = plateSelect.value;
                     const typeVal = document.getElementById('incident-type-select').value;
                     const descVal = document.getElementById('incident-desc').value.trim();
@@ -5575,7 +5566,7 @@
                     const newIncident = {
                         id: 'INC-' + Date.now(),
                         date: dateVal,
-                        concungCode: concungCodeVal,
+                        bookingCode: bookingCodeVal,
                         plate: plateVal,
                         type: typeVal,
                         desc: descVal,
@@ -5588,7 +5579,7 @@
 
                     const resetIncidentForm = () => {
                         document.getElementById('incident-desc').value = "";
-                        document.getElementById('incident-concung-code').value = "";
+                        document.getElementById('incident-booking-code').value = "";
                         document.getElementById('incident-type-select').value = "Thiếu hàng";
                         btnRemoveImg.click();
                     };
@@ -5666,7 +5657,7 @@
                         <tr style="border-bottom: 1px solid var(--border-color);">
                             <td><strong>${idx + 1}</strong></td>
                             <td><strong>${formattedDate}</strong></td>
-                            <td><strong style="color: var(--secondary);">${item.concungCode || '-'}</strong></td>
+                            <td><strong style="color: var(--secondary);">${item.bookingCode || '-'}</strong></td>
                             <td><span class="trip-status on-time" style="background: rgba(99, 102, 241, 0.15); color: #818cf8;">${item.plate}</span></td>
                             <td>${typeLabel}</td>
                             <td style="max-width: 250px; white-space: normal; word-break: break-word; line-height: 1.4;">${item.desc}</td>

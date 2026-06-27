@@ -180,7 +180,7 @@ def download_attachments():
                                             dest_path = os.path.join(OUTPUT_DIR, target_filename)
                                             
                                             is_ghn = "ghn.vn" in sender.lower()
-                                            sender_type = "GHN" if is_ghn else "CONCUNG"
+                                            sender_type = "GHN" if is_ghn else "SUPRA"
                                             
                                             # Lấy dữ liệu file đính kèm
                                             file_data = part.get_payload(decode=True)
