@@ -411,8 +411,7 @@ function generateTrips() {
 
         // --- ROUTE COMBINING / MERGING LOGIC ---
         const isSmallGroup = (g) => {
-            const totalVol = g.points.reduce((s, p) => s + (p.volume || 0), 0);
-            return g.points.length <= 2 && g.totalWeight <= 1200 && totalVol <= 3.5;
+            return g.points.length > 0 && g.points.length < 5;
         };
 
         const getGroupDistance = (points) => {
