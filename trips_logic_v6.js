@@ -409,6 +409,84 @@ function generateTrips() {
             };
         }).filter(g => g.points.length > 0);
 
+        // --- ROUTE COMBINING / MERGING LOGIC ---
+        const isSmallGroup = (g) => {
+            const totalVol = g.points.reduce((s, p) => s + (p.volume || 0), 0);
+            return g.points.length <= 2 && g.totalWeight <= 1200 && totalVol <= 3.5;
+        };
+
+        const getGroupDistance = (points) => {
+            if (points.length === 0) return 0;
+            const tsp = solveTSP(hubDC, points);
+            let dist = 0;
+            let last = hubDC;
+            tsp.sequence.forEach(p => {
+                dist += calculateDistance(last.coords, p.coords);
+                last = p;
+            });
+            dist += calculateDistance(last.coords, hubDC.coords);
+            return parseFloat(dist.toFixed(2));
+        };
+
+        let mergedAny = true;
+        while (mergedAny) {
+            mergedAny = false;
+            // Process smallest first
+            groupsData.sort((a, b) => a.totalWeight - b.totalWeight);
+            
+            for (let i = 0; i < groupsData.length; i++) {
+                const gA = groupsData[i];
+                if (!isSmallGroup(gA)) continue;
+                
+                let bestPartnerIdx = -1;
+                let bestCostIncrease = Infinity;
+                
+                for (let j = 0; j < groupsData.length; j++) {
+                    if (i === j) continue;
+                    const gB = groupsData[j];
+                    
+                    const combinedPoints = [...gB.points, ...gA.points];
+                    const combinedWeight = gA.totalWeight + gB.totalWeight;
+                    const combinedVolume = combinedPoints.reduce((s, p) => s + (p.volume || 0), 0);
+                    
+                    let truckType = '';
+                    if (combinedWeight <= 2090 && combinedVolume <= 14) {
+                        truckType = '1.9T';
+                    } else if (combinedWeight <= 5500 && combinedVolume <= 26) {
+                        truckType = '5T';
+                    }
+                    
+                    if (!truckType) continue; // Exceeds capacity
+                    
+                    const distCombined = getGroupDistance(combinedPoints);
+                    const costCombined = getTripCostDetails(truckType, distCombined, combinedWeight, 'Đi thẳng').totalCost;
+                    
+                    const distB = getGroupDistance(gB.points);
+                    let origTruckB = '1.9T';
+                    const volB = gB.points.reduce((s, p) => s + (p.volume || 0), 0);
+                    if (gB.totalWeight > 2090 || volB > 14) origTruckB = '5T';
+                    const costB = getTripCostDetails(origTruckB, distB, gB.totalWeight, 'Đi thẳng').totalCost;
+                    
+                    const costIncrease = costCombined - costB;
+                    if (costIncrease <= 1300000 && costIncrease < bestCostIncrease) {
+                        bestCostIncrease = costIncrease;
+                        bestPartnerIdx = j;
+                    }
+                }
+                
+                if (bestPartnerIdx !== -1) {
+                    const gB = groupsData[bestPartnerIdx];
+                    gB.points = [...gB.points, ...gA.points];
+                    gB.totalWeight += gA.totalWeight;
+                    gB.group.mergedNames = (gB.group.mergedNames || gB.group.name.replace(/^Tuyến \d+:\s*/, '')) + ' - ' + gA.group.name.replace(/^Tuyến \d+:\s*/, '');
+                    
+                    groupsData.splice(i, 1);
+                    mergedAny = true;
+                    break;
+                }
+            }
+        }
+
         // Temporarily pack all groups allowing 5T
         let tempTrips = [];
         groupsData.forEach(g => {
@@ -423,7 +501,7 @@ function generateTrips() {
         if (num5T <= 2) {
             // Keep the proposed trips
             tempTrips.forEach(t => {
-                t.districtsName = t.groupRef.group.name.replace(/^Tuyến \d+:\s*/, '');
+                t.districtsName = t.groupRef.group.mergedNames || t.groupRef.group.name.replace(/^Tuyến \d+:\s*/, '');
             });
             directTrips = tempTrips;
         } else {
@@ -442,7 +520,7 @@ function generateTrips() {
                 const allow5T = allowedGroups.includes(g);
                 const trips = packGroupIntoTripsLocal(g.points, allow5T);
                 trips.forEach(t => {
-                    t.districtsName = g.group.name.replace(/^Tuyến \d+:\s*/, '');
+                    t.districtsName = g.group.mergedNames || g.group.name.replace(/^Tuyến \d+:\s*/, '');
                 });
                 directTrips.push(...trips);
             });
