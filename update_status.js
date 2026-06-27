@@ -1,1 +1,1 @@
-﻿window.UPDATE_STATUS = {"status":"error","timestamp":"2026-06-27 19:07:44","message":"Chi tiet loi: The process cannot access the file G:\\My Drive\\Training AI\\Supra Phú Thọ\\update_status.js because it is being used by another process.","step":"Loi trong qua trinh cap nhat","progress":0};
+﻿window.UPDATE_STATUS = {"status":"running","timestamp":"2026-06-27 19:08:53","message":"","step":"Dang dong bo du lieu len link online...","progress":95};
