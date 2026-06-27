@@ -3,6 +3,7 @@
 Tài liệu này lưu trữ các thay đổi và cập nhật quan trọng của hệ thống tính toán và ghép tuyến (Cập nhật mới nhất: 27/06/2026).
 
 ## 1. Cập nhật ngày 27/06/2026 (Phần 2): Thêm Tab Test Logic Cố Định Tuyến Huyện
+- **Bổ sung cột Huyện/Xã (`demo.html`):** Thêm cột **Huyện/Xã** vào trực tiếp sau cột **Lộ Trình** trên bảng kết quả tab **Lên Lịch Tải** để dễ dàng xác định tuyến đường chạy cố định huyện nào hoặc tuyến trung chuyển nào.
 - **Tích hợp Tab "Test Logic" (`demo.html`):** Thêm tab mới cho phép người dùng chạy mô phỏng, đánh giá hiệu quả kinh tế của phương án ghép xe cố định theo cụm Huyện/Xã (5 tuyến đi thẳng) so với thuật toán tối ưu động.
 - **Giới hạn số lượng xe 5T tối đa 2 xe/ngày:** Bổ sung cơ chế xếp tải thông minh: nếu có từ 3 tuyến huyện cố định trở lên vượt quá tải trọng xe 1.9T (2090 kg), thuật toán sẽ tự động phân hạng theo tổng khối lượng hàng giảm dần, chỉ ưu tiên nâng tải lên xe 5T cho **2 tuyến nặng nhất**. Các tuyến còn lại bắt buộc sử dụng xe 1.9T và tự động phân chia hành trình thành nhiều chuyến xe 1.9T độc lập.
 - **Giải thuật mô phỏng gom hàng & TSP cố định:** Viết hàm `runFixedRouteSimulation()` gom hàng trực tiếp theo 5 tuyến đề xuất:
