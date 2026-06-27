@@ -256,7 +256,7 @@ try {
         Write-Warning "Khong the chay auto_add_new_stores.py: $_"
     }
 
-    # 0.5. Đã tắt update_store_data.py vì script này chuyên biệt cho file JSON của Con Cung
+    # 0.5. Đã tắt update_store_data.py
     # try {
     #     Write-Status "running" "Dong bo danh sach cua hang qua Python..." 25
     #     Write-Host "Running update_store_data.py..."
