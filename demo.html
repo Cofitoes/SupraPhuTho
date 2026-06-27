@@ -1640,8 +1640,8 @@
                                     <th>Chỉ số (Direct Delivery)</th>
                                     <th>Logic Hiện Tại</th>
                                     <th>Logic Quá Khứ</th>
-                                    <th>Chênh Lệch</th>
-                                    <th>Đánh giá</th>
+                                    <th>Chênh Lệch (Quá Khứ/Hiện Tại)</th>
+                                    <th>Đánh giá (Quá Khứ/Hiện Tại)</th>
                                 </tr>
                             </thead>
                             <tbody id="test-comparison-table-body">
@@ -7243,15 +7243,15 @@
         // Render comparative table
         const compTableBody = document.getElementById('test-comparison-table-body');
         const costAssessment = costDiff > 0 
-            ? `<span style="color:#ef4444; font-weight:600;"><i class="fas fa-times-circle"></i> Đắt hơn (${pctDiff.toFixed(1)}%)</span>`
-            : (costDiff < 0 ? `<span style="color:#10b981; font-weight:600;"><i class="fas fa-check-circle"></i> Tiết kiệm (${Math.abs(pctDiff).toFixed(1)}%)</span>` : 'Tương đương');
+            ? `<span style="color:#ef4444; font-weight:600;"><i class="fas fa-times-circle"></i> Quá Khứ đắt hơn (${pctDiff.toFixed(1)}%)</span>`
+            : (costDiff < 0 ? `<span style="color:#10b981; font-weight:600;"><i class="fas fa-check-circle"></i> Quá Khứ rẻ hơn (${Math.abs(pctDiff).toFixed(1)}%)</span>` : 'Tương đương');
         const tripDiff = proposedTrips.length - currentDirectTrips.length;
         const tripAssessment = tripDiff > 0 
-            ? `<span style="color:#ef4444; font-weight:600;">Tăng ${tripDiff} xe</span>`
-            : (tripDiff < 0 ? `<span style="color:#10b981; font-weight:600;">Giảm ${Math.abs(tripDiff)} xe</span>` : 'Số xe bằng nhau');
+            ? `<span style="color:#ef4444; font-weight:600;">Quá Khứ tăng ${tripDiff} xe</span>`
+            : (tripDiff < 0 ? `<span style="color:#10b981; font-weight:600;">Quá Khứ giảm ${Math.abs(tripDiff)} xe</span>` : 'Bằng nhau');
         const distAssessment = distDiff > 0 
-            ? `<span style="color:#ef4444;">Tăng ${distDiff.toFixed(1)} km</span>`
-            : (distDiff < 0 ? `<span style="color:#10b981;">Giảm ${Math.abs(distDiff).toFixed(1)} km</span>` : 'Bằng nhau');
+            ? `<span style="color:#ef4444;">Quá Khứ tăng ${distDiff.toFixed(1)} km</span>`
+            : (distDiff < 0 ? `<span style="color:#10b981;">Quá Khứ giảm ${Math.abs(distDiff).toFixed(1)} km</span>` : 'Bằng nhau');
 
         compTableBody.innerHTML = `
             <tr style="border-bottom: 1px solid var(--border-color);">
