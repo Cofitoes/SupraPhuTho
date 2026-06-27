@@ -1079,6 +1079,7 @@
                                         <th>Trip</th>
                                         <th>Trọng Tải Xe</th>
                                         <th>Lộ Trình</th>
+                                        <th>Huyện/Xã</th>
                                         <th>Loại Chuyến</th>
                                         <th>Số Store</th>
                                         <th>Tổng KM</th>
@@ -3491,6 +3492,11 @@
                         <div style="margin-bottom: 8px;">${routePathHtml}</div>
                         <a href="${mapsUrl}" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; font-size: 0.8rem; color: #3b82f6; text-decoration: none; padding: 4px 8px; background: rgba(59, 130, 246, 0.1); border-radius: 4px; transition: all 0.2s;"><i class="fas fa-map-marked-alt"></i> Xem lộ trình Google Maps</a>
                     </td>
+                    <td>
+                        <span class="trip-status" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6; font-weight: 500; border-radius: 4px; padding: 4px 8px;">
+                            ${t.districtsName || (t.tripType === 'Trung chuyển' ? 'Trung chuyển GXT' : '-')}
+                        </span>
+                    </td>
                     <td><span class="trip-status" style="background: ${t.tripType === 'Đi thẳng' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(245, 158, 11, 0.1)'}; color: ${t.tripType === 'Đi thẳng' ? '#10b981' : '#f59e0b'};">${t.tripType}</span></td>
                     <td><strong>${storeCount}</strong></td>
                     <td>${t.dist}</td>
@@ -3506,7 +3512,7 @@
 
             const summaryRowHtml = `
                 <tr style="background-color: rgba(59, 130, 246, 0.05); font-weight: bold; border-top: 2px solid var(--primary);">
-                    <td colspan="4" style="text-align: right; padding-right: 20px;">TỔNG CỘNG (${globalTrips.length} CHUYẾN)</td>
+                    <td colspan="5" style="text-align: right; padding-right: 20px;">TỔNG CỘNG (${globalTrips.length} CHUYẾN)</td>
                     <td style="font-size: 1.1rem; color: var(--primary);">${totalStores}</td>
                     <td>-</td>
                     <td style="font-size: 1.1rem; color: var(--primary);">${totalVol.toFixed(2)}</td>

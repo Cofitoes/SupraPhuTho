@@ -248,6 +248,7 @@ function generateTrips() {
             const trip = {
                 id: `TC-GXT-${bookingDateStr}-${String(tcCounter).padStart(3, '0')}`,
                 tripType: 'Trung chuyển',
+                districtsName: 'Trung chuyển GXT',
                 route: `Kho DC Win Phú Thọ -> GXT Phú Thọ (${weightInTons} Tấn)`,
                 routeName: `Kho DC Win Phú Thọ -> GXT Phú Thọ (${weightInTons} Tấn)`,
                 truckType: truckType, vehicle: truckType,
@@ -418,6 +419,9 @@ function generateTrips() {
         let directTrips = [];
         if (num5T <= 2) {
             // Keep the proposed trips
+            tempTrips.forEach(t => {
+                t.districtsName = t.groupRef.group.name.replace(/^Tuyến \d+:\s*/, '');
+            });
             directTrips = tempTrips;
         } else {
             // Rank groups by weight and restrict the excess ones to 1.9T only
@@ -434,6 +438,9 @@ function generateTrips() {
             groupsData.forEach(g => {
                 const allow5T = allowedGroups.includes(g);
                 const trips = packGroupIntoTripsLocal(g.points, allow5T);
+                trips.forEach(t => {
+                    t.districtsName = g.group.name.replace(/^Tuyến \d+:\s*/, '');
+                });
                 directTrips.push(...trips);
             });
         }
