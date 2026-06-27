@@ -164,8 +164,8 @@ const STORE_LIST_DATA = [
     "trip_type": "Giao Thang",
     "isGXT": false,
     "coords": {
-      "lat": 21.1356817,
-      "lng": 105.9913869
+      "lat": 21.56417,
+      "lng": 105.17778
     }
   },
   {
@@ -554,8 +554,8 @@ const STORE_LIST_DATA = [
     "trip_type": "Giao Thang",
     "isGXT": false,
     "coords": {
-      "lat": 21.0,
-      "lng": 105.0
+      "lat": 21.31667,
+      "lng": 105.26444
     }
   },
   {
@@ -853,8 +853,8 @@ const STORE_LIST_DATA = [
     "trip_type": "Giao Thang",
     "isGXT": false,
     "coords": {
-      "lat": 21.0,
-      "lng": 105.0
+      "lat": 21.134,
+      "lng": 105.28
     }
   },
   {
@@ -866,8 +866,8 @@ const STORE_LIST_DATA = [
     "trip_type": "Giao Thang",
     "isGXT": false,
     "coords": {
-      "lat": 21.0,
-      "lng": 105.0
+      "lat": 21.1705,
+      "lng": 105.279
     }
   },
   {
@@ -892,8 +892,8 @@ const STORE_LIST_DATA = [
     "trip_type": "Giao Thang",
     "isGXT": false,
     "coords": {
-      "lat": 21.0,
-      "lng": 105.0
+      "lat": 21.13444,
+      "lng": 105.27972
     }
   },
   {
