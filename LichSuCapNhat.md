@@ -2,6 +2,19 @@
 
 Tài liệu này lưu trữ các thay đổi và cập nhật quan trọng của hệ thống tính toán và ghép tuyến (Cập nhật mới nhất: 27/06/2026).
 
+## 1. Cập nhật ngày 27/06/2026 (Phần 3): Tích hợp Nút Xóa Cache & Rà Soát Hệ Thống
+- **Hệ thống cache cục bộ (localStorage caching):**
+  - Tích hợp bộ nhớ đệm `localStorage` cho cả chuyến đi thẳng / trung chuyển Masan/Supra (`supra_trips_cache_[date]`) và chuyến bưu cục GHN (`supra_trips_ghn_cache_[date]`).
+  - Khi người dùng chuyển đổi giữa các ngày hoặc chuyển đổi qua lại giữa các tab, hệ thống sẽ nạp dữ liệu lập tức từ cache thay vì gọi OSRM API tính toán lại từ đầu, giúp tốc độ tải trang phản hồi tức thì và loại bỏ hoàn toàn hiện tượng trễ/lag.
+- **Nút "Xóa Cache Hiển Thị" màu đỏ:**
+  - Bổ sung nút **Xóa Cache Hiển Thị** ngay bên cạnh nút "Chạy Tối Ưu Tuyến".
+  - Khi click nút này, toàn bộ dữ liệu cache lưu trong `localStorage` sẽ bị xóa bỏ hoàn toàn, đồng thời kích hoạt tính toán lại từ đầu và gọi OSRM lấy khoảng cách thực tế mới nhất.
+  - Khi xóa thành công, giao diện hiển thị thông báo toast màu xanh lá ở góc dưới bên phải màn hình: *"Đã xóa toàn bộ cache hiển thị và tính toán lại!"*.
+- **Rà soát & Loại bỏ triệt để liên quan Con Cưng:**
+  - Xóa bỏ các file vá lỗi cũ dư thừa (`fix_all.py`, `fix_ghn_lag.py`, `remove_concung_safe.py`).
+  - Chuẩn hóa tên trường sự cố từ `Mã Đơn ConCung` thành `Mã Đơn / Booking` để nhất quán với dự án Supra Phú Thọ.
+  - Thay thế tiêu đề trang web hiển thị trên tab trình duyệt thành **`Supra Phú Thọ | Quản Lý Vận Tải Thông Minh`**.
+
 ## 1. Cập nhật ngày 27/06/2026 (Phần 2): Thêm Tab Test Logic Cố Định Tuyến Huyện
 - **Bổ sung cột Huyện/Xã (`demo.html`):** Thêm cột **Huyện/Xã** vào trực tiếp sau cột **Lộ Trình** trên bảng kết quả tab **Lên Lịch Tải** để dễ dàng xác định tuyến đường chạy cố định huyện nào hoặc tuyến trung chuyển nào.
 - **Tích hợp Tab "Test Logic" (`demo.html`):** Thêm tab mới cho phép người dùng chạy mô phỏng, đánh giá hiệu quả kinh tế của phương án ghép xe cố định theo cụm Huyện/Xã (5 tuyến đi thẳng) so với thuật toán tối ưu động.
