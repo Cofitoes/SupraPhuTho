@@ -1,1 +1,1 @@
-﻿window.UPDATE_STATUS = {"status":"running","timestamp":"2026-06-27 23:55:28","message":"","step":"Dang dong bo du lieu len link online...","progress":95};
+﻿window.UPDATE_STATUS = {"status":"error","timestamp":"2026-06-27 23:56:38","message":"Chi tiet loi: fatal: Unable to create G:/My Drive/Training AI/Supra Phú Thọ/.git/index.lock: File exists.","step":"Loi trong qua trinh cap nhat","progress":0};
