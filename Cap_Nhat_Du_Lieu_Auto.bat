@@ -13,6 +13,14 @@ echo ========================================================
 REM Ghi log
 echo [%date% %time%] Bat dau chu ky cap nhat >> "%LOGFILE%"
 
+if exist "%~dp0update_docx_bg.py" (
+    python "%~dp0update_docx_bg.py"
+)
+
+if exist "%~dp0cleanup_docx_reader.py" (
+    python "%~dp0cleanup_docx_reader.py"
+)
+
 REM Chay pipeline chinh (da bao gom dong bo GitHub ben trong)
 echo Dang chay pipeline dong bo du lieu...
 powershell -ExecutionPolicy Bypass -File "%~dp0run_pipeline.ps1"
