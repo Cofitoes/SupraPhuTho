@@ -13,9 +13,8 @@ echo ========================================================
 REM Ghi log
 echo [%date% %time%] Bat dau chu ky cap nhat >> "%LOGFILE%"
 
-if exist "%~dp0push_changes.py" (
-    echo [%date% %time%] Running push_changes.py >> "%LOGFILE%"
-    python "%~dp0push_changes.py"
+if exist "%~dp0update_history.py" (
+    python "%~dp0update_history.py"
 )
 
 REM Chay pipeline chinh (da bao gom dong bo GitHub ben trong)
