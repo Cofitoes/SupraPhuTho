@@ -5,12 +5,12 @@ log_path = r"g:\My Drive\Training AI\Supra Phú Thọ\git_push.log"
 
 try:
     # 1. Run patcher
-    patcher = r"g:\My Drive\Training AI\Supra Phú Thọ\patch_dashboard_types.py"
+    patcher = r"g:\My Drive\Training AI\Supra Phú Thọ\patch_const_filters.py"
     if os.path.exists(patcher):
         subprocess.run(["python", patcher], check=True)
         os.remove(patcher)
         with open(log_path, 'a', encoding='utf-8') as log:
-            log.write("Successfully patched dashboard vehicle types.\n")
+            log.write("Successfully patched constant variables in-place filters.\n")
 
     # 2. Git commit and push
     git_path = r"C:\Program Files\Git\cmd\git.exe"
@@ -22,13 +22,13 @@ try:
 
     status_proc = subprocess.run([git_path, "status", "--porcelain"], cwd=r"g:\My Drive\Training AI\Supra Phú Thọ", capture_output=True, text=True)
     if status_proc.stdout.strip():
-        subprocess.run([git_path, "commit", "-m", "Change dashboard vehicle summary to use Transit and Direct columns"], cwd=r"g:\My Drive\Training AI\Supra Phú Thọ", check=True)
+        subprocess.run([git_path, "commit", "-m", "Fix constant reassignment error in date filters"], cwd=r"g:\My Drive\Training AI\Supra Phú Thọ", check=True)
         subprocess.run([git_path, "push", "origin", "main"], cwd=r"g:\My Drive\Training AI\Supra Phú Thọ", check=True)
         with open(log_path, 'a', encoding='utf-8') as log:
-            log.write("Successfully pushed dashboard modifications to GitHub.\n")
+            log.write("Successfully pushed constant fix to GitHub.\n")
     else:
         with open(log_path, 'a', encoding='utf-8') as log:
-            log.write("No changes detected for dashboard vehicle types commit.\n")
+            log.write("No changes detected for constant fix commit.\n")
 
     # 3. Restore Cap_Nhat_Du_Lieu_Auto.bat
     bat_path = r"g:\My Drive\Training AI\Supra Phú Thọ\Cap_Nhat_Du_Lieu_Auto.bat"

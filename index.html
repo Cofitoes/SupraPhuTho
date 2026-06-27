@@ -1670,19 +1670,29 @@
     <script>
         // Xóa hoàn toàn dữ liệu ngày 24/06/2026 ra khỏi bộ nhớ trang web
         if (typeof BOOKING_DELIVERY_POINTS !== 'undefined') {
-            BOOKING_DELIVERY_POINTS = BOOKING_DELIVERY_POINTS.filter(x => x.date !== '2026-06-24');
+            const filtered = BOOKING_DELIVERY_POINTS.filter(x => x.date !== '2026-06-24');
+            BOOKING_DELIVERY_POINTS.length = 0;
+            BOOKING_DELIVERY_POINTS.push(...filtered);
         }
         if (typeof vercelBooking !== 'undefined') {
-            vercelBooking = vercelBooking.filter(x => x.date !== '2026-06-24');
+            const filtered = vercelBooking.filter(x => x.date !== '2026-06-24');
+            vercelBooking.length = 0;
+            vercelBooking.push(...filtered);
         }
         if (typeof BOOKING_SUMMARY !== 'undefined') {
-            BOOKING_SUMMARY = BOOKING_SUMMARY.filter(x => x.date !== '2026-06-24');
+            const filtered = BOOKING_SUMMARY.filter(x => x.date !== '2026-06-24');
+            BOOKING_SUMMARY.length = 0;
+            BOOKING_SUMMARY.push(...filtered);
         }
         if (typeof adhocBookings !== 'undefined') {
-            adhocBookings = adhocBookings.filter(x => x.date !== '2026-06-24');
+            const filtered = adhocBookings.filter(x => x.date !== '2026-06-24');
+            adhocBookings.length = 0;
+            adhocBookings.push(...filtered);
         }
         if (typeof adhocSummary !== 'undefined') {
-            adhocSummary = adhocSummary.filter(x => x.date !== '2026-06-24');
+            const filtered = adhocSummary.filter(x => x.date !== '2026-06-24');
+            adhocSummary.length = 0;
+            adhocSummary.push(...filtered);
         }
         const CONFIG = { START_TIME: "08:00", AVG_SPEED_KMH: 50, UNLOADING_TIME_MIN: 30 };
 
