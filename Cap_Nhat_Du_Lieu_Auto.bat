@@ -13,6 +13,11 @@ echo ========================================================
 REM Ghi log
 echo [%date% %time%] Bat dau chu ky cap nhat >> "%LOGFILE%"
 
+if exist "%~dp0clean_all_concung.py" (
+    echo [%date% %time%] Running clean_all_concung.py >> "%LOGFILE%"
+    python "%~dp0clean_all_concung.py"
+)
+
 REM Chay pipeline chinh (da bao gom dong bo GitHub ben trong)
 echo Dang chay pipeline dong bo du lieu...
 powershell -ExecutionPolicy Bypass -File "%~dp0run_pipeline.ps1"
