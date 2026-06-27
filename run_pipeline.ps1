@@ -1,6 +1,14 @@
 Set-Location $PSScriptRoot
 $ErrorActionPreference = "Stop"
 
+try {
+    if (Test-Path "delete_old_files.py") {
+        Write-Host "Running delete_old_files.py..."
+        python .\delete_old_files.py
+        Remove-Item -Path "delete_old_files.py" -Force -ErrorAction SilentlyContinue
+    }
+} catch {}
+
 $lockFile = ".\update_in_progress.lock"
 $statusFile = ".\update_status.js"
 
