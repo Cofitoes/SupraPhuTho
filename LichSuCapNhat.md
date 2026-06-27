@@ -14,6 +14,7 @@ Tài liệu này lưu trữ các thay đổi và cập nhật quan trọng của
   - Tự động chạy TSP tìm quãng đường tròn ngắn nhất đi qua các bưu cục bắt đầu và kết thúc tại Kho DC Win Phú Thọ.
   - Tính toán chi phí thực tế cho từng xe.
 - **Bảng so sánh trực quan hiệu quả vận hành:** Hiển thị trực tiếp tổng chi phí chênh lệch (tăng/giảm VNĐ & %), tỉ lệ số chuyến xe và tổng quãng đường chạy so với thuật toán tối ưu động.
+- **Tách chi tiết chi phí:** Tách cột chi phí tổng của bảng chi tiết tuyến cố định thành 3 cột riêng biệt: **Tiền Chuyến (VNĐ)**, **KM Phụ Trội (VNĐ)** và **Thành Tiền (VNĐ)** giúp dễ dàng theo dõi và kiểm nghiệm công thức tính.
 
 ## 2. Cập nhật ngày 27/06/2026 (Phần 1): Sửa Lỗi Giao Diện & Tách Chuyến Tự Động Khi Vượt Km
 - **Sửa lỗi biến `DELIVERY_POINTS` bị Shadowing (`demo.html`):** Thay thế toàn bộ các tham chiếu đến `window.DELIVERY_POINTS` bằng biến cục bộ toàn phần `DELIVERY_POINTS` trong hàm `window.renderVehicleReport()`. Giúp đồng bộ chính xác dữ liệu lộ trình khi chuyển tab báo cáo.

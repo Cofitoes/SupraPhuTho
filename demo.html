@@ -1618,13 +1618,15 @@
                                     <th>Thể Tích (m³)</th>
                                     <th>Số Cửa Hàng</th>
                                     <th>Quãng Đường (Km)</th>
-                                    <th>Chi Phí (VNĐ)</th>
+                                    <th>Tiền Chuyến (VNĐ)</th>
+                                    <th>KM Phụ Trội (VNĐ)</th>
+                                    <th>Thành Tiền (VNĐ)</th>
                                     <th>Danh Sách Cửa Hàng</th>
                                 </tr>
                             </thead>
                             <tbody id="test-fixed-table-body">
                                 <tr>
-                                    <td colspan="8" style="text-align: center; color: var(--text-dim); padding: 40px;">Đang tải dữ liệu mô phỏng...</td>
+                                    <td colspan="10" style="text-align: center; color: var(--text-dim); padding: 40px;">Đang tải dữ liệu mô phỏng...</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -6909,6 +6911,8 @@
                     dist: parseFloat(dist.toFixed(2)),
                     weight: Math.round(cw),
                     volume: parseFloat(cv.toFixed(2)),
+                    baseCost: costDetails.baseCost,
+                    extraCost: costDetails.extraCost,
                     cost: costDetails.totalCost,
                     stores: chunk.map(p => p.name)
                 });
@@ -6971,7 +6975,7 @@
         // Render detailed fixed trips table
         const fixedTableBody = document.getElementById('test-fixed-table-body');
         if (proposedTrips.length === 0) {
-            fixedTableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--text-dim); padding: 40px;">Không có hàng giao thẳng trong ngày này.</td></tr>`;
+            fixedTableBody.innerHTML = `<tr><td colspan="10" style="text-align: center; color: var(--text-dim); padding: 40px;">Không có hàng giao thẳng trong ngày này.</td></tr>`;
         } else {
             fixedTableBody.innerHTML = proposedTrips.map(t => `
                 <tr style="border-bottom: 1px solid var(--border-color);">
@@ -6981,6 +6985,8 @@
                     <td>${t.volume.toFixed(1)}</td>
                     <td>${t.stores.length} CH</td>
                     <td><strong>${t.dist}</strong></td>
+                    <td>${t.baseCost.toLocaleString()} VNĐ</td>
+                    <td>${t.extraCost.toLocaleString()} VNĐ</td>
                     <td style="color: var(--secondary); font-weight: 600;">${t.cost.toLocaleString()} VNĐ</td>
                     <td>
                         <div style="font-size:0.85rem; color: var(--text-dim); max-width: 400px; white-space: normal; line-height: 1.4;">
