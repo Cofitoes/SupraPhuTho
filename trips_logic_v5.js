@@ -433,8 +433,52 @@ function generateTrips() {
     // STEP 2: TRANSIT (Trung chuyển) - GXT stores → GXT Phú Thọ
     // ========================================
     if (gxtPoints.length > 0) {
-        const totalGxtW = gxtPoints.reduce((sum, p) => sum + (p.weight || 0), 0);
-        const totalGxtV = gxtPoints.reduce((sum, p) => sum + (p.volume || 0), 0);
+        // Tách các bưu cục trung chuyển nếu vượt quá giới hạn 1 xe 8T (7480 kg hoặc 55 CBM)
+        const splitLargeGXTPoints = (points) => {
+            const result = [];
+            points.forEach(p => {
+                const maxW = 7480;
+                const maxV = 55;
+                if ((p.weight && p.weight > maxW) || (p.volume && p.volume > maxV)) {
+                    let remW = p.weight || 0;
+                    let remV = p.volume || 0;
+                    let partIndex = 1;
+                    while (remW > 0 || remV > 0) {
+                        let partW = Math.min(remW, maxW);
+                        let partV = Math.min(remV, maxV);
+                        if (remW > 0 && remV > 0) {
+                            const ratioW = partW / remW;
+                            const ratioV = partV / remV;
+                            const minRatio = Math.min(ratioW, ratioV);
+                            partW = remW * minRatio;
+                            partV = remV * minRatio;
+                        }
+                        if (partW <= 0 && partV <= 0) break;
+                        if (partW < 1 && remW < 1) partW = remW;
+                        if (partV < 0.01 && remV < 0.01) partV = remV;
+
+                        result.push({
+                            ...p,
+                            name: `${p.name} (Phần ${partIndex})`,
+                            weight: partW,
+                            volume: partV,
+                            originalPoints: p.originalPoints || [p.name]
+                        });
+                        
+                        remW -= partW;
+                        remV -= partV;
+                        partIndex++;
+                    }
+                } else {
+                    result.push(p);
+                }
+            });
+            return result;
+        };
+
+        const processedGxtPoints = splitLargeGXTPoints(gxtPoints);
+        const totalGxtW = processedGxtPoints.reduce((sum, p) => sum + (p.weight || 0), 0);
+        const totalGxtV = processedGxtPoints.reduce((sum, p) => sum + (p.volume || 0), 0);
 
         // Distance from Kho DC Win Phú Thọ → GXT Phú Thọ
         const distToGXT = calculateDistance(hubDC.coords, hubGXT.coords);
@@ -447,17 +491,19 @@ function generateTrips() {
 
         // If total exceeds 8T, split into multiple transit trips
         const transitChunks = [];
-        if (totalGxtW <= TRUCK_LIMITS['8T'].maxW && totalGxtV <= TRUCK_LIMITS['8T'].maxV) {
-            transitChunks.push(gxtPoints);
+        const maxWAllowed8T = 7480; 
+        const maxVAllowed8T = 55;
+        if (totalGxtW <= maxWAllowed8T && totalGxtV <= maxVAllowed8T) {
+            transitChunks.push(processedGxtPoints);
         } else {
             // Pack into chunks fitting 8T sequentially to preserve original booking file order
-            let remaining = [...gxtPoints];
+            let remaining = [...processedGxtPoints];
             while (remaining.length > 0) {
                 const chunk = [];
                 let w = 0, v = 0;
                 while (remaining.length > 0) {
                     const p = remaining[0];
-                    if (w + (p.weight || 0) <= TRUCK_LIMITS['8T'].maxW && v + (p.volume || 0) <= TRUCK_LIMITS['8T'].maxV) {
+                    if (w + (p.weight || 0) <= maxWAllowed8T && v + (p.volume || 0) <= maxVAllowed8T) {
                         chunk.push(p);
                         w += (p.weight || 0);
                         v += (p.volume || 0);
