@@ -1549,9 +1549,9 @@ const STORE_LIST_DATA = [
   {
     "id": "2AKG",
     "name": "WM+ PTO 33 Thống Nhất, Phùng Nguyên",
-    "address": "WM+ PTO 33 Thống Nhất, Phùng Nguyên",
-    "province": "Phú Thọ",
-    "district": "TP. Việt Trì",
+    "address": "Số 33 Thống Nhất, Phùng Nguyên, H. Lâm Thao, T. Phú Thọ",
+    "province": "T. Phú Thọ",
+    "district": "H. Lâm Thao",
     "trip_type": "Giao Thang",
     "isGXT": false,
     "coords": {
