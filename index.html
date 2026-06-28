@@ -3518,6 +3518,41 @@
             }
         }
 
+        window.getTransitDistrictThroughputsText = function(t) {
+            const districtMap = {};
+            let storeNames = [];
+            if (t.points) {
+                t.points.forEach(p => {
+                    if (p.originalPoints) {
+                        storeNames.push(...p.originalPoints);
+                    }
+                });
+            }
+            if (storeNames.length === 0) return '';
+            
+            storeNames.forEach(name => {
+                const dp = (typeof DELIVERY_POINTS !== 'undefined') ? DELIVERY_POINTS.find(p => p.name === name) : null;
+                const weight = dp ? (dp.weight || 0) : 0;
+                
+                let district = 'Khác';
+                if (typeof STORE_LIST_DATA !== 'undefined') {
+                    const s = STORE_LIST_DATA.find(store => store.name === name);
+                    if (s && s.district) {
+                        district = s.district;
+                    }
+                }
+                if (!districtMap[district]) {
+                    districtMap[district] = 0;
+                }
+                districtMap[district] += weight;
+            });
+            
+            return Object.keys(districtMap).map(dist => {
+                const weightTons = (districtMap[dist] / 1000).toFixed(2);
+                return `${dist}: ${weightTons} Tấn`;
+            }).join(', ');
+        };
+
         window.renderTripsTable = renderResults;
         function renderResults() {
             const selectedDate = document.getElementById('global-date-filter') ? document.getElementById('global-date-filter').value : '';
@@ -3616,15 +3651,9 @@
                         }
                     }
                 } else if (t.tripType === 'Trung chuyển') {
-                    const rightProvinces = ['Tỉnh Hà Giang', 'Tỉnh Tuyên Quang', 'Tỉnh Lai Châu', 'Tỉnh Lào Cai', 'Tỉnh Yên Bái', 'Tỉnh Hòa Bình'];
-                    const provincesList = t.points ? t.points.map(p => p.name).filter(Boolean) : [];
-                    const hyList = provincesList.filter(p => !rightProvinces.includes(p));
-                    const hn02List = provincesList.filter(p => rightProvinces.includes(p));
-                    if (hyList.length > 0) {
-                        provincesHtml += `<div style="margin-top: 4px;"><strong>GXT Phú Thọ</strong> (${hyList.join(', ')})</div>`;
-                    }
-                    if (hn02List.length > 0) {
-                        provincesHtml += `<div style="margin-top: 4px;"><strong>GXT Phú Thọ</strong> (${hn02List.join(', ')})</div>`;
+                    const throughputText = window.getTransitDistrictThroughputsText(t);
+                    if (throughputText) {
+                        provincesHtml += `<div style="margin-top: 4px;"><strong>Sản lượng:</strong> ${throughputText}</div>`;
                     }
                 }
 
@@ -3862,17 +3891,8 @@
                 let displayRoute = '';
                 if (t.tripType === 'Trung chuyển') {
                     const hubsList = t.hubsVisited ? t.hubsVisited.join(' → ') : t.hub;
-                    const rightProvinces = ['Tỉnh Hà Giang', 'Tỉnh Tuyên Quang', 'Tỉnh Lai Châu', 'Tỉnh Lào Cai', 'Tỉnh Yên Bái', 'Tỉnh Hòa Bình'];
-                    const provincesList = t.points.map(p => p.name).filter(Boolean);
-                    const hyList = provincesList.filter(p => !rightProvinces.includes(p));
-                    const hn02List = provincesList.filter(p => rightProvinces.includes(p));
-                    
-                    let storesListText = '';
-                    if (hyList.length > 0) storesListText += `GXT Phú Thọ: ${hyList.join(', ')}\n`;
-                    if (hn02List.length > 0) storesListText += `GXT Phú Thọ: ${hn02List.join(', ')}\n`;
-                    
-                    const fullRouteTooltip = `Lộ trình: Kho DC Win Phú Thọ → ${hubsList}\nDanh sách bưu cục:\n${storesListText.trim()}`;
-                    
+                    const throughputText = window.getTransitDistrictThroughputsText(t);
+                    const fullRouteTooltip = `Lộ trình: Kho DC Win Phú Thọ → ${hubsList}\nSản lượng:\n${throughputText}`;
                     displayRoute = `<span title="${fullRouteTooltip.replace(/"/g, '&quot;')}" style="cursor: help; border-bottom: 1px dashed rgba(255,255,255,0.3); padding-bottom: 2px; color: #c084fc;"><strong>Trung chuyển GXT</strong></span>`;
                 } else {
                     const routeVal = t.route || t.routeName;
@@ -3943,17 +3963,8 @@
                 let displayRoute = '';
                 if (t.tripType === 'Trung chuyển') {
                     const hubsList = t.hubsVisited ? t.hubsVisited.join(' → ') : t.hub;
-                    const rightProvinces = ['Tỉnh Hà Giang', 'Tỉnh Tuyên Quang', 'Tỉnh Lai Châu', 'Tỉnh Lào Cai', 'Tỉnh Yên Bái', 'Tỉnh Hòa Bình'];
-                    const provincesList = t.points.map(p => p.name).filter(Boolean);
-                    const hyList = provincesList.filter(p => !rightProvinces.includes(p));
-                    const hn02List = provincesList.filter(p => rightProvinces.includes(p));
-                    
-                    let storesListText = '';
-                    if (hyList.length > 0) storesListText += `GXT Phú Thọ: ${hyList.join(', ')}\n`;
-                    if (hn02List.length > 0) storesListText += `GXT Phú Thọ: ${hn02List.join(', ')}\n`;
-                    
-                    const fullRouteTooltip = `Lộ trình: Kho DC Win Phú Thọ → ${hubsList}\nDanh sách bưu cục:\n${storesListText.trim()}`;
-                    
+                    const throughputText = window.getTransitDistrictThroughputsText(t);
+                    const fullRouteTooltip = `Lộ trình: Kho DC Win Phú Thọ → ${hubsList}\nSản lượng:\n${throughputText}`;
                     displayRoute = `<span title="${fullRouteTooltip.replace(/"/g, '&quot;')}" style="cursor: help; border-bottom: 1px dashed rgba(255,255,255,0.3); padding-bottom: 2px; color: #c084fc;"><strong>Trung chuyển GXT</strong></span>`;
                 } else {
                     const routeVal = t.route || t.routeName;
