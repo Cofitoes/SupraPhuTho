@@ -3673,7 +3673,7 @@
                             }
                             // Tìm điểm tương ứng trong t.points để lấy trọng lượng
                             const pt = t.points ? t.points.find(p => p.name && p.name.toLowerCase().replace(/^wm\+\s*/, '').replace(/^vc\+\s*/, '').replace(/[\s,]+/g, '').trim() === normalizedX) : null;
-                            const weightText = pt && pt.weight ? ` (${(pt.weight / 1000).toFixed(2)} Tấn)` : '';
+                            const weightText = pt && pt.weight ? ` <span style="color: var(--text-dim); font-weight: normal; font-size: 0.82rem;">(${(pt.weight / 1000).toFixed(2)} Tấn)</span>` : '';
                             return `<strong>${x}${weightText}</strong>`;
                           }).join('<br><i class="fas fa-arrow-right" style="font-size: 0.7rem; color: var(--text-dim); margin: 0 5px;"></i> ')
                         : `<strong>${t.hub || 'Kho DC Win Phú Thọ'}</strong>`;
