@@ -353,6 +353,48 @@ function generateTrips() {
             let remaining = [...points];
             let groupTrips = [];
             while (remaining.length > 0) {
+                // Tách đơn hàng nếu vượt quá khả năng chuyên chở lớn nhất của xe 8T (7480 kg hoặc 55 CBM)
+                let splitIdx = remaining.findIndex(p => (p.weight || 0) > 7480 || (p.volume || 0) > 55);
+                if (splitIdx !== -1) {
+                    const p = remaining.splice(splitIdx, 1)[0];
+                    let W = p.weight || 0;
+                    let V = p.volume || 0;
+                    let partCounter = 1;
+                    const maxW = 7480;
+                    const maxV = 55;
+                    while (W > 0 || V > 0) {
+                        let partW = Math.min(W, maxW);
+                        let partV = Math.min(V, maxV);
+                        if (W > 0 && V > 0) {
+                            const ratioW = partW / W;
+                            const ratioV = partV / V;
+                            const minRatio = Math.min(ratioW, ratioV);
+                            partW = W * minRatio;
+                            partV = V * minRatio;
+                        }
+                        if (partW <= 0 && partV <= 0) break;
+                        if (partW < 1 && W < 1) partW = W;
+                        if (partV < 0.01 && V < 0.01) partV = V;
+                        
+                        let partTruckType = '8T';
+                        if (partW <= 2090 && partV <= 14) partTruckType = '1.9T';
+                        else if (partW <= 5500 && partV <= 26) partTruckType = '5T';
+                        
+                        const virtualPoint = {
+                            ...p,
+                            name: `${p.name} (Phần ${partCounter})`,
+                            weight: partW,
+                            volume: partV
+                        };
+                        const trip = createDirectTrip([virtualPoint], hubDC, partTruckType);
+                        groupTrips.push(trip);
+                        W -= partW;
+                        V -= partV;
+                        partCounter++;
+                    }
+                    continue;
+                }
+
                 // Ngoại lệ xe 8T: Nếu có bưu cục đơn lẻ có lượng hàng > 5T (5000 kg) hoặc > 26 CBM
                 let exceptionIdx = remaining.findIndex(p => (p.weight || 0) > 5000 || (p.volume || 0) > 26);
                 if (exceptionIdx !== -1) {
