@@ -143,8 +143,9 @@ function generateTrips() {
     const splitLargeDirectPoints = (points) => {
         const result = [];
         points.forEach(p => {
-            const maxW = 4900;
-            const maxV = 26;
+            const is8TException = (p.weight && p.weight > 5000) || (p.volume && p.volume > 26);
+            const maxW = is8TException ? 7480 : 4900;
+            const maxV = is8TException ? 55 : 26;
             if ((p.weight && p.weight > maxW) || (p.volume && p.volume > maxV)) {
                 let remW = p.weight || 0;
                 let remV = p.volume || 0;
@@ -166,7 +167,8 @@ function generateTrips() {
                         name: `${p.name} (Phần ${partIndex})`,
                         weight: takeW,
                         volume: takeV,
-                        originalPoints: p.originalPoints || [p.name]
+                        originalPoints: p.originalPoints || [p.name],
+                        use8TException: is8TException
                     });
                     
                     remW = parseFloat((remW - takeW).toFixed(2));
@@ -174,7 +176,10 @@ function generateTrips() {
                     partIndex++;
                 }
             } else {
-                result.push(p);
+                result.push({
+                    ...p,
+                    use8TException: is8TException
+                });
             }
         });
         return result;
@@ -370,8 +375,9 @@ function generateTrips() {
                 let cw = chunk.reduce((s, p) => s + (p.weight || 0), 0);
                 let cv = chunk.reduce((s, p) => s + (p.volume || 0), 0);
                 let tType = '1.9T';
-                // Theo luật mới: Chỉ sử dụng 1.9T, exception = 5T. Tuyệt đối không dùng 8T cho giao thẳng
-                if (cw > 1900 || cv > 14) tType = '5T';
+                const has8TException = chunk.some(p => p.use8TException) || cw > 5500 || cv > 26;
+                if (has8TException) tType = '8T';
+                else if (cw > 1900 || cv > 14) tType = '5T';
                 directTrips.push(createDirectTrip(chunk, hubDC, tType));
             }
         });
@@ -411,6 +417,8 @@ function generateTrips() {
         const splitTripType = (pts) => {
             let cw = pts.reduce((s, p) => s + (p.weight || 0), 0);
             let cv = pts.reduce((s, p) => s + (p.volume || 0), 0);
+            const has8TException = pts.some(p => p.use8TException) || cw > 5500 || cv > 26;
+            if (has8TException) return '8T';
             if (cw > 1900 || cv > 14) return '5T';
             return '1.9T';
         };

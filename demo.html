@@ -6989,8 +6989,9 @@
         const splitLargeDirectPoints = (points) => {
             const result = [];
             points.forEach(p => {
-                const maxW = 4900;
-                const maxV = 26;
+                const is8TException = (p.weight && p.weight > 5000) || (p.volume && p.volume > 26);
+                const maxW = is8TException ? 7480 : 4900;
+                const maxV = is8TException ? 55 : 26;
                 if ((p.weight && p.weight > maxW) || (p.volume && p.volume > maxV)) {
                     let remW = p.weight || 0;
                     let remV = p.volume || 0;
@@ -7012,7 +7013,8 @@
                             name: `${p.name} (Phần ${partIndex})`,
                             weight: takeW,
                             volume: takeV,
-                            originalPoints: p.originalPoints || [p.name]
+                            originalPoints: p.originalPoints || [p.name],
+                            use8TException: is8TException
                         });
                         
                         remW = parseFloat((remW - takeW).toFixed(2));
@@ -7020,7 +7022,10 @@
                         partIndex++;
                     }
                 } else {
-                    result.push(p);
+                    result.push({
+                        ...p,
+                        use8TException: is8TException
+                    });
                 }
             });
             return result;
@@ -7128,7 +7133,10 @@
                 const thresholdW = 2850;
                 const thresholdV = 21;
                 
-                if (seed.weight >= thresholdW || seed.volume >= thresholdV) {
+                if (seed.use8TException) {
+                    chunkMaxW = 7480;
+                    chunkMaxV = 55;
+                } else if (seed.weight >= thresholdW || seed.volume >= thresholdV) {
                     chunkMaxW = 5500;
                     chunkMaxV = 26;
                 } else if (seed.weight > 2090 || seed.volume > 14) {
@@ -7168,7 +7176,14 @@
                             });
                             prospectiveDist += window.calculateDistance(last.coords, hubDC.coords);
                             
-                            const prospectiveTruckType = (cw + (p.weight || 0) > 2090 || cv + (p.volume || 0) > 14) ? '5T' : '1.9T';
+                            const nextW = cw + (p.weight || 0);
+                            const nextV = cv + (p.volume || 0);
+                            let prospectiveTruckType = '1.9T';
+                            if (seed.use8TException || nextW > 5500 || nextV > 26) {
+                                prospectiveTruckType = '8T';
+                            } else if (nextW > 2090 || nextV > 14) {
+                                prospectiveTruckType = '5T';
+                            }
                             const prospectiveCost = getTripCostDetailsLocal(prospectiveTruckType, prospectiveDist, cw + (p.weight || 0));
                             
                             if (prospectiveDist <= 120 || prospectiveCost.extraCost <= allowedExtraCostLimit) {
@@ -7190,7 +7205,9 @@
                 }
                 
                 let truckType = '1.9T';
-                if (cw >= thresholdW || cv >= thresholdV) {
+                if (seed.use8TException || cw > 5500 || cv > 26) {
+                    truckType = '8T';
+                } else if (cw >= thresholdW || cv >= thresholdV) {
                     truckType = '5T';
                 } else if (cw > 2090 || cv > 14) {
                     truckType = '5T';
