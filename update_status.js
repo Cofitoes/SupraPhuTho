@@ -1,1 +1,1 @@
-﻿window.UPDATE_STATUS = {"status":"running","timestamp":"2026-06-28 17:55:19","message":"","step":"Dang dong bo du lieu len link online...","progress":95};
+﻿window.UPDATE_STATUS = {"status":"error","timestamp":"2026-06-28 17:57:50","message":"Mot tien trinh cap nhat khac (PID 7936) dang chay. Vui long doi.","step":"Loi trung lap tien trinh","progress":0};
