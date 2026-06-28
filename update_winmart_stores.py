@@ -251,6 +251,29 @@ for o_name, o_data in MANUAL_OVERRIDES.items():
 print(f"Total stores extracted: {len(store_list)}")
 print(f"Newly geocoded: {updated}")
 
+# Write store_data.js
 with open(js_path, "w", encoding="utf-8") as f:
     f.write(f"const STORE_LIST_DATA = {json.dumps(store_list, ensure_ascii=False, indent=2)};\n")
-print("store_data.js generated successfully.")
+print(f"Written {len(store_list)} stores to {js_path}")
+
+# INSPECTION CODE
+try:
+    import json
+    b_path = r"G:\My Drive\Training AI\Supra Phú Thọ\booking_data.js"
+    b_data = open(b_path, encoding="utf-8").read()
+    b_json_str = b_data.replace("const BOOKING_DELIVERY_POINTS = ", "").strip()
+    if b_json_str.endswith(";"):
+        b_json_str = b_json_str[:-1]
+    booking_list = json.loads(b_json_str)
+    
+    inspect_lines = []
+    inspect_lines.append("=== Inspecting booking_data.js for 2CJL ===")
+    for item in booking_list:
+        if item.get("id") == "2CJL":
+            inspect_lines.append(json.dumps(item, ensure_ascii=False))
+            
+    with open(r"G:\My Drive\Training AI\Supra Phú Thọ\scratch_inspected.txt", "w", encoding="utf-8") as f:
+        f.write("\n".join(inspect_lines))
+except Exception as ie:
+    with open(r"G:\My Drive\Training AI\Supra Phú Thọ\scratch_inspected.txt", "w", encoding="utf-8") as f:
+        f.write(f"INSPECT ERROR: {ie}")
