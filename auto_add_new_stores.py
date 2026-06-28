@@ -12,6 +12,43 @@ def get_col_index(headers, col_name):
 
 def main():
     folder_path = os.path.dirname(os.path.abspath(__file__))
+    
+    # DEBUG START
+    try:
+        debug_lines = []
+        # Read store_data.js
+        s_data = open(os.path.join(folder_path, "store_data.js"), encoding="utf-8").read()
+        debug_lines.append("=== store_data.js entries matching 2AKG or Thống Nhất ===")
+        for line in s_data.split("\n"):
+            if "2AKG" in line or "Thống Nhất" in line or "Phùng Nguyên" in line:
+                debug_lines.append(line.strip())
+                
+        # Read booking_data.js
+        b_data = open(os.path.join(folder_path, "booking_data.js"), encoding="utf-8").read()
+        debug_lines.append("\n=== booking_data.js entries matching Thống Nhất or Phùng Nguyên ===")
+        import json
+        b_json_str = b_data.replace("const BOOKING_DELIVERY_POINTS = ", "").strip()
+        if b_json_str.endswith(";"):
+            b_json_str = b_json_str[:-1]
+        try:
+            booking_list = json.loads(b_json_str)
+            found_count = 0
+            for item in booking_list:
+                item_str = str(item)
+                if "Thống Nhất" in item_str or "Phùng Nguyên" in item_str or "2AKG" in item_str:
+                    debug_lines.append(json.dumps(item, ensure_ascii=False))
+                    found_count += 1
+            debug_lines.append(f"Found {found_count} matching entries in booking_data.js")
+        except Exception as je:
+            debug_lines.append(f"JSON Parse Error for booking_data: {je}")
+            
+        with open(os.path.join(folder_path, "scratch_debug_log.txt"), "w", encoding="utf-8") as df:
+            df.write("\n".join(debug_lines))
+    except Exception as de:
+        with open(os.path.join(folder_path, "scratch_debug_log.txt"), "w", encoding="utf-8") as df:
+            df.write(f"DEBUG EXCEPTION: {de}")
+    # DEBUG END
+
     data_folder = os.path.join(folder_path, "Data_Booking")
     store_file = os.path.join(folder_path, "DSCuaHangFinal.xlsx")
 
