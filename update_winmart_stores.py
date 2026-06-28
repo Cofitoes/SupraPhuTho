@@ -132,6 +132,14 @@ for idx, row in df.iterrows():
             "coords": {"lat": 21.13444, "lng": 105.27972},
             "id": "2AKU"
         },
+        "WM+ PTO 33 Thống Nhất, Phùng Nguyên": {
+            "coords": {"lat": 21.2819416, "lng": 105.3053024},
+            "id": "2AKG"
+        },
+        "WM+ PTO 33 Thống Nhất Phùng Nguyên": {
+            "coords": {"lat": 21.2819416, "lng": 105.3053024},
+            "id": "2AKG"
+        },
         # Add future overrides here
     }
     

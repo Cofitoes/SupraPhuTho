@@ -1545,5 +1545,31 @@ const STORE_LIST_DATA = [
       "lat": 21.39540409,
       "lng": 105.21548335
     }
+  },
+  {
+    "id": "2AKG",
+    "name": "WM+ PTO 33 Thống Nhất, Phùng Nguyên",
+    "address": "WM+ PTO 33 Thống Nhất, Phùng Nguyên",
+    "province": "Phú Thọ",
+    "district": "TP. Việt Trì",
+    "trip_type": "Giao Thang",
+    "isGXT": false,
+    "coords": {
+      "lat": 21.2819416,
+      "lng": 105.3053024
+    }
+  },
+  {
+    "id": "2AKG",
+    "name": "WM+ PTO 33 Thống Nhất Phùng Nguyên",
+    "address": "WM+ PTO 33 Thống Nhất Phùng Nguyên",
+    "province": "Phú Thọ",
+    "district": "TP. Việt Trì",
+    "trip_type": "Giao Thang",
+    "isGXT": false,
+    "coords": {
+      "lat": 21.2819416,
+      "lng": 105.3053024
+    }
   }
 ];
