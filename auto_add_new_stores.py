@@ -12,35 +12,6 @@ def get_col_index(headers, col_name):
 
 def main():
     folder_path = os.path.dirname(os.path.abspath(__file__))
-    
-    # DEBUG CHECK START
-    try:
-        debug_lines = []
-        # Read DSCuaHangFinal.xlsx
-        import openpyxl
-        store_file_chk = os.path.join(folder_path, "DSCuaHangFinal.xlsx")
-        wb_chk = openpyxl.load_workbook(store_file_chk, data_only=True)
-        sheet_chk = wb_chk.active
-        debug_lines.append("=== DSCuaHangFinal.xlsx 33 Thống Nhất ID ===")
-        for r in range(1, sheet_chk.max_row + 1):
-            row_vals = [sheet_chk.cell(row=r, column=c).value for c in range(1, 10)]
-            if "Thống Nhất" in str(row_vals):
-                debug_lines.append(f"Row {r}: {row_vals}")
-        wb_chk.close()
-        
-        # Read booking_data.js
-        b_data = open(os.path.join(folder_path, "booking_data.js"), encoding="utf-8").read()
-        debug_lines.append("\n=== booking_data.js entries matching 2CJL ===")
-        for line in b_data.split("\n"):
-            if "2CJL" in line:
-                debug_lines.append(line.strip())
-                
-        with open(os.path.join(folder_path, "scratch_debug_log.txt"), "w", encoding="utf-8") as df:
-            df.write("\n".join(debug_lines))
-    except Exception as de:
-        with open(os.path.join(folder_path, "scratch_debug_log.txt"), "w", encoding="utf-8") as df:
-            df.write(f"CHECK EXCEPTION: {de}")
-    # DEBUG CHECK END
     data_folder = os.path.join(folder_path, "Data_Booking")
     store_file = os.path.join(folder_path, "DSCuaHangFinal.xlsx")
 
