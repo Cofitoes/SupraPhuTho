@@ -208,17 +208,26 @@ for idx, row in df.iterrows():
         },
         "WM+ PTO 33 Thống Nhất, Phùng Nguyên": {
             "coords": {"lat": 21.2819416, "lng": 105.3053024},
-            "id": "2CJL"
+            "id": "2CJL",
+            "address": "H. Lâm Thao, T. Phú Thọ",
+            "province": "T. Phú Thọ",
+            "district": "H. Lâm Thao"
         },
         "WM+ PTO 33 Thống Nhất Phùng Nguyên": {
             "coords": {"lat": 21.2819416, "lng": 105.3053024},
-            "id": "2CJL"
+            "id": "2CJL",
+            "address": "H. Lâm Thao, T. Phú Thọ",
+            "province": "T. Phú Thọ",
+            "district": "H. Lâm Thao"
         },
         # Add future overrides here
     }
     
     if name in MANUAL_OVERRIDES:
         coords = MANUAL_OVERRIDES[name]["coords"]
+        if "address" in MANUAL_OVERRIDES[name]: address = MANUAL_OVERRIDES[name]["address"]
+        if "province" in MANUAL_OVERRIDES[name]: prov = MANUAL_OVERRIDES[name]["province"]
+        if "district" in MANUAL_OVERRIDES[name]: district = MANUAL_OVERRIDES[name]["district"]
         
     store_list.append({
         "id": store_id,
@@ -239,11 +248,11 @@ for o_name, o_data in MANUAL_OVERRIDES.items():
         store_list.append({
             "id": o_data.get("id", o_name),
             "name": o_name,
-            "address": o_name,
-            "province": "Phú Thọ",
-            "district": "TX. Phú Thọ" if "Phú Thọ" in o_name else "TP. Việt Trì",
-            "trip_type": "GXT" if is_gxt else "Giao Thang",
-            "isGXT": is_gxt,
+            "address": o_data.get("address", o_name),
+            "province": o_data.get("province", "Phú Thọ"),
+            "district": o_data.get("district", "TX. Phú Thọ" if "Phú Thọ" in o_name else "TP. Việt Trì"),
+            "trip_type": o_data.get("trip_type", "GXT" if is_gxt else "Giao Thang"),
+            "isGXT": o_data.get("isGXT", is_gxt),
             "coords": o_data["coords"]
         })
         print(f"Injected missing store from overrides: {o_name}")
