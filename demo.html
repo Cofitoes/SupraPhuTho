@@ -3666,7 +3666,16 @@
                 } else {
                     const routeVal = t.route || t.routeName;
                     const baseRoute = routeVal
-                        ? routeVal.split(' -> ').map(x => `<strong>${x}</strong>`).join('<br><i class="fas fa-arrow-right" style="font-size: 0.7rem; color: var(--text-dim); margin: 0 5px;"></i> ')
+                        ? routeVal.split(' -> ').map(x => {
+                            const normalizedX = x.toLowerCase().replace(/^wm\+\s*/, '').replace(/^vc\+\s*/, '').replace(/[\s,]+/g, '').trim();
+                            if (normalizedX.includes('khodcwinphúthọ') || normalizedX.includes('gxtphúthọ')) {
+                                return `<strong>${x}</strong>`;
+                            }
+                            // Tìm điểm tương ứng trong t.points để lấy trọng lượng
+                            const pt = t.points ? t.points.find(p => p.name && p.name.toLowerCase().replace(/^wm\+\s*/, '').replace(/^vc\+\s*/, '').replace(/[\s,]+/g, '').trim() === normalizedX) : null;
+                            const weightText = pt && pt.weight ? ` (${(pt.weight / 1000).toFixed(2)} Tấn)` : '';
+                            return `<strong>${x}${weightText}</strong>`;
+                          }).join('<br><i class="fas fa-arrow-right" style="font-size: 0.7rem; color: var(--text-dim); margin: 0 5px;"></i> ')
                         : `<strong>${t.hub || 'Kho DC Win Phú Thọ'}</strong>`;
                     
                     // List store names for đi thẳng trips
