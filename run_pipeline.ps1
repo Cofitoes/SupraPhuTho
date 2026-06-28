@@ -34,11 +34,22 @@ if (Test-Path $lockFile) {
         if (-not [string]::IsNullOrWhiteSpace($existingPidStr)) {
             $existingPid = [int]$existingPidStr
             $proc = Get-Process -Id $existingPid -ErrorAction SilentlyContinue
-            # Verify if the process exists AND is a powershell process to prevent recycled PID blocks
-            if ($existingPid -ne $currentPid -and $proc -and ($proc.ProcessName -like "*powershell*" -or $proc.ProcessName -like "*pwsh*")) {
-                Write-Status "error" "Loi trung lap tien trinh" 0 "Mot tien trinh cap nhat khac (PID $existingPid) dang chay. Vui long doi."
-                Write-Host "Another process (PID $existingPid) is running. Exiting."
-                exit 0
+            if ($existingPid -ne $currentPid -and $proc) {
+                # Check CommandLine of the process using CIM/WMI
+                $cmdLine = ""
+                try {
+                    $cmdLine = (Get-CimInstance Win32_Process -Filter "ProcessId = $existingPid" -ErrorAction SilentlyContinue).CommandLine
+                } catch {
+                    try {
+                        $cmdLine = (Get-WmiObject Win32_Process -Filter "ProcessId = $existingPid" -ErrorAction SilentlyContinue).CommandLine
+                    } catch {}
+                }
+                
+                # Only block if it is a PowerShell process and its CommandLine contains "run_pipeline"
+                if (($proc.ProcessName -like "*powershell*" -or $proc.ProcessName -like "*pwsh*") -and $cmdLine -like "*run_pipeline*") {
+                    Write-Host "Another process (PID $existingPid) is running. Exiting silently."
+                    exit 0
+                }
             }
         }
     } catch {
