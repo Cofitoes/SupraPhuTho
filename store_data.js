@@ -1549,7 +1549,7 @@ const STORE_LIST_DATA = [
   {
     "id": "2CJL",
     "name": "WM+ PTO 33 Thống Nhất, Phùng Nguyên",
-    "address": "Số 33 Thống Nhất, Phùng Nguyên, H. Lâm Thao, T. Phú Thọ",
+    "address": "H. Lâm Thao, T. Phú Thọ",
     "province": "T. Phú Thọ",
     "district": "H. Lâm Thao",
     "trip_type": "Giao Thang",
