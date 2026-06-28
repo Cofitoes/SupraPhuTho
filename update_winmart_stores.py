@@ -10,6 +10,79 @@ sys.stdout.reconfigure(encoding='utf-8')
 file_path = r"G:\My Drive\Training AI\Supra Phú Thọ\DSCuaHangFinal.xlsx"
 js_path = r"G:\My Drive\Training AI\Supra Phú Thọ\store_data.js"
 
+def check_and_update_excel():
+    try:
+        import openpyxl
+        wb = openpyxl.load_workbook(file_path)
+        sheet = wb.active
+        
+        # Read header row (row 1)
+        headers = [sheet.cell(row=1, column=c).value for c in range(1, sheet.max_column + 1)]
+        headers_lower = [str(h).lower().strip() if h else "" for h in headers]
+        
+        # Find column indices (1-indexed for openpyxl)
+        def find_col(options):
+            for opt in options:
+                for idx, h in enumerate(headers_lower):
+                    if h == opt.lower().strip():
+                        return idx + 1
+            return -1
+            
+        id_idx = find_col(["Site Store", "Mã cửa hàng (Mã CH)", "Mã cửa hàng", "ID", "Store_ID"])
+        name_idx = find_col(["Tên cửa hàng", "Name", "Store_Name"])
+        addr_idx = find_col(["địa chỉ", "Địa chỉ", "Address"])
+        prov_idx = find_col(["Tỉnh giao", "Thành Phố/Tỉnh", "Tỉnh", "Province", "Tên tỉnh chuẩn"])
+        dist_idx = find_col(["District", "Quận/Huyện", "Huyện/Xã", "Huyện"])
+        type_idx = find_col(["Trip_Type", "Phân loại", "Trip Type"])
+        lat_idx = find_col(["Lat", "Vi Do", "Vĩ độ"])
+        lng_idx = find_col(["Long", "Lng", "Kinh Do", "Kinh độ"])
+        
+        # Ensure we have required columns
+        if id_idx == -1 or name_idx == -1 or addr_idx == -1:
+            print("Required columns missing in Excel headers")
+            wb.close()
+            return
+            
+        # Check if store already exists by ID or name
+        exists = False
+        target_name = "WM+ PTO 33 Thống Nhất, Phùng Nguyên"
+        target_id = "2AKG"
+        
+        for r in range(2, sheet.max_row + 1):
+            name_val = sheet.cell(row=r, column=name_idx).value
+            id_val = sheet.cell(row=r, column=id_idx).value
+            
+            # Check if name matches or ID matches target_id and name is similar
+            if (name_val and str(name_val).strip() == target_name) or (id_val and str(id_val).strip() == target_id and name_val and "Thống Nhất" in str(name_val)):
+                exists = True
+                # Update store name and coords
+                sheet.cell(row=r, column=name_idx, value=target_name)
+                if lat_idx != -1: sheet.cell(row=r, column=lat_idx, value=21.2819416)
+                if lng_idx != -1: sheet.cell(row=r, column=lng_idx, value=105.3053024)
+                print(f"Updated store coordinates at row {r}")
+                break
+                
+        if not exists:
+            # Append store
+            r = sheet.max_row + 1
+            print(f"Appending store to row {r}")
+            sheet.cell(row=r, column=id_idx, value=target_id)
+            sheet.cell(row=r, column=name_idx, value=target_name)
+            sheet.cell(row=r, column=addr_idx, value="Số 33 Thống Nhất, Phùng Nguyên, H. Lâm Thao, T. Phú Thọ")
+            if prov_idx != -1: sheet.cell(row=r, column=prov_idx, value="T. Phú Thọ")
+            if dist_idx != -1: sheet.cell(row=r, column=dist_idx, value="H. Lâm Thao")
+            if type_idx != -1: sheet.cell(row=r, column=type_idx, value="Giao Thang")
+            if lat_idx != -1: sheet.cell(row=r, column=lat_idx, value=21.2819416)
+            if lng_idx != -1: sheet.cell(row=r, column=lng_idx, value=105.3053024)
+            
+        wb.save(file_path)
+        wb.close()
+        print("Excel check and update completed successfully.")
+    except Exception as e:
+        print(f"Error checking Excel: {e}")
+
+check_and_update_excel()
+
 print("Loading DSCuaHangFinal.xlsx...")
 df = pd.read_excel(file_path, engine="openpyxl")
 
