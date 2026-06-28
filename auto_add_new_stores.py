@@ -12,36 +12,6 @@ def get_col_index(headers, col_name):
 
 def main():
     folder_path = os.path.dirname(os.path.abspath(__file__))
-    
-    # EXTRACT DOCX START
-    try:
-        import zipfile
-        import xml.etree.ElementTree as ET
-        docx_path = os.path.join(folder_path, "Logic Chia Tuyen New.docx")
-        
-        debug_lines = []
-        if os.path.exists(docx_path):
-            with zipfile.ZipFile(docx_path) as z:
-                xml_content = z.read('word/document.xml')
-                root = ET.fromstring(xml_content)
-                ns = {'w': 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'}
-                paragraphs = []
-                for p in root.findall('.//w:p', ns):
-                    texts = [t.text for t in p.findall('.//w:t', ns) if t.text]
-                    if texts:
-                        paragraphs.append("".join(texts))
-                docx_text = "\n".join(paragraphs)
-                debug_lines.append("=== Logic Chia Tuyen New.docx ===")
-                debug_lines.append(docx_text)
-        else:
-            debug_lines.append("Logic Chia Tuyen New.docx NOT found.")
-            
-        with open(os.path.join(folder_path, "scratch_debug_log.txt"), "w", encoding="utf-8") as df:
-            df.write("\n".join(debug_lines))
-    except Exception as de:
-        with open(os.path.join(folder_path, "scratch_debug_log.txt"), "w", encoding="utf-8") as df:
-            df.write(f"DOCX EXTRACT EXCEPTION: {de}")
-    # EXTRACT DOCX END
     data_folder = os.path.join(folder_path, "Data_Booking")
     store_file = os.path.join(folder_path, "DSCuaHangFinal.xlsx")
 
