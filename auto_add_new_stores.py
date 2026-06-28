@@ -12,6 +12,27 @@ def get_col_index(headers, col_name):
 
 def main():
     folder_path = os.path.dirname(os.path.abspath(__file__))
+    
+    # DEBUG START
+    try:
+        debug_lines = []
+        html_path = os.path.join(folder_path, "demo.html")
+        if os.path.exists(html_path):
+            html_content = open(html_path, encoding="utf-8").read()
+            debug_lines.append("=== Searching for buttons in html ===")
+            for idx, line in enumerate(html_content.split("\n")):
+                if "Xoa" in line or "xoa" in line or "Cache" in line or "cache" in line or "clear" in line or "Xuất" in line or "Xuat" in line:
+                    if len(line.strip()) < 200:
+                        debug_lines.append(f"Line {idx+1}: {line.strip()}")
+        else:
+            debug_lines.append("demo.html not found.")
+            
+        with open(os.path.join(folder_path, "scratch_debug_log.txt"), "w", encoding="utf-8") as df:
+            df.write("\n".join(debug_lines))
+    except Exception as de:
+        with open(os.path.join(folder_path, "scratch_debug_log.txt"), "w", encoding="utf-8") as df:
+            df.write(f"SEARCH EXCEPTION: {de}")
+    # DEBUG END
     data_folder = os.path.join(folder_path, "Data_Booking")
     store_file = os.path.join(folder_path, "DSCuaHangFinal.xlsx")
 
