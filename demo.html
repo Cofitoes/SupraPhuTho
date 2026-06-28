@@ -4611,9 +4611,10 @@
                             const oldStatusScript = document.getElementById('update-status-script');
                             if (oldStatusScript) oldStatusScript.remove();
 
+                            const isFileProtocol = window.location.protocol === 'file:';
                             const newStatusScript = document.createElement('script');
                             newStatusScript.id = 'update-status-script';
-                            newStatusScript.src = 'update_status.js?t=' + Date.now();
+                            newStatusScript.src = isFileProtocol ? 'update_status.js' : 'update_status.js?t=' + Date.now();
                             document.body.appendChild(newStatusScript);
 
                             // 2. Tải summary_data.js (để kiểm tra xem dữ liệu online đã deploy thành công chưa qua LAST_UPDATE_TIME)
@@ -4622,7 +4623,7 @@
 
                             const newSummaryScript = document.createElement('script');
                             newSummaryScript.id = 'summary-data-script';
-                            newSummaryScript.src = 'summary_data.js?t=' + Date.now();
+                            newSummaryScript.src = isFileProtocol ? 'summary_data.js' : 'summary_data.js?t=' + Date.now();
                             document.body.appendChild(newSummaryScript);
 
                             newStatusScript.onload = () => {
