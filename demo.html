@@ -6986,7 +6986,46 @@
                 return normGXT === normStore || normStore.includes(normGXT) || normGXT.includes(normStore);
             });
         };
-        const directPoints = dailyPoints.filter(p => p.coords && p.coords.lat && p.coords.lng && !isGXTStore(p));
+        const splitLargeDirectPoints = (points) => {
+            const result = [];
+            points.forEach(p => {
+                const maxW = 4900;
+                const maxV = 26;
+                if ((p.weight && p.weight > maxW) || (p.volume && p.volume > maxV)) {
+                    let remW = p.weight || 0;
+                    let remV = p.volume || 0;
+                    let partIndex = 1;
+                    while (remW > 0 || remV > 0) {
+                        let fractionW = remW > 0 ? Math.min(1, maxW / remW) : 1;
+                        let fractionV = remV > 0 ? Math.min(1, maxV / remV) : 1;
+                        let fraction = Math.min(fractionW, fractionV);
+                        
+                        let takeW = parseFloat((remW * fraction).toFixed(2));
+                        let takeV = parseFloat((remV * fraction).toFixed(2));
+                        
+                        if (takeW <= 0.01 && takeV <= 0.01) break;
+                        if (takeW > remW) takeW = remW;
+                        if (takeV > remV) takeV = remV;
+
+                        result.push({
+                            ...p,
+                            name: `${p.name} (Phần ${partIndex})`,
+                            weight: takeW,
+                            volume: takeV,
+                            originalPoints: p.originalPoints || [p.name]
+                        });
+                        
+                        remW = parseFloat((remW - takeW).toFixed(2));
+                        remV = parseFloat((remV - takeV).toFixed(2));
+                        partIndex++;
+                    }
+                } else {
+                    result.push(p);
+                }
+            });
+            return result;
+        };
+        const directPoints = splitLargeDirectPoints(dailyPoints.filter(p => p.coords && p.coords.lat && p.coords.lng && !isGXTStore(p)));
         
         const routeGroups = [
             {
