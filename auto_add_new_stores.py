@@ -19,9 +19,9 @@ def main():
         html_path = os.path.join(folder_path, "demo.html")
         if os.path.exists(html_path):
             html_content = open(html_path, encoding="utf-8").read()
-            debug_lines.append("=== Searching for buttons in html ===")
+            debug_lines.append("=== Searching for trips_logic_v5 or Logic Quá Khứ ===")
             for idx, line in enumerate(html_content.split("\n")):
-                if "Xoa" in line or "xoa" in line or "Cache" in line or "cache" in line or "clear" in line or "Xuất" in line or "Xuat" in line:
+                if "trips_logic_v5" in line or "Logic Quá Khứ" in line or "logic_v5" in line or "generateTrips" in line:
                     if len(line.strip()) < 200:
                         debug_lines.append(f"Line {idx+1}: {line.strip()}")
         else:
