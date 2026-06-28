@@ -1,8 +1,23 @@
 # Lịch Sử Cập Nhật Hệ Thống Supra Phú Thọ
 
-Tài liệu này lưu trữ các thay đổi và cập nhật quan trọng của hệ thống tính toán và ghép tuyến (Cập nhật mới nhất: 27/06/2026).
+Tài liệu này lưu trữ các thay đổi và cập nhật quan trọng của hệ thống tính toán và ghép tuyến (Cập nhật mới nhất: 28/06/2026).
 
-## 1. Cập nhật ngày 27/06/2026 (Phần 3): Tích hợp Nút Xóa Cache & Rà Soát Hệ Thống
+## 1. Cập nhật ngày 28/06/2026: Tích Hợp Ngoại Lệ Xe 8T Vào Logic Quá Khứ, Sửa Hiển Thị 2CJL & Đồng Bộ Online
+- **Cơ chế ngoại lệ xe 8T cho Logic Quá Khứ**:
+  - Đồng bộ thuật toán chia tuyến cũ trong `demo.html` (trình mô phỏng Test Logic) và file offline `trips_logic_v5.js` để tự động phát hiện các đơn hàng đi thẳng > 5T, áp dụng tải trọng xe 8T (7.48T/55 CBM) và gán loại xe 8T thay vì xe 5T quá tải.
+  - Sửa đổi trực tiếp tại hàm `splitLargeDirectPoints`, hàm gán loại xe `tType` và `splitTripType`. Giúp việc so sánh chi phí và số lượng xe giữa hai logic chuẩn xác hơn.
+- **Đồng bộ hóa nút Xóa Cache trên toàn giao diện**:
+  - Di chuyển nút **Xóa Cache Hiển Thị** màu đỏ lên thanh tiêu đề chính (Header) của website, giúp nút này xuất hiện cố định ở mọi tab làm việc.
+  - Loại bỏ nút xóa cache trùng lặp tại tab Lên Lịch Tải (`#scheduler`).
+- **Sửa lỗi hiển thị thông tin bưu cục 2CJL (Lâm Thao)**:
+  - Khắc phục lỗi bưu cục `2CJL` (WM+ PTO 33 Thống Nhất Phùng Nguyên) bị hiển thị sai địa bàn thành TP. Việt Trì (do lệch tên có/không dấu phẩy giữa Excel và Booking nên rơi vào logic nạp khuyết thiếu và nhận giá trị mặc định).
+  - Cập nhật danh sách ghi đè thủ công `MANUAL_OVERRIDES` trong `update_winmart_stores.py` cho cả hai dạng tên để gán chính xác: Địa chỉ `H. Lâm Thao, T. Phú Thọ`, Quận/Huyện `H. Lâm Thao`, Tỉnh `T. Phú Thọ`.
+  - Cải tiến logic nạp trong script python để ưu tiên sử dụng trực tiếp các trường tùy biến, đảm bảo file cơ sở dữ liệu `store_data.js` được biên dịch chính xác.
+- **Xác minh đồng bộ hóa Web Online**:
+  - Định vị chính xác link online của dự án trên GitHub Pages tại [https://cofitoes.github.io/SupraPhuTho/demo.html](https://cofitoes.github.io/SupraPhuTho/demo.html).
+  - Xác nhận tiến trình chạy ngầm đã tự động đồng bộ hóa và deploy thành công các thay đổi lên trang web online.
+
+## 2. Cập nhật ngày 27/06/2026 (Phần 3): Tích hợp Nút Xóa Cache & Rà Soát Hệ Thống
 - **Hệ thống cache cục bộ (localStorage caching):**
   - Tích hợp bộ nhớ đệm `localStorage` cho cả chuyến đi thẳng / trung chuyển Masan/Supra (`supra_trips_cache_[date]`) và chuyến bưu cục GHN (`supra_trips_ghn_cache_[date]`).
   - Khi người dùng chuyển đổi giữa các ngày hoặc chuyển đổi qua lại giữa các tab, hệ thống sẽ nạp dữ liệu lập tức từ cache thay vì gọi OSRM API tính toán lại từ đầu, giúp tốc độ tải trang phản hồi tức thì và loại bỏ hoàn toàn hiện tượng trễ/lag.
