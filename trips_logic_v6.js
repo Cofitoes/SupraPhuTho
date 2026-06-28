@@ -353,6 +353,15 @@ function generateTrips() {
             let remaining = [...points];
             let groupTrips = [];
             while (remaining.length > 0) {
+                // Ngoại lệ xe 8T: Nếu có bưu cục đơn lẻ có lượng hàng > 5T (5000 kg) hoặc > 26 CBM
+                let exceptionIdx = remaining.findIndex(p => (p.weight || 0) > 5000 || (p.volume || 0) > 26);
+                if (exceptionIdx !== -1) {
+                    const p = remaining.splice(exceptionIdx, 1)[0];
+                    const trip = createDirectTrip([p], hubDC, '8T');
+                    groupTrips.push(trip);
+                    continue;
+                }
+
                 let chunk = [];
                 let cw = 0, cv = 0;
                 let truckType = '1.9T';

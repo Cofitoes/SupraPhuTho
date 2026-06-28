@@ -46,20 +46,21 @@ def check_and_update_excel():
         # Check if store already exists by ID or name
         exists = False
         target_name = "WM+ PTO 33 Thống Nhất, Phùng Nguyên"
-        target_id = "2AKG"
+        target_id = "2CJL"
         
         for r in range(2, sheet.max_row + 1):
             name_val = sheet.cell(row=r, column=name_idx).value
             id_val = sheet.cell(row=r, column=id_idx).value
             
             # Check if name matches or ID matches target_id and name is similar
-            if (name_val and str(name_val).strip() == target_name) or (id_val and str(id_val).strip() == target_id and name_val and "Thống Nhất" in str(name_val)):
+            if (name_val and str(name_val).strip() == target_name) or (id_val and str(id_val).strip() in ["2AKG", "2CJL"] and name_val and "Thống Nhất" in str(name_val)):
                 exists = True
-                # Update store name and coords
+                # Update store ID, name and coords
+                sheet.cell(row=r, column=id_idx, value=target_id)
                 sheet.cell(row=r, column=name_idx, value=target_name)
                 if lat_idx != -1: sheet.cell(row=r, column=lat_idx, value=21.2819416)
                 if lng_idx != -1: sheet.cell(row=r, column=lng_idx, value=105.3053024)
-                print(f"Updated store coordinates at row {r}")
+                print(f"Updated store coordinates and ID at row {r}")
                 break
                 
         if not exists:
@@ -207,11 +208,11 @@ for idx, row in df.iterrows():
         },
         "WM+ PTO 33 Thống Nhất, Phùng Nguyên": {
             "coords": {"lat": 21.2819416, "lng": 105.3053024},
-            "id": "2AKG"
+            "id": "2CJL"
         },
         "WM+ PTO 33 Thống Nhất Phùng Nguyên": {
             "coords": {"lat": 21.2819416, "lng": 105.3053024},
-            "id": "2AKG"
+            "id": "2CJL"
         },
         # Add future overrides here
     }
