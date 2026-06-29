@@ -365,19 +365,19 @@ try {
         Write-Warning "Khong the chay tu dong dong bo su co: $_"
     }
 
-    # 1.7. Đong bo ma van don tu Google Sheets
-    try {
-        Write-Status "running" "Dang dong bo ma van don GHN tu Google Sheets..." 95
-        Write-Host "Running update_data.py..."
-        $env:PYTHONIOENCODING = "utf-8"
-        $pythonPath = "C:\Users\ADMIN\AppData\Local\Programs\Python\Python312\python.exe"
-        if (-not (Test-Path $pythonPath)) {
-            $pythonPath = "python"
-        }
-        & $pythonPath ".\update_data.py"
-    } catch {
-        Write-Warning "Khong the chay dong bo ma van don GHN: $_"
-    }
+    # 1.7. Dong bo ma van don tu Google Sheets (Da tat - khong con dung Google Sheets)
+    # try {
+    #     Write-Status "running" "Dang dong bo ma van don GHN tu Google Sheets..." 95
+    #     Write-Host "Running update_data.py..."
+    #     $env:PYTHONIOENCODING = "utf-8"
+    #     $pythonPath = "C:\Users\ADMIN\AppData\Local\Programs\Python\Python312\python.exe"
+    #     if (-not (Test-Path $pythonPath)) {
+    #         $pythonPath = "python"
+    #     }
+    #     & $pythonPath ".\update_data.py"
+    # } catch {
+    #     Write-Warning "Khong the chay dong bo ma van don GHN: $_"
+    # }
 
     # 2. Deploy to online link (GitHub -> Vercel)
     Sync-Git-Data
