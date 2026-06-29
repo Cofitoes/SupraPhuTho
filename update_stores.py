@@ -1,8 +1,10 @@
 import pandas as pd
 import numpy as np
 
-existing_path = r'g:\My Drive\Training AI\Supra Phú Thọ\DS_Winmart_Extracted.xlsx'
-new_path = r'g:\My Drive\Training AI\Supra Phú Thọ\Danh sách Winmart (1).xlsx'
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+existing_path = os.path.join(BASE_DIR, 'DS_Winmart_Extracted.xlsx')
+new_path = os.path.join(BASE_DIR, 'Danh sách Winmart (1).xlsx')
 
 print("Loading existing stores...")
 df_existing = pd.read_excel(existing_path)

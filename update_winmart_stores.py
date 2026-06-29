@@ -7,8 +7,9 @@ import sys
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-file_path = r"G:\My Drive\Training AI\Supra Phú Thọ\DSCuaHangFinal.xlsx"
-js_path = r"G:\My Drive\Training AI\Supra Phú Thọ\store_data.js"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+file_path = os.path.join(BASE_DIR, "DSCuaHangFinal.xlsx")
+js_path = os.path.join(BASE_DIR, "store_data.js")
 
 def check_and_update_excel():
     try:

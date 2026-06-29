@@ -24,8 +24,8 @@ except ImportError:
 
 APP_PASSWORD = os.environ.get("EMAIL_APP_PASSWORD", "")
 
-# Thư mục lưu file Excel Booking tải về
-OUTPUT_DIR = r"g:\My Drive\Training AI\Supra Phú Thọ\Data_Booking"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+OUTPUT_DIR = os.path.join(BASE_DIR, "Data_Booking")
 
 # Tiêu đề email cần tìm kiếm chính xác
 TARGET_SUBJECT = "DCPT"

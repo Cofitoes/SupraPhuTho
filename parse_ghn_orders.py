@@ -5,8 +5,9 @@ import glob
 from datetime import datetime
 import re
 
-DATA_DIR = "g:\\My Drive\\Training AI\\Supra Phú Thọ\\Data_Booking"
-MAIN_FILE = "g:\\My Drive\\Training AI\\Supra Phú Thọ\\T06.2026 GHN-Supra.xlsx"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE_DIR, "Data_Booking")
+MAIN_FILE = os.path.join(BASE_DIR, "T06.2026 GHN-Supra.xlsx")
 
 store_ghn_so_data = {}
 
@@ -129,7 +130,7 @@ for file in glob.glob(os.path.join(DATA_DIR, "*.xls*")):
         print(f"Error processing {filename}: {e}")
 
 js_content = f"const STORE_GHN_SO_DATA = {json.dumps(store_ghn_so_data, ensure_ascii=False, indent=2)};\n"
-output_path = "g:\\My Drive\\Training AI\\Supra Phú Thọ\\data_ghn_so.js"
+output_path = os.path.join(BASE_DIR, "data_ghn_so.js")
 
 with open(output_path, "w", encoding="utf-8") as f:
     f.write(js_content)

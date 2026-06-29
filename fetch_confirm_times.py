@@ -21,8 +21,8 @@ EMAIL_ACCOUNT = "cuongnd@ghn.vn"
 APP_PASSWORD = os.environ.get("EMAIL_APP_PASSWORD", "")
 
 
-# File path to output departure times JavaScript
-OUTPUT_JS_PATH = r"g:\My Drive\Training AI\Supra Phú Thọ\departure_times.js"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+OUTPUT_JS_PATH = os.path.join(BASE_DIR, "departure_times.js")
 
 def decode_mime_header(header_value):
     if not header_value:

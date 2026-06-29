@@ -7,9 +7,10 @@ import sys
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-DATA_DIR = r"g:\My Drive\Training AI\Supra Phú Thọ\Data_Booking"
-BOOKING_JS_PATH = r"g:\My Drive\Training AI\Supra Phú Thọ\booking_data.js"
-SUMMARY_JS_PATH = r"g:\My Drive\Training AI\Supra Phú Thọ\summary_data.js"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE_DIR, "Data_Booking")
+BOOKING_JS_PATH = os.path.join(BASE_DIR, "booking_data.js")
+SUMMARY_JS_PATH = os.path.join(BASE_DIR, "summary_data.js")
 
 def extract_date_from_filename(filename):
     # Pattern 1: YYYYMMDD (e.g., 20260623)

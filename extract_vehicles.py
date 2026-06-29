@@ -8,8 +8,9 @@ import sys
 # Đảm bảo mã hóa UTF-8 cho dòng ra
 sys.stdout.reconfigure(encoding='utf-8')
 
-output_js_path = r"g:\My Drive\Training AI\Supra Phú Thọ\vehicle_data.js"
-booking_dir = r"g:\My Drive\Training AI\Supra Phú Thọ\Data_Booking"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+output_js_path = os.path.join(BASE_DIR, "vehicle_data.js")
+booking_dir = os.path.join(BASE_DIR, "Data_Booking")
 
 def main():
     extracted_data = {}
