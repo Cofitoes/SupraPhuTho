@@ -304,8 +304,8 @@ const STORE_LIST_DATA = [
     "address": "H. Lâm Thao, T. Phú Thọ",
     "province": "T. Phú Thọ",
     "district": "H. Lâm Thao",
-    "trip_type": "Giao Thang",
-    "isGXT": false,
+    "trip_type": "GXT",
+    "isGXT": true,
     "coords": {
       "lat": 21.3039529,
       "lng": 105.3205295
@@ -317,8 +317,8 @@ const STORE_LIST_DATA = [
     "address": "H. Lâm Thao, T. Phú Thọ",
     "province": "T. Phú Thọ",
     "district": "H. Lâm Thao",
-    "trip_type": "Giao Thang",
-    "isGXT": false,
+    "trip_type": "GXT",
+    "isGXT": true,
     "coords": {
       "lat": 21.355658,
       "lng": 105.293522
@@ -330,8 +330,8 @@ const STORE_LIST_DATA = [
     "address": "H. Lâm Thao, T. Phú Thọ",
     "province": "T. Phú Thọ",
     "district": "H. Lâm Thao",
-    "trip_type": "Giao Thang",
-    "isGXT": false,
+    "trip_type": "GXT",
+    "isGXT": true,
     "coords": {
       "lat": 21.38923211,
       "lng": 105.3002563
@@ -343,8 +343,8 @@ const STORE_LIST_DATA = [
     "address": "H. Lâm Thao, T. Phú Thọ",
     "province": "T. Phú Thọ",
     "district": "H. Lâm Thao",
-    "trip_type": "Giao Thang",
-    "isGXT": false,
+    "trip_type": "GXT",
+    "isGXT": true,
     "coords": {
       "lat": 21.325406,
       "lng": 105.2837353
@@ -356,8 +356,8 @@ const STORE_LIST_DATA = [
     "address": "H. Lâm Thao, T. Phú Thọ",
     "province": "T. Phú Thọ",
     "district": "H. Lâm Thao",
-    "trip_type": "Giao Thang",
-    "isGXT": false,
+    "trip_type": "GXT",
+    "isGXT": true,
     "coords": {
       "lat": 21.3385339,
       "lng": 105.29316541
@@ -369,8 +369,8 @@ const STORE_LIST_DATA = [
     "address": "H. Lâm Thao, T. Phú Thọ",
     "province": "T. Phú Thọ",
     "district": "H. Lâm Thao",
-    "trip_type": "Giao Thang",
-    "isGXT": false,
+    "trip_type": "GXT",
+    "isGXT": true,
     "coords": {
       "lat": 21.29753649,
       "lng": 105.3490302
@@ -382,8 +382,8 @@ const STORE_LIST_DATA = [
     "address": "H. Lâm Thao, T. Phú Thọ",
     "province": "T. Phú Thọ",
     "district": "H. Lâm Thao",
-    "trip_type": "Giao Thang",
-    "isGXT": false,
+    "trip_type": "GXT",
+    "isGXT": true,
     "coords": {
       "lat": 21.269248,
       "lng": 105.295034
@@ -395,8 +395,8 @@ const STORE_LIST_DATA = [
     "address": "H. Lâm Thao, T. Phú Thọ",
     "province": "T. Phú Thọ",
     "district": "H. Lâm Thao",
-    "trip_type": "Giao Thang",
-    "isGXT": false,
+    "trip_type": "GXT",
+    "isGXT": true,
     "coords": {
       "lat": 21.37217265,
       "lng": 105.29870171
@@ -408,8 +408,8 @@ const STORE_LIST_DATA = [
     "address": "H. Lâm Thao, T. Phú Thọ",
     "province": "T. Phú Thọ",
     "district": "H. Lâm Thao",
-    "trip_type": "Giao Thang",
-    "isGXT": false,
+    "trip_type": "GXT",
+    "isGXT": true,
     "coords": {
       "lat": 21.288375,
       "lng": 105.302425
