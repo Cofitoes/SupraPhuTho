@@ -17,8 +17,7 @@ def check_and_update_excel():
         wb = openpyxl.load_workbook(file_path)
         sheet = wb.active
         
-        # Read header row (row 1)
-        headers = [sheet.cell(row=1, column=c).value for c in range(1, sheet.max_column + 1)]
+Hãy         headers = [sheet.cell(row=1, column=c).value for c in range(1, sheet.max_column + 1)]
         headers_lower = [str(h).lower().strip() if h else "" for h in headers]
         
         # Find column indices (1-indexed for openpyxl)

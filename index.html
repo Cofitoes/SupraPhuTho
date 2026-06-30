@@ -3629,13 +3629,12 @@
                     }
 
                     if (routeCoords.length >= 2) {
-                        const origin = `${routeCoords[0].lat},${routeCoords[0].lng}`;
-                        const destination = `${routeCoords[routeCoords.length - 1].lat},${routeCoords[routeCoords.length - 1].lng}`;
-                        let waypoints = '';
-                        if (routeCoords.length > 2) {
-                            waypoints = '&waypoints=' + routeCoords.slice(1, -1).map(c => `${c.lat},${c.lng}`).join('%7C');
+                        const hasReturn = t.points && t.points.length > 0 && t.points[t.points.length - 1].type === 'HUB_RETURN';
+                        const coordsForUrl = [...routeCoords];
+                        if (hasReturn) {
+                            coordsForUrl.push(originCoords);
                         }
-                        mapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}${waypoints}`;
+                        mapsUrl = 'https://www.google.com/maps/dir/' + coordsForUrl.map(c => `${c.lat},${c.lng}`).join('/');
                     }
                 }
 
@@ -3804,13 +3803,12 @@
                             routeCoords = [originCoords, ...validPoints.map(p => p.coords)];
                         }
                         if (routeCoords.length >= 2) {
-                            const origin = `${routeCoords[0].lat},${routeCoords[0].lng}`;
-                            const destination = `${routeCoords[routeCoords.length - 1].lat},${routeCoords[routeCoords.length - 1].lng}`;
-                            let waypoints = '';
-                            if (routeCoords.length > 2) {
-                                waypoints = '&waypoints=' + routeCoords.slice(1, -1).map(c => `${c.lat},${c.lng}`).join('%7C');
+                            const hasReturn = t.points && t.points.length > 0 && t.points[t.points.length - 1].type === 'HUB_RETURN';
+                            const coordsForUrl = [...routeCoords];
+                            if (hasReturn) {
+                                coordsForUrl.push(originCoords);
                             }
-                            mapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}${waypoints}`;
+                            mapsUrl = 'https://www.google.com/maps/dir/' + coordsForUrl.map(c => `${c.lat},${c.lng}`).join('/');
                         }
                     }
 
