@@ -288,7 +288,7 @@ function generateTrips() {
     }
 
     // ========================================
-    // STEP 2: DIRECT DELIVERY (Giao thẳng)
+    // STEP 2: DIRECT DELIVERY (Giao thẳng) - Gom Huyện + Nâng tải
     // ========================================
     if (directPoints.length > 0) {
         // Helper to resolve district for a delivery point
@@ -326,144 +326,327 @@ function generateTrips() {
             return '';
         };
 
-        // ========================================
-        // OPTIMIZED STRATEGY: 5T trucks, no fixed route grouping
-        // ========================================
-        // Instead of grouping by fixed district routes and packing into 1.9T,
-        // pack all direct delivery points together into 5T trucks.
-        // For each trip, compare 5T vs 1.9T cost and pick the cheaper option.
-        // This approach saves ~18.8% cost based on historical data analysis.
+        const getChunkDistance = (hub, points) => {
+            if (points.length === 0) return 0;
+            const tsp = solveTSP(hub, points);
+            let sequence = tsp.sequence || [];
+            let dist = 0;
+            let last = hub;
+            sequence.forEach(p => {
+                dist += calculateDistance(last.coords, p.coords);
+                last = p;
+            });
+            if (sequence.length > 0) {
+                dist += calculateDistance(sequence[sequence.length - 1].coords, hub.coords);
+            }
+            return parseFloat(dist.toFixed(2));
+        };
 
-        let remaining = [...directPoints];
-        let directTrips = [];
+        const splitLargeDirectPoints = (points) => {
+            const result = [];
+            points.forEach(p => {
+                const is8TException = (p.weight && p.weight > 5000) || (p.volume && p.volume > 26);
+                const maxW = is8TException ? 7480 : 5000;
+                const maxV = is8TException ? 55 : 26;
+                if ((p.weight && p.weight > maxW) || (p.volume && p.volume > maxV)) {
+                    let remW = p.weight || 0;
+                    let remV = p.volume || 0;
+                    let partIndex = 1;
+                    while (remW > 0 || remV > 0) {
+                        let fractionW = remW > 0 ? Math.min(1, maxW / remW) : 1;
+                        let fractionV = remV > 0 ? Math.min(1, maxV / remV) : 1;
+                        let fraction = Math.min(fractionW, fractionV);
+                        
+                        let takeW = parseFloat((remW * fraction).toFixed(2));
+                        let takeV = parseFloat((remV * fraction).toFixed(2));
+                        
+                        if (takeW <= 0.01 && takeV <= 0.01) break;
+                        if (takeW > remW) takeW = remW;
+                        if (takeV > remV) takeV = remV;
 
-        // --- Exception 1: Split oversized stores (> 8T capacity) ---
-        for (let i = remaining.length - 1; i >= 0; i--) {
-            const p = remaining[i];
-            if ((p.weight || 0) > TRUCK_LIMITS['8T'].maxWAllowed || (p.volume || 0) > TRUCK_LIMITS['8T'].maxV) {
-                remaining.splice(i, 1);
-                let W = p.weight || 0;
-                let V = p.volume || 0;
-                let partCounter = 1;
-                const maxW = TRUCK_LIMITS['8T'].maxWAllowed;
-                const maxV = TRUCK_LIMITS['8T'].maxV;
-                while (W > 0 || V > 0) {
-                    let partW = Math.min(W, maxW);
-                    let partV = Math.min(V, maxV);
-                    if (W > 0 && V > 0) {
-                        const ratioW = partW / W;
-                        const ratioV = partV / V;
-                        const minRatio = Math.min(ratioW, ratioV);
-                        partW = W * minRatio;
-                        partV = V * minRatio;
+                        result.push({
+                            ...p,
+                            name: `${p.name} (Phần ${partIndex})`,
+                            weight: takeW,
+                            volume: takeV,
+                            originalPoints: p.originalPoints || [p.name],
+                            use8TException: is8TException
+                        });
+                        
+                        remW = parseFloat((remW - takeW).toFixed(2));
+                        remV = parseFloat((remV - takeV).toFixed(2));
+                        partIndex++;
                     }
-                    if (partW <= 0 && partV <= 0) break;
-                    if (partW < 1 && W < 1) partW = W;
-                    if (partV < 0.01 && V < 0.01) partV = V;
-
-                    let partTruckType = '8T';
-                    if (partW <= TRUCK_LIMITS['5T'].maxWAllowed && partV <= TRUCK_LIMITS['5T'].maxV) partTruckType = '5T';
-                    if (partW <= TRUCK_LIMITS['1.9T'].maxWAllowed && partV <= TRUCK_LIMITS['1.9T'].maxV) partTruckType = '1.9T';
-
-                    const virtualPoint = {
-                        ...p,
-                        name: `${p.name} (Phần ${partCounter})`,
-                        weight: partW,
-                        volume: partV
-                    };
-                    const trip = createDirectTrip([virtualPoint], hubDC, partTruckType);
-                    trip.districtsName = 'Quá tải - Tách chuyến';
-                    directTrips.push(trip);
-                    W -= partW;
-                    V -= partV;
-                    partCounter++;
-                }
-            }
-        }
-
-        // --- Exception 2: Single stores exceeding 5T capacity → 8T ---
-        for (let i = remaining.length - 1; i >= 0; i--) {
-            const p = remaining[i];
-            if ((p.weight || 0) > TRUCK_LIMITS['5T'].maxWAllowed || (p.volume || 0) > TRUCK_LIMITS['5T'].maxV) {
-                remaining.splice(i, 1);
-                const trip = createDirectTrip([p], hubDC, '8T');
-                const pDistrict = getDistrictForPoint(p);
-                trip.districtsName = pDistrict ? pDistrict.replace(/^(H\.|TP\.|TX\.)\s*/i, '').trim() : 'Ngoại lệ 8T';
-                directTrips.push(trip);
-            }
-        }
-
-        // --- Main packing: 5T trucks with smart cost comparison ---
-        // Sort by weight descending (First-Fit Decreasing for better bin packing)
-        remaining.sort((a, b) => (b.weight || 0) - (a.weight || 0));
-
-        while (remaining.length > 0) {
-            // Pack as many as possible into a 5T truck
-            let chunk = [];
-            let cw = 0, cv = 0;
-            let i = 0;
-            while (i < remaining.length) {
-                const p = remaining[i];
-                const pw = p.weight || 0;
-                const pv = p.volume || 0;
-                if (cw + pw <= TRUCK_LIMITS['5T'].maxWAllowed && cv + pv <= TRUCK_LIMITS['5T'].maxV) {
-                    chunk.push(p);
-                    cw += pw;
-                    cv += pv;
-                    remaining.splice(i, 1);
                 } else {
-                    i++;
-                }
-            }
-            if (chunk.length === 0 && remaining.length > 0) {
-                const p = remaining.shift();
-                chunk.push(p);
-                cw = p.weight || 0;
-                cv = p.volume || 0;
-            }
-
-            // Smart truck selection: compare 5T vs 1.9T cost
-            let truckType = '5T';
-            const fitsIn19T = cw <= TRUCK_LIMITS['1.9T'].maxWAllowed && cv <= TRUCK_LIMITS['1.9T'].maxV;
-
-            if (fitsIn19T) {
-                // Compute distance to compare costs
-                const tspResult = solveTSP(hubDC, chunk);
-                let dist = 0;
-                let last = hubDC;
-                tspResult.sequence.forEach(p => {
-                    dist += calculateDistance(last.coords, p.coords);
-                    last = p;
-                });
-                if (tspResult.sequence.length > 0) {
-                    dist += calculateDistance(tspResult.sequence[tspResult.sequence.length - 1].coords, hubDC.coords);
-                }
-                const distKm = parseFloat(dist.toFixed(2));
-
-                const cost5T = getTripCostDetails('5T', distKm, cw, 'Đi thẳng').totalCost;
-                const cost19T = getTripCostDetails('1.9T', distKm, cw, 'Đi thẳng').totalCost;
-
-                truckType = cost19T <= cost5T ? '1.9T' : '5T';
-            }
-
-            const trip = createDirectTrip(chunk, hubDC, truckType);
-
-            // Derive district name from actual points for display
-            const districtSet = new Set();
-            chunk.forEach(p => {
-                const d = getDistrictForPoint(p);
-                if (d) {
-                    districtSet.add(d.replace(/^(H\.|TP\.|TX\.)\s*/i, '').trim());
+                    result.push({
+                        ...p,
+                        use8TException: is8TException
+                    });
                 }
             });
-            trip.districtsName = districtSet.size > 0 ? [...districtSet].join(' - ') : 'Giao thẳng';
+            return result;
+        };
 
-            directTrips.push(trip);
+        let processedDirect = splitLargeDirectPoints(directPoints);
+        let directTrips = [];
+
+        // Exception 8T - run directly as single trips
+        let remainingDirect = [];
+        processedDirect.forEach(p => {
+            if (p.use8TException) {
+                const trip = createDirectTrip([p], hubDC, '8T');
+                trip.districtsName = 'Ngoại lệ 8T';
+                directTrips.push(trip);
+            } else {
+                remainingDirect.push(p);
+            }
+        });
+
+        // Fixed route groups definition
+        const ROUTE_GROUPS = [
+            { id: 1, name: 'Tuyến 1: Thanh Thủy - Thanh Sơn', districts: ['Thanh Thủy', 'Thanh Sơn', 'Thanh Thuỷ'], points: [] },
+            { id: 2, name: 'Tuyến 2: Yên Lập - Cẩm Khê', districts: ['Yên Lập', 'Cẩm Khê'], points: [] },
+            { id: 3, name: 'Tuyến 3: Tam Nông - Lâm Thao', districts: ['Tam Nông', 'Lâm Thao'], points: [] },
+            { id: 4, name: 'Tuyến 4: Đoan Hùng - Phù Ninh', districts: ['Đoan Hùng', 'Phù Ninh'], points: [] },
+            { id: 5, name: 'Tuyến 5: Hạ Hòa - Thanh Ba', districts: ['Hạ Hòa', 'Hạ Hoà', 'Thanh Ba'], points: [] }
+        ];
+        let fallbackPoints = [];
+
+        // Group points
+        remainingDirect.forEach(p => {
+            const distName = getDistrictForPoint(p);
+            let matched = false;
+            if (distName) {
+                const normalized = distName.normalize('NFC').trim().toLowerCase();
+                for (const group of ROUTE_GROUPS) {
+                    for (const d of group.districts) {
+                        const normD = d.normalize('NFC').trim().toLowerCase();
+                        if (normalized === normD || normalized.includes(normD) || normD.includes(normalized)) {
+                            group.points.push(p);
+                            matched = true;
+                            break;
+                        }
+                    }
+                    if (matched) break;
+                }
+            }
+            if (!matched) {
+                fallbackPoints.push(p);
+            }
+        });
+
+        // Resolve fallback points
+        fallbackPoints.forEach(p => {
+            let bestGroupId = 3;
+            let minDist = Infinity;
+            ROUTE_GROUPS.forEach(g => {
+                if (g.points.length > 0) {
+                    g.points.forEach(gp => {
+                        const d = calculateDistance(p.coords, gp.coords);
+                        if (d < minDist) {
+                            minDist = d;
+                            bestGroupId = g.id;
+                        }
+                    });
+                }
+            });
+            const group = ROUTE_GROUPS.find(g => g.id === bestGroupId);
+            group.points.push(p);
+        });
+
+        // Route Merging Logic (< 5 stores)
+        let activeGroups = ROUTE_GROUPS.filter(g => g.points.length > 0);
+        let mergedAny = true;
+        while (mergedAny) {
+            mergedAny = false;
+            let bestMerge = null;
+            
+            for (let i = 0; i < activeGroups.length; i++) {
+                const src = activeGroups[i];
+                if (src.points.length > 0 && src.points.length < 5) {
+                    for (let j = 0; j < activeGroups.length; j++) {
+                        const tgt = activeGroups[j];
+                        if (src.id === tgt.id || tgt.points.length === 0) continue;
+                        
+                        const distTgt = getChunkDistance(hubDC, tgt.points);
+                        const wTgt = tgt.points.reduce((s,p) => s + (p.weight||0), 0);
+                        const vTgt = tgt.points.reduce((s,p) => s + (p.volume||0), 0);
+                        let truckTypeTgt = '1.9T';
+                        if (wTgt > 2090 || vTgt > 14) truckTypeTgt = '5T';
+                        const costTgt = getTripCostDetails(truckTypeTgt, distTgt, wTgt, 'Đi thẳng').totalCost;
+                        
+                        const mergedPoints = [...tgt.points, ...src.points];
+                        const distMerged = getChunkDistance(hubDC, mergedPoints);
+                        const wMerged = mergedPoints.reduce((s,p) => s + (p.weight||0), 0);
+                        const vMerged = mergedPoints.reduce((s,p) => s + (p.volume||0), 0);
+                        let truckTypeMerged = '1.9T';
+                        if (wMerged > 2090 || vMerged > 14) truckTypeMerged = '5T';
+                        if (wMerged > 5500 || vMerged > 26) truckTypeMerged = '8T';
+                        
+                        const costMerged = getTripCostDetails(truckTypeMerged, distMerged, wMerged, 'Đi thẳng').totalCost;
+                        const costIncrease = costMerged - costTgt;
+                        
+                        if (costIncrease <= 1300000) {
+                            if (bestMerge === null || costIncrease < bestMerge.costIncrease) {
+                                bestMerge = {
+                                    srcId: src.id,
+                                    tgtId: tgt.id,
+                                    costIncrease: costIncrease,
+                                    mergedPoints: mergedPoints
+                                };
+                            }
+                        }
+                    }
+                }
+            }
+            
+            if (bestMerge) {
+                const srcGroup = activeGroups.find(g => g.id === bestMerge.srcId);
+                const tgtGroup = activeGroups.find(g => g.id === bestMerge.tgtId);
+                tgtGroup.points = bestMerge.mergedPoints;
+                srcGroup.points = [];
+                activeGroups = activeGroups.filter(g => g.points.length > 0);
+                mergedAny = true;
+            }
         }
 
-        // Sort direct delivery trips by distance for display ordering
-        directTrips.sort((a, b) => (a.dist || a.distance || 0) - (b.dist || b.distance || 0));
+        // Packing options
+        const packGroupPoints = (points, allow5T) => {
+            const sortedPoints = [...points].sort((a,b) => (b.weight||0) - (a.weight||0));
+            const maxW19T = 2090;
+            const maxV19T = 14;
+            const maxW5T = 5500;
+            const maxV5T = 26;
+            
+            let tripsList = [];
+            
+            if (allow5T) {
+                let pointsFor5T = [];
+                let remainingPoints = [];
+                let w5t = 0, v5t = 0;
+                
+                sortedPoints.forEach(p => {
+                    if (w5t + (p.weight||0) <= maxW5T && v5t + (p.volume||0) <= maxV5T) {
+                        pointsFor5T.push(p);
+                        w5t += (p.weight||0);
+                        v5t += (p.volume||0);
+                    } else {
+                        remainingPoints.push(p);
+                    }
+                });
+                
+                if (pointsFor5T.length > 0) {
+                    tripsList.push({ points: pointsFor5T, type: '5T' });
+                }
+                
+                let chunks19T = [];
+                remainingPoints.forEach(p => {
+                    let packed = false;
+                    for (let i = 0; i < chunks19T.length; i++) {
+                        let c = chunks19T[i];
+                        if (c.w + (p.weight||0) <= maxW19T && c.v + (p.volume||0) <= maxV19T) {
+                            c.points.push(p);
+                            c.w += (p.weight||0);
+                            c.v += (p.volume||0);
+                            packed = true;
+                            break;
+                        }
+                    }
+                    if (!packed) {
+                        chunks19T.push({
+                            points: [p],
+                            w: (p.weight||0),
+                            v: (p.volume||0)
+                        });
+                    }
+                });
+                
+                chunks19T.forEach(c => {
+                    tripsList.push({ points: c.points, type: '1.9T' });
+                });
+            } else {
+                let chunks19T = [];
+                sortedPoints.forEach(p => {
+                    let packed = false;
+                    for (let i = 0; i < chunks19T.length; i++) {
+                        let c = chunks19T[i];
+                        if (c.w + (p.weight||0) <= maxW19T && c.v + (p.volume||0) <= maxV19T) {
+                            c.points.push(p);
+                            c.w += (p.weight||0);
+                            c.v += (p.volume||0);
+                            packed = true;
+                            break;
+                        }
+                    }
+                    if (!packed) {
+                        chunks19T.push({
+                            points: [p],
+                            w: (p.weight||0),
+                            v: (p.volume||0)
+                        });
+                    }
+                });
+                
+                chunks19T.forEach(c => {
+                    tripsList.push({ points: c.points, type: '1.9T' });
+                });
+            }
+            return tripsList;
+        };
 
+        const calculateTripsCost = (tripsList) => {
+            let totalCost = 0;
+            tripsList.forEach(t => {
+                const dist = getChunkDistance(hubDC, t.points);
+                const w = t.points.reduce((s,p) => s + (p.weight||0), 0);
+                const costDetails = getTripCostDetails(t.type, dist, w, 'Đi thẳng');
+                totalCost += costDetails.totalCost;
+            });
+            return totalCost;
+        };
+
+        // Determine best groups to upgrade to 5T (max 2)
+        const groupStats = activeGroups.map(g => {
+            const tripsNoUpgrade = packGroupPoints(g.points, false);
+            const costNoUpgrade = calculateTripsCost(tripsNoUpgrade);
+            
+            const tripsWithUpgrade = packGroupPoints(g.points, true);
+            const costWithUpgrade = calculateTripsCost(tripsWithUpgrade);
+            
+            const saving = costNoUpgrade - costWithUpgrade;
+            
+            return {
+                group: g,
+                saving: saving,
+                tripsNoUpgrade: tripsNoUpgrade,
+                tripsWithUpgrade: tripsWithUpgrade
+            };
+        });
+
+        groupStats.sort((a,b) => b.saving - a.saving);
+
+        let upgraded5TCount = 0;
+        groupStats.forEach(stat => {
+            if (stat.saving > 0 && upgraded5TCount < 2) {
+                stat.tripsWithUpgrade.forEach(t => {
+                    const trip = createDirectTrip(t.points, hubDC, t.type);
+                    trip.districtsName = stat.group.name.replace(/^(Tuyến \d+:\s*)/i, '').trim();
+                    directTrips.push(trip);
+                    if (t.type === '5T') {
+                        upgraded5TCount++;
+                    }
+                });
+            } else {
+                stat.tripsNoUpgrade.forEach(t => {
+                    const trip = createDirectTrip(t.points, hubDC, t.type);
+                    trip.districtsName = stat.group.name.replace(/^(Tuyến \d+:\s*)/i, '').trim();
+                    directTrips.push(trip);
+                });
+            }
+        });
+
+        // Sort direct trips by distance for UI presentation
+        directTrips.sort((a, b) => (a.dist || 0) - (b.dist || 0));
         trips.push(...directTrips);
     }
 
