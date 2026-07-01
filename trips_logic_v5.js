@@ -592,6 +592,51 @@ function generateTrips() {
         trip.id = `LH-${bookingDateStr}-${String(idx + 1).padStart(3, '0')}`;
     });
 
+    // ========================================
+    // RESOLVE DISTRICT NAMES (Huyện/Xã) FOR EACH TRIP
+    // ========================================
+    const resolveDistrictForPoint = (p) => {
+        // Priority 1: Look up from STORE_LIST_DATA by ID or name
+        if (typeof STORE_LIST_DATA !== 'undefined' && Array.isArray(STORE_LIST_DATA)) {
+            const cleanName = p.name ? p.name.replace(/\s*\(Phần\s*\d+\)\s*$/i, '').toLowerCase() : '';
+            const store = STORE_LIST_DATA.find(s =>
+                (p.id && s.id && s.id.toLowerCase() === p.id.toLowerCase()) ||
+                (cleanName && s.name && s.name.toLowerCase() === cleanName)
+            );
+            if (store && store.district) return store.district;
+        }
+        // Priority 2: Parse from address field (format: "H. Xxx, T. Yyy")
+        if (p.address) {
+            let parts = p.address.split(',').map(part => part.trim()).filter(Boolean);
+            if (parts.length > 0) {
+                let last = parts[parts.length - 1];
+                if (last.toLowerCase() === 'việt nam' || last.toLowerCase() === 'vietnam') {
+                    parts.pop();
+                }
+            }
+            if (parts.length >= 1) {
+                return parts[0]; // First part is typically the district
+            }
+        }
+        return '';
+    };
+
+    sortedTrips.forEach(trip => {
+        if (trip.tripType === 'Trung chuyển') {
+            trip.districtsName = 'Trung chuyển GXT';
+            return;
+        }
+        const deliveryPoints = (trip.points || []).filter(p => p.type === 'DELIVERY');
+        const districts = new Set();
+        deliveryPoints.forEach(p => {
+            const d = resolveDistrictForPoint(p);
+            if (d) districts.add(d);
+        });
+        if (districts.size > 0) {
+            trip.districtsName = [...districts].join(', ');
+        }
+    });
+
     // API for Drag and Drop reallocation
     window.recalculateTrip = (trip) => {
         if (trip.tripType !== 'Đi thẳng') return trip;
