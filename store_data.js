@@ -299,123 +299,6 @@ const STORE_LIST_DATA = [
     }
   },
   {
-    "id": "2BX9",
-    "name": "WM+ PTO Khu 15, Dục Mỹ",
-    "address": "H. Lâm Thao, T. Phú Thọ",
-    "province": "T. Phú Thọ",
-    "district": "H. Lâm Thao",
-    "trip_type": "GXT",
-    "isGXT": true,
-    "coords": {
-      "lat": 21.3039529,
-      "lng": 105.3205295
-    }
-  },
-  {
-    "id": "6562",
-    "name": "WM+ PTO 235-235B TT Hùng Sơn",
-    "address": "H. Lâm Thao, T. Phú Thọ",
-    "province": "T. Phú Thọ",
-    "district": "H. Lâm Thao",
-    "trip_type": "GXT",
-    "isGXT": true,
-    "coords": {
-      "lat": 21.355658,
-      "lng": 105.293522
-    }
-  },
-  {
-    "id": "2BGF",
-    "name": "WM+ PTO Khu 10, Xuân Lũng",
-    "address": "H. Lâm Thao, T. Phú Thọ",
-    "province": "T. Phú Thọ",
-    "district": "H. Lâm Thao",
-    "trip_type": "GXT",
-    "isGXT": true,
-    "coords": {
-      "lat": 21.38923211,
-      "lng": 105.3002563
-    }
-  },
-  {
-    "id": "5905",
-    "name": "WM+ PTO 26 Âu Cơ",
-    "address": "H. Lâm Thao, T. Phú Thọ",
-    "province": "T. Phú Thọ",
-    "district": "H. Lâm Thao",
-    "trip_type": "GXT",
-    "isGXT": true,
-    "coords": {
-      "lat": 21.325406,
-      "lng": 105.2837353
-    }
-  },
-  {
-    "id": "6540",
-    "name": "WM+ PTO Khu 12, TT Lâm Thao",
-    "address": "H. Lâm Thao, T. Phú Thọ",
-    "province": "T. Phú Thọ",
-    "district": "H. Lâm Thao",
-    "trip_type": "GXT",
-    "isGXT": true,
-    "coords": {
-      "lat": 21.3385339,
-      "lng": 105.29316541
-    }
-  },
-  {
-    "id": "6338",
-    "name": "WM+ PTO Cao Xá, Lâm Thao",
-    "address": "H. Lâm Thao, T. Phú Thọ",
-    "province": "T. Phú Thọ",
-    "district": "H. Lâm Thao",
-    "trip_type": "GXT",
-    "isGXT": true,
-    "coords": {
-      "lat": 21.29753649,
-      "lng": 105.3490302
-    }
-  },
-  {
-    "id": "2BW8",
-    "name": "WM+ PTO Khu 1, Bản Nguyên",
-    "address": "H. Lâm Thao, T. Phú Thọ",
-    "province": "T. Phú Thọ",
-    "district": "H. Lâm Thao",
-    "trip_type": "GXT",
-    "isGXT": true,
-    "coords": {
-      "lat": 21.269248,
-      "lng": 105.295034
-    }
-  },
-  {
-    "id": "2BBO",
-    "name": "WM+ PTO Khu 2, Xuân Lũng",
-    "address": "H. Lâm Thao, T. Phú Thọ",
-    "province": "T. Phú Thọ",
-    "district": "H. Lâm Thao",
-    "trip_type": "GXT",
-    "isGXT": true,
-    "coords": {
-      "lat": 21.37217265,
-      "lng": 105.29870171
-    }
-  },
-  {
-    "id": "2AKG",
-    "name": "WM+ PTO Khu 5, Tứ Xã",
-    "address": "H. Lâm Thao, T. Phú Thọ",
-    "province": "T. Phú Thọ",
-    "district": "H. Lâm Thao",
-    "trip_type": "GXT",
-    "isGXT": true,
-    "coords": {
-      "lat": 21.288375,
-      "lng": 105.302425
-    }
-  },
-  {
     "id": "6750",
     "name": "WM+ PTO Bình Phú, Phù Ninh",
     "address": "H. Phù Ninh, T. Phú Thọ",
@@ -530,45 +413,6 @@ const STORE_LIST_DATA = [
     "coords": {
       "lat": 21.49196898,
       "lng": 105.22540187
-    }
-  },
-  {
-    "id": "5891",
-    "name": "WM+ PTO Khu 23 Vạn Xuân",
-    "address": "H. Tam Nông, T. Phú Thọ",
-    "province": "T. Phú Thọ",
-    "district": "H. Tam Nông",
-    "trip_type": "Giao Thang",
-    "isGXT": false,
-    "coords": {
-      "lat": 21.28429,
-      "lng": 105.25763
-    }
-  },
-  {
-    "id": "2ANC",
-    "name": "WM+ PTO Khu 21, Vạn Xuân",
-    "address": "H. Tam Nông, T. Phú Thọ",
-    "province": "T. Phú Thọ",
-    "district": "H. Tam Nông",
-    "trip_type": "Giao Thang",
-    "isGXT": false,
-    "coords": {
-      "lat": 21.31667,
-      "lng": 105.26444
-    }
-  },
-  {
-    "id": "6871",
-    "name": "WM+ PTO TT Hưng Hóa, Tam Nông",
-    "address": "H. Tam Nông, T. Phú Thọ",
-    "province": "T. Phú Thọ",
-    "district": "H. Tam Nông",
-    "trip_type": "Giao Thang",
-    "isGXT": false,
-    "coords": {
-      "lat": 21.25426,
-      "lng": 105.29208
     }
   },
   {
@@ -959,6 +803,175 @@ const STORE_LIST_DATA = [
     "coords": {
       "lat": 21.248375,
       "lng": 105.1120516
+    }
+  },
+  {
+    "id": "2BX9",
+    "name": "WM+ PTO Khu 15, Dục Mỹ",
+    "address": "H. Lâm Thao, T. Phú Thọ",
+    "province": "T. Phú Thọ",
+    "district": "H. Lâm Thao",
+    "trip_type": "GXT",
+    "isGXT": true,
+    "coords": {
+      "lat": 21.3039529,
+      "lng": 105.3205295
+    }
+  },
+  {
+    "id": "6562",
+    "name": "WM+ PTO 235-235B TT Hùng Sơn",
+    "address": "H. Lâm Thao, T. Phú Thọ",
+    "province": "T. Phú Thọ",
+    "district": "H. Lâm Thao",
+    "trip_type": "GXT",
+    "isGXT": true,
+    "coords": {
+      "lat": 21.355658,
+      "lng": 105.293522
+    }
+  },
+  {
+    "id": "2BGF",
+    "name": "WM+ PTO Khu 10, Xuân Lũng",
+    "address": "H. Lâm Thao, T. Phú Thọ",
+    "province": "T. Phú Thọ",
+    "district": "H. Lâm Thao",
+    "trip_type": "GXT",
+    "isGXT": true,
+    "coords": {
+      "lat": 21.38923211,
+      "lng": 105.3002563
+    }
+  },
+  {
+    "id": "5905",
+    "name": "WM+ PTO 26 Âu Cơ",
+    "address": "H. Lâm Thao, T. Phú Thọ",
+    "province": "T. Phú Thọ",
+    "district": "H. Lâm Thao",
+    "trip_type": "GXT",
+    "isGXT": true,
+    "coords": {
+      "lat": 21.325406,
+      "lng": 105.2837353
+    }
+  },
+  {
+    "id": "6540",
+    "name": "WM+ PTO Khu 12, TT Lâm Thao",
+    "address": "H. Lâm Thao, T. Phú Thọ",
+    "province": "T. Phú Thọ",
+    "district": "H. Lâm Thao",
+    "trip_type": "GXT",
+    "isGXT": true,
+    "coords": {
+      "lat": 21.3385339,
+      "lng": 105.29316541
+    }
+  },
+  {
+    "id": "6338",
+    "name": "WM+ PTO Cao Xá, Lâm Thao",
+    "address": "H. Lâm Thao, T. Phú Thọ",
+    "province": "T. Phú Thọ",
+    "district": "H. Lâm Thao",
+    "trip_type": "GXT",
+    "isGXT": true,
+    "coords": {
+      "lat": 21.29753649,
+      "lng": 105.3490302
+    }
+  },
+  {
+    "id": "2BW8",
+    "name": "WM+ PTO Khu 1, Bản Nguyên",
+    "address": "H. Lâm Thao, T. Phú Thọ",
+    "province": "T. Phú Thọ",
+    "district": "H. Lâm Thao",
+    "trip_type": "GXT",
+    "isGXT": true,
+    "coords": {
+      "lat": 21.269248,
+      "lng": 105.295034
+    }
+  },
+  {
+    "id": "2BBO",
+    "name": "WM+ PTO Khu 2, Xuân Lũng",
+    "address": "H. Lâm Thao, T. Phú Thọ",
+    "province": "T. Phú Thọ",
+    "district": "H. Lâm Thao",
+    "trip_type": "GXT",
+    "isGXT": true,
+    "coords": {
+      "lat": 21.37217265,
+      "lng": 105.29870171
+    }
+  },
+  {
+    "id": "2AKG",
+    "name": "WM+ PTO Khu 5, Tứ Xã",
+    "address": "H. Lâm Thao, T. Phú Thọ",
+    "province": "T. Phú Thọ",
+    "district": "H. Lâm Thao",
+    "trip_type": "GXT",
+    "isGXT": true,
+    "coords": {
+      "lat": 21.288375,
+      "lng": 105.302425
+    }
+  },
+  {
+    "id": "2CJL",
+    "name": "WM+ PTO 33 Thống Nhất, Phùng Nguyên",
+    "address": "H. Lâm Thao, T. Phú Thọ",
+    "province": "T. Phú Thọ",
+    "district": "H. Lâm Thao",
+    "trip_type": "GXT",
+    "isGXT": true,
+    "coords": {
+      "lat": 21.2819416,
+      "lng": 105.3053024
+    }
+  },
+  {
+    "id": "5891",
+    "name": "WM+ PTO Khu 23 Vạn Xuân",
+    "address": "H. Tam Nông, T. Phú Thọ",
+    "province": "T. Phú Thọ",
+    "district": "H. Tam Nông",
+    "trip_type": "GXT",
+    "isGXT": true,
+    "coords": {
+      "lat": 21.28429,
+      "lng": 105.25763
+    }
+  },
+  {
+    "id": "2ANC",
+    "name": "WM+ PTO Khu 21, Vạn Xuân",
+    "address": "H. Tam Nông, T. Phú Thọ",
+    "province": "T. Phú Thọ",
+    "district": "H. Tam Nông",
+    "trip_type": "GXT",
+    "isGXT": true,
+    "coords": {
+      "lat": 21.31667,
+      "lng": 105.26444
+    }
+  },
+  {
+    "id": "6871",
+    "name": "WM+ PTO TT Hưng Hóa, Tam Nông",
+    "address": "H. Tam Nông, T. Phú Thọ",
+    "province": "T. Phú Thọ",
+    "district": "H. Tam Nông",
+    "trip_type": "GXT",
+    "isGXT": true,
+    "coords": {
+      "lat": 21.25426,
+      "lng": 105.29208
     }
   },
   {
@@ -1544,19 +1557,6 @@ const STORE_LIST_DATA = [
     "coords": {
       "lat": 21.39540409,
       "lng": 105.21548335
-    }
-  },
-  {
-    "id": "2CJL",
-    "name": "WM+ PTO 33 Thống Nhất, Phùng Nguyên",
-    "address": "H. Lâm Thao, T. Phú Thọ",
-    "province": "T. Phú Thọ",
-    "district": "H. Lâm Thao",
-    "trip_type": "Giao Thang",
-    "isGXT": false,
-    "coords": {
-      "lat": 21.2819416,
-      "lng": 105.3053024
     }
   },
   {
