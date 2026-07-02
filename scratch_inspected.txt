@@ -1,0 +1,2 @@
+=== Inspecting booking_data.js for 2CJL ===
+{"id": "2CJL", "date": "2026-06-29", "name": "WM+ PTO 33 Thống Nhất, Phùng Nguyên", "address": "H. Lâm Thao, T. Phú Thọ", "province": "T. Phú Thọ", "volume": 47.539375558792045, "weight": 14299.01313690202, "total_qty": 33897.0, "so_count": 11, "carrier": "GHN", "coords": {"lat": 21.2819416, "lng": 105.3053024}}

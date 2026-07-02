@@ -1,0 +1,40 @@
+TÀI LIỆU LOGIC CHIA TUYẾN & GHÉP CHUYẾN CỐ ĐỊNH
+HỆ THỐNG VẬN TẢI SUPRA PHÚ THỌ
+(Cập nhật mới nhất ngày 27/06/2026)
+1. THÔNG TIN CHUNG & THIẾT LẬP HỆ THỐNG
+• Điểm xuất phát (Kho DC): Kho DC Win Phú Thọ (Tọa độ GPS: lat: 21.3879985, lng: 105.1803274).
+• Trung tâm giao nhận trung chuyển (GXT): Bưu cục thuộc danh sách GXT Phú Thọ (Tọa độ GPS: lat: 21.3264875, lng: 105.3246094) sẽ được lọc ra để trung chuyển riêng, không gom chung vào các tuyến đi thẳng của huyện.
+• Đơn vị quy đổi thể tích/khối lượng: Sức tải được tính toán song song dựa trên hai yếu tố Trọng Lượng (Kg) và Thể Tích (CBM).
+2. QUY TẮC PHÂN CỤM XE CỐ ĐỊNH THEO HUYỆN/XÃ
+Để nâng cao tính ổn định vận hành và giảm phụ thuộc vào tài xế chạy chéo hướng, hàng hóa giao thẳng (Direct Delivery) được phân chia cố định theo các địa bàn huyện/thị thuộc tỉnh Phú Thọ thành 5 cụm tuyến chính:
+Tuyến 1: Thanh Thủy - Thanh Sơn: Bao gồm các bưu cục thuộc địa giới Huyện Thanh Thủy và Huyện Thanh Sơn.
+Tuyến 2: Yên Lập - Cẩm Khê: Bao gồm các bưu cục thuộc địa giới Huyện Yên Lập và Huyện Cẩm Khê.
+Tuyến 3: Tam Nông - Lâm Thao: Bao gồm các bưu cục thuộc địa giới Huyện Tam Nông và Huyện Lâm Thao.
+Tuyến 4: Đoan Hùng - Phù Ninh: Bao gồm các bưu cục thuộc địa giới Huyện Đoan Hùng và Huyện Phù Ninh.
+Tuyến 5: Hạ Hòa - Thanh Ba: Bao gồm các bưu cục thuộc địa giới Huyện Hạ Hòa (Hạ Hoà) và Huyện Thanh Ba.
+3. QUY TRÌNH PHÂN PHỐI HÀNG & NÂNG TẢI TỰ ĐỘNG
+Bước 1: Lọc bỏ GXT (Luồng Xe Trung Chuyển): Quét danh sách các bưu cục trong booking ngày làm việc. Nếu bưu cục thuộc diện GXT (chuyển tiếp), chuyển thẳng sang luồng vận chuyển xe trung chuyển GXT Phú Thọ riêng. Hệ thống sẽ tự động tính toán tổng lượng hàng, trọng tải và thể tích của nhóm siêu thị này để đề xuất loại xe trung chuyển (1.9T, 5T, 8T) phù hợp nhất, đảm bảo tối ưu chi phí.
+Bước 2: Gom Huyện/Xã (Luồng Xe Giao Thẳng): Lọc các đơn hàng còn lại theo địa bàn và gán về 5 nhóm tuyến cố định nêu trên dựa trên trường thông tin Huyện/Xã.
+Bước 3: Đóng chuyến & Nâng tải: Xếp hàng hóa của xe giao thẳng vào xe 1.9T trước. Nếu tổng trọng lượng <= 2090 kg và thể tích <= 14 CBM, chốt chạy xe giao thẳng 1.9T
+Lưu ý :
+Trường hợp nếu có 1 Tuyến cố định nào trong ngày có số cửa hàng ít (Dưới 5 cửa hàng), có thể ghép vào 1 xe tuyến cố định khác miễn sao cho chi phí tăng km không vượt quá 1.300.000 đồng/chuyến đó. Khi ghép, có thể tăng trọng tải xe từ 1t9 lên 5t với tuyến cố đính được ghép. Số lượng xe giao thẳng 5T sử dụng trong 1 ngày tối đa 2 xe, còn lại sử dụng xe giao thẳng 1.9T
+Trường hợp có 1 BC mà lượng hàng vượt hơn 5T để mà sử dụng xe 8T, hãy cho trường hợp ngoại lệ để xử lý
+4. GIẢI THUẬT ĐƯỜNG ĐI TSP (NEAREST NEIGHBOR)
+Hành trình di chuyển thực tế của các xe gom cụm tuyến được tối ưu hóa theo bài toán người đưa thư (TSP) khép kín để tiết kiệm quãng đường:
+Bắt đầu hành trình: Xe xuất phát từ điểm Kho DC Win Phú Thọ.
+Lộ trình giao hàng: Đi qua lần lượt các cửa hàng theo nguyên tắc điểm lân cận gần nhất (Nearest Neighbor) từ vị trí hiện tại.
+Kết thúc hành trình: After sau khi giao hết điểm bưu cục cuối cùng, xe quay trở về điểm Kho DC Win Phú Thọ để kết thúc vòng lặp.
+Quy đổi đường bộ: Quãng đường chim bay giữa các điểm được nhân với hệ số điều chỉnh bộ hành thực tế là 1.4 để ra km chạy thực tế đường bộ.
+5. CÔNG THỨC TÍNH GIÁ CƯỚC VÀ CHI PHÍ VẬN CHUYỂN
+Đơn giá chi phí của chuyến xe được áp dụng theo biểu phí sau:
+• Đơn giá xe 1.9T:
+- Quãng đường <= 120 km: Cước trọn gói là 1.700.000 VNĐ.
+- Quãng đường > 120 km: Thành tiền = 1.700.000 VNĐ + 11.000 VNĐ * (Tổng quãng đường - 120 km).
+• Đơn giá xe 5T (Tính theo bậc quãng đường):
+- Bậc 1 (Quãng đường <= 50 km): Cước là 1.100.000 VNĐ.
+- Bậc 2 (Quãng đường từ 51 km đến 100 km): Cước là 2.400.000 VNĐ.
+- Bậc 3 (Quãng đường từ 101 km đến 150 km): Cước là 3.000.000 VNĐ.
+- Bậc 4 (Quãng đường > 150 km): Thành tiền = 3.000.000 VNĐ + 20.000 VNĐ * (Tổng quãng đường - 150 km).
+Loại Xe Tải | Tải Trọng Tối Đa (Kg) | Thể Tích Tối Đa (CBM)
+Xe 1.9T (Dòng xe mặc định) | 2,090 kg (Gồm 10% quá tải của 1,900 kg) | 14 CBM
+Xe 5T (Dòng xe nâng tải) | 5,500 kg | 26 CBM

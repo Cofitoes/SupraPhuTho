@@ -1,0 +1,21 @@
+=== Searching for script loading ===
+Line 12: <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+Line 16: <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+Line 739: <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+Line 740: <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+Line 898: <div class="user-info"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User">
+Line 1349: <img id="incident-image-preview" src=""
+Line 1536: <img id="photo-modal-img" src="" style="max-width: 100%; max-height: 90vh; border-radius: 8px;">
+Line 1657: <!-- <script src="email_data.js"></script> -->
+Line 1660: document.write('<script src="store_data.js' + cb + '"></scr' + 'ipt>');
+Line 1661: document.write('<script src="booking_data.js' + cb + '"></scr' + 'ipt>');
+Line 1662: document.write('<script src="data_ghn_so.js' + cb + '"></scr' + 'ipt>');
+Line 1663: document.write('<script src="gxt_stores.js' + cb + '"></scr' + 'ipt>');
+Line 1664: document.write('<script src="summary_data.js' + cb + '"></scr' + 'ipt>');
+Line 1665: document.write('<script src="departure_times.js' + cb + '"></scr' + 'ipt>');
+Line 1666: document.write('<script src="vehicle_data.js' + cb + '"></scr' + 'ipt>');
+Line 1667: document.write('<script src="checkin_data.js' + cb + '"></scr' + 'ipt>');
+Line 1668: document.write('<script src="incidents_data.js' + cb + '"></scr' + 'ipt>');
+Line 1669: document.write('<script src="Data_Booking/telegram_data.js' + cb + '"></scr' + 'ipt>');
+Line 1971: document.write('<script src="trips_logic_v6.js' + tripsLogicQuery + '"><\/script>');
+Line 4737: <img id="checkin-modal-img" src="" alt="Checkin Photo Full">

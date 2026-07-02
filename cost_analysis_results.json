@@ -1,0 +1,100 @@
+{
+  "analysis_date": "2026-07-01",
+  "data_range": {
+    "from": "2026-06-09",
+    "to": "2026-07-01",
+    "days": 20
+  },
+  "ranking": [
+    {
+      "rank": 1,
+      "strategy": "S6: Tat ca 5T, khong nhom",
+      "totalCost": 197951848,
+      "totalDirectCost": 116559600,
+      "avgDailyCost": 9897592,
+      "avgTrips": 1.7,
+      "savings": 50722880,
+      "savingsPct": 20.4
+    },
+    {
+      "rank": 2,
+      "strategy": "S2: Tat ca 1.9T, khong nhom",
+      "totalCost": 211695468,
+      "totalDirectCost": 130303220,
+      "avgDailyCost": 10584773,
+      "avgTrips": 3.5,
+      "savings": 36979260,
+      "savingsPct": 14.9
+    },
+    {
+      "rank": 3,
+      "strategy": "S5: Smart Mixed (so sanh cost)",
+      "totalCost": 219297678,
+      "totalDirectCost": 137905430,
+      "avgDailyCost": 10964884,
+      "avgTrips": 3.2,
+      "savings": 29377050,
+      "savingsPct": 11.8
+    },
+    {
+      "rank": 4,
+      "strategy": "S7: Geo Clustering + 5T",
+      "totalCost": 222490648,
+      "totalDirectCost": 141098400,
+      "avgDailyCost": 11124532,
+      "avgTrips": 2.5,
+      "savings": 26184080,
+      "savingsPct": 10.5
+    },
+    {
+      "rank": 5,
+      "strategy": "S8: Hybrid (smart+merge leftover)",
+      "totalCost": 229497678,
+      "totalDirectCost": 148105430,
+      "avgDailyCost": 11474884,
+      "avgTrips": 3.2,
+      "savings": 19177050,
+      "savingsPct": 7.7
+    },
+    {
+      "rank": 6,
+      "strategy": "S4: Hon hop (5T nang, 1.9T nhe)",
+      "totalCost": 236019258,
+      "totalDirectCost": 154627010,
+      "avgDailyCost": 11800963,
+      "avgTrips": 3.8,
+      "savings": 12655470,
+      "savingsPct": 5.1
+    },
+    {
+      "rank": 7,
+      "strategy": "S3: Tat ca 5T, nhom tuyen",
+      "totalCost": 236470248,
+      "totalDirectCost": 155078000,
+      "avgDailyCost": 11823512,
+      "avgTrips": 3.1,
+      "savings": 12204480,
+      "savingsPct": 4.9
+    },
+    {
+      "rank": 8,
+      "strategy": "S1: Hien tai (1.9T, nhom tuyen)",
+      "totalCost": 248674728,
+      "totalDirectCost": 167282480,
+      "avgDailyCost": 12433736,
+      "avgTrips": 4.8,
+      "savings": 0,
+      "savingsPct": 0.0
+    },
+    {
+      "rank": 9,
+      "strategy": "S9: Tat ca 8T, nhom tuyen",
+      "totalCost": 290958088,
+      "totalDirectCost": 209565840,
+      "avgDailyCost": 14547904,
+      "avgTrips": 3.1,
+      "savings": -42283360,
+      "savingsPct": -17.0
+    }
+  ]
+}
