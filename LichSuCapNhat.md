@@ -1,8 +1,24 @@
 # Lịch Sử Cập Nhật Hệ Thống Supra Phú Thọ
 
-Tài liệu này lưu trữ các thay đổi và cập nhật quan trọng của hệ thống tính toán và ghép tuyến (Cập nhật mới nhất: 28/06/2026).
+Tài liệu này lưu trữ các thay đổi và cập nhật quan trọng của hệ thống tính toán và ghép tuyến (Cập nhật mới nhất: 02/07/2026).
 
-## 1. Cập nhật ngày 28/06/2026: Tích Hợp Ngoại Lệ Xe 8T Vào Logic Quá Khứ, Sửa Hiển Thị 2CJL & Đồng Bộ Online
+## 1. Cập nhật ngày 02/07/2026: Sửa Lỗi Cột Huyện/Xã Mất Thông Tin & Đồng Bộ Booking
+- **Sửa lỗi cột Huyện/Xã trống trên tab Lên Lịch Tải (`trips_logic_v5.js`)**:
+  - **Nguyên nhân gốc:** Trang web dashboard (`demo.html`) tải file logic `trips_logic_v5.js`, nhưng file v5 này không hề có logic gán thông tin Huyện/Xã (`districtsName`) cho các chuyến xe. Chỉ có file `trips_logic_v6.js` (dùng cho tab Test Logic) mới có logic này. Kết quả là cột Huyện/Xã trên bảng "Tuyến Đường Đề Xuất" luôn hiển thị `-` cho mọi chuyến đi thẳng.
+  - **Cách khắc phục:** Bổ sung khối code **"RESOLVE DISTRICT NAMES"** vào cuối hàm `generateTrips()` trong `trips_logic_v5.js`, ngay trước khi trả về danh sách chuyến xe:
+    1. **Tra cứu từ `STORE_LIST_DATA`:** Mỗi điểm giao (`DELIVERY`) trên chuyến xe được tra cứu trường `district` từ cơ sở dữ liệu cửa hàng (`store_data.js`) thông qua so khớp `id` hoặc `name` (case-insensitive).
+    2. **Xử lý tên cắt phần:** Hỗ trợ tên cửa hàng đã bị cắt bởi logic chia tải (VD: `"WM+ PTO 33 Thống Nhất (Phần 1)"`) bằng cách loại bỏ hậu tố `(Phần X)` trước khi so khớp.
+    3. **Fallback parse địa chỉ:** Nếu không tìm thấy trong `STORE_LIST_DATA`, hệ thống parse trực tiếp từ trường `address` của điểm giao (VD: `"H. Cẩm Khê, T. Phú Thọ"` → `"H. Cẩm Khê"`).
+    4. **Gom nhóm hiển thị:** Tổng hợp tất cả quận/huyện duy nhất (sử dụng `Set`) của chuyến xe thành chuỗi phân cách bởi dấu phẩy (VD: `"H. Cẩm Khê, H. Yên Lập"`), gán vào trường `trip.districtsName`.
+    5. Chuyến trung chuyển tự động gán `districtsName = 'Trung chuyển GXT'`.
+  - **File thay đổi:** `trips_logic_v5.js` — thêm ~45 dòng code (hàm `resolveDistrictForPoint` và vòng lặp gán `districtsName`).
+- **Đồng bộ dữ liệu Booking từ Email:**
+  - Tải thêm 1 file Booking mới từ email: `20260701l GHN.xlsb` (ghi đè `Booking Supra 30-06-2026.xlsb`).
+  - Trích xuất và cập nhật thành công 1455 điểm giao hàng cho 21 ngày vào `booking_data.js` và `summary_data.js`.
+  - Đồng bộ tọa độ cho toàn bộ 1455 điểm giao từ `store_data.js`.
+- **Deploy lên GitHub Pages:** Đẩy thành công các thay đổi lên trang web online tại [cofitoes.github.io/SupraPhuTho](https://cofitoes.github.io/SupraPhuTho/demo.html).
+
+## 2. Cập nhật ngày 28/06/2026: Tích Hợp Ngoại Lệ Xe 8T Vào Logic Quá Khứ, Sửa Hiển Thị 2CJL & Đồng Bộ Online
 - **Cơ chế ngoại lệ xe 8T cho Logic Quá Khứ**:
   - Đồng bộ thuật toán chia tuyến cũ trong `demo.html` (trình mô phỏng Test Logic) và file offline `trips_logic_v5.js` để tự động phát hiện các đơn hàng đi thẳng > 5T, áp dụng tải trọng xe 8T (7.48T/55 CBM) và gán loại xe 8T thay vì xe 5T quá tải.
   - Sửa đổi trực tiếp tại hàm `splitLargeDirectPoints`, hàm gán loại xe `tType` và `splitTripType`. Giúp việc so sánh chi phí và số lượng xe giữa hai logic chuẩn xác hơn.
