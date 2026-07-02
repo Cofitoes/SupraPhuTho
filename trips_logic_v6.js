@@ -408,7 +408,9 @@ function generateTrips() {
             { id: 2, name: 'Tuyến 2: Yên Lập - Cẩm Khê', districts: ['Yên Lập', 'Cẩm Khê'], points: [] },
             { id: 3, name: 'Tuyến 3: Tam Nông - Lâm Thao', districts: ['Tam Nông', 'Lâm Thao'], points: [] },
             { id: 4, name: 'Tuyến 4: Đoan Hùng - Phù Ninh', districts: ['Đoan Hùng', 'Phù Ninh'], points: [] },
-            { id: 5, name: 'Tuyến 5: Hạ Hòa - Thanh Ba', districts: ['Hạ Hòa', 'Hạ Hoà', 'Thanh Ba'], points: [] }
+            { id: 5, name: 'Tuyến 5: Hạ Hòa - Thanh Ba', districts: ['Hạ Hòa', 'Hạ Hoà', 'Thanh Ba'], points: [] },
+            { id: 6, name: 'Tuyến 6: TX Phú Thọ', districts: ['Phú Thọ'], points: [] },
+            { id: 7, name: 'Tuyến 7: TP Việt Trì', districts: ['Việt Trì'], points: [] }
         ];
         let fallbackPoints = [];
 
@@ -454,61 +456,8 @@ function generateTrips() {
             group.points.push(p);
         });
 
-        // Route Merging Logic (< 5 stores)
+        // Route groups run independently (no merging) to avoid inflated group sizes
         let activeGroups = ROUTE_GROUPS.filter(g => g.points.length > 0);
-        let mergedAny = true;
-        while (mergedAny) {
-            mergedAny = false;
-            let bestMerge = null;
-            
-            for (let i = 0; i < activeGroups.length; i++) {
-                const src = activeGroups[i];
-                if (src.points.length > 0 && src.points.length < 5) {
-                    for (let j = 0; j < activeGroups.length; j++) {
-                        const tgt = activeGroups[j];
-                        if (src.id === tgt.id || tgt.points.length === 0) continue;
-                        
-                        const distTgt = getChunkDistance(hubDC, tgt.points);
-                        const wTgt = tgt.points.reduce((s,p) => s + (p.weight||0), 0);
-                        const vTgt = tgt.points.reduce((s,p) => s + (p.volume||0), 0);
-                        let truckTypeTgt = '1.9T';
-                        if (wTgt > 2090 || vTgt > 14) truckTypeTgt = '5T';
-                        const costTgt = getTripCostDetails(truckTypeTgt, distTgt, wTgt, 'Đi thẳng').totalCost;
-                        
-                        const mergedPoints = [...tgt.points, ...src.points];
-                        const distMerged = getChunkDistance(hubDC, mergedPoints);
-                        const wMerged = mergedPoints.reduce((s,p) => s + (p.weight||0), 0);
-                        const vMerged = mergedPoints.reduce((s,p) => s + (p.volume||0), 0);
-                        let truckTypeMerged = '1.9T';
-                        if (wMerged > 2090 || vMerged > 14) truckTypeMerged = '5T';
-                        if (wMerged > 5500 || vMerged > 26) truckTypeMerged = '8T';
-                        
-                        const costMerged = getTripCostDetails(truckTypeMerged, distMerged, wMerged, 'Đi thẳng').totalCost;
-                        const costIncrease = costMerged - costTgt;
-                        
-                        if (costIncrease <= 1300000) {
-                            if (bestMerge === null || costIncrease < bestMerge.costIncrease) {
-                                bestMerge = {
-                                    srcId: src.id,
-                                    tgtId: tgt.id,
-                                    costIncrease: costIncrease,
-                                    mergedPoints: mergedPoints
-                                };
-                            }
-                        }
-                    }
-                }
-            }
-            
-            if (bestMerge) {
-                const srcGroup = activeGroups.find(g => g.id === bestMerge.srcId);
-                const tgtGroup = activeGroups.find(g => g.id === bestMerge.tgtId);
-                tgtGroup.points = bestMerge.mergedPoints;
-                srcGroup.points = [];
-                activeGroups = activeGroups.filter(g => g.points.length > 0);
-                mergedAny = true;
-            }
-        }
 
         // Packing options
         const packGroupPoints = (points, allow5T) => {
@@ -627,7 +576,10 @@ function generateTrips() {
 
         let upgraded5TCount = 0;
         groupStats.forEach(stat => {
-            if (stat.saving > 0 && upgraded5TCount < 2) {
+            // Only upgrade to 5T if: saving >= 500K VNĐ AND group total weight > 2090 kg
+            const groupTotalW = stat.group.points.reduce((s,p) => s + (p.weight||0), 0);
+            const canUpgrade5T = stat.saving >= 500000 && groupTotalW > 2090 && upgraded5TCount < 2;
+            if (canUpgrade5T) {
                 stat.tripsWithUpgrade.forEach(t => {
                     const trip = createDirectTrip(t.points, hubDC, t.type);
                     trip.districtsName = stat.group.name.replace(/^(Tuyến \d+:\s*)/i, '').trim();
