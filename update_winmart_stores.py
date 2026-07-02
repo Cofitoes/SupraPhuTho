@@ -242,8 +242,10 @@ for idx, row in df.iterrows():
 
 # Add missing manual overrides that weren't in the Excel
 found_names = {s['name'] for s in store_list}
+found_ids = {s['id'] for s in store_list}
 for o_name, o_data in MANUAL_OVERRIDES.items():
-    if o_name not in found_names:
+    override_id = o_data.get("id", "")
+    if o_name not in found_names and override_id not in found_ids:
         is_gxt = "Phú Thọ" in o_name or "Việt Trì" in o_name or o_data.get("id") in ["1649", "1564"]
         store_list.append({
             "id": o_data.get("id", o_name),

@@ -1558,18 +1558,5 @@ const STORE_LIST_DATA = [
       "lat": 21.39540409,
       "lng": 105.21548335
     }
-  },
-  {
-    "id": "2CJL",
-    "name": "WM+ PTO 33 Thống Nhất Phùng Nguyên",
-    "address": "H. Lâm Thao, T. Phú Thọ",
-    "province": "T. Phú Thọ",
-    "district": "H. Lâm Thao",
-    "trip_type": "Giao Thang",
-    "isGXT": false,
-    "coords": {
-      "lat": 21.2819416,
-      "lng": 105.3053024
-    }
   }
 ];
